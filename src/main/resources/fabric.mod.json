@@ -1,0 +1,53 @@
+{
+    "schemaVersion": 1,
+    "id": "hybrid-birds",
+    "version": "${version}",
+    "name": "Hybrid Birds",
+    "description": "DESCRIPTION REQUIRED.",
+    "authors": [
+        "dragoncommands",
+        "MysticKoko",
+        "Andante"
+    ],
+    "contact": {
+        "sources": "https://github.com/hybridlabs/hybrid-birds",
+        "issues": "https://github.com/hybridlabs/hybrid-birds/issues"
+    },
+    "license": "ARR (Assets), MIT (Code)",
+    "icon": "assets/hybrid-birds/icon.png",
+    "environment": "*",
+    "entrypoints": {
+        "main": [
+            {
+                "value": "dev.hybridlabs.birds.HybridBirds",
+                "adapter": "kotlin"
+            }
+        ],
+        "client": [
+            {
+                "value": "dev.hybridlabs.birds.HybridBirdsClient",
+                "adapter": "kotlin"
+            }
+        ],
+        "fabric-datagen": [
+            {
+                "value": "dev.hybridlabs.birds.data.HybridBirdsDataGenerator",
+                "adapter": "kotlin"
+            }
+        ]
+    },
+    "mixins": [
+        "hybrid-birds.mixins.json",
+        {
+            "config": "hybrid-birds.client.mixins.json",
+            "environment": "client"
+        }
+    ],
+    "accessWidener": "hybrid-birds.accesswidener",
+    "depends": {
+        "minecraft": "~1.20.1",
+        "java": ">=17",
+        "fabric-api": "*",
+        "fabric-language-kotlin": "*"
+    }
+}
