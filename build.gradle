@@ -12,6 +12,15 @@ base {
 }
 
 repositories {
+    maven {
+        name = "Terraformers"
+        url  = "https://maven.terraformersmc.com/releases/"
+    }
+
+    maven {
+        name = "Geckolib"
+        url  = "https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/"
+    }
 }
 
 dependencies {
@@ -20,9 +29,12 @@ dependencies {
     mappings "net.fabricmc:yarn:$minecraft_version+build.$yarn_build:v2"
     modImplementation "net.fabricmc:fabric-loader:$loader_version"
 
-    // Fabric API. This is technically optional, but you probably want it anyway.
     modImplementation "net.fabricmc.fabric-api:fabric-api:$fabric_version"
     modImplementation "net.fabricmc:fabric-language-kotlin:$fabric_kotlin_version"
+
+    modImplementation "software.bernie.geckolib:geckolib-fabric-$geckolib_version"
+
+    modImplementation "com.terraformersmc:modmenu:$mod_menu_version"
 }
 
 loom {
@@ -55,7 +67,7 @@ sourceSets {
     main {
         resources {
             srcDirs += [
-                    'src/generated/resources'
+                    "src/generated/resources"
             ]
         }
     }
