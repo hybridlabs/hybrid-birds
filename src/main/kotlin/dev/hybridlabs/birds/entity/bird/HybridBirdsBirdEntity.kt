@@ -6,15 +6,12 @@ import net.minecraft.entity.EntityPose
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.SpawnReason
 import net.minecraft.entity.ai.control.FlightMoveControl
-import net.minecraft.entity.ai.goal.EscapeDangerGoal
-import net.minecraft.entity.ai.goal.FlyGoal
-import net.minecraft.entity.ai.goal.SwimGoal
-import net.minecraft.entity.ai.goal.TemptGoal
-import net.minecraft.entity.ai.goal.WanderAroundGoal
+import net.minecraft.entity.ai.goal.*
 import net.minecraft.entity.ai.pathing.BirdNavigation
 import net.minecraft.entity.ai.pathing.EntityNavigation
 import net.minecraft.entity.passive.AnimalEntity
 import net.minecraft.entity.passive.PassiveEntity
+import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.recipe.Ingredient
 import net.minecraft.registry.tag.ItemTags
 import net.minecraft.server.world.ServerWorld
@@ -43,6 +40,8 @@ open class HybridBirdsBirdEntity(
         goalSelector.add(2, FlyGoal(this, 1.0))
         goalSelector.add(1, WanderAroundGoal(this, 0.6))
         goalSelector.add(1, TemptGoal(this, 0.6, Ingredient.fromTag(ItemTags.FISHES), false))
+        goalSelector.add(6, LookAtEntityGoal(this, PlayerEntity::class.java, 6.0f))
+        goalSelector.add(7, LookAroundGoal(this))
     }
 
     override fun createNavigation(world: World?): EntityNavigation {

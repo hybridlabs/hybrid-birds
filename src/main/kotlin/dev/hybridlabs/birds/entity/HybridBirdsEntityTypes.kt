@@ -1,6 +1,7 @@
 package dev.hybridlabs.birds.entity
 
 import dev.hybridlabs.birds.HybridBirds
+import dev.hybridlabs.birds.entity.bird.DuckEntity
 import dev.hybridlabs.birds.entity.bird.SeagullEntity
 import dev.hybridlabs.birds.utils.HybridBirdsSpawnGroup
 import net.fabricmc.fabric.api.`object`.builder.v1.entity.FabricDefaultAttributeRegistry
@@ -17,6 +18,12 @@ object HybridBirdsEntityTypes {
         ::SeagullEntity,
         EntityDimensions.fixed(0.75f, 0.75f),
         SeagullEntity.createMobAttributes()
+    )
+    val DUCK = registerBird(
+        "duck",
+        ::DuckEntity,
+        EntityDimensions.fixed(0.75f, 0.75f),
+        DuckEntity.createMobAttributes()
     )
 
 

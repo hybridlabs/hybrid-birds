@@ -2,6 +2,7 @@ package dev.hybridlabs.birds.entity
 
 
 import dev.hybridlabs.birds.entity.bird.HybridBirdsBirdEntity
+import dev.hybridlabs.birds.utils.HybridBirdsSpawnGroup
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.SpawnRestriction
 import net.minecraft.entity.SpawnRestriction.SpawnPredicate
@@ -16,6 +17,7 @@ object SpawnRestrictionRegistry {
     init {
         setOf(
             HybridBirdsEntityTypes.SEAGULL,
+            HybridBirdsEntityTypes.DUCK,
         ).forEach { registerBird(it) }
     }
 

@@ -11,7 +11,8 @@ import net.minecraft.world.biome.Biome
 
 object EntityBiomeModifications {
     init {
-        addBird(HybridBirdsEntityTypes.SEAGULL, BiomeTags.IS_BEACH, 10, 1, 2)
+        addBird(HybridBirdsEntityTypes.SEAGULL, BiomeTags.IS_BEACH, 5, 1, 2)
+        addBird(HybridBirdsEntityTypes.DUCK, BiomeTags.IS_RIVER, 5, 1, 2)
     }
 
     private fun addBird(
