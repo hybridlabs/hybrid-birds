@@ -2,6 +2,7 @@ package dev.hybridlabs.birds.entity
 
 import dev.hybridlabs.birds.HybridBirds
 import dev.hybridlabs.birds.entity.bird.DuckEntity
+import dev.hybridlabs.birds.entity.bird.HummingbirdEntity
 import dev.hybridlabs.birds.entity.bird.SeagullEntity
 import dev.hybridlabs.birds.utils.HybridBirdsSpawnGroup
 import net.fabricmc.fabric.api.`object`.builder.v1.entity.FabricDefaultAttributeRegistry
@@ -16,14 +17,22 @@ object HybridBirdsEntityTypes {
     val SEAGULL = registerBird(
         "seagull",
         ::SeagullEntity,
-        EntityDimensions.fixed(0.75f, 0.75f),
+        EntityDimensions.fixed(0.6f, 0.6f),
         SeagullEntity.createMobAttributes()
     )
+
     val DUCK = registerBird(
         "duck",
         ::DuckEntity,
-        EntityDimensions.fixed(0.75f, 0.75f),
+        EntityDimensions.fixed(0.6f, 0.6f),
         DuckEntity.createMobAttributes()
+    )
+
+    val HUMMINGBIRD = registerBird(
+        "hummingbird",
+        ::HummingbirdEntity,
+        EntityDimensions.fixed(0.4f, 0.4f),
+        HummingbirdEntity.createMobAttributes()
     )
 
 
