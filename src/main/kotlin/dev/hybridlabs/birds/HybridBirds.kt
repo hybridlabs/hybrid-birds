@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory
 
 object HybridBirds : ModInitializer {
     const val MOD_ID = "hybrid-birds"
-    const val MOD_NAME = "Hybrid Birds"
+    private const val MOD_NAME = "Hybrid Birds"
 
     private val logger: Logger = LoggerFactory.getLogger(MOD_ID)
 
