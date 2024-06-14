@@ -1,13 +1,23 @@
 package dev.hybridlabs.birds.entity.bird
 
 import net.minecraft.entity.EntityType
+import net.minecraft.entity.ai.goal.SwimGoal
+import net.minecraft.entity.ai.goal.TemptGoal
 import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.mob.WaterCreatureEntity
+import net.minecraft.recipe.Ingredient
+import net.minecraft.registry.tag.ItemTags
 import net.minecraft.world.World
 
 class SeagullEntity(entityType: EntityType<out SeagullEntity>, world: World) :
     HybridBirdsBirdEntity(entityType, world) {
+
+    override fun initGoals() {
+        goalSelector.add(0, SwimGoal(this))
+        goalSelector.add(1, TemptGoal(this, 0.6, Ingredient.fromTag(ItemTags.FISHES), false))
+    }
+
     companion object {
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
             return WaterCreatureEntity.createMobAttributes()
