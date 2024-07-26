@@ -16,9 +16,7 @@ import net.minecraft.world.Heightmap
 object SpawnRestrictionRegistry {
     init {
         setOf(
-            HybridBirdsEntityTypes.SEAGULL,
-            HybridBirdsEntityTypes.DUCK,
-            HybridBirdsEntityTypes.HUMMINGBIRD,
+            HybridBirdsEntityTypes.ROOSTER,
         ).forEach { registerBird(it) }
     }
 

@@ -1,3 +1,5 @@
+@file:Suppress("SameParameterValue")
+
 package dev.hybridlabs.birds.world
 
 import dev.hybridlabs.birds.entity.HybridBirdsEntityTypes
@@ -11,9 +13,7 @@ import net.minecraft.world.biome.Biome
 
 object EntityBiomeModifications {
     init {
-        addBird(HybridBirdsEntityTypes.SEAGULL, BiomeTags.IS_BEACH, 5, 1, 2)
-        addBird(HybridBirdsEntityTypes.DUCK, BiomeTags.IS_RIVER, 5, 1, 2)
-        addBird(HybridBirdsEntityTypes.HUMMINGBIRD, BiomeTags.IS_FOREST, 5, 1, 2)
+        addBird(HybridBirdsEntityTypes.ROOSTER, BiomeTags.VILLAGE_PLAINS_HAS_STRUCTURE, 5, 1, 2)
     }
 
     private fun addBird(

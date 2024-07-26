@@ -1,9 +1,7 @@
 package dev.hybridlabs.birds.entity
 
 import dev.hybridlabs.birds.HybridBirds
-import dev.hybridlabs.birds.entity.bird.DuckEntity
-import dev.hybridlabs.birds.entity.bird.HummingbirdEntity
-import dev.hybridlabs.birds.entity.bird.SeagullEntity
+import dev.hybridlabs.birds.entity.bird.RoosterEntity
 import dev.hybridlabs.birds.utils.HybridBirdsSpawnGroup
 import net.fabricmc.fabric.api.`object`.builder.v1.entity.FabricDefaultAttributeRegistry
 import net.fabricmc.fabric.api.`object`.builder.v1.entity.FabricEntityTypeBuilder
@@ -14,28 +12,12 @@ import net.minecraft.registry.Registry
 import net.minecraft.util.Identifier
 
 object HybridBirdsEntityTypes {
-    val SEAGULL = registerBird(
-        "seagull",
-        ::SeagullEntity,
-        EntityDimensions.fixed(0.6f, 0.6f),
-        SeagullEntity.createMobAttributes()
+    val ROOSTER = registerBird(
+        "rooster",
+        ::RoosterEntity,
+        EntityDimensions.fixed(0.4f, 0.7f),
+        RoosterEntity.createMobAttributes()
     )
-
-    val DUCK = registerBird(
-        "duck",
-        ::DuckEntity,
-        EntityDimensions.fixed(0.6f, 0.6f),
-        DuckEntity.createMobAttributes()
-    )
-
-    val HUMMINGBIRD = registerBird(
-        "hummingbird",
-        ::HummingbirdEntity,
-        EntityDimensions.fixed(0.4f, 0.4f),
-        HummingbirdEntity.createMobAttributes()
-    )
-
-
 
     private fun <T : LivingEntity> registerBird(
         id: String,

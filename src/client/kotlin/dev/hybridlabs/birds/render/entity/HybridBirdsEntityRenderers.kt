@@ -1,13 +1,9 @@
 package dev.hybridlabs.birds.render.entity
 
 import dev.hybridlabs.birds.entity.HybridBirdsEntityTypes
-import dev.hybridlabs.birds.render.entity.bird.DuckEntityRenderer
-import dev.hybridlabs.birds.render.entity.bird.HummingbirdEntityRenderer
-import dev.hybridlabs.birds.render.entity.bird.SeagullEntityRenderer
+import dev.hybridlabs.birds.render.entity.bird.RoosterEntityRenderer
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry
 
 object HybridBirdsEntityRenderers {
-    val SEAGULL = EntityRendererRegistry.register(HybridBirdsEntityTypes.SEAGULL, ::SeagullEntityRenderer)
-    val DUCK = EntityRendererRegistry.register(HybridBirdsEntityTypes.DUCK, ::DuckEntityRenderer)
-    val HUMMINGBIRD = EntityRendererRegistry.register(HybridBirdsEntityTypes.HUMMINGBIRD, ::HummingbirdEntityRenderer)
+    val ROOSTER = EntityRendererRegistry.register(HybridBirdsEntityTypes.ROOSTER, ::RoosterEntityRenderer)
 }
