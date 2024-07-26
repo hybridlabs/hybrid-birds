@@ -29,7 +29,7 @@ class RoosterEntity(entityType: EntityType<out RoosterEntity>, world: World) :
     }
 
     override fun getLimitPerChunk(): Int {
-        return 1
+        return 2
     }
 
     override fun initGoals() {
