@@ -5,9 +5,8 @@ import net.minecraft.entity.EntityDimensions
 import net.minecraft.entity.EntityPose
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.SpawnReason
-import net.minecraft.entity.ai.control.FlightMoveControl
+import net.minecraft.entity.ai.control.MoveControl
 import net.minecraft.entity.ai.goal.*
-import net.minecraft.entity.ai.pathing.BirdNavigation
 import net.minecraft.entity.ai.pathing.EntityNavigation
 import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.passive.AnimalEntity
@@ -34,21 +33,13 @@ open class HybridBirdsBirdEntity(
 ) : AnimalEntity(type, world), GeoEntity {
 
     private val factory = GeckoLibUtil.createInstanceCache(this)
+    private var birdNavigation: EntityNavigation = createNavigation(world)
 
     override fun initGoals() {
-        goalSelector.add(0, EscapeDangerGoal(this, 0.75))
-        goalSelector.add(2, FlyGoal(this, 1.0))
-        goalSelector.add(1, WanderAroundGoal(this, 0.6))
-        goalSelector.add(6, LookAtEntityGoal(this, PlayerEntity::class.java, 6.0f))
+        goalSelector.add(0, EscapeDangerGoal(this, 0.6))
+        goalSelector.add(0, SwimGoal(this))
+        goalSelector.add(1, WanderAroundGoal(this, 0.5))
         goalSelector.add(7, LookAroundGoal(this))
-    }
-
-    override fun createNavigation(world: World?): EntityNavigation {
-        val birdNavigation = BirdNavigation(this, world)
-        birdNavigation.setCanPathThroughDoors(false)
-        birdNavigation.setCanSwim(true)
-        birdNavigation.setCanEnterOpenDoors(true)
-        return birdNavigation
     }
 
     override fun createChild(world: ServerWorld?, entity: PassiveEntity?): PassiveEntity? {
@@ -56,14 +47,20 @@ open class HybridBirdsBirdEntity(
     }
 
     init {
-        moveControl = FlightMoveControl(this, 10, false)
+        moveControl = MoveControl(this)
+        navigation = this.birdNavigation
     }
 
     override fun fall(heightDifference: Double, onGround: Boolean, state: BlockState?, landedPosition: BlockPos?) {
     }
 
-    open fun isInAir(): Boolean {
-        return !this.isOnGround && !this.isTouchingWater
+    override fun tickMovement() {
+        super.tickMovement()
+
+        val vec3d = this.velocity
+        if (!this.isOnGround && vec3d.y < 0.0) {
+            this.velocity = vec3d.multiply(1.0, 0.6, 1.0)
+        }
     }
 
     override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
@@ -82,11 +79,12 @@ open class HybridBirdsBirdEntity(
     }
 
     open fun <E : GeoAnimatable> predicate(event: AnimationState<E>): PlayState {
-        if (isOnGround) {
+        if (event.isMoving && isOnGround) {
+            event.controller.setAnimation(WALK_ANIMATION)
+        } else {
             event.controller.setAnimation(IDLE_ANIMATION)
-            return PlayState.CONTINUE
         }
-        if (isInAir()) {
+        if (!isOnGround && !isTouchingWater) {
             event.controller.setAnimation(FLY_ANIMATION)
             return PlayState.CONTINUE
         }
@@ -102,7 +100,7 @@ open class HybridBirdsBirdEntity(
     }
 
     override fun canImmediatelyDespawn(distanceSquared: Double): Boolean {
-        return !hasCustomName()
+        return false
     }
 
     override fun getLimitPerChunk(): Int {
@@ -124,6 +122,7 @@ open class HybridBirdsBirdEntity(
 
     companion object {
         val IDLE_ANIMATION: RawAnimation = RawAnimation.begin().then("idle", Animation.LoopType.LOOP)
+        val WALK_ANIMATION: RawAnimation = RawAnimation.begin().then("walk", Animation.LoopType.LOOP)
         val SWIM_ANIMATION: RawAnimation = RawAnimation.begin().then("swim", Animation.LoopType.LOOP)
         val FLY_ANIMATION: RawAnimation = RawAnimation.begin().then("fly", Animation.LoopType.LOOP)
 
