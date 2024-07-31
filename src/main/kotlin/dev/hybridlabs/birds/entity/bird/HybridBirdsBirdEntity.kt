@@ -72,19 +72,6 @@ open class HybridBirdsBirdEntity(
     }
 
     open fun <E : GeoAnimatable> predicate(event: AnimationState<E>): PlayState {
-        if (event.isMoving && isOnGround) {
-            event.controller.setAnimation(WALK_ANIMATION)
-        } else {
-            event.controller.setAnimation(IDLE_ANIMATION)
-        }
-        if (!isOnGround && !isTouchingWater) {
-            event.controller.setAnimation(FLY_ANIMATION)
-            return PlayState.CONTINUE
-        }
-        if (isTouchingWater) {
-            event.controller.setAnimation(SWIM_ANIMATION)
-            return PlayState.CONTINUE
-        }
         return PlayState.STOP
     }
 

@@ -3,6 +3,7 @@ package dev.hybridlabs.birds.entity
 import dev.hybridlabs.birds.HybridBirds
 import dev.hybridlabs.birds.entity.bird.ChickEntity
 import dev.hybridlabs.birds.entity.bird.RoosterEntity
+import dev.hybridlabs.birds.entity.bird.TurkeyEntity
 import dev.hybridlabs.birds.utils.HybridBirdsSpawnGroup
 import net.fabricmc.fabric.api.`object`.builder.v1.entity.FabricDefaultAttributeRegistry
 import net.fabricmc.fabric.api.`object`.builder.v1.entity.FabricEntityTypeBuilder
@@ -19,11 +20,18 @@ object HybridBirdsEntityTypes {
         EntityDimensions.fixed(0.4f, 0.7f),
         RoosterEntity.createMobAttributes()
     )
+
     val CHICK = registerBird(
         "chick",
         ::ChickEntity,
         EntityDimensions.fixed(0.25f, 0.25f),
         ChickEntity.createMobAttributes()
+    )
+    val TURKEY = registerBird(
+        "turkey",
+        ::TurkeyEntity,
+        EntityDimensions.fixed(0.6f, 0.6f),
+        TurkeyEntity.createMobAttributes()
     )
 
     private fun <T : LivingEntity> registerBird(
