@@ -21,7 +21,7 @@ public class SpawnGroupMixin {
     private static SpawnGroup[] field_6301;
 
     @Unique
-    private static SpawnGroup createHybridAquaticSpawnGroups(String enumname, int ordinal, HybridBirdsSpawnGroup spawnGroup) {
+    private static SpawnGroup createHybridBirdsSpawnGroups(String enumname, int ordinal, HybridBirdsSpawnGroup spawnGroup) {
         return ((SpawnGroup)(Object) new SpawnGroupMixin(spawnGroup.name, ordinal, spawnGroup.name, spawnGroup.spawnCap, spawnGroup.peaceful, spawnGroup.rare, spawnGroup.immediateDespawnRange));
     }
 
@@ -40,7 +40,7 @@ public class SpawnGroupMixin {
         for (int i = 0; i < haSpawnGroups.length; i++) {
             int pos = vanillaSpawnGroupsLength + i;
             HybridBirdsSpawnGroup haSpawnGroup = haSpawnGroups[i];
-            haSpawnGroup.spawnGroup = field_6301[pos] = createHybridAquaticSpawnGroups(haSpawnGroup.name(), pos, haSpawnGroup);
+            haSpawnGroup.spawnGroup = field_6301[pos] = createHybridBirdsSpawnGroups(haSpawnGroup.name(), pos, haSpawnGroup);
         }
     }
 }
