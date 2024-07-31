@@ -17,6 +17,7 @@ object SpawnRestrictionRegistry {
     init {
         setOf(
             HybridBirdsEntityTypes.ROOSTER,
+            HybridBirdsEntityTypes.CHICK,
         ).forEach { registerBird(it) }
     }
 

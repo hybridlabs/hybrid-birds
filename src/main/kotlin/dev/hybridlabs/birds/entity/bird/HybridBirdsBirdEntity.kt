@@ -35,13 +35,6 @@ open class HybridBirdsBirdEntity(
     private val factory = GeckoLibUtil.createInstanceCache(this)
     private var birdNavigation: EntityNavigation = createNavigation(world)
 
-    override fun initGoals() {
-        goalSelector.add(0, EscapeDangerGoal(this, 0.6))
-        goalSelector.add(0, SwimGoal(this))
-        goalSelector.add(1, WanderAroundGoal(this, 0.5))
-        goalSelector.add(7, LookAroundGoal(this))
-    }
-
     override fun createChild(world: ServerWorld?, entity: PassiveEntity?): PassiveEntity? {
         return null
     }
