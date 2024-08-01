@@ -27,12 +27,17 @@ object HybridBirdsEntityTypes {
         EntityDimensions.fixed(0.25f, 0.25f),
         ChickEntity.createMobAttributes()
     )
+
     val TURKEY = registerBird(
         "turkey",
         ::TurkeyEntity,
         EntityDimensions.fixed(0.6f, 0.6f),
         TurkeyEntity.createMobAttributes()
     )
+    @JvmStatic
+    fun getChickEntityType(): EntityType<ChickEntity> {
+        return CHICK
+    }
 
     private fun <T : LivingEntity> registerBird(
         id: String,
