@@ -10,7 +10,10 @@ import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.entity.effect.StatusEffects
 import net.minecraft.entity.mob.WaterCreatureEntity
+import net.minecraft.entity.passive.CatEntity
 import net.minecraft.entity.passive.ChickenEntity
+import net.minecraft.entity.passive.FoxEntity
+import net.minecraft.entity.passive.OcelotEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.recipe.Ingredient
 import net.minecraft.registry.tag.ItemTags
@@ -35,6 +38,9 @@ class RoosterEntity(entityType: EntityType<out RoosterEntity>, world: World) :
     override fun initGoals() {
         goalSelector.add(0, SwimGoal(this))
         goalSelector.add(0, EscapeDangerGoal(this, 0.6))
+        goalSelector.add(0, FleeEntityGoal(this, OcelotEntity::class.java, 8.0f, 1.0, 1.25))
+        goalSelector.add(0, FleeEntityGoal(this, FoxEntity::class.java, 8.0f, 1.0, 1.25))
+        goalSelector.add(0, FleeEntityGoal(this, CatEntity::class.java, 8.0f, 1.0, 1.25))
         goalSelector.add(1, TemptGoal(this, 0.6, Ingredient.fromTag(ItemTags.VILLAGER_PLANTABLE_SEEDS), false))
         goalSelector.add(2, WanderAroundGoal(this, 0.5))
         goalSelector.add(2, LookAroundGoal(this))
