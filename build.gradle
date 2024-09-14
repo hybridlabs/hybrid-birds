@@ -15,11 +15,6 @@ base {
 
 repositories {
     maven {
-        name = "Terraformers"
-        url  = "https://maven.terraformersmc.com/releases/"
-    }
-
-    maven {
         name = "Jitpack"
         url  = "https://jitpack.io/"
     }
@@ -60,7 +55,6 @@ dependencies {
     modImplementation "net.fabricmc:fabric-language-kotlin:$fabric_kotlin_version+kotlin.$kotlin_version"
 
     modImplementation "software.bernie.geckolib:geckolib-fabric-$geckolib_version"
-    modImplementation "com.terraformersmc:modmenu:$mod_menu_version"
 
     modRuntimeOnly "io.github.flemmli97:debugutils:$minecraft_version-$debug_utils_version-fabric"
     modRuntimeOnly "maven.modrinth:carpet:$carpet_version"
@@ -89,8 +83,8 @@ processResources {
 
 java {
     withSourcesJar()
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
 }
 
 jar {
