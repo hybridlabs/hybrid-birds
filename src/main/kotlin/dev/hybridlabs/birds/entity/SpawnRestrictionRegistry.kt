@@ -19,6 +19,8 @@ object SpawnRestrictionRegistry {
             HybridBirdsEntityTypes.ROOSTER,
             HybridBirdsEntityTypes.CHICK,
             HybridBirdsEntityTypes.TURKEY,
+            HybridBirdsEntityTypes.DUCK,
+            HybridBirdsEntityTypes.SWAN,
         ).forEach { registerBird(it) }
     }
 

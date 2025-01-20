@@ -8,10 +8,10 @@ import software.bernie.geckolib.model.GeoModel
 import software.bernie.geckolib.renderer.GeoEntityRenderer
 import software.bernie.geckolib.renderer.layer.AutoGlowingGeoLayer
 
-open class HybridBirdsBirdEntityRenderer<T: HybridBirdsBirdEntity>(
+open class HybridBirdsBirdEntityRenderer<T : HybridBirdsBirdEntity>(
     context: EntityRendererFactory.Context,
     model: GeoModel<T>,
-): GeoEntityRenderer<T>(context, model) {
+) : GeoEntityRenderer<T>(context, model) {
 
     override fun render(
         entity: T,
