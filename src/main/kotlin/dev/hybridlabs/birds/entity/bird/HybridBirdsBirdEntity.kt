@@ -6,12 +6,10 @@ import net.minecraft.entity.EntityPose
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.SpawnReason
 import net.minecraft.entity.ai.control.MoveControl
-import net.minecraft.entity.ai.goal.*
 import net.minecraft.entity.ai.pathing.EntityNavigation
 import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.passive.AnimalEntity
 import net.minecraft.entity.passive.PassiveEntity
-import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
@@ -23,7 +21,10 @@ import software.bernie.geckolib.animatable.GeoEntity
 import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.core.animatable.GeoAnimatable
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.core.animation.*
+import software.bernie.geckolib.core.animation.AnimatableManager
+import software.bernie.geckolib.core.animation.AnimationController
+import software.bernie.geckolib.core.animation.AnimationState
+import software.bernie.geckolib.core.animation.RawAnimation
 import software.bernie.geckolib.core.`object`.PlayState
 import software.bernie.geckolib.util.GeckoLibUtil
 
@@ -61,6 +62,17 @@ open class HybridBirdsBirdEntity(
         controllerRegistrar.add(
             DefaultAnimations.genericWalkRunIdleController(this)
         )
+        controllerRegistrar.add(
+            AnimationController(this, "Flap", 0,
+                AnimationController.AnimationStateHandler { state: AnimationState<HybridBirdsBirdEntity> ->
+                    if (!this.isOnGround) {
+                        return@AnimationStateHandler state.setAndContinue(FLAP)
+                    } else {
+                        PlayState.STOP
+                    }
+                }
+            )
+        )
     }
 
     override fun getAnimatableInstanceCache(): AnimatableInstanceCache {
@@ -97,6 +109,8 @@ open class HybridBirdsBirdEntity(
 
 
     companion object {
+
+        val FLAP: RawAnimation = RawAnimation.begin().thenPlay("misc.flap")
 
         @Suppress("UNUSED_PARAMETER")
         fun canSpawn(
