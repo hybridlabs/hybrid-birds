@@ -3,7 +3,7 @@ package dev.hybridlabs.birds.utils;
 import net.minecraft.entity.SpawnGroup;
 
 public enum HybridBirdsSpawnGroup {
-    BIRDS("hb_birds", 2, true, false, 32);
+    BIRDS("hb_birds", 10, true, false, 32);
 
     public SpawnGroup spawnGroup;
     public final String name;

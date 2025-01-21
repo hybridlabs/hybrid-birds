@@ -20,6 +20,7 @@ import net.minecraft.util.math.random.Random
 import net.minecraft.world.World
 import net.minecraft.world.WorldAccess
 import software.bernie.geckolib.animatable.GeoEntity
+import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.core.animatable.GeoAnimatable
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
 import software.bernie.geckolib.core.animation.*
@@ -58,12 +59,7 @@ open class HybridBirdsBirdEntity(
 
     override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
         controllerRegistrar.add(
-            AnimationController(
-                this,
-                "controller",
-                0,
-                ::predicate
-            )
+            DefaultAnimations.genericWalkRunIdleController(this)
         )
     }
 
@@ -101,18 +97,14 @@ open class HybridBirdsBirdEntity(
 
 
     companion object {
-        val IDLE_ANIMATION: RawAnimation = RawAnimation.begin().then("idle", Animation.LoopType.LOOP)
-        val WALK_ANIMATION: RawAnimation = RawAnimation.begin().then("walk", Animation.LoopType.LOOP)
-        val SWIM_ANIMATION: RawAnimation = RawAnimation.begin().then("swim", Animation.LoopType.LOOP)
-        val FLY_ANIMATION: RawAnimation = RawAnimation.begin().then("fly", Animation.LoopType.LOOP)
 
         @Suppress("UNUSED_PARAMETER")
         fun canSpawn(
             type: EntityType<out AnimalEntity>,
             world: WorldAccess,
-            reason: SpawnReason?,
+            reason: SpawnReason,
             pos: BlockPos,
-            random: Random?
+            random: Random
         ): Boolean {
             return true
         }

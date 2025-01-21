@@ -22,6 +22,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
     private fun generateEntities(builder: TranslationBuilder) {
         val entityNameMap = mapOf(
             HybridBirdsEntityTypes.DUCK to "Duck",
+            HybridBirdsEntityTypes.GOOSE to "Goose",
             HybridBirdsEntityTypes.SWAN to "Swan",
             HybridBirdsEntityTypes.ROOSTER to "Rooster",
             HybridBirdsEntityTypes.CHICK to "Chick",

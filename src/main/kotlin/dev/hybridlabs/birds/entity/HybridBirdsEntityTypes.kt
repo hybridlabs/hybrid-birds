@@ -40,6 +40,13 @@ object HybridBirdsEntityTypes {
         DuckEntity.createMobAttributes()
     )
 
+    val GOOSE = registerBird(
+        "goose",
+        ::GooseEntity,
+        EntityDimensions.fixed(0.6f, 1.2f),
+        GooseEntity.createMobAttributes()
+    )
+
     val SWAN = registerBird(
         "swan",
         ::SwanEntity,

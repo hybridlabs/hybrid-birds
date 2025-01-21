@@ -15,6 +15,7 @@ object EntityBiomeModifications {
     init {
         addBird(HybridBirdsEntityTypes.ROOSTER, BiomeTags.VILLAGE_PLAINS_HAS_STRUCTURE, 5, 1, 2)
         addBird(HybridBirdsEntityTypes.DUCK, BiomeTags.IS_RIVER, 5, 1, 2)
+        addBird(HybridBirdsEntityTypes.GOOSE, BiomeTags.IS_RIVER, 5, 1, 2)
         addBird(HybridBirdsEntityTypes.SWAN, BiomeTags.IS_RIVER, 5, 1, 2)
         addBird(HybridBirdsEntityTypes.TURKEY, BiomeTags.IS_FOREST, 5, 1, 2)
     }

@@ -9,5 +9,6 @@ object HybridBirdsEntityRenderers {
     val CHICK = EntityRendererRegistry.register(HybridBirdsEntityTypes.CHICK, ::ChickEntityRenderer)
     val TURKEY = EntityRendererRegistry.register(HybridBirdsEntityTypes.TURKEY, ::TurkeyEntityRenderer)
     val DUCK = EntityRendererRegistry.register(HybridBirdsEntityTypes.DUCK, ::DuckEntityRenderer)
+    val GOOSE = EntityRendererRegistry.register(HybridBirdsEntityTypes.GOOSE, ::GooseEntityRenderer)
     val SWAN = EntityRendererRegistry.register(HybridBirdsEntityTypes.SWAN, ::SwanEntityRenderer)
 }
