@@ -2,9 +2,9 @@ package dev.hybridlabs.birds.data
 
 import dev.hybridlabs.birds.HybridBirds
 import dev.hybridlabs.birds.data.client.LanguageProvider
+import dev.hybridlabs.birds.data.client.ModelProvider
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator
-import net.minecraft.data.client.*
 import net.minecraft.registry.Registry
 
 object HybridBirdsDataGenerator : DataGeneratorEntrypoint {
@@ -17,7 +17,11 @@ object HybridBirdsDataGenerator : DataGeneratorEntrypoint {
 	fun <T> filterHybridBirds(registry: Registry<T>): (T) -> Boolean {
 		return { o ->
 			val id = registry.getId(o)
-			id?.namespace == HybridBirds.MOD_ID
+			if (id == null) {
+				false
+			} else {
+				id.namespace == HybridBirds.MOD_ID
+			}
 		}
 	}
 }

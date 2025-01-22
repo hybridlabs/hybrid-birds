@@ -13,7 +13,6 @@ import net.minecraft.registry.Registry
 import net.minecraft.util.Identifier
 
 object HybridBirdsItems {
-
     val DUCK_SPAWN_EGG = registerSpawnEgg("duck_spawn_egg", HybridBirdsEntityTypes.DUCK, 0x676b8d, 0xd0ccda)
     val GOOSE_SPAWN_EGG = registerSpawnEgg("goose_spawn_egg", HybridBirdsEntityTypes.GOOSE, 0x676b8d, 0xd0ccda)
     val SWAN_SPAWN_EGG = registerSpawnEgg("swan_spawn_egg", HybridBirdsEntityTypes.SWAN, 0x676b8d, 0xd0ccda)
@@ -25,6 +24,7 @@ object HybridBirdsItems {
     private fun register(id: String, item: Item): Item {
         return Registry.register(Registries.ITEM, Identifier(HybridBirds.MOD_ID, id), item)
     }
+
     private fun <T : MobEntity> registerSpawnEgg(
         id: String,
         type: EntityType<T>,

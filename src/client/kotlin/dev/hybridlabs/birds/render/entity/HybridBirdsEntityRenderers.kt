@@ -1,7 +1,12 @@
 package dev.hybridlabs.birds.render.entity
 
 import dev.hybridlabs.birds.entity.HybridBirdsEntityTypes
-import dev.hybridlabs.birds.render.entity.bird.*
+import dev.hybridlabs.birds.render.entity.bird.ChickEntityRenderer
+import dev.hybridlabs.birds.render.entity.bird.DuckEntityRenderer
+import dev.hybridlabs.birds.render.entity.bird.GooseEntityRenderer
+import dev.hybridlabs.birds.render.entity.bird.RoosterEntityRenderer
+import dev.hybridlabs.birds.render.entity.bird.SwanEntityRenderer
+import dev.hybridlabs.birds.render.entity.bird.TurkeyEntityRenderer
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry
 
 object HybridBirdsEntityRenderers {

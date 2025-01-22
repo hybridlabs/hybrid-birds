@@ -4,7 +4,7 @@ import dev.hybridlabs.birds.entity.bird.RoosterEntity
 import net.minecraft.entity.ai.TargetPredicate
 import net.minecraft.entity.ai.goal.Goal
 import net.minecraft.entity.passive.ChickenEntity
-import java.util.*
+import java.util.EnumSet
 
 class FollowRoosterGoal(
     private val chicken: ChickenEntity,

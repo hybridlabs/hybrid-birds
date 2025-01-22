@@ -6,7 +6,6 @@ import net.minecraft.client.render.entity.EntityRendererFactory
 import net.minecraft.client.util.math.MatrixStack
 import software.bernie.geckolib.model.GeoModel
 import software.bernie.geckolib.renderer.GeoEntityRenderer
-import software.bernie.geckolib.renderer.layer.AutoGlowingGeoLayer
 
 open class HybridBirdsBirdEntityRenderer<T : HybridBirdsBirdEntity>(
     context: EntityRendererFactory.Context,

@@ -13,25 +13,17 @@ import net.minecraft.registry.Registries
 
 class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
     override fun generateBlockStateModels(generator: BlockStateModelGenerator) {
-        generator.run {
-
-            // spawn eggs
-            Registries.ITEM
-                .filter(filterHybridBirds(Registries.ITEM))
-                .forEach { item ->
-                    if (item is SpawnEggItem) {
-                        registerParentedItemModel(item, ModelIds.getMinecraftNamespacedItem("template_spawn_egg"))
-                    }
+        // spawn eggs
+        Registries.ITEM
+            .filter(filterHybridBirds(Registries.ITEM))
+            .forEach { item ->
+                if (item is SpawnEggItem) {
+                    generator.registerParentedItemModel(item, ModelIds.getMinecraftNamespacedItem("template_spawn_egg"))
                 }
-        }
+            }
     }
 
     override fun generateItemModels(generator: ItemModelGenerator) {
-        setOf(
-            HybridBirdsItems.TURKEY_EGG,
-        ).forEach { item ->
-            generator.register(item, Models.GENERATED)
-        }
+        generator.register(HybridBirdsItems.TURKEY_EGG, Models.GENERATED)
     }
-
 }

@@ -2,7 +2,12 @@ package dev.hybridlabs.birds.entity.bird
 
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.ai.control.MoveControl
-import net.minecraft.entity.ai.goal.*
+import net.minecraft.entity.ai.goal.EscapeDangerGoal
+import net.minecraft.entity.ai.goal.LookAroundGoal
+import net.minecraft.entity.ai.goal.LookAtEntityGoal
+import net.minecraft.entity.ai.goal.SwimGoal
+import net.minecraft.entity.ai.goal.TemptGoal
+import net.minecraft.entity.ai.goal.WanderAroundGoal
 import net.minecraft.entity.ai.pathing.EntityNavigation
 import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes

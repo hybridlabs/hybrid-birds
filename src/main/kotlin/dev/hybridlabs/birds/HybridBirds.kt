@@ -1,7 +1,7 @@
 package dev.hybridlabs.birds
 
-import dev.hybridlabs.birds.entity.SpawnRestrictionRegistry
 import dev.hybridlabs.birds.entity.HybridBirdsEntityTypes
+import dev.hybridlabs.birds.entity.SpawnRestrictionRegistry
 import dev.hybridlabs.birds.item.HybridBirdsItemGroups
 import dev.hybridlabs.birds.item.HybridBirdsItems
 import dev.hybridlabs.birds.world.EntityBiomeModifications
