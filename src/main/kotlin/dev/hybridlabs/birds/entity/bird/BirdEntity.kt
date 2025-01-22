@@ -28,12 +28,7 @@ import software.bernie.geckolib.core.animation.RawAnimation
 import software.bernie.geckolib.core.`object`.PlayState
 import software.bernie.geckolib.util.GeckoLibUtil
 
-@Suppress("LeakingThis")
-open class HybridBirdsBirdEntity(
-    type: EntityType<out HybridBirdsBirdEntity>,
-    world: World,
-) : AnimalEntity(type, world), GeoEntity {
-
+open class BirdEntity(type: EntityType<out BirdEntity>, world: World, ) : AnimalEntity(type, world), GeoEntity {
     private val factory = GeckoLibUtil.createInstanceCache(this)
     private var birdNavigation: EntityNavigation = createNavigation(world)
 
@@ -64,7 +59,7 @@ open class HybridBirdsBirdEntity(
         )
         controllerRegistrar.add(
             AnimationController(this, "Flap", 0,
-                AnimationController.AnimationStateHandler { state: AnimationState<HybridBirdsBirdEntity> ->
+                AnimationController.AnimationStateHandler { state: AnimationState<BirdEntity> ->
                     if (!this.isOnGround) {
                         return@AnimationStateHandler state.setAndContinue(FLAP)
                     } else {

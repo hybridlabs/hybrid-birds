@@ -23,7 +23,7 @@ import net.minecraft.sound.SoundEvents
 import net.minecraft.world.World
 
 class RoosterEntity(entityType: EntityType<out RoosterEntity>, world: World) :
-    HybridBirdsBirdEntity(entityType, world) {
+    BirdEntity(entityType, world) {
     private var roosterNavigation: EntityNavigation = createNavigation(world)
     private var hasCalled: Boolean = false
 

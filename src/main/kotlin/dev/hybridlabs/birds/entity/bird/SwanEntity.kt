@@ -23,7 +23,7 @@ import net.minecraft.world.World
 import net.minecraft.world.event.GameEvent
 
 class SwanEntity(entityType: EntityType<out SwanEntity>, world: World) :
-    HybridBirdsBirdEntity(entityType, world) {
+    BirdEntity(entityType, world) {
     private var swanNavigation: EntityNavigation = createNavigation(world)
     private var eggLayTime: Int = 0
 
