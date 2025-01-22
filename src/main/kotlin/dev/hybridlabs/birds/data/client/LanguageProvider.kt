@@ -3,6 +3,7 @@ package dev.hybridlabs.birds.data.client
 import dev.hybridlabs.birds.data.HybridBirdsDataGenerator.filterHybridBirds
 import dev.hybridlabs.birds.entity.HybridBirdsEntityTypes
 import dev.hybridlabs.birds.item.HybridBirdsItemGroups
+import dev.hybridlabs.birds.item.HybridBirdsItems
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider
 import net.minecraft.entity.EntityType
@@ -17,6 +18,12 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
         )
 
         generateEntities(builder)
+
+        mapOf(
+            HybridBirdsItems.TURKEY_EGG to "Turkey Egg",
+        ).forEach { (item, translation) ->
+            builder.add(item, translation)
+        }
     }
 
     private fun generateEntities(builder: TranslationBuilder) {

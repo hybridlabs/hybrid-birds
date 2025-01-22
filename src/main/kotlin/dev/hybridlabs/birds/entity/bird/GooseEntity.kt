@@ -9,19 +9,23 @@ import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.mob.WaterCreatureEntity
 import net.minecraft.entity.player.PlayerEntity
+import net.minecraft.item.Items
 import net.minecraft.recipe.Ingredient
 import net.minecraft.registry.tag.ItemTags
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.world.World
+import net.minecraft.world.event.GameEvent
 
 class GooseEntity(entityType: EntityType<out GooseEntity>, world: World) :
     HybridBirdsBirdEntity(entityType, world) {
     private var gooseNavigation: EntityNavigation = createNavigation(world)
+    private var eggLayTime: Int = 0
 
     init {
         moveControl = MoveControl(this)
         navigation = gooseNavigation
+        this.eggLayTime = random.nextInt(6000) + 6000
     }
 
     override fun getLimitPerChunk(): Int {
@@ -35,6 +39,20 @@ class GooseEntity(entityType: EntityType<out GooseEntity>, world: World) :
         goalSelector.add(2, WanderAroundGoal(this, 0.5))
         goalSelector.add(2, LookAroundGoal(this))
         goalSelector.add(11, LookAtEntityGoal(this, PlayerEntity::class.java, 10.0f))
+    }
+
+    override fun tickMovement() {
+        super.tickMovement()
+        if ((!world.isClient && this.isAlive && !this.isBaby && --this.eggLayTime <= 0)) {
+            this.playSound(
+                SoundEvents.ENTITY_CHICKEN_EGG,
+                1.0f,
+                (random.nextFloat() - random.nextFloat()) * 0.2f + 1.0f
+            )
+            this.dropItem(Items.EGG)
+            this.emitGameEvent(GameEvent.ENTITY_PLACE)
+            this.eggLayTime = random.nextInt(6000) + 6000
+        }
     }
 
     override fun getHurtSound(source: DamageSource): SoundEvent {

@@ -5,6 +5,7 @@ import dev.hybridlabs.birds.entity.HybridBirdsEntityTypes
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.mob.MobEntity
+import net.minecraft.item.EggItem
 import net.minecraft.item.Item
 import net.minecraft.item.SpawnEggItem
 import net.minecraft.registry.Registries
@@ -18,6 +19,8 @@ object HybridBirdsItems {
     val SWAN_SPAWN_EGG = registerSpawnEgg("swan_spawn_egg", HybridBirdsEntityTypes.SWAN, 0x676b8d, 0xd0ccda)
     val ROOSTER_SPAWN_EGG = registerSpawnEgg("rooster_spawn_egg", HybridBirdsEntityTypes.ROOSTER, 0x676b8d, 0xd0ccda)
     val TURKEY_SPAWN_EGG = registerSpawnEgg("turkey_spawn_egg", HybridBirdsEntityTypes.TURKEY, 0x676b8d, 0xd0ccda)
+
+    val TURKEY_EGG = register("turkey_egg", EggItem(FabricItemSettings().maxCount(16)))
 
     private fun register(id: String, item: Item): Item {
         return Registry.register(Registries.ITEM, Identifier(HybridBirds.MOD_ID, id), item)

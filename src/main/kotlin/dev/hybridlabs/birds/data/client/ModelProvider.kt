@@ -1,14 +1,13 @@
 package dev.hybridlabs.birds.data.client
 
 import dev.hybridlabs.birds.data.HybridBirdsDataGenerator.filterHybridBirds
+import dev.hybridlabs.birds.item.HybridBirdsItems
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider
-import net.minecraft.block.Blocks
-import net.minecraft.block.FluidBlock
 import net.minecraft.data.client.BlockStateModelGenerator
 import net.minecraft.data.client.ItemModelGenerator
 import net.minecraft.data.client.ModelIds
-import net.minecraft.data.client.TextureMap
+import net.minecraft.data.client.Models
 import net.minecraft.item.SpawnEggItem
 import net.minecraft.registry.Registries
 
@@ -27,8 +26,12 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
         }
     }
 
-    override fun generateItemModels(itemModelGenerator: ItemModelGenerator?) {
-        TODO("Not yet implemented")
+    override fun generateItemModels(generator: ItemModelGenerator) {
+        setOf(
+            HybridBirdsItems.TURKEY_EGG,
+        ).forEach { item ->
+            generator.register(item, Models.GENERATED)
+        }
     }
 
 }
