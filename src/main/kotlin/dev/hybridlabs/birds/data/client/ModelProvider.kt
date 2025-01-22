@@ -25,5 +25,6 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
 
     override fun generateItemModels(generator: ItemModelGenerator) {
         generator.register(HybridBirdsItems.TURKEY_EGG, Models.GENERATED)
+        generator.register(HybridBirdsItems.PEACOCK_EGG, Models.GENERATED)
     }
 }

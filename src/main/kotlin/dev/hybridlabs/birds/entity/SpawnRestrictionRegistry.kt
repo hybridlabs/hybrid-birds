@@ -17,6 +17,7 @@ object SpawnRestrictionRegistry {
             HybridBirdsEntityTypes.ROOSTER,
             HybridBirdsEntityTypes.CHICK,
             HybridBirdsEntityTypes.TURKEY,
+            HybridBirdsEntityTypes.PEACOCK,
             HybridBirdsEntityTypes.DUCK,
             HybridBirdsEntityTypes.GOOSE,
             HybridBirdsEntityTypes.SWAN,

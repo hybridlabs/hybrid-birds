@@ -18,6 +18,7 @@ object EntityBiomeModifications {
         addBird(HybridBirdsEntityTypes.GOOSE, BiomeTags.IS_RIVER, 5, 1, 2)
         addBird(HybridBirdsEntityTypes.SWAN, BiomeTags.IS_RIVER, 5, 1, 2)
         addBird(HybridBirdsEntityTypes.TURKEY, BiomeTags.IS_FOREST, 5, 1, 2)
+        addBird(HybridBirdsEntityTypes.PEACOCK, BiomeTags.IS_JUNGLE, 5, 1, 2)
     }
 
     private fun addBird(

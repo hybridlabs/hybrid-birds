@@ -1,12 +1,7 @@
 package dev.hybridlabs.birds.entity
 
 import dev.hybridlabs.birds.HybridBirds
-import dev.hybridlabs.birds.entity.bird.ChickEntity
-import dev.hybridlabs.birds.entity.bird.DuckEntity
-import dev.hybridlabs.birds.entity.bird.GooseEntity
-import dev.hybridlabs.birds.entity.bird.RoosterEntity
-import dev.hybridlabs.birds.entity.bird.SwanEntity
-import dev.hybridlabs.birds.entity.bird.TurkeyEntity
+import dev.hybridlabs.birds.entity.bird.*
 import dev.hybridlabs.birds.utils.HybridBirdsSpawnGroup
 import net.fabricmc.fabric.api.`object`.builder.v1.entity.FabricDefaultAttributeRegistry
 import net.fabricmc.fabric.api.`object`.builder.v1.entity.FabricEntityTypeBuilder
@@ -40,6 +35,13 @@ object HybridBirdsEntityTypes {
         ::TurkeyEntity,
         EntityDimensions.fixed(0.6f, 0.6f),
         TurkeyEntity.createMobAttributes()
+    )
+
+    val PEACOCK = registerBird(
+        "peacock",
+        ::PeacockEntity,
+        EntityDimensions.fixed(0.6f, 0.6f),
+        PeacockEntity.createMobAttributes()
     )
 
     val DUCK = registerBird(

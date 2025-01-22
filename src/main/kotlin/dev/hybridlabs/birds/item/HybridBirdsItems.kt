@@ -20,6 +20,7 @@ object HybridBirdsItems {
     val TURKEY_SPAWN_EGG = registerSpawnEgg("turkey_spawn_egg", HybridBirdsEntityTypes.TURKEY, 0x676b8d, 0xd0ccda)
 
     val TURKEY_EGG = register("turkey_egg", EggItem(FabricItemSettings().maxCount(16)))
+    val PEACOCK_EGG = register("peacock_egg", EggItem(FabricItemSettings().maxCount(16)))
 
     private fun register(id: String, item: Item): Item {
         return Registry.register(Registries.ITEM, Identifier(HybridBirds.MOD_ID, id), item)

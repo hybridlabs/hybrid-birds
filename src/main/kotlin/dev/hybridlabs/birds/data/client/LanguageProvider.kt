@@ -21,6 +21,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
 
         mapOf(
             HybridBirdsItems.TURKEY_EGG to "Turkey Egg",
+            HybridBirdsItems.PEACOCK_EGG to "Peacock Egg",
         ).forEach { (item, translation) ->
             builder.add(item, translation)
         }
@@ -34,6 +35,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridBirdsEntityTypes.ROOSTER to "Rooster",
             HybridBirdsEntityTypes.CHICK to "Chick",
             HybridBirdsEntityTypes.TURKEY to "Turkey",
+            HybridBirdsEntityTypes.PEACOCK to "Peacock",
         )
 
         val nonPresentEntityNames = mutableListOf<EntityType<*>>()
