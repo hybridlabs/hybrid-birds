@@ -40,6 +40,13 @@ object HybridBirdsEntityTypes {
         PeacockEntity.createMobAttributes()
     )
 
+    val GUINEA_FOWL = registerBird(
+        "guinea_fowl",
+        ::GuineaFowlEntity,
+        EntityDimensions.fixed(0.6f, 0.6f),
+        GuineaFowlEntity.createMobAttributes()
+    )
+
     val DUCK = registerBird(
         "duck",
         ::DuckEntity,

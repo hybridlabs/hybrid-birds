@@ -29,5 +29,6 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
         generator.register(HybridBirdsItems.SWAN_EGG, Models.GENERATED)
         generator.register(HybridBirdsItems.TURKEY_EGG, Models.GENERATED)
         generator.register(HybridBirdsItems.PEACOCK_EGG, Models.GENERATED)
+        generator.register(HybridBirdsItems.GUINEA_FOWL_EGG, Models.GENERATED)
     }
 }
