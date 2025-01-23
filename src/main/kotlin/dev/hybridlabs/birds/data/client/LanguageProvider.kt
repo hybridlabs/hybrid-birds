@@ -22,6 +22,9 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
         mapOf(
             HybridBirdsItems.TURKEY_EGG to "Turkey Egg",
             HybridBirdsItems.PEACOCK_EGG to "Peacock Egg",
+            HybridBirdsItems.DUCK_EGG to "Duck Egg",
+            HybridBirdsItems.GOOSE_EGG to "Goose Egg",
+            HybridBirdsItems.SWAN_EGG to "Swan Egg",
         ).forEach { (item, translation) ->
             builder.add(item, translation)
         }

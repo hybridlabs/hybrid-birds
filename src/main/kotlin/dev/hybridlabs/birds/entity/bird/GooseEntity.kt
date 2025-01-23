@@ -1,5 +1,6 @@
 package dev.hybridlabs.birds.entity.bird
 
+import dev.hybridlabs.birds.item.HybridBirdsItems
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.ai.control.MoveControl
 import net.minecraft.entity.ai.goal.EscapeDangerGoal
@@ -54,7 +55,7 @@ class GooseEntity(entityType: EntityType<out GooseEntity>, world: World) :
                 1.0f,
                 (random.nextFloat() - random.nextFloat()) * 0.2f + 1.0f
             )
-            this.dropItem(Items.EGG)
+            this.dropItem(HybridBirdsItems.GOOSE_EGG)
             this.emitGameEvent(GameEvent.ENTITY_PLACE)
             this.eggLayTime = random.nextInt(6000) + 6000
         }

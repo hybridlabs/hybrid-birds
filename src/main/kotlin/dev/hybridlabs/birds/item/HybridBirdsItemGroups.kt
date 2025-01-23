@@ -18,6 +18,13 @@ object  HybridBirdsItemGroups {
         .displayName(Text.translatable("itemGroup.${HybridBirds.MOD_ID}.spawn_eggs"))
         .icon { ItemStack(Items.FEATHER) }
         .entries { _, entries ->
+
+            entries.add(HybridBirdsItems.DUCK_EGG)
+            entries.add(HybridBirdsItems.GOOSE_EGG)
+            entries.add(HybridBirdsItems.SWAN_EGG)
+            entries.add(HybridBirdsItems.TURKEY_EGG)
+            entries.add(HybridBirdsItems.PEACOCK_EGG)
+
             Registries.ITEM.forEach { item ->
                 val id = Registries.ITEM.getId(item)
                 if (id.namespace != HybridBirds.MOD_ID) {

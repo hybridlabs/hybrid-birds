@@ -2,17 +2,11 @@ package dev.hybridlabs.birds.entity
 
 import dev.hybridlabs.birds.HybridBirds
 import dev.hybridlabs.birds.entity.bird.*
-import dev.hybridlabs.birds.entity.projectile.TurkeyEggEntity
 import dev.hybridlabs.birds.utils.HybridBirdsSpawnGroup
 import net.fabricmc.fabric.api.`object`.builder.v1.entity.FabricDefaultAttributeRegistry
 import net.fabricmc.fabric.api.`object`.builder.v1.entity.FabricEntityTypeBuilder
-import net.minecraft.entity.Entity
-import net.minecraft.entity.EntityDimensions
-import net.minecraft.entity.EntityType
-import net.minecraft.entity.LivingEntity
-import net.minecraft.entity.SpawnGroup
+import net.minecraft.entity.*
 import net.minecraft.entity.attribute.DefaultAttributeContainer
-import net.minecraft.entity.projectile.ProjectileEntity
 import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
 import net.minecraft.util.Identifier
@@ -67,13 +61,6 @@ object HybridBirdsEntityTypes {
         SwanEntity.createMobAttributes()
     )
 
-    val TURKEY_EGG = registerProjectile(
-        "turkey_egg",
-        ::TurkeyEggEntity,
-        EntityDimensions.fixed(0.8f, 1.5f),
-        SpawnGroup.MISC
-    )
-
     @JvmStatic
     fun getChickEntityType(): EntityType<ChickEntity> {
         return CHICK
@@ -113,16 +100,6 @@ object HybridBirdsEntityTypes {
     ): EntityType<T> {
         val entityType = FabricEntityTypeBuilder.create(spawnGroup, entityFactory).dimensions(dimensions).build()
         FabricDefaultAttributeRegistry.register(entityType, attributeContainer)
-        return register(id, entityType)
-    }
-
-    private fun <T : ProjectileEntity> registerProjectile(
-        id: String,
-        entityFactory: EntityType.EntityFactory<T>,
-        dimensions: EntityDimensions,
-        spawnGroup: SpawnGroup
-    ): EntityType<T> {
-        val entityType = FabricEntityTypeBuilder.create(spawnGroup, entityFactory).dimensions(dimensions).build()
         return register(id, entityType)
     }
 
