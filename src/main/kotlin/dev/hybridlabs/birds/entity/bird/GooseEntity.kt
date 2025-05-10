@@ -17,7 +17,6 @@ import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.mob.WaterCreatureEntity
 import net.minecraft.entity.passive.PassiveEntity
 import net.minecraft.entity.player.PlayerEntity
-import net.minecraft.item.Items
 import net.minecraft.recipe.Ingredient
 import net.minecraft.registry.tag.ItemTags
 import net.minecraft.server.world.ServerWorld
@@ -77,7 +76,7 @@ class GooseEntity(entityType: EntityType<out GooseEntity>, world: World) :
     }
 
     override fun createChild(world: ServerWorld, entity: PassiveEntity): PassiveEntity? {
-        return HybridBirdsEntityTypes.getGoslingEntityType().create(world)
+        return HybridBirdsEntityTypes.GOSLING.create(world)
     }
 
     companion object {

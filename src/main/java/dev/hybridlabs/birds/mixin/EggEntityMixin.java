@@ -25,7 +25,7 @@ public abstract class EggEntityMixin {
                 }
 
                 for (int j = 0; j < i; ++j) {
-                    ChickEntity chickEntity = HybridBirdsEntityTypes.getChickEntityType().create(world);
+                    ChickEntity chickEntity = HybridBirdsEntityTypes.INSTANCE.getCHICK().create(world);
                     if (chickEntity != null) {
                         chickEntity.setBreedingAge(-24000);
                         chickEntity.refreshPositionAndAngles(eggEntity.getX(), eggEntity.getY(), eggEntity.getZ(), eggEntity.getYaw(), 0.0F);

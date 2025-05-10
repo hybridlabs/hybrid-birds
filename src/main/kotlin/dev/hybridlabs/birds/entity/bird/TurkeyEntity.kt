@@ -76,7 +76,7 @@ class TurkeyEntity(entityType: EntityType<out TurkeyEntity>, world: World) :
     }
 
     override fun createChild(world: ServerWorld, entity: PassiveEntity): PassiveEntity? {
-        return HybridBirdsEntityTypes.getPoultEntityType().create(world)
+        return HybridBirdsEntityTypes.POULT.create(world)
     }
 
     companion object {

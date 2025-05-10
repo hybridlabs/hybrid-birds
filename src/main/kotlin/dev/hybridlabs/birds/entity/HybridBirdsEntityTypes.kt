@@ -1,11 +1,28 @@
 package dev.hybridlabs.birds.entity
 
 import dev.hybridlabs.birds.HybridBirds
-import dev.hybridlabs.birds.entity.bird.*
+import dev.hybridlabs.birds.entity.bird.ChickEntity
+import dev.hybridlabs.birds.entity.bird.CygnetEntity
+import dev.hybridlabs.birds.entity.bird.DuckEntity
+import dev.hybridlabs.birds.entity.bird.DucklingEntity
+import dev.hybridlabs.birds.entity.bird.GooseEntity
+import dev.hybridlabs.birds.entity.bird.GoslingEntity
+import dev.hybridlabs.birds.entity.bird.GuineaFowlEntity
+import dev.hybridlabs.birds.entity.bird.KeetEntity
+import dev.hybridlabs.birds.entity.bird.PeachickEntity
+import dev.hybridlabs.birds.entity.bird.PeacockEntity
+import dev.hybridlabs.birds.entity.bird.PoultEntity
+import dev.hybridlabs.birds.entity.bird.RoosterEntity
+import dev.hybridlabs.birds.entity.bird.SwanEntity
+import dev.hybridlabs.birds.entity.bird.TurkeyEntity
 import dev.hybridlabs.birds.utils.HybridBirdsSpawnGroup
 import net.fabricmc.fabric.api.`object`.builder.v1.entity.FabricDefaultAttributeRegistry
 import net.fabricmc.fabric.api.`object`.builder.v1.entity.FabricEntityTypeBuilder
-import net.minecraft.entity.*
+import net.minecraft.entity.Entity
+import net.minecraft.entity.EntityDimensions
+import net.minecraft.entity.EntityType
+import net.minecraft.entity.LivingEntity
+import net.minecraft.entity.SpawnGroup
 import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
@@ -109,29 +126,6 @@ object HybridBirdsEntityTypes {
         EntityDimensions.fixed(0.8f, 1.5f),
         SwanEntity.createMobAttributes()
     )
-
-    @JvmStatic
-    fun getChickEntityType(): EntityType<ChickEntity> {
-        return CHICK
-    }
-    fun getDucklingEntityType(): EntityType<DucklingEntity> {
-        return DUCKLING
-    }
-    fun getGoslingEntityType(): EntityType<GoslingEntity> {
-        return GOSLING
-    }
-    fun getCygnetEntityType(): EntityType<CygnetEntity> {
-        return CYGNET
-    }
-    fun getKeetEntityType(): EntityType<KeetEntity> {
-        return KEET
-    }
-    fun getPeachickEntityType(): EntityType<PeachickEntity> {
-        return PEACHICK
-    }
-    fun getPoultEntityType(): EntityType<PoultEntity> {
-        return POULT
-    }
 
     private fun <T : LivingEntity> registerBird(
         id: String,
