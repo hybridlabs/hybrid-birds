@@ -32,7 +32,7 @@ open class BirdEntity(type: EntityType<out BirdEntity>, world: World, ) : Animal
     private val factory = GeckoLibUtil.createInstanceCache(this)
     private var birdNavigation: EntityNavigation = createNavigation(world)
 
-    override fun createChild(world: ServerWorld?, entity: PassiveEntity?): PassiveEntity? {
+    override fun createChild(world: ServerWorld, entity: PassiveEntity): PassiveEntity? {
         return null
     }
 

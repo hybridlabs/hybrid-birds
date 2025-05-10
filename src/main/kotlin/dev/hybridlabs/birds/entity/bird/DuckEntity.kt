@@ -1,27 +1,27 @@
 package dev.hybridlabs.birds.entity.bird
 
+import dev.hybridlabs.birds.entity.HybridBirdsEntityTypes
+import dev.hybridlabs.birds.entity.HybridBirdsEntityTypes.getChickEntityType
+import dev.hybridlabs.birds.entity.HybridBirdsEntityTypes.getDucklingEntityType
 import dev.hybridlabs.birds.item.HybridBirdsItems
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.ai.control.MoveControl
-import net.minecraft.entity.ai.goal.EscapeDangerGoal
-import net.minecraft.entity.ai.goal.LookAroundGoal
-import net.minecraft.entity.ai.goal.LookAtEntityGoal
-import net.minecraft.entity.ai.goal.SwimGoal
-import net.minecraft.entity.ai.goal.TemptGoal
-import net.minecraft.entity.ai.goal.WanderAroundGoal
+import net.minecraft.entity.ai.goal.*
 import net.minecraft.entity.ai.pathing.EntityNavigation
 import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.mob.WaterCreatureEntity
+import net.minecraft.entity.passive.PassiveEntity
 import net.minecraft.entity.player.PlayerEntity
-import net.minecraft.item.Items
 import net.minecraft.recipe.Ingredient
 import net.minecraft.registry.tag.ItemTags
+import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.world.World
 import net.minecraft.world.event.GameEvent
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable
 
 class DuckEntity(entityType: EntityType<out DuckEntity>, world: World) :
     BirdEntity(entityType, world) {
@@ -71,6 +71,18 @@ class DuckEntity(entityType: EntityType<out DuckEntity>, world: World) :
 
     override fun getAmbientSound(): SoundEvent {
         return SoundEvents.ENTITY_CHICKEN_AMBIENT
+    }
+
+    override fun createChild(world: ServerWorld, entity: PassiveEntity): PassiveEntity? {
+        return getDucklingEntityType().create(world)
+    }
+
+    private fun injectCreateChild(
+        serverWorld: ServerWorld,
+        passiveEntity: PassiveEntity,
+        cir: CallbackInfoReturnable<PassiveEntity?>
+    ) {
+        cir.returnValue = getChickEntityType().create(serverWorld)
     }
 
     companion object {

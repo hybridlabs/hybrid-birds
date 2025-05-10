@@ -16,6 +16,12 @@ object SpawnRestrictionRegistry {
         setOf(
             HybridBirdsEntityTypes.ROOSTER,
             HybridBirdsEntityTypes.CHICK,
+            HybridBirdsEntityTypes.DUCKLING,
+            HybridBirdsEntityTypes.GOSLING,
+            HybridBirdsEntityTypes.CYGNET,
+            HybridBirdsEntityTypes.POULT,
+            HybridBirdsEntityTypes.PEACHICK,
+            HybridBirdsEntityTypes.KEET,
             HybridBirdsEntityTypes.TURKEY,
             HybridBirdsEntityTypes.PEACOCK,
             HybridBirdsEntityTypes.GUINEA_FOWL,

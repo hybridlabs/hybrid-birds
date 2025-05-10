@@ -1,5 +1,6 @@
 package dev.hybridlabs.birds.entity.bird
 
+import dev.hybridlabs.birds.entity.HybridBirdsEntityTypes
 import dev.hybridlabs.birds.item.HybridBirdsItems
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.ai.control.MoveControl
@@ -14,10 +15,12 @@ import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.mob.WaterCreatureEntity
+import net.minecraft.entity.passive.PassiveEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.Items
 import net.minecraft.recipe.Ingredient
 import net.minecraft.registry.tag.ItemTags
+import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.world.World
@@ -71,6 +74,10 @@ class SwanEntity(entityType: EntityType<out SwanEntity>, world: World) :
 
     override fun getAmbientSound(): SoundEvent {
         return SoundEvents.ENTITY_CHICKEN_AMBIENT
+    }
+
+    override fun createChild(world: ServerWorld, entity: PassiveEntity): PassiveEntity? {
+        return HybridBirdsEntityTypes.getCygnetEntityType().create(world)
     }
 
     companion object {

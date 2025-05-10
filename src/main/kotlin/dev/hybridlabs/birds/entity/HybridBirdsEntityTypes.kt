@@ -26,6 +26,48 @@ object HybridBirdsEntityTypes {
         ChickEntity.createMobAttributes()
     )
 
+    val DUCKLING = registerBird(
+        "duckling",
+        ::DucklingEntity,
+        EntityDimensions.fixed(0.25f, 0.25f),
+        DucklingEntity.createMobAttributes()
+    )
+
+    val GOSLING = registerBird(
+        "gosling",
+        ::GoslingEntity,
+        EntityDimensions.fixed(0.25f, 0.25f),
+        GoslingEntity.createMobAttributes()
+    )
+
+    val CYGNET = registerBird(
+        "cygnet",
+        ::CygnetEntity,
+        EntityDimensions.fixed(0.25f, 0.25f),
+        CygnetEntity.createMobAttributes()
+    )
+
+    val POULT = registerBird(
+        "poult",
+        ::PoultEntity,
+        EntityDimensions.fixed(0.25f, 0.25f),
+        PoultEntity.createMobAttributes()
+    )
+
+    val PEACHICK = registerBird(
+        "peachick",
+        ::PeachickEntity,
+        EntityDimensions.fixed(0.25f, 0.25f),
+        PeachickEntity.createMobAttributes()
+    )
+
+    val KEET = registerBird(
+        "keet",
+        ::KeetEntity,
+        EntityDimensions.fixed(0.25f, 0.25f),
+        KeetEntity.createMobAttributes()
+    )
+
     val TURKEY = registerBird(
         "turkey",
         ::TurkeyEntity,
@@ -71,6 +113,24 @@ object HybridBirdsEntityTypes {
     @JvmStatic
     fun getChickEntityType(): EntityType<ChickEntity> {
         return CHICK
+    }
+    fun getDucklingEntityType(): EntityType<DucklingEntity> {
+        return DUCKLING
+    }
+    fun getGoslingEntityType(): EntityType<GoslingEntity> {
+        return GOSLING
+    }
+    fun getCygnetEntityType(): EntityType<CygnetEntity> {
+        return CYGNET
+    }
+    fun getKeetEntityType(): EntityType<KeetEntity> {
+        return KEET
+    }
+    fun getPeachickEntityType(): EntityType<PeachickEntity> {
+        return PEACHICK
+    }
+    fun getPoultEntityType(): EntityType<PoultEntity> {
+        return POULT
     }
 
     private fun <T : LivingEntity> registerBird(
