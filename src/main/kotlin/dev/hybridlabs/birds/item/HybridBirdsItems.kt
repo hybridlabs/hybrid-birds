@@ -4,8 +4,10 @@ import dev.hybridlabs.birds.HybridBirds
 import dev.hybridlabs.birds.entity.HybridBirdsEntityTypes
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.minecraft.entity.EntityType
+import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.entity.mob.MobEntity
 import net.minecraft.item.EggItem
+import net.minecraft.item.FoodComponent
 import net.minecraft.item.Item
 import net.minecraft.item.SpawnEggItem
 import net.minecraft.registry.Registries
@@ -26,6 +28,30 @@ object HybridBirdsItems {
     val TURKEY_EGG = register("turkey_egg", EggItem(FabricItemSettings().maxCount(16)))
     val PEACOCK_EGG = register("peacock_egg", EggItem(FabricItemSettings().maxCount(16)))
     val GUINEA_FOWL_EGG = register("guinea_fowl_egg", EggItem(FabricItemSettings().maxCount(16)))
+
+    val RAW_DUCK = register(
+        "raw_duck", Item(
+            FabricItemSettings().food(
+                    FoodComponent.Builder().hunger(3).saturationModifier(0.6F).meat().build()
+            )
+        )
+    )
+
+    val RAW_GOOSE = register(
+        "raw_goose", Item(
+            FabricItemSettings().food(
+                FoodComponent.Builder().hunger(4).saturationModifier(0.6F).meat().build()
+            )
+        )
+    )
+
+    val RAW_TURKEY = register(
+        "raw_turkey", Item(
+            FabricItemSettings().food(
+                FoodComponent.Builder().hunger(5).saturationModifier(0.6F).meat().build()
+            )
+        )
+    )
 
     private fun register(id: String, item: Item): Item {
         return Registry.register(Registries.ITEM, Identifier(HybridBirds.MOD_ID, id), item)
