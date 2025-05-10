@@ -21,7 +21,8 @@ class FollowRoosterGoal(
     }
 
     override fun canStart(): Boolean {
-        val nearestRooster: RoosterEntity? = chicken.world.getClosestEntity(
+        val world = chicken.world
+        val nearestRooster: RoosterEntity? = world.getClosestEntity(
             RoosterEntity::class.java,
             targetPredicate,
             chicken,
@@ -34,14 +35,19 @@ class FollowRoosterGoal(
         if (nearestRooster == null || nearestRooster.squaredDistanceTo(chicken) < minDistance * minDistance) {
             return false
         }
+
         this.rooster = nearestRooster
         return true
     }
 
     override fun shouldContinue(): Boolean {
-        return rooster != null && rooster!!.isAlive &&
-                chicken.squaredDistanceTo(rooster!!) > minDistance * minDistance &&
-                chicken.squaredDistanceTo(rooster!!) < maxDistance * maxDistance
+        val rooster = rooster ?: return false
+
+        if (!rooster.isAlive) {
+            return false
+        }
+
+        return chicken.squaredDistanceTo(rooster) > minDistance * minDistance && chicken.squaredDistanceTo(rooster) < maxDistance * maxDistance
     }
 
     override fun start() {
@@ -53,16 +59,20 @@ class FollowRoosterGoal(
     }
 
     override fun tick() {
-        if (rooster == null || !rooster!!.isAlive) {
-            return
-        }
+        rooster?.let { rooster ->
+            if (!rooster.isAlive) {
+                return@let
+            }
 
-        if (--delayCounter <= 0) {
-            delayCounter = 10
-            val targetPos = rooster!!.blockPos
-            chicken.navigation.startMovingTo(
-                targetPos.x.toDouble(), targetPos.y.toDouble(), targetPos.z.toDouble(), speed
-            )
+            if (--delayCounter <= 0) {
+                delayCounter = 10
+
+                val targetPos = rooster.blockPos
+                val x = targetPos.x
+                val y = targetPos.y
+                val z = targetPos.z
+                chicken.navigation.startMovingTo(x.toDouble(), y.toDouble(), z.toDouble(), speed)
+            }
         }
     }
 }

@@ -17,7 +17,6 @@ import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.mob.WaterCreatureEntity
 import net.minecraft.entity.passive.PassiveEntity
 import net.minecraft.entity.player.PlayerEntity
-import net.minecraft.item.Items
 import net.minecraft.recipe.Ingredient
 import net.minecraft.registry.tag.ItemTags
 import net.minecraft.server.world.ServerWorld
@@ -77,7 +76,7 @@ class SwanEntity(entityType: EntityType<out SwanEntity>, world: World) :
     }
 
     override fun createChild(world: ServerWorld, entity: PassiveEntity): PassiveEntity? {
-        return HybridBirdsEntityTypes.getCygnetEntityType().create(world)
+        return HybridBirdsEntityTypes.CYGNET.create(world)
     }
 
     companion object {

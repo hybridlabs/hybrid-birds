@@ -17,11 +17,7 @@ object HybridBirdsDataGenerator : DataGeneratorEntrypoint {
 	fun <T> filterHybridBirds(registry: Registry<T>): (T) -> Boolean {
 		return { o ->
 			val id = registry.getId(o)
-			if (id == null) {
-				false
-			} else {
-				id.namespace == HybridBirds.MOD_ID
-			}
+			id?.namespace == HybridBirds.MOD_ID
 		}
 	}
 }

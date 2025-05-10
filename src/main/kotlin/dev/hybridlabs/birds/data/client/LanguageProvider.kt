@@ -32,9 +32,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridBirdsItems.COOKED_DUCK to "Cooked Duck",
             HybridBirdsItems.COOKED_GOOSE to "Cooked Goose",
             HybridBirdsItems.COOKED_TURKEY to "Cooked Turkey",
-        ).forEach { (item, translation) ->
-            builder.add(item, translation)
-        }
+        ).forEach(builder::add)
     }
 
     private fun generateEntities(builder: TranslationBuilder) {
@@ -68,7 +66,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             }
 
         if (nonPresentEntityNames.isNotEmpty()) {
-            throw throw IllegalStateException("Entity to display name map does not contain ${nonPresentEntityNames.joinToString()}. Please modify ${javaClass.simpleName} accordingly.")
+            throw IllegalStateException("Entity to display name map does not contain ${nonPresentEntityNames.joinToString()}. Please modify ${javaClass.simpleName} accordingly.")
         }
 
         entityNameMap.forEach { (entityType, translation) ->

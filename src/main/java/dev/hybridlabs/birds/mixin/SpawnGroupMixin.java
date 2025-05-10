@@ -1,6 +1,6 @@
 package dev.hybridlabs.birds.mixin;
 
-import dev.hybridlabs.birds.utils.HybridBirdsSpawnGroup;
+import dev.hybridlabs.birds.entity.HybridBirdsSpawnGroup;
 import net.minecraft.entity.SpawnGroup;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -26,7 +26,8 @@ public class SpawnGroupMixin {
 
     @Unique
     private static SpawnGroup createHybridBirdsSpawnGroups(String enumname, int ordinal, HybridBirdsSpawnGroup spawnGroup) {
-        return ((SpawnGroup)(Object) new SpawnGroupMixin(spawnGroup.name, ordinal, spawnGroup.name, spawnGroup.spawnCap, spawnGroup.peaceful, spawnGroup.rare, spawnGroup.immediateDespawnRange));
+        String namespacedName = spawnGroup.createNamespacedName();
+        return ((SpawnGroup)(Object) new SpawnGroupMixin(namespacedName, ordinal, namespacedName, spawnGroup.spawnCap, spawnGroup.peaceful, spawnGroup.rare, spawnGroup.immediateDespawnRange));
     }
 
     @Inject(method = "<clinit>",

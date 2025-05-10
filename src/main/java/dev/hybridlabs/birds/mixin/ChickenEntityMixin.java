@@ -20,8 +20,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(ChickenEntity.class)
 public abstract class ChickenEntityMixin extends AnimalEntity {
-    protected ChickenEntityMixin(EntityType<? extends AnimalEntity> entityType, World world) {
-        super(entityType, world);
+    private ChickenEntityMixin(EntityType<? extends AnimalEntity> type, World world) {
+        super(type, world);
     }
 
     @Inject(method = "initGoals", at = @At("HEAD"))
@@ -32,8 +32,8 @@ public abstract class ChickenEntityMixin extends AnimalEntity {
         this.goalSelector.add(1, new FleeEntityGoal<>(this, CatEntity.class, 8.0F, 1.0, 1.0));
     }
 
-    @Inject(method = "createChild*", at = @At("HEAD"), cancellable = true)
-    private void injectCreateChild(ServerWorld serverWorld, PassiveEntity passiveEntity, CallbackInfoReturnable<PassiveEntity> cir) {
-        cir.setReturnValue(HybridBirdsEntityTypes.getChickEntityType().create(serverWorld));
+    @Inject(method = "createChild(Lnet/minecraft/server/world/ServerWorld;Lnet/minecraft/entity/passive/PassiveEntity;)Lnet/minecraft/entity/passive/ChickenEntity;", at = @At("HEAD"), cancellable = true)
+    private void injectCreateChild(ServerWorld world, PassiveEntity parentEntity, CallbackInfoReturnable<PassiveEntity> cir) {
+        cir.setReturnValue(HybridBirdsEntityTypes.INSTANCE.getCHICK().create(world));
     }
 }
