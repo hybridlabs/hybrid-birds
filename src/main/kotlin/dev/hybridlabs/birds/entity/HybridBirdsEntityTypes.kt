@@ -45,7 +45,7 @@ object HybridBirdsEntityTypes {
     val DUCKLING = registerBird(
         "duckling",
         ::DucklingEntity,
-        EntityDimensions.fixed(0.25f, 0.25f),
+        EntityDimensions.fixed(0.3f, 0.25f),
         DucklingEntity.createMobAttributes()
     )
 
@@ -59,7 +59,7 @@ object HybridBirdsEntityTypes {
     val CYGNET = registerBird(
         "cygnet",
         ::CygnetEntity,
-        EntityDimensions.fixed(0.25f, 0.25f),
+        EntityDimensions.fixed(0.5f, 0.25f),
         CygnetEntity.createMobAttributes()
     )
 
