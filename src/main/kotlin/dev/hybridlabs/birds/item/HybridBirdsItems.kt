@@ -53,6 +53,30 @@ object HybridBirdsItems {
         )
     )
 
+    val COOKED_DUCK = register(
+        "cooked_duck", Item(
+            FabricItemSettings().food(
+                FoodComponent.Builder().hunger(12).saturationModifier(0.8F).meat().build()
+            )
+        )
+    )
+
+    val COOKED_GOOSE = register(
+        "cooked_goose", Item(
+            FabricItemSettings().food(
+                FoodComponent.Builder().hunger(12).saturationModifier(0.8F).meat().build()
+            )
+        )
+    )
+
+    val COOKED_TURKEY = register(
+        "cooked_turkey", Item(
+            FabricItemSettings().food(
+                FoodComponent.Builder().hunger(12).saturationModifier(0.8F).meat().build()
+            )
+        )
+    )
+
     private fun <T : Item> register(id: String, item: T): T {
         return Registry.register(Registries.ITEM, Identifier(HybridBirds.MOD_ID, id), item)
     }
