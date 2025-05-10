@@ -25,6 +25,9 @@ object  HybridBirdsItemGroups {
             entries.add(HybridBirdsItems.TURKEY_EGG)
             entries.add(HybridBirdsItems.PEACOCK_EGG)
             entries.add(HybridBirdsItems.GUINEA_FOWL_EGG)
+            entries.add(HybridBirdsItems.RAW_DUCK)
+            entries.add(HybridBirdsItems.RAW_GOOSE)
+            entries.add(HybridBirdsItems.RAW_TURKEY)
 
             Registries.ITEM.forEach { item ->
                 val id = Registries.ITEM.getId(item)
