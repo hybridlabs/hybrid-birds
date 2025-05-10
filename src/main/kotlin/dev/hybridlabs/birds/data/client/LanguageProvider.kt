@@ -38,7 +38,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridBirdsEntityTypes.SWAN to "Swan",
             HybridBirdsEntityTypes.ROOSTER to "Rooster",
             HybridBirdsEntityTypes.CHICK to "Chick",
-            HybridBirdsEntityTypes.DUCKLING to "Ducklng",
+            HybridBirdsEntityTypes.DUCKLING to "Duckling",
             HybridBirdsEntityTypes.GOSLING to "Gosling",
             HybridBirdsEntityTypes.CYGNET to "Cygnet",
             HybridBirdsEntityTypes.POULT to "Poult",
