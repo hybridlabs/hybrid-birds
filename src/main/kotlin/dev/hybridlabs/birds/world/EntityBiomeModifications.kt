@@ -3,7 +3,7 @@
 package dev.hybridlabs.birds.world
 
 import dev.hybridlabs.birds.entity.HybridBirdsEntityTypes
-import dev.hybridlabs.birds.utils.HybridBirdsSpawnGroup
+import dev.hybridlabs.birds.entity.HybridBirdsSpawnGroup
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.SpawnGroup

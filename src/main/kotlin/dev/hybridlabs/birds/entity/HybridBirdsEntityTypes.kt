@@ -15,7 +15,6 @@ import dev.hybridlabs.birds.entity.bird.PoultEntity
 import dev.hybridlabs.birds.entity.bird.RoosterEntity
 import dev.hybridlabs.birds.entity.bird.SwanEntity
 import dev.hybridlabs.birds.entity.bird.TurkeyEntity
-import dev.hybridlabs.birds.utils.HybridBirdsSpawnGroup
 import net.fabricmc.fabric.api.`object`.builder.v1.entity.FabricDefaultAttributeRegistry
 import net.fabricmc.fabric.api.`object`.builder.v1.entity.FabricEntityTypeBuilder
 import net.minecraft.entity.Entity

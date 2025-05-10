@@ -1,9 +1,10 @@
-package dev.hybridlabs.birds.utils;
+package dev.hybridlabs.birds.entity;
 
+import dev.hybridlabs.birds.HybridBirds;
 import net.minecraft.entity.SpawnGroup;
 
 public enum HybridBirdsSpawnGroup {
-    BIRDS("hb_birds", 10, true, false, 32);
+    BIRDS("birds", 10, true, false, 32);
 
     public SpawnGroup spawnGroup;
     public final String name;
@@ -18,5 +19,9 @@ public enum HybridBirdsSpawnGroup {
         this.peaceful = peaceful;
         this.rare = rare;
         this.immediateDespawnRange = immediateDespawnRange;
+    }
+
+    public String createNamespacedName() {
+        return String.format("%s_%s", HybridBirds.MOD_ID, this.name);
     }
 }
