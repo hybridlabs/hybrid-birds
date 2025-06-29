@@ -38,7 +38,7 @@ object SpawnRestrictionRegistry {
     private fun <T : AnimalEntity> registerAnimalEntity(entityType: EntityType<T>, predicate: SpawnPredicate<T>) {
         register(
             entityType,
-            SpawnRestriction.Location.NO_RESTRICTIONS,
+            SpawnRestriction.Location.ON_GROUND,
             predicate
         )
     }
