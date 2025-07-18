@@ -4,6 +4,7 @@ import dev.hybridlabs.birds.entity.HybridBirdsEntityTypes
 import dev.hybridlabs.birds.entity.SpawnRestrictionRegistry
 import dev.hybridlabs.birds.item.HybridBirdsItemGroups
 import dev.hybridlabs.birds.item.HybridBirdsItems
+import dev.hybridlabs.birds.sound.HybridBirdsSoundEvents
 import dev.hybridlabs.birds.world.EntityBiomeModifications
 import net.fabricmc.api.ModInitializer
 import org.slf4j.Logger
@@ -18,6 +19,7 @@ object HybridBirds : ModInitializer {
 	override fun onInitialize() {
 		logger.info("Initializing $MOD_NAME")
 
+        HybridBirdsSoundEvents
         HybridBirdsEntityTypes
         HybridBirdsItems
         HybridBirdsItemGroups
