@@ -26,7 +26,7 @@ import net.minecraft.world.World
 import net.minecraft.world.event.GameEvent
 
 class GuineaFowlEntity(entityType: EntityType<out GuineaFowlEntity>, world: World) :
-    BirdEntity(entityType, world) {
+    HybridBirdsBirdEntity(entityType, world) {
     private var guineaFowlNavigation: EntityNavigation = createNavigation(world)
     private var eggLayTime: Int = 0
 

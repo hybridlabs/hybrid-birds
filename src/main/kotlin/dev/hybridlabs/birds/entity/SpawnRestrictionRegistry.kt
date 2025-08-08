@@ -1,6 +1,6 @@
 package dev.hybridlabs.birds.entity
 
-import dev.hybridlabs.birds.entity.bird.BirdEntity
+import dev.hybridlabs.birds.entity.bird.HybridBirdsBirdEntity
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.SpawnRestriction
 import net.minecraft.entity.SpawnRestriction.SpawnPredicate
@@ -32,7 +32,7 @@ object SpawnRestrictionRegistry {
     }
 
     private fun <T : AnimalEntity> registerBird(entityType: EntityType<T>) {
-        registerAnimalEntity(entityType, BirdEntity::canSpawn)
+        registerAnimalEntity(entityType, HybridBirdsBirdEntity::canSpawn)
     }
 
     private fun <T : AnimalEntity> registerAnimalEntity(entityType: EntityType<T>, predicate: SpawnPredicate<T>) {

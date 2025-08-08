@@ -1,12 +1,12 @@
 package dev.hybridlabs.birds.entity.bird
 
 import dev.hybridlabs.birds.entity.HybridBirdsEntityTypes
+import dev.hybridlabs.birds.entity.ai.BirdFloatControl
 import net.minecraft.entity.EntityData
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.SpawnReason
-import net.minecraft.entity.ai.control.MoveControl
 import net.minecraft.entity.ai.goal.*
-import net.minecraft.entity.ai.pathing.EntityNavigation
+import net.minecraft.entity.ai.pathing.AmphibiousSwimNavigation
 import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.mob.WaterCreatureEntity
@@ -15,19 +15,17 @@ import net.minecraft.nbt.NbtCompound
 import net.minecraft.recipe.Ingredient
 import net.minecraft.registry.tag.ItemTags
 import net.minecraft.server.world.ServerWorld
-import net.minecraft.sound.SoundEvents
 import net.minecraft.world.World
 import java.util.*
 import kotlin.math.abs
-import kotlin.random.Random
 
 class DucklingEntity(entityType: EntityType<out DucklingEntity>, world: World) :
-    BirdEntity(entityType, world) {
-    private var ducklingNavigation: EntityNavigation = createNavigation(world)
+    HybridBirdsBirdEntity(entityType, world) {
+    private var ducklingNavigation = AmphibiousSwimNavigation(this, world)
     private var ducklingAge = 0
 
     init {
-        moveControl = MoveControl(this)
+        moveControl = BirdFloatControl(this)
         navigation = ducklingNavigation
     }
 

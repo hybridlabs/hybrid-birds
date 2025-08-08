@@ -1,5 +1,5 @@
 package dev.hybridlabs.birds.model.entity.bird
 
-import dev.hybridlabs.birds.entity.bird.BirdEntity
+import dev.hybridlabs.birds.entity.bird.HybridBirdsBirdEntity
 
-class PeacockEntityModel : HybridBirdsEntityModel<BirdEntity>("peacock")
+class PeacockEntityModel : HybridBirdsEntityModel<HybridBirdsBirdEntity>("peacock")

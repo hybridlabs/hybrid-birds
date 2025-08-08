@@ -26,7 +26,7 @@ import net.minecraft.world.World
 import net.minecraft.world.event.GameEvent
 
 class PeacockEntity(entityType: EntityType<out PeacockEntity>, world: World) :
-    BirdEntity(entityType, world) {
+    HybridBirdsBirdEntity(entityType, world) {
     private var peacockNavigation: EntityNavigation = createNavigation(world)
     private var eggLayTime: Int = 0
 

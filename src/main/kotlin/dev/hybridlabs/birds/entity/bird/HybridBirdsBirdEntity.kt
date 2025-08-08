@@ -1,15 +1,15 @@
 package dev.hybridlabs.birds.entity.bird
 
-import net.minecraft.block.BlockState
 import net.minecraft.entity.EntityDimensions
 import net.minecraft.entity.EntityPose
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.SpawnReason
 import net.minecraft.entity.ai.control.MoveControl
-import net.minecraft.entity.ai.pathing.EntityNavigation
+import net.minecraft.entity.ai.pathing.MobNavigation
 import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.passive.AnimalEntity
 import net.minecraft.entity.passive.PassiveEntity
+import net.minecraft.registry.tag.FluidTags
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
@@ -28,9 +28,11 @@ import software.bernie.geckolib.core.animation.RawAnimation
 import software.bernie.geckolib.core.`object`.PlayState
 import software.bernie.geckolib.util.GeckoLibUtil
 
-open class BirdEntity(type: EntityType<out BirdEntity>, world: World, ) : AnimalEntity(type, world), GeoEntity {
+
+@Suppress("LeakingThis")
+open class HybridBirdsBirdEntity(type: EntityType<out HybridBirdsBirdEntity>, world: World) : AnimalEntity(type, world), GeoEntity {
     private val factory = GeckoLibUtil.createInstanceCache(this)
-    private var birdNavigation: EntityNavigation = createNavigation(world)
+    private var birdNavigation = MobNavigation(this, world)
 
     override fun createChild(world: ServerWorld, entity: PassiveEntity): PassiveEntity? {
         return null
@@ -41,16 +43,12 @@ open class BirdEntity(type: EntityType<out BirdEntity>, world: World, ) : Animal
         navigation = this.birdNavigation
     }
 
-    override fun fall(heightDifference: Double, onGround: Boolean, state: BlockState?, landedPosition: BlockPos?) {
+    fun isBelowWaterline(): Boolean {
+        return this.isSubmergedInWater || this.getFluidHeight(FluidTags.WATER) > this.getWaterline()
     }
 
-    override fun tickMovement() {
-        super.tickMovement()
-
-        val vec3d = this.velocity
-        if (!this.isOnGround && vec3d.y < 0.0) {
-            this.velocity = vec3d.multiply(1.0, 0.6, 1.0)
-        }
+    open fun getWaterline(): Float {
+        return 0.4f
     }
 
     override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
@@ -59,7 +57,7 @@ open class BirdEntity(type: EntityType<out BirdEntity>, world: World, ) : Animal
         )
         controllerRegistrar.add(
             AnimationController(this, "Flap", 0,
-                AnimationController.AnimationStateHandler { state: AnimationState<BirdEntity> ->
+                AnimationController.AnimationStateHandler { state: AnimationState<HybridBirdsBirdEntity> ->
                     if (!this.isOnGround) {
                         return@AnimationStateHandler state.setAndContinue(FLAP)
                     } else {

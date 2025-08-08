@@ -1,12 +1,12 @@
 package dev.hybridlabs.birds.entity.bird
 
 import dev.hybridlabs.birds.entity.HybridBirdsEntityTypes
+import dev.hybridlabs.birds.entity.ai.BirdFloatControl
 import net.minecraft.entity.EntityData
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.SpawnReason
-import net.minecraft.entity.ai.control.MoveControl
 import net.minecraft.entity.ai.goal.*
-import net.minecraft.entity.ai.pathing.EntityNavigation
+import net.minecraft.entity.ai.pathing.AmphibiousSwimNavigation
 import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.mob.WaterCreatureEntity
@@ -20,12 +20,12 @@ import java.util.*
 import kotlin.math.abs
 
 class GoslingEntity(entityType: EntityType<out GoslingEntity>, world: World) :
-    BirdEntity(entityType, world) {
-    private var goslingNavigation: EntityNavigation = createNavigation(world)
+    HybridBirdsBirdEntity(entityType, world) {
+    private var goslingNavigation = AmphibiousSwimNavigation(this, world)
     private var goslingAge = 0
 
     init {
-        moveControl = MoveControl(this)
+        moveControl = BirdFloatControl(this)
         navigation = goslingNavigation
     }
 

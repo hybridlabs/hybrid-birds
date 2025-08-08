@@ -26,7 +26,7 @@ import net.minecraft.world.World
 import net.minecraft.world.event.GameEvent
 
 class TurkeyEntity(entityType: EntityType<out TurkeyEntity>, world: World) :
-    BirdEntity(entityType, world) {
+    HybridBirdsBirdEntity(entityType, world) {
     private var turkeyNavigation: EntityNavigation = createNavigation(world)
     private var eggLayTime: Int = 0
 

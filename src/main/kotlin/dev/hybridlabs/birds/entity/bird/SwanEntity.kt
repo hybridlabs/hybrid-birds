@@ -1,16 +1,11 @@
 package dev.hybridlabs.birds.entity.bird
 
 import dev.hybridlabs.birds.entity.HybridBirdsEntityTypes
+import dev.hybridlabs.birds.entity.ai.BirdFloatControl
 import dev.hybridlabs.birds.item.HybridBirdsItems
 import net.minecraft.entity.EntityType
-import net.minecraft.entity.ai.control.MoveControl
-import net.minecraft.entity.ai.goal.EscapeDangerGoal
-import net.minecraft.entity.ai.goal.LookAroundGoal
-import net.minecraft.entity.ai.goal.LookAtEntityGoal
-import net.minecraft.entity.ai.goal.SwimGoal
-import net.minecraft.entity.ai.goal.TemptGoal
-import net.minecraft.entity.ai.goal.WanderAroundGoal
-import net.minecraft.entity.ai.pathing.EntityNavigation
+import net.minecraft.entity.ai.goal.*
+import net.minecraft.entity.ai.pathing.AmphibiousSwimNavigation
 import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.damage.DamageSource
@@ -26,12 +21,12 @@ import net.minecraft.world.World
 import net.minecraft.world.event.GameEvent
 
 class SwanEntity(entityType: EntityType<out SwanEntity>, world: World) :
-    BirdEntity(entityType, world) {
-    private var swanNavigation: EntityNavigation = createNavigation(world)
+    HybridBirdsBirdEntity(entityType, world) {
+    private var swanNavigation = AmphibiousSwimNavigation(this, world)
     private var eggLayTime: Int = 0
 
     init {
-        moveControl = MoveControl(this)
+        moveControl = BirdFloatControl(this)
         navigation = swanNavigation
         this.eggLayTime = random.nextInt(6000) + 6000
     }

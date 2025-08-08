@@ -20,7 +20,7 @@ import java.util.*
 import kotlin.math.abs
 
 class KeetEntity(entityType: EntityType<out KeetEntity>, world: World) :
-    BirdEntity(entityType, world) {
+    HybridBirdsBirdEntity(entityType, world) {
     private var keetNavigation: EntityNavigation = createNavigation(world)
     private var keetAge = 0
 
