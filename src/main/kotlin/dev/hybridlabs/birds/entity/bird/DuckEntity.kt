@@ -3,6 +3,7 @@ package dev.hybridlabs.birds.entity.bird
 import dev.hybridlabs.birds.entity.HybridBirdsEntityTypes
 import dev.hybridlabs.birds.entity.ai.BirdFloatControl
 import dev.hybridlabs.birds.item.HybridBirdsItems
+import dev.hybridlabs.birds.sound.HybridBirdsSoundEvents
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.ai.goal.*
 import net.minecraft.entity.ai.pathing.AmphibiousSwimNavigation
@@ -59,16 +60,16 @@ class DuckEntity(entityType: EntityType<out DuckEntity>, world: World) :
         }
     }
 
+    override fun getAmbientSound(): SoundEvent {
+        return HybridBirdsSoundEvents.DUCK_AMBIENT
+    }
+
     override fun getHurtSound(source: DamageSource): SoundEvent {
-        return SoundEvents.ENTITY_CHICKEN_HURT
+        return HybridBirdsSoundEvents.DUCK_HURT
     }
 
     override fun getDeathSound(): SoundEvent {
-        return SoundEvents.ENTITY_CHICKEN_DEATH
-    }
-
-    override fun getAmbientSound(): SoundEvent {
-        return SoundEvents.ENTITY_CHICKEN_AMBIENT
+        return HybridBirdsSoundEvents.DUCK_DIE
     }
 
     override fun createChild(world: ServerWorld, entity: PassiveEntity): PassiveEntity? {

@@ -1,5 +1,6 @@
 package dev.hybridlabs.birds.entity.bird
 
+import dev.hybridlabs.birds.sound.HybridBirdsSoundEvents
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.ai.control.MoveControl
 import net.minecraft.entity.ai.goal.EscapeDangerGoal
@@ -53,7 +54,7 @@ class RoosterEntity(entityType: EntityType<out RoosterEntity>, world: World) :
     private fun morningCall() {
         val timeOfDay = world.timeOfDay % 24000L
         if (timeOfDay in 0..5 && !hasCalled) {
-            this.playSound(SoundEvents.ENTITY_CHICKEN_DEATH, 2.0F, 1.0F)
+            this.playSound(HybridBirdsSoundEvents.ROOSTER_CALL, 2.0F, 1.0F)
             applySpeedEffectToNearbyPlayers()
             hasCalled = true
         } else if (timeOfDay !in 0..5) {
@@ -73,16 +74,16 @@ class RoosterEntity(entityType: EntityType<out RoosterEntity>, world: World) :
         }
     }
 
+    override fun getAmbientSound(): SoundEvent {
+        return SoundEvents.ENTITY_CHICKEN_AMBIENT
+    }
+
     override fun getHurtSound(source: DamageSource): SoundEvent {
         return SoundEvents.ENTITY_CHICKEN_HURT
     }
 
     override fun getDeathSound(): SoundEvent {
         return SoundEvents.ENTITY_CHICKEN_DEATH
-    }
-
-    override fun getAmbientSound(): SoundEvent {
-        return SoundEvents.ENTITY_CHICKEN_AMBIENT
     }
 
     companion object {

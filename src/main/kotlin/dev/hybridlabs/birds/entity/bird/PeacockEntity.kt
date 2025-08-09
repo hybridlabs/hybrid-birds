@@ -2,6 +2,7 @@ package dev.hybridlabs.birds.entity.bird
 
 import dev.hybridlabs.birds.entity.HybridBirdsEntityTypes
 import dev.hybridlabs.birds.item.HybridBirdsItems
+import dev.hybridlabs.birds.sound.HybridBirdsSoundEvents
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.ai.control.MoveControl
 import net.minecraft.entity.ai.goal.EscapeDangerGoal
@@ -63,20 +64,20 @@ class PeacockEntity(entityType: EntityType<out PeacockEntity>, world: World) :
         }
     }
 
-    override fun getHurtSound(source: DamageSource): SoundEvent {
-        return SoundEvents.ENTITY_CHICKEN_HURT
-    }
-
-    override fun getDeathSound(): SoundEvent {
-        return SoundEvents.ENTITY_CHICKEN_DEATH
+    override fun createChild(world: ServerWorld, entity: PassiveEntity): PassiveEntity? {
+        return HybridBirdsEntityTypes.PEACHICK.create(world)
     }
 
     override fun getAmbientSound(): SoundEvent {
-        return SoundEvents.ENTITY_CHICKEN_AMBIENT
+        return HybridBirdsSoundEvents.PEACOCK_AMBIENT
     }
 
-    override fun createChild(world: ServerWorld, entity: PassiveEntity): PassiveEntity? {
-        return HybridBirdsEntityTypes.PEACHICK.create(world)
+    override fun getHurtSound(source: DamageSource): SoundEvent {
+        return HybridBirdsSoundEvents.PEACOCK_HURT
+    }
+
+    override fun getDeathSound(): SoundEvent {
+        return HybridBirdsSoundEvents.PEACOCK_DIE
     }
 
     companion object {

@@ -1,1 +1,8 @@
-{}
+{
+  "rooster_call": {
+    "subtitle": "sounds.hybrid-birds.rooster_calls",
+    "sounds": [
+      "hybrid-birds:rooster_call"
+    ]
+  }
+}
