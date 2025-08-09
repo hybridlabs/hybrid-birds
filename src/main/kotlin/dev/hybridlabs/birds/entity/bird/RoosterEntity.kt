@@ -1,5 +1,6 @@
 package dev.hybridlabs.birds.entity.bird
 
+import dev.hybridlabs.birds.HybridBirds
 import dev.hybridlabs.birds.sound.HybridBirdsSoundEvents
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.ai.control.MoveControl
@@ -75,15 +76,15 @@ class RoosterEntity(entityType: EntityType<out RoosterEntity>, world: World) :
     }
 
     override fun getAmbientSound(): SoundEvent {
-        return SoundEvents.ENTITY_CHICKEN_AMBIENT
+        return HybridBirdsSoundEvents.ROOSTER_AMBIENT
     }
 
     override fun getHurtSound(source: DamageSource): SoundEvent {
-        return SoundEvents.ENTITY_CHICKEN_HURT
+        return HybridBirdsSoundEvents.ROOSTER_HURT
     }
 
     override fun getDeathSound(): SoundEvent {
-        return SoundEvents.ENTITY_CHICKEN_DEATH
+        return HybridBirdsSoundEvents.ROOSTER_DIE
     }
 
     companion object {

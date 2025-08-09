@@ -21,6 +21,9 @@ object HybridBirdsSoundEvents {
     val SWAN_DIE = register("swan_die")
 
     val ROOSTER_CALL = register("rooster_call")
+    val ROOSTER_AMBIENT = register("rooster_ambient")
+    val ROOSTER_HURT = register("rooster_hurt")
+    val ROOSTER_DIE = register("rooster_die")
 
     val TURKEY_AMBIENT = register("turkey_ambient")
     val TURKEY_HURT = register("turkey_hurt")

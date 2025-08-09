@@ -5,6 +5,24 @@
       "hybrid-birds:rooster_call"
     ]
   },
+  "rooster_ambient": {
+    "subtitle": "sounds.hybrid-birds.rooster_ambient",
+    "sounds": [
+      "hybrid-birds:rooster_ambient"
+    ]
+  },
+  "rooster_hurt": {
+    "subtitle": "sounds.hybrid-birds.rooster_hurt",
+    "sounds": [
+      "hybrid-birds:rooster_hurt"
+    ]
+  },
+  "rooster_die": {
+    "subtitle": "sounds.hybrid-birds.rooster_die",
+    "sounds": [
+      "hybrid-birds:rooster_die"
+    ]
+  },
   "duck_ambient": {
     "subtitle": "sounds.hybrid-birds.duck_ambient",
     "sounds": [
