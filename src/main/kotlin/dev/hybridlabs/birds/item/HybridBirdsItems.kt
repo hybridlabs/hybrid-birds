@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package dev.hybridlabs.birds.item
 
 import dev.hybridlabs.birds.HybridBirds
