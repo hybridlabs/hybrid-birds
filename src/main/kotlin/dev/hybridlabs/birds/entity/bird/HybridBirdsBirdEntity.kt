@@ -1,5 +1,6 @@
 package dev.hybridlabs.birds.entity.bird
 
+import net.minecraft.block.BlockState
 import net.minecraft.entity.EntityDimensions
 import net.minecraft.entity.EntityPose
 import net.minecraft.entity.EntityType
@@ -9,14 +10,17 @@ import net.minecraft.entity.ai.pathing.MobNavigation
 import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.passive.AnimalEntity
 import net.minecraft.entity.passive.PassiveEntity
+import net.minecraft.item.Items
 import net.minecraft.registry.tag.FluidTags
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.util.math.BlockPos
+import net.minecraft.util.math.MathHelper
 import net.minecraft.util.math.random.Random
 import net.minecraft.world.World
 import net.minecraft.world.WorldAccess
+import net.minecraft.world.event.GameEvent
 import software.bernie.geckolib.animatable.GeoEntity
 import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.core.animatable.GeoAnimatable
@@ -100,6 +104,17 @@ open class HybridBirdsBirdEntity(type: EntityType<out HybridBirdsBirdEntity>, wo
         return SoundEvents.ENTITY_PARROT_AMBIENT
     }
 
+    override fun playStepSound(pos: BlockPos, state: BlockState) {
+        this.playSound(SoundEvents.ENTITY_CHICKEN_STEP, 0.15f, 1.0f)
+    }
+
+    override fun tickMovement() {
+        super.tickMovement()
+        val vec3d = this.velocity
+        if (!this.isOnGround && vec3d.y < 0.0) {
+            this.velocity = vec3d.multiply(1.0, 0.6, 1.0)
+        }
+    }
 
     companion object {
 
