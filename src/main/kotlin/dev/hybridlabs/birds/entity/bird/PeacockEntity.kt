@@ -5,12 +5,7 @@ import dev.hybridlabs.birds.item.HybridBirdsItems
 import dev.hybridlabs.birds.sound.HybridBirdsSoundEvents
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.ai.control.MoveControl
-import net.minecraft.entity.ai.goal.EscapeDangerGoal
-import net.minecraft.entity.ai.goal.LookAroundGoal
-import net.minecraft.entity.ai.goal.LookAtEntityGoal
-import net.minecraft.entity.ai.goal.SwimGoal
-import net.minecraft.entity.ai.goal.TemptGoal
-import net.minecraft.entity.ai.goal.WanderAroundGoal
+import net.minecraft.entity.ai.goal.*
 import net.minecraft.entity.ai.pathing.EntityNavigation
 import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
@@ -19,7 +14,6 @@ import net.minecraft.entity.mob.WaterCreatureEntity
 import net.minecraft.entity.passive.PassiveEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
-import net.minecraft.item.Items
 import net.minecraft.recipe.Ingredient
 import net.minecraft.registry.tag.ItemTags
 import net.minecraft.server.world.ServerWorld
@@ -47,6 +41,7 @@ class PeacockEntity(entityType: EntityType<out PeacockEntity>, world: World) :
         goalSelector.add(0, SwimGoal(this))
         goalSelector.add(0, EscapeDangerGoal(this, 0.6))
         goalSelector.add(1, TemptGoal(this, 0.6, BREEDING_INGREDIENT, false))
+        goalSelector.add(2, AnimalMateGoal(this, 0.5))
         goalSelector.add(2, WanderAroundGoal(this, 0.5))
         goalSelector.add(2, LookAroundGoal(this))
         goalSelector.add(11, LookAtEntityGoal(this, PlayerEntity::class.java, 10.0f))
@@ -95,13 +90,6 @@ class PeacockEntity(entityType: EntityType<out PeacockEntity>, world: World) :
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 12.0)
         }
 
-        val BREEDING_INGREDIENT: Ingredient = Ingredient.ofItems(
-            Items.WHEAT_SEEDS,
-            Items.MELON_SEEDS,
-            Items.PUMPKIN_SEEDS,
-            Items.BEETROOT_SEEDS,
-            Items.TORCHFLOWER_SEEDS,
-            Items.PITCHER_POD
-        )
+        val BREEDING_INGREDIENT: Ingredient = Ingredient.fromTag(ItemTags.VILLAGER_PLANTABLE_SEEDS)
     }
 }

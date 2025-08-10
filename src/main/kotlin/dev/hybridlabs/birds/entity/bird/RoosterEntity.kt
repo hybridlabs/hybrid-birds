@@ -1,15 +1,9 @@
 package dev.hybridlabs.birds.entity.bird
 
-import dev.hybridlabs.birds.HybridBirds
 import dev.hybridlabs.birds.sound.HybridBirdsSoundEvents
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.ai.control.MoveControl
-import net.minecraft.entity.ai.goal.EscapeDangerGoal
-import net.minecraft.entity.ai.goal.LookAroundGoal
-import net.minecraft.entity.ai.goal.LookAtEntityGoal
-import net.minecraft.entity.ai.goal.SwimGoal
-import net.minecraft.entity.ai.goal.TemptGoal
-import net.minecraft.entity.ai.goal.WanderAroundGoal
+import net.minecraft.entity.ai.goal.*
 import net.minecraft.entity.ai.pathing.EntityNavigation
 import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
@@ -17,11 +11,12 @@ import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.entity.effect.StatusEffects
 import net.minecraft.entity.mob.WaterCreatureEntity
+import net.minecraft.entity.passive.AnimalEntity
+import net.minecraft.entity.passive.ChickenEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.recipe.Ingredient
 import net.minecraft.registry.tag.ItemTags
 import net.minecraft.sound.SoundEvent
-import net.minecraft.sound.SoundEvents
 import net.minecraft.world.World
 
 class RoosterEntity(entityType: EntityType<out RoosterEntity>, world: World) :
@@ -36,6 +31,13 @@ class RoosterEntity(entityType: EntityType<out RoosterEntity>, world: World) :
 
     override fun getLimitPerChunk(): Int {
         return 2
+    }
+
+    override fun canBreedWith(other: AnimalEntity): Boolean {
+        return other !== this &&
+                other is ChickenEntity &&
+                this.isInLove &&
+                other.isInLove
     }
 
     override fun initGoals() {

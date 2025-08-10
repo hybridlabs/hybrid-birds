@@ -1,7 +1,6 @@
 package dev.hybridlabs.birds.entity.bird
 
 import dev.hybridlabs.birds.entity.HybridBirdsEntityTypes
-import dev.hybridlabs.birds.entity.ai.BirdFloatControl
 import dev.hybridlabs.birds.item.HybridBirdsItems
 import dev.hybridlabs.birds.sound.HybridBirdsSoundEvents
 import net.minecraft.entity.EntityType
@@ -11,14 +10,11 @@ import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.mob.WaterCreatureEntity
-import net.minecraft.entity.passive.CamelEntity.BREEDING_INGREDIENT
-import net.minecraft.entity.passive.ChickenEntity
 import net.minecraft.entity.passive.PassiveEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
 import net.minecraft.recipe.Ingredient
-import net.minecraft.registry.tag.ItemTags
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
@@ -31,7 +27,6 @@ class GooseEntity(entityType: EntityType<out GooseEntity>, world: World) :
     private var eggLayTime: Int = 0
 
     init {
-        moveControl = BirdFloatControl(this)
         navigation = gooseNavigation
         this.eggLayTime = random.nextInt(6000) + 6000
     }
@@ -44,6 +39,7 @@ class GooseEntity(entityType: EntityType<out GooseEntity>, world: World) :
         goalSelector.add(0, SwimGoal(this))
         goalSelector.add(0, EscapeDangerGoal(this, 0.6))
         goalSelector.add(1, TemptGoal(this, 0.6, BREEDING_INGREDIENT, false))
+        goalSelector.add(2, AnimalMateGoal(this, 1.0))
         goalSelector.add(2, WanderAroundGoal(this, 0.5))
         goalSelector.add(2, LookAroundGoal(this))
         goalSelector.add(11, LookAtEntityGoal(this, PlayerEntity::class.java, 10.0f))
