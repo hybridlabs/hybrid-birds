@@ -11,8 +11,6 @@ import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.entity.effect.StatusEffects
 import net.minecraft.entity.mob.WaterCreatureEntity
-import net.minecraft.entity.passive.AnimalEntity
-import net.minecraft.entity.passive.ChickenEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.recipe.Ingredient
 import net.minecraft.registry.tag.ItemTags
@@ -31,13 +29,6 @@ class RoosterEntity(entityType: EntityType<out RoosterEntity>, world: World) :
 
     override fun getLimitPerChunk(): Int {
         return 2
-    }
-
-    override fun canBreedWith(other: AnimalEntity): Boolean {
-        return other !== this &&
-                other is ChickenEntity &&
-                this.isInLove &&
-                other.isInLove
     }
 
     override fun initGoals() {
