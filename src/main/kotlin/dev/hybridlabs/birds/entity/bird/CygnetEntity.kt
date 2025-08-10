@@ -1,7 +1,6 @@
 package dev.hybridlabs.birds.entity.bird
 
 import dev.hybridlabs.birds.entity.HybridBirdsEntityTypes
-import dev.hybridlabs.birds.entity.ai.BirdFloatControl
 import net.minecraft.entity.EntityData
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.SpawnReason
@@ -12,8 +11,6 @@ import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.mob.WaterCreatureEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.nbt.NbtCompound
-import net.minecraft.recipe.Ingredient
-import net.minecraft.registry.tag.ItemTags
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.world.World
 import java.util.*
@@ -25,7 +22,6 @@ class CygnetEntity(entityType: EntityType<out CygnetEntity>, world: World) :
     private var cygnetAge = 0
 
     init {
-        moveControl = BirdFloatControl(this)
         navigation = cygnetNavigation
     }
 
@@ -147,7 +143,7 @@ class CygnetEntity(entityType: EntityType<out CygnetEntity>, world: World) :
         }
 
         override fun tick() {
-            if (this.cygnet.squaredDistanceTo(this.swanEntity!!) >= 49.0) {
+            if (this.cygnet.squaredDistanceTo(this.swanEntity) >= 49.0) {
                 this.cygnet.navigation.startMovingTo(this.swanEntity, this.speed)
             }
         }

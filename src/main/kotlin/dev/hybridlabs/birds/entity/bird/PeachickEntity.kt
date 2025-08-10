@@ -147,7 +147,7 @@ class PeachickEntity(entityType: EntityType<out PeachickEntity>, world: World) :
         }
 
         override fun tick() {
-            if (this.peachick.squaredDistanceTo(this.peacockEntity!!) >= 49.0) {
+            if (this.peachick.squaredDistanceTo(this.peacockEntity) >= 49.0) {
                 this.peachick.navigation.startMovingTo(this.peacockEntity, this.speed)
             }
         }

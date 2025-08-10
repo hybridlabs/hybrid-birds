@@ -147,7 +147,7 @@ class KeetEntity(entityType: EntityType<out KeetEntity>, world: World) :
         }
 
         override fun tick() {
-            if (this.keet.squaredDistanceTo(this.guineaFowlEntity!!) >= 49.0) {
+            if (this.keet.squaredDistanceTo(this.guineaFowlEntity) >= 49.0) {
                 this.keet.navigation.startMovingTo(this.guineaFowlEntity, this.speed)
             }
         }

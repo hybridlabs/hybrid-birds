@@ -155,7 +155,7 @@ class ChickEntity(entityType: EntityType<out ChickEntity>, world: World) : Hybri
         }
 
         override fun tick() {
-            if (this.chick.squaredDistanceTo(this.chickenEntity!!) >= 49.0) {
+            if (this.chick.squaredDistanceTo(this.chickenEntity) >= 49.0) {
                 this.chick.navigation.startMovingTo(this.chickenEntity, this.speed)
             }
         }

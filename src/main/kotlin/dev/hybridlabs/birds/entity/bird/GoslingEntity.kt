@@ -1,7 +1,6 @@
 package dev.hybridlabs.birds.entity.bird
 
 import dev.hybridlabs.birds.entity.HybridBirdsEntityTypes
-import dev.hybridlabs.birds.entity.ai.BirdFloatControl
 import net.minecraft.entity.EntityData
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.SpawnReason
@@ -12,8 +11,6 @@ import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.mob.WaterCreatureEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.nbt.NbtCompound
-import net.minecraft.recipe.Ingredient
-import net.minecraft.registry.tag.ItemTags
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.world.World
 import java.util.*
@@ -25,7 +22,6 @@ class GoslingEntity(entityType: EntityType<out GoslingEntity>, world: World) :
     private var goslingAge = 0
 
     init {
-        moveControl = BirdFloatControl(this)
         navigation = goslingNavigation
     }
 
@@ -147,7 +143,7 @@ class GoslingEntity(entityType: EntityType<out GoslingEntity>, world: World) :
         }
 
         override fun tick() {
-            if (this.gosling.squaredDistanceTo(this.gooseEntity!!) >= 49.0) {
+            if (this.gosling.squaredDistanceTo(this.gooseEntity) >= 49.0) {
                 this.gosling.navigation.startMovingTo(this.gooseEntity, this.speed)
             }
         }

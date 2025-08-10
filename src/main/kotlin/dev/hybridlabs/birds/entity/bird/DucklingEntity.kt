@@ -1,7 +1,6 @@
 package dev.hybridlabs.birds.entity.bird
 
 import dev.hybridlabs.birds.entity.HybridBirdsEntityTypes
-import dev.hybridlabs.birds.entity.ai.BirdFloatControl
 import net.minecraft.entity.EntityData
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.SpawnReason
@@ -12,8 +11,6 @@ import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.mob.WaterCreatureEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.nbt.NbtCompound
-import net.minecraft.recipe.Ingredient
-import net.minecraft.registry.tag.ItemTags
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.world.World
 import java.util.*
@@ -25,7 +22,6 @@ class DucklingEntity(entityType: EntityType<out DucklingEntity>, world: World) :
     private var ducklingAge = 0
 
     init {
-        moveControl = BirdFloatControl(this)
         navigation = ducklingNavigation
     }
 
@@ -147,7 +143,7 @@ class DucklingEntity(entityType: EntityType<out DucklingEntity>, world: World) :
         }
 
         override fun tick() {
-            if (this.duckling.squaredDistanceTo(this.duckEntity!!) >= 49.0) {
+            if (this.duckling.squaredDistanceTo(this.duckEntity) >= 49.0) {
                 this.duckling.navigation.startMovingTo(this.duckEntity, this.speed)
             }
         }

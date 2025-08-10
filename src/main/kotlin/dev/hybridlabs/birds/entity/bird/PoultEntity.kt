@@ -147,7 +147,7 @@ class PoultEntity(entityType: EntityType<out PoultEntity>, world: World) :
         }
 
         override fun tick() {
-            if (this.poult.squaredDistanceTo(this.turkeyEntity!!) >= 49.0) {
+            if (this.poult.squaredDistanceTo(this.turkeyEntity) >= 49.0) {
                 this.poult.navigation.startMovingTo(this.turkeyEntity, this.speed)
             }
         }
