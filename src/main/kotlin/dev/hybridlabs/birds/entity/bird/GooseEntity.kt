@@ -11,8 +11,12 @@ import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.mob.WaterCreatureEntity
+import net.minecraft.entity.passive.CamelEntity.BREEDING_INGREDIENT
+import net.minecraft.entity.passive.ChickenEntity
 import net.minecraft.entity.passive.PassiveEntity
 import net.minecraft.entity.player.PlayerEntity
+import net.minecraft.item.ItemStack
+import net.minecraft.item.Items
 import net.minecraft.recipe.Ingredient
 import net.minecraft.registry.tag.ItemTags
 import net.minecraft.server.world.ServerWorld
@@ -39,7 +43,7 @@ class GooseEntity(entityType: EntityType<out GooseEntity>, world: World) :
     override fun initGoals() {
         goalSelector.add(0, SwimGoal(this))
         goalSelector.add(0, EscapeDangerGoal(this, 0.6))
-        goalSelector.add(1, TemptGoal(this, 0.6, Ingredient.fromTag(ItemTags.VILLAGER_PLANTABLE_SEEDS), false))
+        goalSelector.add(1, TemptGoal(this, 0.6, BREEDING_INGREDIENT, false))
         goalSelector.add(2, WanderAroundGoal(this, 0.5))
         goalSelector.add(2, LookAroundGoal(this))
         goalSelector.add(11, LookAtEntityGoal(this, PlayerEntity::class.java, 10.0f))
@@ -71,6 +75,10 @@ class GooseEntity(entityType: EntityType<out GooseEntity>, world: World) :
         return HybridBirdsSoundEvents.GOOSE_DIE
     }
 
+    override fun isBreedingItem(stack: ItemStack?): Boolean {
+        return BREEDING_INGREDIENT.test(stack)
+    }
+
     override fun createChild(world: ServerWorld, entity: PassiveEntity): PassiveEntity? {
         return HybridBirdsEntityTypes.GOSLING.create(world)
     }
@@ -83,5 +91,10 @@ class GooseEntity(entityType: EntityType<out GooseEntity>, world: World) :
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 1.0)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 12.0)
         }
+
+        val BREEDING_INGREDIENT: Ingredient = Ingredient.ofItems(
+            Items.WHEAT,
+            Items.COD
+        )
     }
 }
