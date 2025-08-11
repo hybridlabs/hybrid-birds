@@ -33,6 +33,10 @@ class GooseEntity(entityType: EntityType<out GooseEntity>, world: World) :
         this.eggLayTime = random.nextInt(6000) + 6000
     }
 
+    override fun getWaterline(): Float {
+        return 0.3f
+    }
+
     override fun getLimitPerChunk(): Int {
         return 2
     }
@@ -40,7 +44,7 @@ class GooseEntity(entityType: EntityType<out GooseEntity>, world: World) :
     override fun initGoals() {
         goalSelector.add(0, EscapeDangerGoal(this, 0.6))
         goalSelector.add(1, TemptGoal(this, 0.5, BREEDING_INGREDIENT, false))
-        goalSelector.add(2, AnimalMateGoal(this, 1.0))
+        goalSelector.add(2, AnimalMateGoal(this, 0.5))
         goalSelector.add(2, WanderAroundGoal(this, 0.5))
         goalSelector.add(2, LookAroundGoal(this))
         goalSelector.add(11, LookAtEntityGoal(this, PlayerEntity::class.java, 10.0f))

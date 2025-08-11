@@ -36,10 +36,9 @@ class DucklingEntity(entityType: EntityType<out DucklingEntity>, world: World) :
     }
 
     override fun initGoals() {
-        goalSelector.add(0, SwimGoal(this))
-        goalSelector.add(0, FollowDuckGoal(this, 0.6))
+        goalSelector.add(0, FollowDuckGoal(this, 0.5))
         goalSelector.add(0, EscapeDangerGoal(this, 0.6))
-        goalSelector.add(1, TemptGoal(this, 0.6, DuckEntity.BREEDING_INGREDIENT, false))
+        goalSelector.add(1, TemptGoal(this, 0.5, DuckEntity.BREEDING_INGREDIENT, false))
         goalSelector.add(2, WanderAroundGoal(this, 0.5))
         goalSelector.add(2, LookAroundGoal(this))
         goalSelector.add(11, LookAtEntityGoal(this, PlayerEntity::class.java, 10.0f))
