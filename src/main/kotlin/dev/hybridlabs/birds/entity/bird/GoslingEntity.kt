@@ -1,6 +1,7 @@
 package dev.hybridlabs.birds.entity.bird
 
 import dev.hybridlabs.birds.entity.HybridBirdsEntityTypes
+import dev.hybridlabs.birds.entity.ai.BirdFloatControl
 import net.minecraft.entity.EntityData
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.SpawnReason
@@ -22,6 +23,7 @@ class GoslingEntity(entityType: EntityType<out GoslingEntity>, world: World) :
     private var goslingAge = 0
 
     init {
+        moveControl = BirdFloatControl(this)
         navigation = goslingNavigation
     }
 

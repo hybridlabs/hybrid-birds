@@ -1,6 +1,7 @@
 package dev.hybridlabs.birds.entity.bird
 
 import dev.hybridlabs.birds.entity.HybridBirdsEntityTypes
+import dev.hybridlabs.birds.entity.ai.BirdFloatControl
 import dev.hybridlabs.birds.item.HybridBirdsItems
 import dev.hybridlabs.birds.sound.HybridBirdsSoundEvents
 import net.minecraft.entity.EntityType
@@ -28,6 +29,7 @@ class DuckEntity(entityType: EntityType<out DuckEntity>, world: World) :
     private var eggLayTime: Int = 0
 
     init {
+        moveControl = BirdFloatControl(this)
         navigation = duckNavigation
         this.eggLayTime = random.nextInt(6000) + 6000
     }
@@ -37,9 +39,8 @@ class DuckEntity(entityType: EntityType<out DuckEntity>, world: World) :
     }
 
     override fun initGoals() {
-        goalSelector.add(0, SwimGoal(this))
         goalSelector.add(0, EscapeDangerGoal(this, 0.6))
-        goalSelector.add(1, TemptGoal(this, 0.6, BREEDING_INGREDIENT, false))
+        goalSelector.add(1, TemptGoal(this, 0.5, BREEDING_INGREDIENT, false))
         goalSelector.add(2, AnimalMateGoal(this, 0.5))
         goalSelector.add(2, WanderAroundGoal(this, 0.5))
         goalSelector.add(2, LookAroundGoal(this))
