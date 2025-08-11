@@ -45,21 +45,21 @@ object HybridBirdsEntityTypes {
     val DUCKLING = registerBird(
         "duckling",
         ::DucklingEntity,
-        EntityDimensions.fixed(0.3f, 0.25f),
+        EntityDimensions.fixed(0.25f, 0.25f),
         DucklingEntity.createMobAttributes()
     )
 
     val GOSLING = registerBird(
         "gosling",
         ::GoslingEntity,
-        EntityDimensions.fixed(0.25f, 0.25f),
+        EntityDimensions.fixed(0.25f, 0.3f),
         GoslingEntity.createMobAttributes()
     )
 
     val CYGNET = registerBird(
         "cygnet",
         ::CygnetEntity,
-        EntityDimensions.fixed(0.5f, 0.25f),
+        EntityDimensions.fixed(0.25f, 0.4f),
         CygnetEntity.createMobAttributes()
     )
 
@@ -115,14 +115,14 @@ object HybridBirdsEntityTypes {
     val GOOSE = registerBird(
         "goose",
         ::GooseEntity,
-        EntityDimensions.fixed(0.6f, 1.2f),
+        EntityDimensions.fixed(0.6f, 0.75f),
         GooseEntity.createMobAttributes()
     )
 
     val SWAN = registerBird(
         "swan",
         ::SwanEntity,
-        EntityDimensions.fixed(0.8f, 1.5f),
+        EntityDimensions.fixed(0.8f, 1.0f),
         SwanEntity.createMobAttributes()
     )
 

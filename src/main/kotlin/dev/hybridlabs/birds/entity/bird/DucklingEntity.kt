@@ -27,6 +27,10 @@ class DucklingEntity(entityType: EntityType<out DucklingEntity>, world: World) :
         navigation = ducklingNavigation
     }
 
+    override fun getWaterline(): Float {
+        return 0.2f
+    }
+
     override fun getLimitPerChunk(): Int {
         return 2
     }

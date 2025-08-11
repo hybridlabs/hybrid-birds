@@ -27,6 +27,10 @@ class GoslingEntity(entityType: EntityType<out GoslingEntity>, world: World) :
         navigation = goslingNavigation
     }
 
+    override fun getWaterline(): Float {
+        return 0.2f
+    }
+
     override fun getLimitPerChunk(): Int {
         return 2
     }

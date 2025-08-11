@@ -27,6 +27,10 @@ class CygnetEntity(entityType: EntityType<out CygnetEntity>, world: World) :
         navigation = cygnetNavigation
     }
 
+    override fun getWaterline(): Float {
+        return 0.2f
+    }
+
     override fun getLimitPerChunk(): Int {
         return 2
     }

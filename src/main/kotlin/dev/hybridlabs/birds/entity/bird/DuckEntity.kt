@@ -34,6 +34,10 @@ class DuckEntity(entityType: EntityType<out DuckEntity>, world: World) :
         this.eggLayTime = random.nextInt(6000) + 6000
     }
 
+    override fun getWaterline(): Float {
+        return 0.2f
+    }
+
     override fun getLimitPerChunk(): Int {
         return 2
     }
