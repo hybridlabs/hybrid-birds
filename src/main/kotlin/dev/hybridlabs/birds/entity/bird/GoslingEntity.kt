@@ -28,7 +28,7 @@ class GoslingEntity(entityType: EntityType<out GoslingEntity>, world: World) :
     }
 
     override fun getWaterline(): Float {
-        return 0.2f
+        return 0.15f
     }
 
     override fun getLimitPerChunk(): Int {
