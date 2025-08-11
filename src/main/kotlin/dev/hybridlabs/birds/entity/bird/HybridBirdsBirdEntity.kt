@@ -10,31 +10,28 @@ import net.minecraft.entity.ai.pathing.MobNavigation
 import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.passive.AnimalEntity
 import net.minecraft.entity.passive.PassiveEntity
-import net.minecraft.item.Items
 import net.minecraft.registry.tag.FluidTags
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.util.math.BlockPos
-import net.minecraft.util.math.MathHelper
 import net.minecraft.util.math.random.Random
 import net.minecraft.world.World
 import net.minecraft.world.WorldAccess
-import net.minecraft.world.event.GameEvent
 import software.bernie.geckolib.animatable.GeoEntity
 import software.bernie.geckolib.constant.DefaultAnimations
-import software.bernie.geckolib.core.animatable.GeoAnimatable
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
 import software.bernie.geckolib.core.animation.AnimatableManager
 import software.bernie.geckolib.core.animation.AnimationController
 import software.bernie.geckolib.core.animation.AnimationState
 import software.bernie.geckolib.core.animation.RawAnimation
-import software.bernie.geckolib.core.`object`.PlayState
 import software.bernie.geckolib.util.GeckoLibUtil
 
 
 @Suppress("LeakingThis")
-open class HybridBirdsBirdEntity(type: EntityType<out HybridBirdsBirdEntity>, world: World) : AnimalEntity(type, world), GeoEntity {
+open class HybridBirdsBirdEntity(type: EntityType<out HybridBirdsBirdEntity>, world: World) :
+    AnimalEntity(type, world),
+    GeoEntity {
     private val factory = GeckoLibUtil.createInstanceCache(this)
     private var birdNavigation = MobNavigation(this, world)
 
@@ -57,27 +54,22 @@ open class HybridBirdsBirdEntity(type: EntityType<out HybridBirdsBirdEntity>, wo
 
     override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
         controllerRegistrar.add(
-            DefaultAnimations.genericWalkRunIdleController(this)
-        )
-        controllerRegistrar.add(
-            AnimationController(this, "Flap", 0,
-                AnimationController.AnimationStateHandler { state: AnimationState<HybridBirdsBirdEntity> ->
-                    if (!this.isOnGround) {
-                        return@AnimationStateHandler state.setAndContinue(FLAP)
-                    } else {
-                        PlayState.STOP
-                    }
+            AnimationController(
+                this, "Walk/Swim/Fly/Idle", 4
+            ) { state: AnimationState<HybridBirdsBirdEntity> ->
+                when {
+                    state.isMoving && isOnGround -> state.setAndContinue(DefaultAnimations.WALK)
+                    state.isMoving && isTouchingWater -> state.setAndContinue(DefaultAnimations.SWIM)
+                    !state.isMoving && isTouchingWater -> state.setAndContinue(WATER_IDLE)
+                    !this.isOnGround && !isTouchingWater -> state.setAndContinue(DefaultAnimations.FLY)
+                    else -> state.setAndContinue(DefaultAnimations.IDLE)
                 }
-            )
+            }
         )
     }
 
     override fun getAnimatableInstanceCache(): AnimatableInstanceCache {
         return factory
-    }
-
-    open fun <E : GeoAnimatable> predicate(event: AnimationState<E>): PlayState {
-        return PlayState.STOP
     }
 
     override fun getActiveEyeHeight(pose: EntityPose, dimensions: EntityDimensions): Float {
@@ -104,9 +96,7 @@ open class HybridBirdsBirdEntity(type: EntityType<out HybridBirdsBirdEntity>, wo
         return SoundEvents.ENTITY_PARROT_AMBIENT
     }
 
-    override fun playStepSound(pos: BlockPos, state: BlockState) {
-        this.playSound(SoundEvents.ENTITY_CHICKEN_STEP, 0.15f, 1.0f)
-    }
+    override fun fall(heightDifference: Double, onGround: Boolean, state: BlockState, landedPosition: BlockPos) {}
 
     override fun tickMovement() {
         super.tickMovement()
@@ -117,8 +107,7 @@ open class HybridBirdsBirdEntity(type: EntityType<out HybridBirdsBirdEntity>, wo
     }
 
     companion object {
-
-        val FLAP: RawAnimation = RawAnimation.begin().thenPlay("misc.flap")
+        val WATER_IDLE: RawAnimation = RawAnimation.begin().thenPlay("misc.water_idle")
 
         @Suppress("UNUSED_PARAMETER")
         fun canSpawn(
