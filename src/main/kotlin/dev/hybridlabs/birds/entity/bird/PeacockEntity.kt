@@ -21,11 +21,18 @@ import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.world.World
 import net.minecraft.world.event.GameEvent
+import software.bernie.geckolib.constant.DefaultAnimations
+import software.bernie.geckolib.core.animation.AnimatableManager
+import software.bernie.geckolib.core.animation.AnimationController
+import software.bernie.geckolib.core.animation.AnimationState
+import software.bernie.geckolib.core.animation.RawAnimation
 
 class PeacockEntity(entityType: EntityType<out PeacockEntity>, world: World) :
     HybridBirdsBirdEntity(entityType, world) {
     private var peacockNavigation: EntityNavigation = createNavigation(world)
     private var eggLayTime: Int = 0
+    private var tailUp = false
+    private var tailUpTimer = 0
 
     init {
         moveControl = MoveControl(this)
@@ -61,6 +68,41 @@ class PeacockEntity(entityType: EntityType<out PeacockEntity>, world: World) :
         }
     }
 
+    override fun tick() {
+        super.tick()
+
+        if (tailUpTimer > 0) {
+            tailUpTimer--
+        } else {
+            tailUp = !tailUp
+
+            val minTicks = 1200
+            val maxTicks = 3600
+            tailUpTimer = (minTicks..maxTicks).random()
+        }
+    }
+
+    override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
+        controllerRegistrar.add(
+            AnimationController(
+                this, "Walk/Fly/Idle", 4
+            ) { state: AnimationState<HybridBirdsBirdEntity> ->
+                when {
+                    state.isMoving && isOnGround -> state.setAndContinue(DefaultAnimations.WALK)
+                    !this.isOnGround && !isTouchingWater -> state.setAndContinue(DefaultAnimations.FLY)
+                    else -> state.setAndContinue(DefaultAnimations.IDLE)
+                }
+            }
+        )
+        controllerRegistrar.add(AnimationController(this, "Tail", 20) { state ->
+            val animation = when {
+                tailUp -> TAIL_UP
+                else -> TAIL_DOWN
+            }
+            state.setAndContinue(animation)
+        })
+    }
+
     override fun createChild(world: ServerWorld, entity: PassiveEntity): PassiveEntity? {
         return HybridBirdsEntityTypes.PEACHICK.create(world)
     }
@@ -89,6 +131,9 @@ class PeacockEntity(entityType: EntityType<out PeacockEntity>, world: World) :
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 1.0)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 12.0)
         }
+
+        val TAIL_DOWN: RawAnimation = RawAnimation.begin().thenPlay("misc.tail_down")
+        val TAIL_UP: RawAnimation = RawAnimation.begin().thenPlay("misc.tail_up")
 
         val BREEDING_INGREDIENT: Ingredient = Ingredient.fromTag(ItemTags.VILLAGER_PLANTABLE_SEEDS)
     }
