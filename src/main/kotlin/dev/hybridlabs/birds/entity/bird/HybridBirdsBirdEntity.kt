@@ -73,7 +73,7 @@ open class HybridBirdsBirdEntity(type: EntityType<out HybridBirdsBirdEntity>, wo
     }
 
     override fun getActiveEyeHeight(pose: EntityPose, dimensions: EntityDimensions): Float {
-        return dimensions.height * 0.65f
+        return dimensions.height * 0.85f
     }
 
     override fun canImmediatelyDespawn(distanceSquared: Double): Boolean {
