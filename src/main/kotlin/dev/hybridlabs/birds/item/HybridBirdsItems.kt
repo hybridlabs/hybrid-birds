@@ -53,6 +53,14 @@ object HybridBirdsItems {
         )
     )
 
+    val RAW_TURDUCKEN = register(
+        "raw_turducken", Item(
+            FabricItemSettings().food(
+                FoodComponent.Builder().hunger(5).saturationModifier(0.6F).meat().build()
+            )
+        )
+    )
+
     val COOKED_DUCK = register(
         "cooked_duck", Item(
             FabricItemSettings().food(
@@ -71,6 +79,14 @@ object HybridBirdsItems {
 
     val COOKED_TURKEY = register(
         "cooked_turkey", Item(
+            FabricItemSettings().food(
+                FoodComponent.Builder().hunger(12).saturationModifier(0.8F).meat().build()
+            )
+        )
+    )
+
+    val COOKED_TURDUCKEN = register(
+        "cooked_turducken", Item(
             FabricItemSettings().food(
                 FoodComponent.Builder().hunger(12).saturationModifier(0.8F).meat().build()
             )
