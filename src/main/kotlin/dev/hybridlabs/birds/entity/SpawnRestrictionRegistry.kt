@@ -16,23 +16,30 @@ object SpawnRestrictionRegistry {
         setOf(
             HybridBirdsEntityTypes.ROOSTER,
             HybridBirdsEntityTypes.CHICK,
-            HybridBirdsEntityTypes.DUCKLING,
-            HybridBirdsEntityTypes.GOSLING,
-            HybridBirdsEntityTypes.CYGNET,
             HybridBirdsEntityTypes.POULT,
             HybridBirdsEntityTypes.PEACHICK,
             HybridBirdsEntityTypes.KEET,
             HybridBirdsEntityTypes.TURKEY,
             HybridBirdsEntityTypes.PEACOCK,
-            HybridBirdsEntityTypes.GUINEA_FOWL,
+            HybridBirdsEntityTypes.GUINEA_FOWL
+        ).forEach { registerBird(it) }
+
+        setOf(
+            HybridBirdsEntityTypes.DUCKLING,
+            HybridBirdsEntityTypes.GOSLING,
+            HybridBirdsEntityTypes.CYGNET,
             HybridBirdsEntityTypes.DUCK,
             HybridBirdsEntityTypes.GOOSE,
             HybridBirdsEntityTypes.SWAN,
-        ).forEach { registerBird(it) }
+        ).forEach { registerAquaticBird(it) }
     }
 
-    private fun <T : AnimalEntity> registerBird(entityType: EntityType<T>) {
-        registerAnimalEntity(entityType, HybridBirdsBirdEntity::canSpawn)
+    private fun <T : HybridBirdsBirdEntity> registerBird(entityType: EntityType<T>) {
+        registerAnimalEntity(entityType, HybridBirdsBirdEntity::canBirdSpawn)
+    }
+
+    private fun <T : HybridBirdsBirdEntity> registerAquaticBird(entityType: EntityType<T>) {
+        registerAnimalEntity(entityType, HybridBirdsBirdEntity::canAquaticBirdSpawn)
     }
 
     private fun <T : AnimalEntity> registerAnimalEntity(entityType: EntityType<T>, predicate: SpawnPredicate<T>) {

@@ -132,7 +132,7 @@ object HybridBirdsEntityTypes {
         dimensions: EntityDimensions,
         attributeContainer: DefaultAttributeContainer.Builder
     ): EntityType<T> {
-        return registerCustomSpawnGroup(id, entityFactory, dimensions, attributeContainer, HybridBirdsSpawnGroup.BIRDS)
+        return registerCustomSpawnGroup(id, entityFactory, dimensions, attributeContainer, SpawnGroup.CREATURE)
     }
 
     /**
@@ -143,9 +143,9 @@ object HybridBirdsEntityTypes {
         entityFactory: EntityType.EntityFactory<T>,
         dimensions: EntityDimensions,
         attributeContainer: DefaultAttributeContainer.Builder,
-        hybridBirdsSpawnGroup: HybridBirdsSpawnGroup
+        spawnGroup: SpawnGroup
     ): EntityType<T> {
-        return registerLiving(id, entityFactory, dimensions, attributeContainer, hybridBirdsSpawnGroup.spawnGroup)
+        return registerLiving(id, entityFactory, dimensions, attributeContainer, spawnGroup)
     }
 
     /**

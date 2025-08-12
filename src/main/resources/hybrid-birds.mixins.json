@@ -5,8 +5,7 @@
   "mixins": [
     "ChickenEntityMixin",
     "EggEntityMixin",
-    "OcelotEntityMixin",
-    "SpawnGroupMixin"
+    "OcelotEntityMixin"
   ],
   "injectors": {
     "defaultRequire": 1

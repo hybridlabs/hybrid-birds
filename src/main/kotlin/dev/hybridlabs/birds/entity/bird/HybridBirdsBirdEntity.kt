@@ -10,11 +10,13 @@ import net.minecraft.entity.ai.pathing.MobNavigation
 import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.passive.AnimalEntity
 import net.minecraft.entity.passive.PassiveEntity
+import net.minecraft.entity.passive.StriderEntity
 import net.minecraft.registry.tag.FluidTags
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.util.math.BlockPos
+import net.minecraft.util.math.Direction
 import net.minecraft.util.math.random.Random
 import net.minecraft.world.World
 import net.minecraft.world.WorldAccess
@@ -110,14 +112,30 @@ open class HybridBirdsBirdEntity(type: EntityType<out HybridBirdsBirdEntity>, wo
         val WATER_IDLE: RawAnimation = RawAnimation.begin().thenPlay("misc.water_idle")
 
         @Suppress("UNUSED_PARAMETER")
-        fun canSpawn(
-            type: EntityType<out AnimalEntity>,
+        fun canBirdSpawn(
+            type: EntityType<out HybridBirdsBirdEntity>,
             world: WorldAccess,
             reason: SpawnReason,
             pos: BlockPos,
             random: Random
         ): Boolean {
+            isLightLevelValidForNaturalSpawn(world, pos)
             return true
+        }
+
+        @Suppress("UNUSED_PARAMETER")
+        fun canAquaticBirdSpawn(
+            type: EntityType<out HybridBirdsBirdEntity>,
+            world: WorldAccess,
+            spawnReason: SpawnReason,
+            pos: BlockPos,
+            random: Random
+        ): Boolean {
+            val mutable = pos.mutableCopy()
+            do {
+                mutable.move(Direction.UP)
+            } while (world.getFluidState(mutable).isIn(FluidTags.WATER))
+            return world.getBlockState(mutable).isAir
         }
     }
 }
