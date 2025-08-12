@@ -2,6 +2,7 @@ package dev.hybridlabs.birds
 
 import dev.hybridlabs.aquatic.config.HybridBirdsConfigHandler
 import dev.hybridlabs.birds.config.HybridBirdsConfig
+import dev.hybridlabs.birds.effect.HybridBirdsStatusEffects
 import dev.hybridlabs.birds.entity.HybridBirdsEntityTypes
 import dev.hybridlabs.birds.entity.SpawnRestrictionRegistry
 import dev.hybridlabs.birds.item.HybridBirdsItemGroups
@@ -33,6 +34,8 @@ object HybridBirds : ModInitializer {
 
         HybridBirdsItems
         HybridBirdsItemGroups
+
+        HybridBirdsStatusEffects
 
         SpawnRestrictionRegistry
 
