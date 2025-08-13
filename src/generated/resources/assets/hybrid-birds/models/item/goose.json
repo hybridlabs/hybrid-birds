@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "hybrid-birds:item/raw_turducken"
+    "layer0": "hybrid-birds:item/goose"
   }
 }

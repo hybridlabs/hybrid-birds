@@ -30,32 +30,32 @@ object HybridBirdsItems {
     val PEACOCK_EGG = registerEgg("peacock_egg", HybridBirdsEntityTypes.PEACHICK)
     val GUINEA_FOWL_EGG = registerEgg("guinea_fowl_egg", HybridBirdsEntityTypes.KEET)
 
-    val RAW_DUCK = register(
-        "raw_duck", Item(
+    val DUCK = register(
+        "duck", Item(
             FabricItemSettings().food(
                     FoodComponent.Builder().hunger(3).saturationModifier(0.6F).meat().build()
             )
         )
     )
 
-    val RAW_GOOSE = register(
-        "raw_goose", Item(
+    val GOOSE = register(
+        "goose", Item(
             FabricItemSettings().food(
                 FoodComponent.Builder().hunger(4).saturationModifier(0.6F).meat().build()
             )
         )
     )
 
-    val RAW_TURKEY = register(
-        "raw_turkey", Item(
+    val TURKEY = register(
+        "turkey", Item(
             FabricItemSettings().food(
                 FoodComponent.Builder().hunger(5).saturationModifier(0.6F).meat().build()
             )
         )
     )
 
-    val RAW_TURDUCKEN = register(
-        "raw_turducken", Item(
+    val TURDUCKEN = register(
+        "turducken", Item(
             FabricItemSettings().food(
                 FoodComponent.Builder().hunger(5).saturationModifier(0.6F).meat().build()
             )

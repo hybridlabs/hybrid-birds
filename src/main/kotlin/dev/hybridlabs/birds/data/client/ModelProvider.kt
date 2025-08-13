@@ -31,10 +31,10 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
         generator.register(HybridBirdsItems.PEACOCK_EGG, Models.GENERATED)
         generator.register(HybridBirdsItems.GUINEA_FOWL_EGG, Models.GENERATED)
 
-        generator.register(HybridBirdsItems.RAW_DUCK, Models.GENERATED)
-        generator.register(HybridBirdsItems.RAW_GOOSE, Models.GENERATED)
-        generator.register(HybridBirdsItems.RAW_TURKEY, Models.GENERATED)
-        generator.register(HybridBirdsItems.RAW_TURDUCKEN, Models.GENERATED)
+        generator.register(HybridBirdsItems.DUCK, Models.GENERATED)
+        generator.register(HybridBirdsItems.GOOSE, Models.GENERATED)
+        generator.register(HybridBirdsItems.TURKEY, Models.GENERATED)
+        generator.register(HybridBirdsItems.TURDUCKEN, Models.GENERATED)
 
         generator.register(HybridBirdsItems.COOKED_DUCK, Models.GENERATED)
         generator.register(HybridBirdsItems.COOKED_GOOSE, Models.GENERATED)
