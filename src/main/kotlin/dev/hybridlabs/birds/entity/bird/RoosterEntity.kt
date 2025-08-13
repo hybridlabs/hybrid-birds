@@ -52,8 +52,11 @@ class RoosterEntity(entityType: EntityType<out RoosterEntity>, world: World) :
         goalSelector.add(6, LookAtEntityGoal(this, RoosterEntity::class.java, 8.0f))
         goalSelector.add(6, LookAtEntityGoal(this, ChickenEntity::class.java, 8.0f))
         goalSelector.add(5, LookAtEntityGoal(this, ChickEntity::class.java, 8.0f))
-        goalSelector.add(1, AttackGoal(this))
-        targetSelector.add(1, ActiveTargetGoal(this, RoosterEntity::class.java, true) { other -> other is RoosterEntity && this.isAngry() && other.isAngry() })
+        goalSelector.add(1, MeleeAttackGoal(this, 0.5, false))
+        targetSelector.add(1, RevengeGoal(this))
+        targetSelector.add(2, ActiveTargetGoal(this, RoosterEntity::class.java, true) { other ->
+            other is RoosterEntity && this.isAngry() && other.isAngry()
+        })
     }
 
     private fun isAngeringItem(stack: ItemStack): Boolean {
@@ -63,7 +66,7 @@ class RoosterEntity(entityType: EntityType<out RoosterEntity>, world: World) :
     override fun interactMob(player: PlayerEntity, hand: Hand?): ActionResult {
         val itemStack = player.getStackInHand(hand)
 
-        if (isAngeringItem(itemStack)) {
+        if (isAngeringItem(itemStack) && !isAngry()) {
             if (!world.isClient) {
                 if (!player.abilities.creativeMode) {
                     itemStack.decrement(1)
@@ -86,11 +89,8 @@ class RoosterEntity(entityType: EntityType<out RoosterEntity>, world: World) :
 
     override fun tick() {
         super.tick()
-        if (!isAngry()) {
-            val nearby = world.getEntitiesByClass(RoosterEntity::class.java, boundingBox.expand(4.0)) { it != this }
-            if (nearby.any { it.isAngry() }) {
-                this.angerTicks = 200
-            }
+        if (angerTicks > 0) {
+            angerTicks--
         }
         morningCall()
     }
