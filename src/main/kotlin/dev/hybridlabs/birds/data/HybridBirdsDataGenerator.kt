@@ -6,12 +6,14 @@ import dev.hybridlabs.birds.data.client.ModelProvider
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator
 import net.minecraft.registry.Registry
+import dev.hybridlabs.birds.data.server.loot.EntityTypeLootTableProvider
 
 object HybridBirdsDataGenerator : DataGeneratorEntrypoint {
 	override fun onInitializeDataGenerator(generator: FabricDataGenerator) {
 		val pack = generator.createPack()
 		pack.addProvider(::LanguageProvider)
 		pack.addProvider(::ModelProvider)
+		pack.addProvider(::EntityTypeLootTableProvider)
 	}
 
 	fun <T> filterHybridBirds(registry: Registry<T>): (T) -> Boolean {
