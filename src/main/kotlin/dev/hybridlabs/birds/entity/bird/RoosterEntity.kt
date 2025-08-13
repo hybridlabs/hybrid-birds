@@ -11,6 +11,7 @@ import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.entity.mob.WaterCreatureEntity
+import net.minecraft.entity.passive.ChickenEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
@@ -21,7 +22,6 @@ import net.minecraft.sound.SoundEvent
 import net.minecraft.util.ActionResult
 import net.minecraft.util.Hand
 import net.minecraft.world.World
-import java.util.*
 
 class RoosterEntity(entityType: EntityType<out RoosterEntity>, world: World) :
     HybridBirdsBirdEntity(entityType, world) {
@@ -29,9 +29,31 @@ class RoosterEntity(entityType: EntityType<out RoosterEntity>, world: World) :
     private var hasCalled: Boolean = false
     private var angerTicks = 0
 
-
-    private fun isAngry(): Boolean {
+    internal fun isAngry(): Boolean {
         return this.angerTicks > 0
+    }
+
+    override fun getLimitPerChunk(): Int {
+        return 2
+    }
+
+    init {
+        moveControl = MoveControl(this)
+        navigation = roosterNavigation
+    }
+
+    override fun initGoals() {
+        goalSelector.add(0, SwimGoal(this))
+        goalSelector.add(2, EscapeDangerGoal(this, 0.6))
+        goalSelector.add(3, TemptGoal(this, 0.5, Ingredient.fromTag(ItemTags.VILLAGER_PLANTABLE_SEEDS), false))
+        goalSelector.add(5, WanderAroundGoal(this, 0.5))
+        goalSelector.add(7, LookAroundGoal(this))
+        goalSelector.add(6, LookAtEntityGoal(this, PlayerEntity::class.java, 8.0f))
+        goalSelector.add(6, LookAtEntityGoal(this, RoosterEntity::class.java, 8.0f))
+        goalSelector.add(6, LookAtEntityGoal(this, ChickenEntity::class.java, 8.0f))
+        goalSelector.add(5, LookAtEntityGoal(this, ChickEntity::class.java, 8.0f))
+        goalSelector.add(1, AttackGoal(this))
+        targetSelector.add(1, ActiveTargetGoal(this, RoosterEntity::class.java, true) { other -> other is RoosterEntity && this.isAngry() && other.isAngry() })
     }
 
     private fun isAngeringItem(stack: ItemStack): Boolean {
@@ -40,16 +62,15 @@ class RoosterEntity(entityType: EntityType<out RoosterEntity>, world: World) :
 
     override fun interactMob(player: PlayerEntity, hand: Hand?): ActionResult {
         val itemStack = player.getStackInHand(hand)
-        if (this.isAngeringItem(itemStack)) {
-            val i = this.getBreedingAge()
-            if (!world.isClient && i == 0 && this.canEat()) {
-                this.eat(player, hand, itemStack)
-                return ActionResult.SUCCESS
-            }
 
-            if (world.isClient) {
-                return ActionResult.CONSUME
+        if (isAngeringItem(itemStack)) {
+            if (!world.isClient) {
+                if (!player.abilities.creativeMode) {
+                    itemStack.decrement(1)
+                }
+                angerTicks = 200
             }
+            return ActionResult.SUCCESS
         }
 
         return super.interactMob(player, hand)
@@ -61,39 +82,6 @@ class RoosterEntity(entityType: EntityType<out RoosterEntity>, world: World) :
         }
 
         this.angerTicks = 200
-    }
-
-    override fun writeCustomDataToNbt(nbt: NbtCompound) {
-        super.writeCustomDataToNbt(nbt)
-        nbt.putInt("IsAngry", this.angerTicks)
-    }
-
-    override fun readCustomDataFromNbt(nbt: NbtCompound) {
-        super.readCustomDataFromNbt(nbt)
-        this.angerTicks = nbt.getInt("IsAngry")
-    }
-
-    init {
-        moveControl = MoveControl(this)
-        navigation = roosterNavigation
-    }
-
-    override fun getLimitPerChunk(): Int {
-        return 2
-    }
-
-    override fun initGoals() {
-        goalSelector.add(0, SwimGoal(this))
-        goalSelector.add(2, EscapeDangerGoal(this, 0.6))
-        goalSelector.add(3, TemptGoal(this, 0.6, Ingredient.fromTag(ItemTags.VILLAGER_PLANTABLE_SEEDS), false))
-        goalSelector.add(4, WanderAroundGoal(this, 0.5))
-        goalSelector.add(4, LookAroundGoal(this))
-        goalSelector.add(5, LookAtEntityGoal(this, PlayerEntity::class.java, 10.0f))
-        goalSelector.add(0, MeleeAttackGoal(this, 1.0, true))
-        goalSelector.add(0, LookAtOpponentGoal())
-        goalSelector.add(0, RoosterRevengeGoal(this))
-        goalSelector.add(1, PounceAtTargetGoal(this, 0.4F))
-        targetSelector.add(0, ActiveTargetGoal(this, RoosterEntity::class.java, true) { other -> other is RoosterEntity && this.isAngry() && other.isAngry() })
     }
 
     override fun tick() {
@@ -130,6 +118,22 @@ class RoosterEntity(entityType: EntityType<out RoosterEntity>, world: World) :
         }
     }
 
+    // region NBT
+
+    override fun writeCustomDataToNbt(nbt: NbtCompound) {
+        super.writeCustomDataToNbt(nbt)
+        nbt.putInt("IsAngry", this.angerTicks)
+    }
+
+    override fun readCustomDataFromNbt(nbt: NbtCompound) {
+        super.readCustomDataFromNbt(nbt)
+        this.angerTicks = nbt.getInt("IsAngry")
+    }
+
+    // endregion
+
+    // region SFX
+
     override fun getAmbientSound(): SoundEvent {
         return HybridBirdsSoundEvents.ROOSTER_AMBIENT
     }
@@ -142,47 +146,7 @@ class RoosterEntity(entityType: EntityType<out RoosterEntity>, world: World) :
         return HybridBirdsSoundEvents.ROOSTER_DIE
     }
 
-    class RoosterRevengeGoal(rooster: RoosterEntity) : RevengeGoal(rooster) {
-        override fun shouldContinue(): Boolean {
-            val target = mob.target
-            return target is RoosterEntity && super.shouldContinue()
-        }
-
-        override fun canStart(): Boolean {
-            val target = mob.attacker
-            return target is RoosterEntity && super.canStart()
-        }
-    }
-
-    private inner class LookAtOpponentGoal : Goal() {
-        init {
-            controls = EnumSet.of(Control.LOOK)
-        }
-
-        override fun canStart(): Boolean {
-            val target = this@RoosterEntity.target
-            return target is RoosterEntity && this@RoosterEntity.isAngry()
-        }
-
-        override fun shouldContinue(): Boolean {
-            val target = this@RoosterEntity.target
-            return target is RoosterEntity && target.isAlive && this@RoosterEntity.isAngry()
-        }
-
-        override fun tick() {
-            val target = this@RoosterEntity.target
-            if (target != null) {
-                this@RoosterEntity.lookControl.lookAt(
-                    target.x,
-                    target.eyeY,
-                    target.z,
-                    180.0f,
-                    20.0f
-                )
-            }
-        }
-    }
-
+    // endregion
 
     companion object {
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
