@@ -1,6 +1,7 @@
 package dev.hybridlabs.birds.entity.bird
 
 import dev.hybridlabs.birds.effect.HybridBirdsStatusEffects
+import dev.hybridlabs.birds.entity.HybridBirdsEntityTypes
 import dev.hybridlabs.birds.sound.HybridBirdsSoundEvents
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.ai.control.MoveControl
@@ -12,12 +13,14 @@ import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.entity.mob.WaterCreatureEntity
 import net.minecraft.entity.passive.ChickenEntity
+import net.minecraft.entity.passive.PassiveEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.recipe.Ingredient
 import net.minecraft.registry.tag.ItemTags
+import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundEvent
 import net.minecraft.util.ActionResult
 import net.minecraft.util.Hand
@@ -147,6 +150,10 @@ class RoosterEntity(entityType: EntityType<out RoosterEntity>, world: World) :
     }
 
     // endregion
+
+    override fun createChild(world: ServerWorld, entity: PassiveEntity): PassiveEntity? {
+        return HybridBirdsEntityTypes.CHICK.create(world)
+    }
 
     companion object {
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
