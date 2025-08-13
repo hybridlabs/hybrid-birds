@@ -1,5 +1,5 @@
 package dev.hybridlabs.birds.model.entity.bird
 
-import dev.hybridlabs.birds.entity.bird.HybridBirdsBirdEntity
+import dev.hybridlabs.birds.entity.bird.RoosterEntity
 
-class RoosterEntityModel : HybridBirdsEntityModel<HybridBirdsBirdEntity>("rooster")
+class RoosterEntityModel : HybridBirdsEntityModel<RoosterEntity>("rooster")
