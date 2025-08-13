@@ -22,6 +22,7 @@ import net.minecraft.recipe.Ingredient
 import net.minecraft.registry.tag.ItemTags
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundEvent
+import net.minecraft.sound.SoundEvents
 import net.minecraft.util.ActionResult
 import net.minecraft.util.Hand
 import net.minecraft.world.World
@@ -74,6 +75,7 @@ class RoosterEntity(entityType: EntityType<out RoosterEntity>, world: World) :
                 if (!player.abilities.creativeMode) {
                     itemStack.decrement(1)
                 }
+                playSound(SoundEvents.ENTITY_FOX_EAT, 1.0f, 1.0f)
                 angerTicks = 200
             }
             return ActionResult.SUCCESS
