@@ -28,7 +28,7 @@ import software.bernie.geckolib.core.animation.AnimationState
 import software.bernie.geckolib.core.animation.RawAnimation
 
 class PeacockEntity(entityType: EntityType<out PeacockEntity>, world: World) :
-    HybridBirdsBirdEntity(entityType, world) {
+    HybridBirdsBirdEntity(entityType, world, false) {
     private var peacockNavigation: EntityNavigation = createNavigation(world)
     private var eggLayTime: Int = 0
     private var tailUp = false

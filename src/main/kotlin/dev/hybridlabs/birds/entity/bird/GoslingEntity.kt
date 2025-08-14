@@ -16,17 +16,13 @@ import java.util.*
 import kotlin.math.abs
 
 class GoslingEntity(entityType: EntityType<out GoslingEntity>, world: World) :
-    HybridBirdsBirdEntity(entityType, world) {
+    HybridBirdsBirdEntity(entityType, world, true) {
     private var goslingNavigation = AmphibiousSwimNavigation(this, world)
     private var goslingAge = 0
 
     init {
         moveControl = BirdFloatControl(this)
         navigation = goslingNavigation
-    }
-
-    override fun getActiveEyeHeight(pose: EntityPose, dimensions: EntityDimensions): Float {
-        return dimensions.height * 0.6f
     }
 
     override fun getWaterline(): Float {

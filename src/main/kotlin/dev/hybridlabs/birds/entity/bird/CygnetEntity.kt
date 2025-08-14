@@ -18,7 +18,7 @@ import java.util.*
 import kotlin.math.abs
 
 class CygnetEntity(entityType: EntityType<out CygnetEntity>, world: World) :
-    HybridBirdsBirdEntity(entityType, world) {
+    HybridBirdsBirdEntity(entityType, world, true) {
     private var cygnetNavigation = AmphibiousSwimNavigation(this, world)
     private var cygnetAge = 0
 

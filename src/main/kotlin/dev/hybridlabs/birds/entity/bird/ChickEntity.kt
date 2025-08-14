@@ -27,7 +27,8 @@ import java.util.EnumSet
 import kotlin.math.abs
 import kotlin.random.Random
 
-class ChickEntity(entityType: EntityType<out ChickEntity>, world: World) : HybridBirdsBirdEntity(entityType, world) {
+class ChickEntity(entityType: EntityType<out ChickEntity>, world: World) :
+    HybridBirdsBirdEntity(entityType, world, false) {
     private var chickNavigation: EntityNavigation = createNavigation(world)
     private var chickAge = 0
 

@@ -18,7 +18,7 @@ import java.util.*
 import kotlin.math.abs
 
 class PeachickEntity(entityType: EntityType<out PeachickEntity>, world: World) :
-    HybridBirdsBirdEntity(entityType, world) {
+    HybridBirdsBirdEntity(entityType, world, false) {
     private var peachickNavigation: EntityNavigation = createNavigation(world)
     private var peachickAge = 0
 

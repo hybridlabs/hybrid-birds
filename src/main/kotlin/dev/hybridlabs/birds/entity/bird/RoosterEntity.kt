@@ -28,7 +28,7 @@ import net.minecraft.util.Hand
 import net.minecraft.world.World
 
 class RoosterEntity(entityType: EntityType<out RoosterEntity>, world: World) :
-    HybridBirdsBirdEntity(entityType, world) {
+    HybridBirdsBirdEntity(entityType, world, false) {
     private var roosterNavigation: EntityNavigation = createNavigation(world)
     private var hasCalled: Boolean = false
     private var angerTicks = 0

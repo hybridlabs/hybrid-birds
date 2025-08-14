@@ -18,7 +18,7 @@ import java.util.*
 import kotlin.math.abs
 
 class PoultEntity(entityType: EntityType<out PoultEntity>, world: World) :
-    HybridBirdsBirdEntity(entityType, world) {
+    HybridBirdsBirdEntity(entityType, world, false) {
     private var poultNavigation: EntityNavigation = createNavigation(world)
     private var poultAge = 0
 

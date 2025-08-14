@@ -16,7 +16,7 @@ import java.util.*
 import kotlin.math.abs
 
 class DucklingEntity(entityType: EntityType<out DucklingEntity>, world: World) :
-    HybridBirdsBirdEntity(entityType, world) {
+    HybridBirdsBirdEntity(entityType, world, true) {
     private var ducklingNavigation = AmphibiousSwimNavigation(this, world)
     private var ducklingAge = 0
 
@@ -31,10 +31,6 @@ class DucklingEntity(entityType: EntityType<out DucklingEntity>, world: World) :
 
     override fun getLimitPerChunk(): Int {
         return 2
-    }
-
-    override fun getActiveEyeHeight(pose: EntityPose, dimensions: EntityDimensions): Float {
-        return dimensions.height * 0.6f
     }
 
     override fun initGoals() {

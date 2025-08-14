@@ -23,7 +23,7 @@ import net.minecraft.world.World
 import net.minecraft.world.event.GameEvent
 
 class GooseEntity(entityType: EntityType<out GooseEntity>, world: World) :
-    HybridBirdsBirdEntity(entityType, world) {
+    HybridBirdsBirdEntity(entityType, world, true) {
     private var gooseNavigation = AmphibiousSwimNavigation(this, world)
     private var eggLayTime: Int = 0
 

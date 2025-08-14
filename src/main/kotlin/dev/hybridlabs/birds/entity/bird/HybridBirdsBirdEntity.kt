@@ -10,7 +10,6 @@ import net.minecraft.entity.ai.pathing.MobNavigation
 import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.passive.AnimalEntity
 import net.minecraft.entity.passive.PassiveEntity
-import net.minecraft.entity.passive.StriderEntity
 import net.minecraft.registry.tag.FluidTags
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundEvent
@@ -31,7 +30,11 @@ import software.bernie.geckolib.util.GeckoLibUtil
 
 
 @Suppress("LeakingThis")
-open class HybridBirdsBirdEntity(type: EntityType<out HybridBirdsBirdEntity>, world: World) :
+open class HybridBirdsBirdEntity(
+    type: EntityType<out HybridBirdsBirdEntity>,
+    world: World,
+    open val isAquatic: Boolean,
+) :
     AnimalEntity(type, world),
     GeoEntity {
     private val factory = GeckoLibUtil.createInstanceCache(this)
@@ -61,8 +64,8 @@ open class HybridBirdsBirdEntity(type: EntityType<out HybridBirdsBirdEntity>, wo
             ) { state: AnimationState<HybridBirdsBirdEntity> ->
                 when {
                     state.isMoving && isOnGround -> state.setAndContinue(DefaultAnimations.WALK)
-                    state.isMoving && isTouchingWater -> state.setAndContinue(DefaultAnimations.SWIM)
-                    !state.isMoving && isTouchingWater -> state.setAndContinue(WATER_IDLE)
+                    this.isAquatic && state.isMoving && isTouchingWater -> state.setAndContinue(DefaultAnimations.SWIM)
+                    this.isAquatic && !state.isMoving && isTouchingWater -> state.setAndContinue(WATER_IDLE)
                     !this.isOnGround && !isTouchingWater -> state.setAndContinue(DefaultAnimations.FLY)
                     else -> state.setAndContinue(DefaultAnimations.IDLE)
                 }
