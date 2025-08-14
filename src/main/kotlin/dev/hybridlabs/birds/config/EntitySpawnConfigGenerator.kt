@@ -16,12 +16,12 @@ class EntitySpawnConfigGenerator {
 
     fun initialize() {
         addBird(HybridBirdsEntityTypes.ROOSTER, listOf(BiomeTags.VILLAGE_PLAINS_HAS_STRUCTURE), 5, 1, 2)
-        addBird(HybridBirdsEntityTypes.TURKEY, listOf(BiomeTags.IS_FOREST), 5, 1, 3)
-        addBird(HybridBirdsEntityTypes.DUCK, listOf(BiomeTags.IS_RIVER), 5, 1, 3)
-        addBird(HybridBirdsEntityTypes.GOOSE, listOf(BiomeTags.IS_RIVER), 5, 1, 3)
-        addBird(HybridBirdsEntityTypes.SWAN, listOf(BiomeTags.IS_RIVER), 5, 1, 2)
-        addBird(HybridBirdsEntityTypes.PEACOCK, listOf(BiomeTags.IS_JUNGLE), 5, 1, 2)
-        addBird(HybridBirdsEntityTypes.GUINEA_FOWL, listOf(BiomeTags.IS_SAVANNA), 5, 1, 3)
+        addBird(HybridBirdsEntityTypes.TURKEY, listOf(BiomeTags.IS_FOREST), 3, 1, 3)
+        addBird(HybridBirdsEntityTypes.DUCK, listOf(BiomeTags.IS_RIVER, BiomeTags.SWAMP_HUT_HAS_STRUCTURE), 5, 1, 3)
+        addBird(HybridBirdsEntityTypes.GOOSE, listOf(BiomeTags.IS_RIVER), 3, 1, 3)
+        addBird(HybridBirdsEntityTypes.SWAN, listOf(BiomeTags.IS_RIVER), 1, 1, 2)
+        addBird(HybridBirdsEntityTypes.PEACOCK, listOf(BiomeTags.IS_JUNGLE), 2, 1, 2)
+        addBird(HybridBirdsEntityTypes.GUINEA_FOWL, listOf(BiomeTags.IS_SAVANNA), 3, 1, 3)
     }
 
     private fun addBird(
