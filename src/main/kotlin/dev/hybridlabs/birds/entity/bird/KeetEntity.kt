@@ -12,8 +12,6 @@ import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.mob.WaterCreatureEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.nbt.NbtCompound
-import net.minecraft.recipe.Ingredient
-import net.minecraft.registry.tag.ItemTags
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.world.World
 import java.util.*
@@ -35,7 +33,7 @@ class KeetEntity(entityType: EntityType<out KeetEntity>, world: World) :
 
     override fun initGoals() {
         goalSelector.add(0, SwimGoal(this))
-        goalSelector.add(0, FollowDuckGoal(this, 0.6))
+        goalSelector.add(0, FollowGuineaFowlGoal(this, 0.6))
         goalSelector.add(0, EscapeDangerGoal(this, 0.6))
         goalSelector.add(1, TemptGoal(this, 0.6, GuineaFowlEntity.BREEDING_INGREDIENT, false))
         goalSelector.add(2, WanderAroundGoal(this, 0.5))
@@ -107,7 +105,7 @@ class KeetEntity(entityType: EntityType<out KeetEntity>, world: World) :
         var MAX_KEET_AGE: Int = abs(-24000.0).toInt()
     }
 
-    internal class FollowDuckGoal(mob: KeetEntity, private val speed: Double) : Goal() {
+    internal class FollowGuineaFowlGoal(mob: KeetEntity, private val speed: Double) : Goal() {
         private val keet: KeetEntity = mob
         private var guineaFowlEntity: DuckEntity? = null
 

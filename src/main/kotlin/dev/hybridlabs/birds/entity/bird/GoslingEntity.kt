@@ -2,9 +2,7 @@ package dev.hybridlabs.birds.entity.bird
 
 import dev.hybridlabs.birds.entity.HybridBirdsEntityTypes
 import dev.hybridlabs.birds.entity.ai.BirdFloatControl
-import net.minecraft.entity.EntityData
-import net.minecraft.entity.EntityType
-import net.minecraft.entity.SpawnReason
+import net.minecraft.entity.*
 import net.minecraft.entity.ai.goal.*
 import net.minecraft.entity.ai.pathing.AmphibiousSwimNavigation
 import net.minecraft.entity.attribute.DefaultAttributeContainer
@@ -27,6 +25,10 @@ class GoslingEntity(entityType: EntityType<out GoslingEntity>, world: World) :
         navigation = goslingNavigation
     }
 
+    override fun getActiveEyeHeight(pose: EntityPose, dimensions: EntityDimensions): Float {
+        return dimensions.height * 0.6f
+    }
+
     override fun getWaterline(): Float {
         return 0.15f
     }
@@ -47,7 +49,7 @@ class GoslingEntity(entityType: EntityType<out GoslingEntity>, world: World) :
     override fun tickMovement() {
         super.tickMovement()
         if (!world.isClient) {
-            this.setgoslingAge(this.goslingAge + 1)
+            this.setGoslingAge(this.goslingAge + 1)
         }
     }
 
@@ -58,10 +60,10 @@ class GoslingEntity(entityType: EntityType<out GoslingEntity>, world: World) :
 
     override fun readCustomDataFromNbt(nbt: NbtCompound) {
         super.readCustomDataFromNbt(nbt)
-        this.setgoslingAge(nbt.getInt("Age"))
+        this.setGoslingAge(nbt.getInt("Age"))
     }
 
-    private fun setgoslingAge(goslingAge: Int) {
+    private fun setGoslingAge(goslingAge: Int) {
         this.goslingAge = goslingAge
         if (this.goslingAge >= MAX_GOSLING_AGE) {
             this.growUp()

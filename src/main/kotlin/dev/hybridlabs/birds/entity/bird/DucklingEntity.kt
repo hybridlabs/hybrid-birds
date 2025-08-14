@@ -2,9 +2,7 @@ package dev.hybridlabs.birds.entity.bird
 
 import dev.hybridlabs.birds.entity.HybridBirdsEntityTypes
 import dev.hybridlabs.birds.entity.ai.BirdFloatControl
-import net.minecraft.entity.EntityData
-import net.minecraft.entity.EntityType
-import net.minecraft.entity.SpawnReason
+import net.minecraft.entity.*
 import net.minecraft.entity.ai.goal.*
 import net.minecraft.entity.ai.pathing.AmphibiousSwimNavigation
 import net.minecraft.entity.attribute.DefaultAttributeContainer
@@ -33,6 +31,10 @@ class DucklingEntity(entityType: EntityType<out DucklingEntity>, world: World) :
 
     override fun getLimitPerChunk(): Int {
         return 2
+    }
+
+    override fun getActiveEyeHeight(pose: EntityPose, dimensions: EntityDimensions): Float {
+        return dimensions.height * 0.6f
     }
 
     override fun initGoals() {

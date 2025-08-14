@@ -12,8 +12,6 @@ import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.mob.WaterCreatureEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.nbt.NbtCompound
-import net.minecraft.recipe.Ingredient
-import net.minecraft.registry.tag.ItemTags
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.world.World
 import java.util.*
@@ -35,7 +33,7 @@ class PeachickEntity(entityType: EntityType<out PeachickEntity>, world: World) :
 
     override fun initGoals() {
         goalSelector.add(0, SwimGoal(this))
-        goalSelector.add(0, FollowGooseGoal(this, 0.6))
+        goalSelector.add(0, FollowPeacockGoal(this, 0.6))
         goalSelector.add(0, EscapeDangerGoal(this, 0.6))
         goalSelector.add(1, TemptGoal(this, 0.6, PeacockEntity.BREEDING_INGREDIENT, false))
         goalSelector.add(2, WanderAroundGoal(this, 0.5))
@@ -46,7 +44,7 @@ class PeachickEntity(entityType: EntityType<out PeachickEntity>, world: World) :
     override fun tickMovement() {
         super.tickMovement()
         if (!world.isClient) {
-            this.setpeachickAge(this.peachickAge + 1)
+            this.setPeachickAge(this.peachickAge + 1)
         }
     }
 
@@ -57,10 +55,10 @@ class PeachickEntity(entityType: EntityType<out PeachickEntity>, world: World) :
 
     override fun readCustomDataFromNbt(nbt: NbtCompound) {
         super.readCustomDataFromNbt(nbt)
-        this.setpeachickAge(nbt.getInt("Age"))
+        this.setPeachickAge(nbt.getInt("Age"))
     }
 
-    private fun setpeachickAge(peachickAge: Int) {
+    private fun setPeachickAge(peachickAge: Int) {
         this.peachickAge = peachickAge
         if (this.peachickAge >= MAX_PEACHICK_AGE) {
             this.growUp()
@@ -107,7 +105,7 @@ class PeachickEntity(entityType: EntityType<out PeachickEntity>, world: World) :
         var MAX_PEACHICK_AGE: Int = abs(-24000.0).toInt()
     }
 
-    internal class FollowGooseGoal(mob: PeachickEntity, private val speed: Double) : Goal() {
+    internal class FollowPeacockGoal(mob: PeachickEntity, private val speed: Double) : Goal() {
         private val peachick: PeachickEntity = mob
         private var peacockEntity: GooseEntity? = null
 

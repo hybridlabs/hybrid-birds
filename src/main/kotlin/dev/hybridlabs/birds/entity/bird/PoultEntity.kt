@@ -12,8 +12,6 @@ import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.mob.WaterCreatureEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.nbt.NbtCompound
-import net.minecraft.recipe.Ingredient
-import net.minecraft.registry.tag.ItemTags
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.world.World
 import java.util.*
@@ -35,7 +33,7 @@ class PoultEntity(entityType: EntityType<out PoultEntity>, world: World) :
 
     override fun initGoals() {
         goalSelector.add(0, SwimGoal(this))
-        goalSelector.add(0, FollowGooseGoal(this, 0.6))
+        goalSelector.add(0, FollowTurkeyGoal(this, 0.6))
         goalSelector.add(0, EscapeDangerGoal(this, 0.6))
         goalSelector.add(1, TemptGoal(this, 0.6, TurkeyEntity.BREEDING_INGREDIENT, false))
         goalSelector.add(2, WanderAroundGoal(this, 0.5))
@@ -46,7 +44,7 @@ class PoultEntity(entityType: EntityType<out PoultEntity>, world: World) :
     override fun tickMovement() {
         super.tickMovement()
         if (!world.isClient) {
-            this.setpoultAge(this.poultAge + 1)
+            this.setPoultAge(this.poultAge + 1)
         }
     }
 
@@ -57,10 +55,10 @@ class PoultEntity(entityType: EntityType<out PoultEntity>, world: World) :
 
     override fun readCustomDataFromNbt(nbt: NbtCompound) {
         super.readCustomDataFromNbt(nbt)
-        this.setpoultAge(nbt.getInt("Age"))
+        this.setPoultAge(nbt.getInt("Age"))
     }
 
-    private fun setpoultAge(poultAge: Int) {
+    private fun setPoultAge(poultAge: Int) {
         this.poultAge = poultAge
         if (this.poultAge >= MAX_POULT_AGE) {
             this.growUp()
@@ -107,7 +105,7 @@ class PoultEntity(entityType: EntityType<out PoultEntity>, world: World) :
         var MAX_POULT_AGE: Int = abs(-24000.0).toInt()
     }
 
-    internal class FollowGooseGoal(mob: PoultEntity, private val speed: Double) : Goal() {
+    internal class FollowTurkeyGoal(mob: PoultEntity, private val speed: Double) : Goal() {
         private val poult: PoultEntity = mob
         private var turkeyEntity: GooseEntity? = null
 

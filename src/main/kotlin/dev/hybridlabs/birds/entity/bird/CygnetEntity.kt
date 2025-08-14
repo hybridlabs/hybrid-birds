@@ -47,7 +47,7 @@ class CygnetEntity(entityType: EntityType<out CygnetEntity>, world: World) :
     override fun tickMovement() {
         super.tickMovement()
         if (!world.isClient) {
-            this.setcygnetAge(this.cygnetAge + 1)
+            this.setCygnetAge(this.cygnetAge + 1)
         }
     }
 
@@ -58,10 +58,10 @@ class CygnetEntity(entityType: EntityType<out CygnetEntity>, world: World) :
 
     override fun readCustomDataFromNbt(nbt: NbtCompound) {
         super.readCustomDataFromNbt(nbt)
-        this.setcygnetAge(nbt.getInt("Age"))
+        this.setCygnetAge(nbt.getInt("Age"))
     }
 
-    private fun setcygnetAge(cygnetAge: Int) {
+    private fun setCygnetAge(cygnetAge: Int) {
         this.cygnetAge = cygnetAge
         if (this.cygnetAge >= MAX_CYGNET_AGE) {
             this.growUp()
