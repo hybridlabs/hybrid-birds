@@ -5,6 +5,8 @@ import net.minecraft.entity.ai.control.MoveControl
 import net.minecraft.util.math.Vec3d
 import kotlin.math.max
 
+// credit to fowl play for the code
+
 class BirdFloatControl(bird: HybridBirdsBirdEntity) : MoveControl(bird) {
     override fun tick() {
         var velocity: Vec3d = this.entity.velocity
