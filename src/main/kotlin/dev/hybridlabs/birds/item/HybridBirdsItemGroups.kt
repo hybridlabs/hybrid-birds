@@ -19,19 +19,19 @@ object  HybridBirdsItemGroups {
         .icon { ItemStack(Items.FEATHER) }
         .entries { _, entries ->
 
-            entries.add(HybridBirdsItems.DUCK_EGG)
-            entries.add(HybridBirdsItems.GOOSE_EGG)
             entries.add(HybridBirdsItems.SWAN_EGG)
-            entries.add(HybridBirdsItems.TURKEY_EGG)
             entries.add(HybridBirdsItems.PEACOCK_EGG)
             entries.add(HybridBirdsItems.GUINEA_FOWL_EGG)
+            entries.add(HybridBirdsItems.DUCK_EGG)
             entries.add(HybridBirdsItems.DUCK)
-            entries.add(HybridBirdsItems.GOOSE)
-            entries.add(HybridBirdsItems.TURKEY)
-            entries.add(HybridBirdsItems.TURDUCKEN)
             entries.add(HybridBirdsItems.COOKED_DUCK)
+            entries.add(HybridBirdsItems.GOOSE_EGG)
+            entries.add(HybridBirdsItems.GOOSE)
             entries.add(HybridBirdsItems.COOKED_GOOSE)
+            entries.add(HybridBirdsItems.TURKEY_EGG)
+            entries.add(HybridBirdsItems.TURKEY)
             entries.add(HybridBirdsItems.COOKED_TURKEY)
+            entries.add(HybridBirdsItems.TURDUCKEN)
             entries.add(HybridBirdsItems.COOKED_TURDUCKEN)
 
             Registries.ITEM.forEach { item ->
