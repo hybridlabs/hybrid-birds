@@ -2,6 +2,7 @@ package dev.hybridlabs.birds.entity.bird
 
 import dev.hybridlabs.birds.entity.HybridBirdsEntityTypes
 import dev.hybridlabs.birds.item.HybridBirdsItems
+import dev.hybridlabs.birds.loot.HybridBirdsLootTables
 import dev.hybridlabs.birds.sound.HybridBirdsSoundEvents
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.ai.control.MoveControl
@@ -26,6 +27,7 @@ import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.util.ActionResult
 import net.minecraft.util.Hand
+import net.minecraft.util.Identifier
 import net.minecraft.world.World
 import net.minecraft.world.event.GameEvent
 
@@ -42,6 +44,15 @@ class TurkeyEntity(entityType: EntityType<out TurkeyEntity>, world: World) :
 
     override fun getLimitPerChunk(): Int {
         return 2
+    }
+
+    override fun getLootTableId(): Identifier {
+        return when (getStuffingLevel()) {
+            1 -> HybridBirdsLootTables.TURKEY_FAT
+            2 -> HybridBirdsLootTables.TURKEY_STUFFED
+            else ->
+                return super.getLootTableId()
+        }
     }
 
     override fun initGoals() {
