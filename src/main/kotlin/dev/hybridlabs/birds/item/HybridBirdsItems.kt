@@ -33,7 +33,10 @@ object HybridBirdsItems {
     val DUCK = register(
         "duck", Item(
             FabricItemSettings().food(
-                    FoodComponent.Builder().hunger(3).saturationModifier(0.6F).meat().build()
+                FoodComponent.Builder()
+                    .hunger(2)
+                    .saturationModifier(0.3F)
+                    .meat().build()
             )
         )
     )
@@ -41,7 +44,11 @@ object HybridBirdsItems {
     val GOOSE = register(
         "goose", Item(
             FabricItemSettings().food(
-                FoodComponent.Builder().hunger(4).saturationModifier(0.6F).meat().build()
+                FoodComponent.Builder()
+                    .hunger(3)
+                    .saturationModifier(0.4F)
+                    .meat()
+                    .build()
             )
         )
     )
@@ -49,7 +56,11 @@ object HybridBirdsItems {
     val TURKEY = register(
         "turkey", Item(
             FabricItemSettings().food(
-                FoodComponent.Builder().hunger(5).saturationModifier(0.6F).meat().build()
+                FoodComponent.Builder()
+                    .hunger(4)
+                    .saturationModifier(0.4F)
+                    .meat()
+                    .build()
             )
         )
     )
@@ -57,7 +68,11 @@ object HybridBirdsItems {
     val TURDUCKEN = register(
         "turducken", Item(
             FabricItemSettings().food(
-                FoodComponent.Builder().hunger(5).saturationModifier(0.6F).meat().build()
+                FoodComponent.Builder()
+                    .hunger(5)
+                    .saturationModifier(0.6F)
+                    .meat()
+                    .build()
             )
         )
     )
@@ -65,7 +80,11 @@ object HybridBirdsItems {
     val COOKED_DUCK = register(
         "cooked_duck", Item(
             FabricItemSettings().food(
-                FoodComponent.Builder().hunger(12).saturationModifier(0.8F).meat().build()
+                FoodComponent.Builder()
+                    .hunger(6)
+                    .saturationModifier(0.6F)
+                    .meat()
+                    .build()
             )
         )
     )
@@ -73,7 +92,11 @@ object HybridBirdsItems {
     val COOKED_GOOSE = register(
         "cooked_goose", Item(
             FabricItemSettings().food(
-                FoodComponent.Builder().hunger(12).saturationModifier(0.8F).meat().build()
+                FoodComponent.Builder()
+                    .hunger(7)
+                    .saturationModifier(0.6F)
+                    .meat()
+                    .build()
             )
         )
     )
@@ -81,7 +104,11 @@ object HybridBirdsItems {
     val COOKED_TURKEY = register(
         "cooked_turkey", Item(
             FabricItemSettings().food(
-                FoodComponent.Builder().hunger(12).saturationModifier(0.8F).meat().build()
+                FoodComponent.Builder()
+                    .hunger(8)
+                    .saturationModifier(0.8F)
+                    .meat()
+                    .build()
             )
         )
     )
@@ -89,7 +116,11 @@ object HybridBirdsItems {
     val COOKED_TURDUCKEN = register(
         "cooked_turducken", Item(
             FabricItemSettings().food(
-                FoodComponent.Builder().hunger(12).saturationModifier(0.8F).meat().build()
+                FoodComponent.Builder()
+                    .hunger(12)
+                    .saturationModifier(1.0F)
+                    .meat()
+                    .build()
             )
         )
     )
