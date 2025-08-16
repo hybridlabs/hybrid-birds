@@ -8,6 +8,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator
 import net.minecraft.registry.Registry
 import dev.hybridlabs.birds.data.server.loot.EntityTypeLootTableProvider
 import dev.hybridlabs.birds.data.server.loot.GenericLootTableProvider
+import dev.hybridlabs.birds.data.server.tag.BiomeTagProvider
 
 object HybridBirdsDataGenerator : DataGeneratorEntrypoint {
 	override fun onInitializeDataGenerator(generator: FabricDataGenerator) {
@@ -16,6 +17,7 @@ object HybridBirdsDataGenerator : DataGeneratorEntrypoint {
 		pack.addProvider(::ModelProvider)
 		pack.addProvider(::EntityTypeLootTableProvider)
 		pack.addProvider(::GenericLootTableProvider)
+		pack.addProvider(::BiomeTagProvider)
 	}
 
 	fun <T> filterHybridBirds(registry: Registry<T>): (T) -> Boolean {

@@ -1,6 +1,7 @@
 package dev.hybridlabs.birds.config
 
 import dev.hybridlabs.birds.entity.HybridBirdsEntityTypes
+import dev.hybridlabs.birds.tag.HybridBirdsBiomeTags
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.SpawnGroup
 import net.minecraft.registry.tag.BiomeTags
@@ -15,11 +16,11 @@ class EntitySpawnConfigGenerator {
     private val list: MutableList<EntitySpawnConfig> = mutableListOf()
 
     fun initialize() {
-        addBird(HybridBirdsEntityTypes.ROOSTER, listOf(BiomeTags.VILLAGE_PLAINS_HAS_STRUCTURE), 5, 1, 2)
-        addBird(HybridBirdsEntityTypes.TURKEY, listOf(BiomeTags.IS_FOREST), 3, 1, 3)
-        addBird(HybridBirdsEntityTypes.DUCK, listOf(BiomeTags.IS_RIVER, BiomeTags.SWAMP_HUT_HAS_STRUCTURE), 5, 1, 3)
-        addBird(HybridBirdsEntityTypes.GOOSE, listOf(BiomeTags.IS_RIVER), 3, 1, 3)
-        addBird(HybridBirdsEntityTypes.SWAN, listOf(BiomeTags.IS_RIVER), 1, 1, 2)
+        addBird(HybridBirdsEntityTypes.ROOSTER, listOf(HybridBirdsBiomeTags.ROOSTER_SPAWN_BIOMES), 5, 1, 2)
+        addBird(HybridBirdsEntityTypes.TURKEY, listOf(HybridBirdsBiomeTags.TURKEY_SPAWN_BIOMES), 3, 1, 3)
+        addBird(HybridBirdsEntityTypes.DUCK, listOf(HybridBirdsBiomeTags.DUCK_SPAWN_BIOMES), 5, 1, 3)
+        addBird(HybridBirdsEntityTypes.GOOSE, listOf(HybridBirdsBiomeTags.GOOSE_SPAWN_BIOMES), 3, 1, 3)
+        addBird(HybridBirdsEntityTypes.SWAN, listOf(HybridBirdsBiomeTags.SWAN_SPAWN_BIOMES), 1, 1, 2)
         addBird(HybridBirdsEntityTypes.PEACOCK, listOf(BiomeTags.IS_JUNGLE), 2, 1, 2)
         addBird(HybridBirdsEntityTypes.GUINEA_FOWL, listOf(BiomeTags.IS_SAVANNA), 3, 1, 3)
     }
