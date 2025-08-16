@@ -20,6 +20,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
         generateEntities(builder)
 
         mapOf(
+            HybridBirdsItems.COOKED_EGG to "Cooked Egg",
             HybridBirdsItems.TURKEY_EGG to "Turkey Egg",
             HybridBirdsItems.PEACOCK_EGG to "Peacock Egg",
             HybridBirdsItems.GUINEA_FOWL_EGG to "Guinea Fowl Egg",
@@ -29,9 +30,11 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridBirdsItems.DUCK to "Raw Duck",
             HybridBirdsItems.GOOSE to "Raw Goose",
             HybridBirdsItems.TURKEY to "Raw Turkey",
+            HybridBirdsItems.TURDUCKEN to "Raw Turducken",
             HybridBirdsItems.COOKED_DUCK to "Cooked Duck",
             HybridBirdsItems.COOKED_GOOSE to "Cooked Goose",
             HybridBirdsItems.COOKED_TURKEY to "Cooked Turkey",
+            HybridBirdsItems.COOKED_TURDUCKEN to "Cooked Turducken",
         ).forEach(builder::add)
     }
 

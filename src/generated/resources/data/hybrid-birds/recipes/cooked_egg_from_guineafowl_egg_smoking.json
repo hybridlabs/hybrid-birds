@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "category": "food",
+  "cookingtime": 100,
+  "experience": 0.15,
+  "ingredient": {
+    "item": "hybrid-birds:guinea_fowl_egg"
+  },
+  "result": "hybrid-birds:cooked_egg"
+}

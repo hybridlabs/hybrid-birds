@@ -9,6 +9,7 @@ import dev.hybridlabs.birds.item.HybridBirdsItemGroups
 import dev.hybridlabs.birds.item.HybridBirdsItems
 import dev.hybridlabs.birds.sound.HybridBirdsSoundEvents
 import dev.hybridlabs.birds.tag.HybridBirdsBiomeTags
+import dev.hybridlabs.birds.tag.HybridBirdsItemTags
 import net.fabricmc.api.ModInitializer
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors
@@ -37,6 +38,7 @@ object HybridBirds : ModInitializer {
         HybridBirdsItemGroups
 
         HybridBirdsBiomeTags
+        HybridBirdsItemTags
 
         HybridBirdsStatusEffects
 
