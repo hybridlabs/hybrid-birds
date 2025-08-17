@@ -17,5 +17,17 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
         ).forEach { item ->
             getOrCreateTagBuilder(HybridBirdsItemTags.TURDUCKEN_INGREDIENTS).add(item)
         }
+
+        setOf(
+            HybridBirdsItems.DUCK_EGG,
+            HybridBirdsItems.GOOSE_EGG,
+            HybridBirdsItems.SWAN_EGG,
+            HybridBirdsItems.TURKEY_EGG,
+            HybridBirdsItems.PEACOCK_EGG,
+            HybridBirdsItems.GUINEA_FOWL_EGG,
+            Items.EGG,
+        ).forEach { item ->
+            getOrCreateTagBuilder(HybridBirdsItemTags.EGGS  ).add(item)
+        }
     }
 }

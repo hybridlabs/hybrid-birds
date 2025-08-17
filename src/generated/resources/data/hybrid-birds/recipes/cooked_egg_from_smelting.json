@@ -4,7 +4,7 @@
   "cookingtime": 200,
   "experience": 0.15,
   "ingredient": {
-    "item": "minecraft:egg"
+    "tag": "hybrid-birds:eggs"
   },
   "result": "hybrid-birds:cooked_egg"
 }

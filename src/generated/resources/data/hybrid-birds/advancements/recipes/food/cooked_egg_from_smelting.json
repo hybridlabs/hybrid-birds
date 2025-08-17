@@ -5,9 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "minecraft:egg"
-            ]
+            "tag": "hybrid-birds:eggs"
           }
         ]
       },

@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "hybrid-birds:duck_egg",
+    "hybrid-birds:goose_egg",
+    "hybrid-birds:swan_egg",
+    "hybrid-birds:turkey_egg",
+    "hybrid-birds:peacock_egg",
+    "hybrid-birds:guinea_fowl_egg",
+    "minecraft:egg"
+  ]
+}

@@ -11,6 +11,7 @@ import net.minecraft.util.Identifier
 
 object HybridBirdsItemTags {
     val TURDUCKEN_INGREDIENTS = create("turducken_ingredients")
+    val EGGS = create("eggs")
 
     private fun create(id: String): TagKey<Item> {
         return TagKey.of(RegistryKeys.ITEM, Identifier(HybridBirds.MOD_ID, id))

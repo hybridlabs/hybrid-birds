@@ -5,13 +5,17 @@ import dev.hybridlabs.birds.tag.HybridBirdsItemTags
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider
 import net.minecraft.advancement.criterion.InventoryChangedCriterion
+import net.minecraft.data.server.recipe.CookingRecipeJsonBuilder
 import net.minecraft.data.server.recipe.RecipeJsonProvider
 import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder
 import net.minecraft.item.Item
 import net.minecraft.item.Items
 import net.minecraft.predicate.item.ItemPredicate
+import net.minecraft.recipe.AbstractCookingRecipe
+import net.minecraft.recipe.Ingredient
 import net.minecraft.recipe.RecipeSerializer
 import net.minecraft.recipe.book.RecipeCategory
+import net.minecraft.registry.tag.TagKey
 import java.util.function.Consumer
 
 class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
@@ -26,33 +30,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             .offerTo(exporter)
 
         // cooking recipes
-        offerFoodCookingRecipe(exporter, "duck_egg_smelting", RecipeSerializer.SMELTING, 200, HybridBirdsItems.DUCK_EGG, HybridBirdsItems.COOKED_EGG, 0.15f)
-        offerFoodCookingRecipe(exporter, "duck_egg_smoking", RecipeSerializer.SMELTING, 100, HybridBirdsItems.DUCK_EGG, HybridBirdsItems.COOKED_EGG, 0.15f)
-        offerFoodCookingRecipe(exporter, "duck_egg_campfire_cooking", RecipeSerializer.SMELTING, 600, HybridBirdsItems.DUCK_EGG, HybridBirdsItems.COOKED_EGG, 0.15f)
-
-        offerFoodCookingRecipe(exporter, "goose_egg_smelting", RecipeSerializer.SMELTING, 200, HybridBirdsItems.GOOSE_EGG, HybridBirdsItems.COOKED_EGG, 0.15f)
-        offerFoodCookingRecipe(exporter, "goose_egg_smoking", RecipeSerializer.SMELTING, 100, HybridBirdsItems.GOOSE_EGG, HybridBirdsItems.COOKED_EGG, 0.15f)
-        offerFoodCookingRecipe(exporter, "goose_egg_campfire_cooking", RecipeSerializer.SMELTING, 600, HybridBirdsItems.GOOSE_EGG, HybridBirdsItems.COOKED_EGG, 0.15f)
-
-        offerFoodCookingRecipe(exporter, "swan_egg_smelting", RecipeSerializer.SMELTING, 200, HybridBirdsItems.SWAN_EGG, HybridBirdsItems.COOKED_EGG, 0.15f)
-        offerFoodCookingRecipe(exporter, "swan_egg_smoking", RecipeSerializer.SMELTING, 100, HybridBirdsItems.SWAN_EGG, HybridBirdsItems.COOKED_EGG, 0.15f)
-        offerFoodCookingRecipe(exporter, "swan_egg_campfire_cooking", RecipeSerializer.SMELTING, 600, HybridBirdsItems.SWAN_EGG, HybridBirdsItems.COOKED_EGG, 0.15f)
-
-        offerFoodCookingRecipe(exporter, "turkey_egg_smelting", RecipeSerializer.SMELTING, 200, HybridBirdsItems.TURKEY_EGG, HybridBirdsItems.COOKED_EGG, 0.15f)
-        offerFoodCookingRecipe(exporter, "turkey_egg_smoking", RecipeSerializer.SMELTING, 100, HybridBirdsItems.TURKEY_EGG, HybridBirdsItems.COOKED_EGG, 0.15f)
-        offerFoodCookingRecipe(exporter, "turkey_egg_campfire_cooking", RecipeSerializer.SMELTING, 600, HybridBirdsItems.TURKEY_EGG, HybridBirdsItems.COOKED_EGG, 0.15f)
-
-        offerFoodCookingRecipe(exporter, "peacock_egg_smelting", RecipeSerializer.SMELTING, 200, HybridBirdsItems.PEACOCK_EGG, HybridBirdsItems.COOKED_EGG, 0.15f)
-        offerFoodCookingRecipe(exporter, "peacock_egg_smoking", RecipeSerializer.SMELTING, 100, HybridBirdsItems.PEACOCK_EGG, HybridBirdsItems.COOKED_EGG, 0.15f)
-        offerFoodCookingRecipe(exporter, "peacock_egg_campfire_cooking", RecipeSerializer.SMELTING, 600, HybridBirdsItems.PEACOCK_EGG, HybridBirdsItems.COOKED_EGG, 0.15f)
-
-        offerFoodCookingRecipe(exporter, "guineafowl_egg_smelting", RecipeSerializer.SMELTING, 200, HybridBirdsItems.GUINEA_FOWL_EGG, HybridBirdsItems.COOKED_EGG, 0.15f)
-        offerFoodCookingRecipe(exporter, "guineafowl_egg_smoking", RecipeSerializer.SMELTING, 100, HybridBirdsItems.GUINEA_FOWL_EGG, HybridBirdsItems.COOKED_EGG, 0.15f)
-        offerFoodCookingRecipe(exporter, "guineafowl_egg_campfire_cooking", RecipeSerializer.SMELTING, 600, HybridBirdsItems.GUINEA_FOWL_EGG, HybridBirdsItems.COOKED_EGG, 0.15f)
-
-        offerFoodCookingRecipe(exporter, "smelting", RecipeSerializer.SMELTING, 200, Items.EGG, HybridBirdsItems.COOKED_EGG, 0.15f)
-        offerFoodCookingRecipe(exporter, "smoking", RecipeSerializer.SMELTING, 100, Items.EGG, HybridBirdsItems.COOKED_EGG, 0.15f)
-        offerFoodCookingRecipe(exporter, "campfire_cooking", RecipeSerializer.SMELTING, 600, Items.EGG, HybridBirdsItems.COOKED_EGG, 0.15f)
+        offerEggCookingRecipes(exporter, HybridBirdsItemTags.EGGS, HybridBirdsItems.COOKED_EGG, 0.15f)
 
         offerCookingRecipes(exporter, HybridBirdsItems.DUCK, HybridBirdsItems.COOKED_DUCK, 0.15f)
         offerCookingRecipes(exporter, HybridBirdsItems.GOOSE, HybridBirdsItems.COOKED_GOOSE, 0.15f)
@@ -69,5 +47,33 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
         offerFoodCookingRecipe(exporter, "smelting", RecipeSerializer.SMELTING, 200, input, output, experience)
         offerFoodCookingRecipe(exporter, "smoking", RecipeSerializer.SMOKING, 100, input, output, experience)
         offerFoodCookingRecipe(exporter, "campfire_cooking", RecipeSerializer.CAMPFIRE_COOKING, 600, input, output, experience)
+    }
+
+    private fun offerEggCookingRecipes(
+        exporter: Consumer<RecipeJsonProvider>,
+        inputTag: TagKey<Item>,
+        output: Item,
+        experience: Float
+    ) {
+        offerEggCookingRecipe(exporter, "smelting", RecipeSerializer.SMELTING, 200, inputTag, output, experience)
+        offerEggCookingRecipe(exporter, "smoking", RecipeSerializer.SMOKING, 100, inputTag, output, experience)
+        offerEggCookingRecipe(exporter, "campfire_cooking", RecipeSerializer.CAMPFIRE_COOKING, 600, inputTag, output, experience)
+    }
+
+    private fun offerEggCookingRecipe(
+        exporter: Consumer<RecipeJsonProvider>,
+        cooker: String,
+        serializer: RecipeSerializer<out AbstractCookingRecipe>,
+        cookingTime: Int,
+        inputTag: TagKey<Item>,
+        output: Item,
+        experience: Float
+    ) {
+        val builder = CookingRecipeJsonBuilder
+            .create(Ingredient.fromTag(inputTag), RecipeCategory.FOOD, output, experience, cookingTime, serializer)
+            .criterion("has_egg", conditionsFromTag(inputTag))
+
+        val recipeId = getItemPath(output) + "_from_" + cooker
+        builder.offerTo(exporter, recipeId)
     }
 }
