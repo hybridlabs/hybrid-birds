@@ -6,7 +6,6 @@ import dev.hybridlabs.birds.HybridBirds
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup
 import net.minecraft.item.ItemGroup
 import net.minecraft.item.ItemStack
-import net.minecraft.item.Items
 import net.minecraft.item.SpawnEggItem
 import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
@@ -16,7 +15,7 @@ import net.minecraft.util.Identifier
 object  HybridBirdsItemGroups {
     val HYBRID_BIRDS = register("hybrid_birds", FabricItemGroup.builder()
         .displayName(Text.translatable("itemGroup.${HybridBirds.MOD_ID}.spawn_eggs"))
-        .icon { ItemStack(Items.FEATHER) }
+        .icon { ItemStack(HybridBirdsItems.GOOSE) }
         .entries { _, entries ->
 
             entries.add(HybridBirdsItems.COOKED_EGG)
