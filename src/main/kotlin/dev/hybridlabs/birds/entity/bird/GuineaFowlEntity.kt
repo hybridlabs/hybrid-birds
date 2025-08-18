@@ -10,8 +10,10 @@ import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.mob.WaterCreatureEntity
+import net.minecraft.entity.passive.AnimalEntity
 import net.minecraft.entity.passive.PassiveEntity
 import net.minecraft.entity.player.PlayerEntity
+import net.minecraft.item.ItemStack
 import net.minecraft.recipe.Ingredient
 import net.minecraft.registry.tag.ItemTags
 import net.minecraft.server.world.ServerWorld
@@ -73,6 +75,26 @@ class GuineaFowlEntity(entityType: EntityType<out GuineaFowlEntity>, world: Worl
 
     override fun createChild(world: ServerWorld, entity: PassiveEntity): PassiveEntity? {
         return HybridBirdsEntityTypes.KEET.create(world)
+    }
+
+    override fun breed(world: ServerWorld, other: AnimalEntity?) {
+        if (other == null) return
+
+        val babyCount = 1 + random.nextInt(4)
+
+        repeat(babyCount) {
+            val passiveEntity = this.createChild(world, other)
+            if (passiveEntity != null) {
+                passiveEntity.isBaby = true
+                passiveEntity.refreshPositionAndAngles(this.x, this.y, this.z, 0.0f, 0.0f)
+                this.breed(world, other, passiveEntity)
+                world.spawnEntityAndPassengers(passiveEntity)
+            }
+        }
+    }
+
+    override fun isBreedingItem(stack: ItemStack): Boolean {
+        return BREEDING_INGREDIENT.test(stack)
     }
 
     companion object {
