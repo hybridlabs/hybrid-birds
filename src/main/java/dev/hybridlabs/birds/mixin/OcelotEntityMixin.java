@@ -1,10 +1,13 @@
 package dev.hybridlabs.birds.mixin;
 
+import dev.hybridlabs.birds.entity.bird.PeacockEntity;
 import dev.hybridlabs.birds.entity.bird.RoosterEntity;
 import dev.hybridlabs.birds.entity.bird.TurkeyEntity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.ai.goal.ActiveTargetGoal;
 import net.minecraft.entity.ai.goal.FleeEntityGoal;
 import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.entity.passive.ChickenEntity;
 import net.minecraft.entity.passive.OcelotEntity;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
@@ -20,6 +23,7 @@ public abstract class OcelotEntityMixin extends AnimalEntity {
 
     @Inject(method = "initGoals", at = @At("HEAD"))
     protected void registerGoals(CallbackInfo ci) {
+        this.targetSelector.add(1, new ActiveTargetGoal<>(this, PeacockEntity.class, false));
         this.goalSelector.add(0, new FleeEntityGoal<>(this, TurkeyEntity.class, 8.0F, 1.0, 1.25));
         this.goalSelector.add(0, new FleeEntityGoal<>(this, RoosterEntity.class, 8.0F, 1.0, 1.25));
     }
