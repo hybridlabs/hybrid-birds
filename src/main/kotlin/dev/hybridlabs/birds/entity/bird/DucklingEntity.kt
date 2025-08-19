@@ -2,15 +2,18 @@ package dev.hybridlabs.birds.entity.bird
 
 import dev.hybridlabs.birds.entity.HybridBirdsEntityTypes
 import dev.hybridlabs.birds.entity.ai.BirdFloatControl
+import dev.hybridlabs.birds.sound.HybridBirdsSoundEvents
 import net.minecraft.entity.*
 import net.minecraft.entity.ai.goal.*
 import net.minecraft.entity.ai.pathing.AmphibiousSwimNavigation
 import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
+import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.mob.WaterCreatureEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.server.world.ServerWorld
+import net.minecraft.sound.SoundEvent
 import net.minecraft.world.World
 import java.util.*
 import kotlin.math.abs
@@ -26,7 +29,7 @@ class DucklingEntity(entityType: EntityType<out DucklingEntity>, world: World) :
     }
 
     override fun getWaterline(): Float {
-        return 0.2f
+        return 0.15f
     }
 
     override fun getLimitPerChunk(): Int {
@@ -92,6 +95,18 @@ class DucklingEntity(entityType: EntityType<out DucklingEntity>, world: World) :
                 this.discard()
             }
         }
+    }
+
+    override fun getAmbientSound(): SoundEvent {
+        return HybridBirdsSoundEvents.DUCKLING_AMBIENT
+    }
+
+    override fun getHurtSound(source: DamageSource): SoundEvent {
+        return HybridBirdsSoundEvents.DUCKLING_HURT
+    }
+
+    override fun getDeathSound(): SoundEvent {
+        return HybridBirdsSoundEvents.DUCKLING_DIE
     }
 
     companion object {

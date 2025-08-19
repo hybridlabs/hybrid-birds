@@ -38,7 +38,25 @@
   "duck_die": {
     "subtitle": "sounds.hybrid-birds.duck_die",
     "sounds": [
-      "hybrid-birds:duck_die"
+      "hybrid-birds:duckling_die"
+    ]
+  },
+  "duckling_ambient": {
+    "subtitle": "sounds.hybrid-birds.duckling_ambient",
+    "sounds": [
+      "hybrid-birds:duck_ambient"
+    ]
+  },
+  "duckling_hurt": {
+    "subtitle": "sounds.hybrid-birds.duckling_hurt",
+    "sounds": [
+      "hybrid-birds:duckling_hurt"
+    ]
+  },
+  "duckling_die": {
+    "subtitle": "sounds.hybrid-birds.duckling_die",
+    "sounds": [
+      "hybrid-birds:duckling_die"
     ]
   },
   "goose_ambient": {
@@ -57,6 +75,24 @@
     "subtitle": "sounds.hybrid-birds.goose_die",
     "sounds": [
       "hybrid-birds:goose_die"
+    ]
+  },
+  "gosling_ambient": {
+    "subtitle": "sounds.hybrid-birds.gosling_ambient",
+    "sounds": [
+      "hybrid-birds:gosling_ambient"
+    ]
+  },
+  "gosling_hurt": {
+    "subtitle": "sounds.hybrid-birds.gosling_hurt",
+    "sounds": [
+      "hybrid-birds:gosling_hurt"
+    ]
+  },
+  "gosling_die": {
+    "subtitle": "sounds.hybrid-birds.gosling_die",
+    "sounds": [
+      "hybrid-birds:gosling_die"
     ]
   },
   "swan_ambient": {

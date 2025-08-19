@@ -11,10 +11,16 @@ object HybridBirdsSoundEvents {
     val DUCK_AMBIENT = register("duck_ambient")
     val DUCK_HURT = register("duck_hurt")
     val DUCK_DIE = register("duck_die")
+    val DUCKLING_AMBIENT = register("duckling_ambient")
+    val DUCKLING_HURT = register("duckling_hurt")
+    val DUCKLING_DIE = register("duckling_die")
 
     val GOOSE_AMBIENT = register("goose_ambient")
     val GOOSE_HURT = register("goose_hurt")
     val GOOSE_DIE = register("goose_die")
+    val GOSLING_AMBIENT = register("gosling_ambient")
+    val GOSLING_HURT = register("gosling_hurt")
+    val GOSLING_DIE = register("gosling_die")
 
     val SWAN_AMBIENT = register("swan_ambient")
     val SWAN_HURT = register("swan_hurt")
