@@ -25,6 +25,9 @@ object HybridBirdsSoundEvents {
     val SWAN_AMBIENT = register("swan_ambient")
     val SWAN_HURT = register("swan_hurt")
     val SWAN_DIE = register("swan_die")
+    val CYGNET_AMBIENT = register("cygnet_ambient")
+    val CYGNET_HURT = register("cygnet_hurt")
+    val CYGNET_DIE = register("cygnet_die")
 
     val ROOSTER_CALL = register("rooster_call")
     val ROOSTER_AMBIENT = register("rooster_ambient")
@@ -34,10 +37,16 @@ object HybridBirdsSoundEvents {
     val TURKEY_AMBIENT = register("turkey_ambient")
     val TURKEY_HURT = register("turkey_hurt")
     val TURKEY_DIE = register("turkey_die")
+    val POULT_AMBIENT = register("poult_ambient")
+    val POULT_HURT = register("poult_hurt")
+    val POULT_DIE = register("poult_die")
 
     val PEACOCK_AMBIENT = register("peacock_ambient")
     val PEACOCK_HURT = register("peacock_hurt")
     val PEACOCK_DIE = register("peacock_die")
+    val PEACHICK_AMBIENT = register("peachick_ambient")
+    val PEACHICK_HURT = register("peachick_hurt")
+    val PEACHICK_DIE = register("peachick_die")
 
     private fun register(id: String): SoundEvent {
         val identifier = Identifier(HybridBirds.MOD_ID, id)
