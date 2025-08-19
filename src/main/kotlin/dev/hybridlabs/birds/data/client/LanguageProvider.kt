@@ -1,6 +1,7 @@
 package dev.hybridlabs.birds.data.client
 
 import dev.hybridlabs.birds.data.HybridBirdsDataGenerator.filterHybridBirds
+import dev.hybridlabs.birds.effect.HybridBirdsStatusEffects
 import dev.hybridlabs.birds.entity.HybridBirdsEntityTypes
 import dev.hybridlabs.birds.item.HybridBirdsItemGroups
 import dev.hybridlabs.birds.item.HybridBirdsItems
@@ -36,6 +37,14 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridBirdsItems.COOKED_TURKEY to "Cooked Turkey",
             HybridBirdsItems.COOKED_TURDUCKEN to "Cooked Turducken",
         ).forEach(builder::add)
+
+        mapOf(
+            HybridBirdsStatusEffects.ROOSTERS_CALLING to "Roosters Calling"
+        ).forEach { (effect, translation) ->
+            val identifier = Registries.STATUS_EFFECT.getId(effect)
+            builder.add("effect.${identifier?.namespace}.${identifier?.path}", translation)
+        }
+
     }
 
     private fun generateEntities(builder: TranslationBuilder) {
