@@ -34,21 +34,6 @@
 				}
 			}
 		},
-		"misc.flap": {
-			"loop": true,
-			"bones": {
-				"right_wing": {
-					"rotation": {
-						"vector": [85, 0, "-90+math.sin(query.anim_time*180*3-120)*25"]
-					}
-				},
-				"left_wing": {
-					"rotation": {
-						"vector": [85, 0, "90+math.sin(query.anim_time*180*3-120)*-25"]
-					}
-				}
-			}
-		},
 		"move.walk": {
 			"loop": true,
 			"animation_length": 2,
