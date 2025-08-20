@@ -17,14 +17,13 @@ import net.minecraft.registry.Registry
 import net.minecraft.util.Identifier
 
 object HybridBirdsItems {
-    val DUCK_SPAWN_EGG = registerSpawnEgg("duck_spawn_egg", HybridBirdsEntityTypes.DUCK, 0x1a854b, 0x662d44)
-    val GOOSE_SPAWN_EGG = registerSpawnEgg("goose_spawn_egg", HybridBirdsEntityTypes.GOOSE, 0x3e312f, 0xdcdce7)
+    val DUCK_SPAWN_EGG = registerSpawnEgg("duck_spawn_egg", HybridBirdsEntityTypes.DUCK, 0xcfb99a, 0x4c2239)
+    val GOOSE_SPAWN_EGG = registerSpawnEgg("goose_spawn_egg", HybridBirdsEntityTypes.GOOSE, 0xdcdce7, 0x3e312f)
     val SWAN_SPAWN_EGG = registerSpawnEgg("swan_spawn_egg", HybridBirdsEntityTypes.SWAN, 0xdcdce7, 0x272736)
-    val ROOSTER_SPAWN_EGG = registerSpawnEgg("rooster_spawn_egg", HybridBirdsEntityTypes.ROOSTER, 0xa6555f, 0xa32858)
-    val TURKEY_SPAWN_EGG = registerSpawnEgg("turkey_spawn_egg", HybridBirdsEntityTypes.TURKEY, 0x4b5bab, 0xbd4882)
-    val PEACOCK_SPAWN_EGG = registerSpawnEgg("peacock_spawn_egg", HybridBirdsEntityTypes.PEACOCK, 0x25634c, 0x011ab2)
-    val GUINEA_FOWL_SPAWN_EGG =
-        registerSpawnEgg("guinea_fowl_spawn_egg", HybridBirdsEntityTypes.GUINEA_FOWL, 0x356b97, 0x252533)
+    val ROOSTER_SPAWN_EGG = registerSpawnEgg("rooster_spawn_egg", HybridBirdsEntityTypes.ROOSTER, 0xa6555f, 0x603d68)
+    val TURKEY_SPAWN_EGG = registerSpawnEgg("turkey_spawn_egg", HybridBirdsEntityTypes.TURKEY, 0x2c283c, 0xcc4468)
+    val PEACOCK_SPAWN_EGG = registerSpawnEgg("peacock_spawn_egg", HybridBirdsEntityTypes.PEACOCK, 0x3faa73, 0x010c86)
+    val GUINEA_FOWL_SPAWN_EGG = registerSpawnEgg("guinea_fowl_spawn_egg", HybridBirdsEntityTypes.GUINEA_FOWL, 0x356b97, 0x252533)
 
     val DUCK_EGG = registerEgg("duck_egg", HybridBirdsEntityTypes.DUCKLING)
     val GOOSE_EGG = registerEgg("goose_egg", HybridBirdsEntityTypes.GOSLING)
