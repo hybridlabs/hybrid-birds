@@ -57,10 +57,10 @@
     "accessWidener": "hybrid-birds.accesswidener",
 
     "depends": {
-        "minecraft": "~1.21",
+        "minecraft": "~1.21.4",
         "java": ">=17",
         "fabric-language-kotlin": "*",
-        "fabric-api": ">=0.92",
-        "geckolib": ">=4.4"
+        "fabric-api": ">=0.119.4",
+        "geckolib": ">=4.8.5"
     }
 }
