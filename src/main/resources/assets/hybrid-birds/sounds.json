@@ -23,6 +23,24 @@
       "hybrid-birds:rooster_die"
     ]
   },
+  "chick_ambient": {
+    "subtitle": "sounds.hybrid-birds.chick_ambient",
+    "sounds": [
+      "hybrid-birds:chick_ambient"
+    ]
+  },
+  "chick_hurt": {
+    "subtitle": "sounds.hybrid-birds.chick_hurt",
+    "sounds": [
+      "hybrid-birds:chick_hurt"
+    ]
+  },
+  "chick_die": {
+    "subtitle": "sounds.hybrid-birds.chick_die",
+    "sounds": [
+      "hybrid-birds:chick_die"
+    ]
+  },
   "duck_ambient": {
     "subtitle": "sounds.hybrid-birds.duck_ambient",
     "sounds": [

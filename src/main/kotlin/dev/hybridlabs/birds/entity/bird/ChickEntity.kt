@@ -1,6 +1,7 @@
 package dev.hybridlabs.birds.entity.bird
 
 import dev.hybridlabs.birds.entity.HybridBirdsEntityTypes
+import dev.hybridlabs.birds.sound.HybridBirdsSoundEvents
 import net.minecraft.entity.EntityData
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.SpawnReason
@@ -15,6 +16,7 @@ import net.minecraft.entity.ai.goal.WanderAroundGoal
 import net.minecraft.entity.ai.pathing.EntityNavigation
 import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
+import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.mob.WaterCreatureEntity
 import net.minecraft.entity.passive.ChickenEntity
 import net.minecraft.entity.player.PlayerEntity
@@ -22,6 +24,7 @@ import net.minecraft.nbt.NbtCompound
 import net.minecraft.recipe.Ingredient
 import net.minecraft.registry.tag.ItemTags
 import net.minecraft.server.world.ServerWorld
+import net.minecraft.sound.SoundEvent
 import net.minecraft.world.World
 import java.util.EnumSet
 import kotlin.math.abs
@@ -102,6 +105,18 @@ class ChickEntity(entityType: EntityType<out ChickEntity>, world: World) :
                 this.discard()
             }
         }
+    }
+
+    override fun getAmbientSound(): SoundEvent {
+        return HybridBirdsSoundEvents.CHICK_AMBIENT
+    }
+
+    override fun getHurtSound(source: DamageSource): SoundEvent {
+        return HybridBirdsSoundEvents.CHICK_HURT
+    }
+
+    override fun getDeathSound(): SoundEvent {
+        return HybridBirdsSoundEvents.CHICK_DIE
     }
 
     companion object {
