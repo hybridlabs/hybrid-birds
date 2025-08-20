@@ -48,6 +48,6 @@ object  HybridBirdsItemGroups {
     )
 
     private fun register(id: String, itemGroup: ItemGroup): ItemGroup {
-        return Registry.register(Registries.ITEM_GROUP, Identifier(HybridBirds.MOD_ID, id), itemGroup)
+        return Registry.register(Registries.ITEM_GROUP, Identifier.of(HybridBirds.MOD_ID, id), itemGroup)
     }
 }

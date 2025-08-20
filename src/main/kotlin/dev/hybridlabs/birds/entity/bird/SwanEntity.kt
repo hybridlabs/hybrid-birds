@@ -72,7 +72,7 @@ class SwanEntity(entityType: EntityType<out SwanEntity>, world: World) :
         return HybridBirdsSoundEvents.SWAN_DIE
     }
 
-    override fun isBreedingItem(stack: ItemStack?): Boolean {
+    override fun isBreedingItem(stack: ItemStack): Boolean {
         return BREEDING_INGREDIENT.test(stack)
     }
 

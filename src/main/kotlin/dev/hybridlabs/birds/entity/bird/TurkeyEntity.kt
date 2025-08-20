@@ -19,15 +19,17 @@ import net.minecraft.entity.passive.PassiveEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
+import net.minecraft.loot.LootTable
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.recipe.Ingredient
+import net.minecraft.registry.RegistryKey
+import net.minecraft.registry.RegistryKeys
 import net.minecraft.registry.tag.ItemTags
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.util.ActionResult
 import net.minecraft.util.Hand
-import net.minecraft.util.Identifier
 import net.minecraft.world.World
 import net.minecraft.world.event.GameEvent
 
@@ -46,13 +48,14 @@ class TurkeyEntity(entityType: EntityType<out TurkeyEntity>, world: World) :
         return 2
     }
 
-    override fun getLootTableId(): Identifier {
-        return when (getStuffingLevel()) {
+    override fun getLootTableId(): RegistryKey<LootTable> {
+        val id = when (getStuffingLevel()) {
+            0 -> HybridBirdsLootTables.TURKEY
             1 -> HybridBirdsLootTables.TURKEY_FAT
             2 -> HybridBirdsLootTables.TURKEY_STUFFED
-            else ->
-                return super.getLootTableId()
+            else -> HybridBirdsLootTables.TURKEY
         }
+        return RegistryKey.of(RegistryKeys.LOOT_TABLE, id)
     }
 
     override fun initGoals() {
@@ -121,9 +124,9 @@ class TurkeyEntity(entityType: EntityType<out TurkeyEntity>, world: World) :
     }
 
 
-    override fun initDataTracker() {
-        super.initDataTracker()
-        dataTracker.startTracking(STUFFING_LEVEL, 0)
+    override fun initDataTracker(builder: DataTracker.Builder) {
+        super.initDataTracker(builder)
+        builder.add(STUFFING_LEVEL, 0)
     }
 
     override fun writeCustomDataToNbt(nbt: NbtCompound) {
@@ -152,7 +155,7 @@ class TurkeyEntity(entityType: EntityType<out TurkeyEntity>, world: World) :
 
     // endregion
 
-    override fun isBreedingItem(stack: ItemStack?): Boolean {
+    override fun isBreedingItem(stack: ItemStack): Boolean {
         return BREEDING_INGREDIENT.test(stack)
     }
 

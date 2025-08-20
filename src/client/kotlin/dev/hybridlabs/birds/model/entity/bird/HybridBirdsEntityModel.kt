@@ -4,21 +4,21 @@ import dev.hybridlabs.birds.HybridBirds
 import dev.hybridlabs.birds.entity.bird.HybridBirdsBirdEntity
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.MathHelper
+import software.bernie.geckolib.animation.AnimationState
 import software.bernie.geckolib.constant.DataTickets
-import software.bernie.geckolib.core.animation.AnimationState
 import software.bernie.geckolib.model.GeoModel
 
 abstract class HybridBirdsEntityModel<T: HybridBirdsBirdEntity> (private val id: String) : GeoModel<T>() {
     override fun getModelResource(animatable: T): Identifier {
-        return Identifier(HybridBirds.MOD_ID, "geo/$id.geo.json")
+        return Identifier.of(HybridBirds.MOD_ID, "geo/$id.geo.json")
     }
 
     override fun getTextureResource(animatable: T): Identifier {
-        return Identifier(HybridBirds.MOD_ID, "textures/entity/$id.png")
+        return Identifier.of(HybridBirds.MOD_ID, "textures/entity/$id.png")
     }
 
     override fun getAnimationResource(animatable: T): Identifier {
-        return Identifier(HybridBirds.MOD_ID, "animations/$id.animation.json")
+        return Identifier.of(HybridBirds.MOD_ID, "animations/$id.animation.json")
     }
 
     override fun setCustomAnimations(animatable: T, instanceId: Long, animationState: AnimationState<T>) {

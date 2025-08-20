@@ -15,6 +15,6 @@ object HybridBirdsBiomeTags {
     val TURKEY_SPAWN_BIOMES = create("turkey_spawn_biomes")
 
     private fun create(id: String): TagKey<Biome> {
-        return TagKey.of(RegistryKeys.BIOME, Identifier(HybridBirds.MOD_ID, id))
+        return TagKey.of(RegistryKeys.BIOME, Identifier.of(HybridBirds.MOD_ID, id))
     }
 }

@@ -104,21 +104,21 @@ class RoosterEntity(entityType: EntityType<out RoosterEntity>, world: World) :
         val timeOfDay = world.timeOfDay % 24000L
         if (timeOfDay in 0..5 && !hasCalled) {
             this.playSound(HybridBirdsSoundEvents.ROOSTER_CALL, 1.0F, 1.0F)
-            applySpeedEffectToNearbyPlayers()
+            applyRoostersCallingToNearbyPlayers()
             hasCalled = true
         } else if (timeOfDay !in 0..5) {
             hasCalled = false
         }
     }
 
-    private fun applySpeedEffectToNearbyPlayers() {
+    private fun applyRoostersCallingToNearbyPlayers() {
         val effectRadius = 32.0
-        val speedEffect = StatusEffectInstance(HybridBirdsStatusEffects.ROOSTERS_CALLING, 6000, 0)
+        val roostersCallingEffect = StatusEffectInstance(HybridBirdsStatusEffects.ROOSTERS_CALLING, 6000, 0)
 
         val players = world.players
         for (player in players) {
             if (this.squaredDistanceTo(player) <= effectRadius * effectRadius) {
-                player.addStatusEffect(speedEffect)
+                player.addStatusEffect(roostersCallingEffect)
             }
         }
     }

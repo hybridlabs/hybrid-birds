@@ -1,9 +1,6 @@
 package dev.hybridlabs.birds.block
 
-import net.minecraft.block.Block
-import net.minecraft.block.BlockState
-import net.minecraft.block.Blocks
-import net.minecraft.block.ShapeContext
+import net.minecraft.block.*
 import net.minecraft.entity.ai.pathing.NavigationType
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.sound.SoundCategory
@@ -23,7 +20,7 @@ import net.minecraft.world.WorldAccess
 import net.minecraft.world.WorldView
 import net.minecraft.world.event.GameEvent
 
-@Suppress("OVERRIDE_DEPRECATION", "DEPRECATION")
+@Suppress("DEPRECATION")
 class TurduckenBlock(settings: Settings) : Block(settings) {
     override fun getOutlineShape(
         state: BlockState,
@@ -39,17 +36,14 @@ class TurduckenBlock(settings: Settings) : Block(settings) {
         world: World,
         pos: BlockPos,
         player: PlayerEntity,
-        hand: Hand,
         hit: BlockHitResult
     ): ActionResult {
-        val itemStack = player.getStackInHand(hand)
-        itemStack.item
         if (world.isClient) {
             if (tryEat(world, pos, state, player).isAccepted) {
                 return ActionResult.SUCCESS
             }
 
-            if (itemStack.isEmpty) {
+            if (player.getStackInHand(Hand.MAIN_HAND).isEmpty) {
                 return ActionResult.CONSUME
             }
         }
@@ -95,7 +89,7 @@ class TurduckenBlock(settings: Settings) : Block(settings) {
         return true
     }
 
-    override fun canPathfindThrough(state: BlockState, world: BlockView, pos: BlockPos, type: NavigationType): Boolean {
+    override fun canPathfindThrough(state: BlockState?, type: NavigationType?): Boolean {
         return false
     }
 

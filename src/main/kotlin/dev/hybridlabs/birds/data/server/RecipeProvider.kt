@@ -6,20 +6,22 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider
 import net.minecraft.advancement.criterion.InventoryChangedCriterion
 import net.minecraft.data.server.recipe.CookingRecipeJsonBuilder
-import net.minecraft.data.server.recipe.RecipeJsonProvider
+import net.minecraft.data.server.recipe.RecipeExporter
 import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder
 import net.minecraft.item.Item
 import net.minecraft.item.Items
 import net.minecraft.predicate.item.ItemPredicate
-import net.minecraft.recipe.AbstractCookingRecipe
-import net.minecraft.recipe.Ingredient
-import net.minecraft.recipe.RecipeSerializer
+import net.minecraft.recipe.*
 import net.minecraft.recipe.book.RecipeCategory
+import net.minecraft.registry.RegistryWrapper
 import net.minecraft.registry.tag.TagKey
-import java.util.function.Consumer
+import java.util.concurrent.CompletableFuture
 
-class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
-    override fun generate(exporter: Consumer<RecipeJsonProvider>) {
+class RecipeProvider(
+    output: FabricDataOutput,
+    registriesFuture: CompletableFuture<RegistryWrapper.WrapperLookup>?
+) : FabricRecipeProvider(output, registriesFuture) {
+    override fun generate(exporter: RecipeExporter) {
         // misc recipes
         ShapelessRecipeJsonBuilder.create(RecipeCategory.FOOD, HybridBirdsItems.TURDUCKEN, 1)
             .input(HybridBirdsItems.TURKEY)
@@ -39,38 +41,39 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
     }
 
     private fun offerCookingRecipes(
-        exporter: Consumer<RecipeJsonProvider>,
+        exporter: RecipeExporter,
         input: Item,
         output: Item,
         experience: Float
     ) {
-        offerFoodCookingRecipe(exporter, "smelting", RecipeSerializer.SMELTING, 200, input, output, experience)
-        offerFoodCookingRecipe(exporter, "smoking", RecipeSerializer.SMOKING, 100, input, output, experience)
-        offerFoodCookingRecipe(exporter, "campfire_cooking", RecipeSerializer.CAMPFIRE_COOKING, 600, input, output, experience)
+        offerFoodCookingRecipe(exporter, "smelting", RecipeSerializer.SMELTING, ::SmeltingRecipe, 200, input, output, experience)
+        offerFoodCookingRecipe(exporter, "smoking", RecipeSerializer.SMOKING, ::SmokingRecipe, 100, input, output, experience)
+        offerFoodCookingRecipe(exporter, "campfire_cooking", RecipeSerializer.CAMPFIRE_COOKING, ::CampfireCookingRecipe, 600, input, output, experience)
     }
 
     private fun offerEggCookingRecipes(
-        exporter: Consumer<RecipeJsonProvider>,
+        exporter: RecipeExporter,
         inputTag: TagKey<Item>,
         output: Item,
         experience: Float
     ) {
-        offerEggCookingRecipe(exporter, "smelting", RecipeSerializer.SMELTING, 200, inputTag, output, experience)
-        offerEggCookingRecipe(exporter, "smoking", RecipeSerializer.SMOKING, 100, inputTag, output, experience)
-        offerEggCookingRecipe(exporter, "campfire_cooking", RecipeSerializer.CAMPFIRE_COOKING, 600, inputTag, output, experience)
+        offerEggCookingRecipe(exporter, "smelting", RecipeSerializer.SMELTING, ::SmeltingRecipe, 200, inputTag, output, experience)
+        offerEggCookingRecipe(exporter, "smoking", RecipeSerializer.SMOKING, ::SmokingRecipe, 100, inputTag, output, experience)
+        offerEggCookingRecipe(exporter, "campfire_cooking", RecipeSerializer.CAMPFIRE_COOKING, ::CampfireCookingRecipe, 600, inputTag, output, experience)
     }
 
-    private fun offerEggCookingRecipe(
-        exporter: Consumer<RecipeJsonProvider>,
+    private fun <T : AbstractCookingRecipe> offerEggCookingRecipe(
+        exporter: RecipeExporter,
         cooker: String,
-        serializer: RecipeSerializer<out AbstractCookingRecipe>,
+        serializer: RecipeSerializer<T>,
+        recipeFactory: AbstractCookingRecipe.RecipeFactory<T>,
         cookingTime: Int,
         inputTag: TagKey<Item>,
         output: Item,
         experience: Float
     ) {
         val builder = CookingRecipeJsonBuilder
-            .create(Ingredient.fromTag(inputTag), RecipeCategory.FOOD, output, experience, cookingTime, serializer)
+            .create(Ingredient.fromTag(inputTag), RecipeCategory.FOOD, output, experience, cookingTime, serializer, recipeFactory)
             .criterion("has_egg", conditionsFromTag(inputTag))
 
         val recipeId = getItemPath(output) + "_from_" + cooker

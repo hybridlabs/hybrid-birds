@@ -11,9 +11,14 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.mob.MobEntity
 import net.minecraft.registry.Registries
+import net.minecraft.registry.RegistryWrapper
+import java.util.concurrent.CompletableFuture
 
-class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output) {
-    override fun generateTranslations(builder: TranslationBuilder) {
+class LanguageProvider(
+    output: FabricDataOutput,
+    registryLookup: CompletableFuture<RegistryWrapper.WrapperLookup>
+) : FabricLanguageProvider(output, registryLookup) {
+    override fun generateTranslations(p0: RegistryWrapper.WrapperLookup, builder: TranslationBuilder) {
         builder.add(
             Registries.ITEM_GROUP.getKey(HybridBirdsItemGroups.HYBRID_BIRDS)
                 .orElseThrow { IllegalStateException("Item group not registered") }, "Hybrid Birds"
@@ -46,11 +51,11 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
 
         mapOf(
             HybridBirdsStatusEffects.ROOSTERS_CALLING to "Roosters Calling"
-        ).forEach { (effect, translation) ->
-            val identifier = Registries.STATUS_EFFECT.getId(effect)
+        ).forEach { (statusEffectEntry, translation) ->
+            val statusEffect = statusEffectEntry.value()
+            val identifier = Registries.STATUS_EFFECT.getId(statusEffect)
             builder.add("effect.${identifier?.namespace}.${identifier?.path}", translation)
         }
-
     }
 
     private fun generateEntities(builder: TranslationBuilder) {

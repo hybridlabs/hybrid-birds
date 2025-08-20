@@ -1,8 +1,6 @@
 package dev.hybridlabs.birds.entity.bird
 
-import net.minecraft.block.BlockState
-import net.minecraft.entity.EntityDimensions
-import net.minecraft.entity.EntityPose
+ import net.minecraft.block.BlockState
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.SpawnReason
 import net.minecraft.entity.ai.control.MoveControl
@@ -10,7 +8,8 @@ import net.minecraft.entity.ai.pathing.MobNavigation
 import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.passive.AnimalEntity
 import net.minecraft.entity.passive.PassiveEntity
-import net.minecraft.registry.tag.FluidTags
+ import net.minecraft.item.ItemStack
+ import net.minecraft.registry.tag.FluidTags
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
@@ -20,12 +19,12 @@ import net.minecraft.util.math.random.Random
 import net.minecraft.world.World
 import net.minecraft.world.WorldAccess
 import software.bernie.geckolib.animatable.GeoEntity
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache
+import software.bernie.geckolib.animation.AnimatableManager
+import software.bernie.geckolib.animation.AnimationController
+import software.bernie.geckolib.animation.AnimationState
+import software.bernie.geckolib.animation.RawAnimation
 import software.bernie.geckolib.constant.DefaultAnimations
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.core.animation.AnimatableManager
-import software.bernie.geckolib.core.animation.AnimationController
-import software.bernie.geckolib.core.animation.AnimationState
-import software.bernie.geckolib.core.animation.RawAnimation
 import software.bernie.geckolib.util.GeckoLibUtil
 
 
@@ -42,6 +41,10 @@ open class HybridBirdsBirdEntity(
 
     override fun createChild(world: ServerWorld, entity: PassiveEntity): PassiveEntity? {
         return null
+    }
+
+    override fun isBreedingItem(stack: ItemStack): Boolean {
+        return false
     }
 
     init {
@@ -75,10 +78,6 @@ open class HybridBirdsBirdEntity(
 
     override fun getAnimatableInstanceCache(): AnimatableInstanceCache {
         return factory
-    }
-
-    override fun getActiveEyeHeight(pose: EntityPose, dimensions: EntityDimensions): Float {
-        return dimensions.height * 0.85f
     }
 
     override fun canImmediatelyDespawn(distanceSquared: Double): Boolean {

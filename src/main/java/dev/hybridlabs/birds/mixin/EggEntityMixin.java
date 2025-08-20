@@ -52,7 +52,7 @@ public abstract class EggEntityMixin extends ThrownItemEntity {
 
     @Unique
     private EntityType<?> getTypeForChild() {
-        ItemStack stack = this.getItem();
+        ItemStack stack = this.getStack();
         if (stack.getItem() instanceof CustomEggItem eggItem) {
             return eggItem.getType();
         }

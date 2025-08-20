@@ -77,7 +77,7 @@ class DuckEntity(entityType: EntityType<out DuckEntity>, world: World) :
         return HybridBirdsSoundEvents.DUCK_DIE
     }
 
-    override fun isBreedingItem(stack: ItemStack?): Boolean {
+    override fun isBreedingItem(stack: ItemStack): Boolean {
         return BREEDING_INGREDIENT.test(stack)
     }
 

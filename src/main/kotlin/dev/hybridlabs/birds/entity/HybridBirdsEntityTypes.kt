@@ -167,6 +167,6 @@ object HybridBirdsEntityTypes {
      * Registers an entity type to the entity type registry.
      */
     private fun <T : Entity> register(id: String, entity: EntityType<T>): EntityType<T> {
-        return Registry.register(Registries.ENTITY_TYPE, Identifier(HybridBirds.MOD_ID, id), entity)
+        return Registry.register(Registries.ENTITY_TYPE, Identifier.of(HybridBirds.MOD_ID, id), entity)
     }
 }

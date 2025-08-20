@@ -5,11 +5,10 @@ package dev.hybridlabs.birds.item
 import dev.hybridlabs.birds.HybridBirds
 import dev.hybridlabs.birds.block.HybridBirdsBlocks
 import dev.hybridlabs.birds.entity.HybridBirdsEntityTypes
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings
+import net.minecraft.component.type.FoodComponent
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.mob.MobEntity
 import net.minecraft.item.BlockItem
-import net.minecraft.item.FoodComponent
 import net.minecraft.item.Item
 import net.minecraft.item.SpawnEggItem
 import net.minecraft.registry.Registries
@@ -34,11 +33,10 @@ object HybridBirdsItems {
 
     val COOKED_EGG = register(
         "cooked_egg", Item(
-            FabricItemSettings().food(
+            Item.Settings().food(
                 FoodComponent.Builder()
-                    .hunger(4)
+                    .nutrition(4)
                     .saturationModifier(0.4F)
-                    .meat()
                     .snack()
                     .build()
             )
@@ -47,22 +45,20 @@ object HybridBirdsItems {
 
     val DUCK = register(
         "duck", Item(
-            FabricItemSettings().food(
+            Item.Settings().food(
                 FoodComponent.Builder()
-                    .hunger(2)
-                    .saturationModifier(0.3F)
-                    .meat().build()
+                    .nutrition(2)
+                    .saturationModifier(0.3F).build()
             )
         )
     )
 
     val GOOSE = register(
         "goose", Item(
-            FabricItemSettings().food(
+            Item.Settings().food(
                 FoodComponent.Builder()
-                    .hunger(3)
+                    .nutrition(3)
                     .saturationModifier(0.4F)
-                    .meat()
                     .build()
             )
         )
@@ -70,11 +66,10 @@ object HybridBirdsItems {
 
     val TURKEY = register(
         "turkey", Item(
-            FabricItemSettings().food(
+            Item.Settings().food(
                 FoodComponent.Builder()
-                    .hunger(4)
+                    .nutrition(4)
                     .saturationModifier(0.4F)
-                    .meat()
                     .build()
             )
         )
@@ -82,11 +77,10 @@ object HybridBirdsItems {
 
     val TURDUCKEN = register(
         "turducken", Item(
-            FabricItemSettings().food(
+            Item.Settings().food(
                 FoodComponent.Builder()
-                    .hunger(5)
+                    .nutrition(5)
                     .saturationModifier(0.6F)
-                    .meat()
                     .build()
             )
         )
@@ -94,11 +88,10 @@ object HybridBirdsItems {
 
     val COOKED_DUCK = register(
         "cooked_duck", Item(
-            FabricItemSettings().food(
+            Item.Settings().food(
                 FoodComponent.Builder()
-                    .hunger(6)
+                    .nutrition(6)
                     .saturationModifier(0.6F)
-                    .meat()
                     .build()
             )
         )
@@ -106,11 +99,10 @@ object HybridBirdsItems {
 
     val COOKED_GOOSE = register(
         "cooked_goose", Item(
-            FabricItemSettings().food(
+            Item.Settings().food(
                 FoodComponent.Builder()
-                    .hunger(7)
+                    .nutrition(7)
                     .saturationModifier(0.6F)
-                    .meat()
                     .build()
             )
         )
@@ -118,11 +110,10 @@ object HybridBirdsItems {
 
     val COOKED_TURKEY = register(
         "cooked_turkey", Item(
-            FabricItemSettings().food(
+            Item.Settings().food(
                 FoodComponent.Builder()
-                    .hunger(8)
+                    .nutrition(8)
                     .saturationModifier(0.8F)
-                    .meat()
                     .build()
             )
         )
@@ -131,19 +122,18 @@ object HybridBirdsItems {
     val COOKED_TURDUCKEN = register(
         "cooked_turducken", BlockItem(
             HybridBirdsBlocks.TURDUCKEN,
-            FabricItemSettings()
+            Item.Settings()
                 .food(
                 FoodComponent.Builder()
-                    .hunger(12)
+                    .nutrition(12)
                     .saturationModifier(1.0F)
-                    .meat()
                     .build()
             )
         )
     )
 
     private fun <T : Item> register(id: String, item: T): T {
-        return Registry.register(Registries.ITEM, Identifier(HybridBirds.MOD_ID, id), item)
+        return Registry.register(Registries.ITEM, Identifier.of(HybridBirds.MOD_ID, id), item)
     }
 
     private fun <T : MobEntity> registerSpawnEgg(
@@ -152,10 +142,10 @@ object HybridBirdsItems {
         primaryColor: Int,
         secondaryColor: Int
     ): Item {
-        return register(id, SpawnEggItem(type, primaryColor, secondaryColor, FabricItemSettings()))
+        return register(id, SpawnEggItem(type, primaryColor, secondaryColor, Item.Settings()))
     }
 
     private fun registerEgg(id: String, type: EntityType<*>): CustomEggItem {
-        return register(id, CustomEggItem(FabricItemSettings().maxCount(16), type))
+        return register(id, CustomEggItem(Item.Settings().maxCount(16), type))
     }
 }

@@ -2,6 +2,8 @@ package dev.hybridlabs.birds.entity
 
 import dev.hybridlabs.birds.entity.bird.HybridBirdsBirdEntity
 import net.minecraft.entity.EntityType
+import net.minecraft.entity.SpawnLocation
+import net.minecraft.entity.SpawnLocationTypes
 import net.minecraft.entity.SpawnRestriction
 import net.minecraft.entity.SpawnRestriction.SpawnPredicate
 import net.minecraft.entity.mob.MobEntity
@@ -45,7 +47,7 @@ object SpawnRestrictionRegistry {
     private fun <T : AnimalEntity> registerBirdEntity(entityType: EntityType<T>, predicate: SpawnPredicate<T>) {
         register(
             entityType,
-            SpawnRestriction.Location.ON_GROUND,
+            SpawnLocationTypes.ON_GROUND,
             predicate
         )
     }
@@ -53,12 +55,12 @@ object SpawnRestrictionRegistry {
     private fun <T : AnimalEntity> registerAquaticBirdEntity(entityType: EntityType<T>, predicate: SpawnPredicate<T>) {
         register(
             entityType,
-            SpawnRestriction.Location.NO_RESTRICTIONS,
+            SpawnLocationTypes.UNRESTRICTED,
             predicate
         )
     }
 
-    private fun <T : MobEntity> register(entityType: EntityType<T>, location: SpawnRestriction.Location, predicate: SpawnPredicate<T>) {
+    private fun <T : MobEntity> register(entityType: EntityType<T>, location: SpawnLocation, predicate: SpawnPredicate<T>) {
         SpawnRestriction.register(entityType, location, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, predicate)
     }
 }

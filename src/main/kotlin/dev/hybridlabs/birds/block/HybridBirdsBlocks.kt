@@ -24,6 +24,6 @@ object HybridBirdsBlocks {
     )
 
     private fun register(id: String, block: Block): Block {
-        return Registry.register(Registries.BLOCK, Identifier(HybridBirds.MOD_ID, id), block)
+        return Registry.register(Registries.BLOCK, Identifier.of(HybridBirds.MOD_ID, id), block)
     }
 }

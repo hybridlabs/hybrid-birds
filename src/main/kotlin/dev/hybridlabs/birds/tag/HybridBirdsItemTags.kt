@@ -14,10 +14,6 @@ object HybridBirdsItemTags {
     val EGGS = create("eggs")
 
     private fun create(id: String): TagKey<Item> {
-        return TagKey.of(RegistryKeys.ITEM, Identifier(HybridBirds.MOD_ID, id))
-    }
-
-    private fun createConventional(id: String): TagKey<Item> {
-        return TagRegistration.ITEM_TAG_REGISTRATION.registerCommon(id)
+        return TagKey.of(RegistryKeys.ITEM, Identifier.of(HybridBirds.MOD_ID, id))
     }
 }

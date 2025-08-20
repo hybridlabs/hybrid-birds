@@ -21,11 +21,11 @@ import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.world.World
 import net.minecraft.world.event.GameEvent
+import software.bernie.geckolib.animation.AnimatableManager
+import software.bernie.geckolib.animation.AnimationController
+import software.bernie.geckolib.animation.AnimationState
+import software.bernie.geckolib.animation.RawAnimation
 import software.bernie.geckolib.constant.DefaultAnimations
-import software.bernie.geckolib.core.animation.AnimatableManager
-import software.bernie.geckolib.core.animation.AnimationController
-import software.bernie.geckolib.core.animation.AnimationState
-import software.bernie.geckolib.core.animation.RawAnimation
 
 class PeacockEntity(entityType: EntityType<out PeacockEntity>, world: World) :
     HybridBirdsBirdEntity(entityType, world, false) {
@@ -119,7 +119,7 @@ class PeacockEntity(entityType: EntityType<out PeacockEntity>, world: World) :
         return HybridBirdsSoundEvents.PEACOCK_DIE
     }
 
-    override fun isBreedingItem(stack: ItemStack?): Boolean {
+    override fun isBreedingItem(stack: ItemStack): Boolean {
         return BREEDING_INGREDIENT.test(stack)
     }
 

@@ -80,8 +80,7 @@ class PoultEntity(entityType: EntityType<out PoultEntity>, world: World) :
                     var2,
                     world.getLocalDifficulty(grownEntity.blockPos),
                     SpawnReason.CONVERSION,
-                    null as EntityData?,
-                    null as NbtCompound?
+                    null as EntityData?
                 )
                 grownEntity.isAiDisabled = this.isAiDisabled
                 if (this.hasCustomName()) {

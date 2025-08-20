@@ -12,12 +12,15 @@ import net.minecraft.loot.context.LootContextTypes
 import net.minecraft.loot.entry.ItemEntry
 import net.minecraft.loot.function.SetCountLootFunction
 import net.minecraft.loot.provider.number.UniformLootNumberProvider
+import net.minecraft.registry.RegistryKey
+import net.minecraft.registry.RegistryWrapper
 import net.minecraft.util.Identifier
+import java.util.concurrent.CompletableFuture
 import java.util.function.BiConsumer
 
-class EntityTypeLootTableProvider(output: FabricDataOutput) :
-    SimpleFabricLootTableProvider(output, LootContextTypes.ENTITY) {
-    override fun accept(exporter: BiConsumer<Identifier, LootTable.Builder>) {
+class EntityTypeLootTableProvider(output: FabricDataOutput, lookup: CompletableFuture<RegistryWrapper.WrapperLookup>) :
+    SimpleFabricLootTableProvider(output, lookup, LootContextTypes.ENTITY) {
+    override fun accept(exporter: BiConsumer<RegistryKey<LootTable>, LootTable.Builder>) {
         export(exporter, HybridBirdsEntityTypes.ROOSTER) {
             pool(
                 LootPool.builder()
@@ -123,7 +126,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
      * Exports a loot table for [entityType] to [exporter] using its loot table id.
      */
     private fun export(
-        exporter: BiConsumer<Identifier, LootTable.Builder>,
+        exporter: BiConsumer<RegistryKey<LootTable>, LootTable.Builder>,
         entityType: EntityType<*>,
         builder: LootTable.Builder.() -> Unit
     ) {

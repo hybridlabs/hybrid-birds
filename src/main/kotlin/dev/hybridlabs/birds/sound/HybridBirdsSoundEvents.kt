@@ -53,7 +53,7 @@ object HybridBirdsSoundEvents {
     val PEACHICK_DIE = register("peachick_die")
 
     private fun register(id: String): SoundEvent {
-        val identifier = Identifier(HybridBirds.MOD_ID, id)
+        val identifier = Identifier.of(HybridBirds.MOD_ID, id)
         return Registry.register(Registries.SOUND_EVENT, identifier, SoundEvent.of(identifier))
     }
 }
