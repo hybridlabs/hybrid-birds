@@ -4,14 +4,13 @@
     "version": "${version}",
 
     "name": "Hybrid Birds",
-    "description": "A mod that enhances adds new birds and improves upon existing ones",
+    "description": "A mod that adds new birds and improves upon existing ones",
 
     "authors": [
         "MysticKoko",
         "Aqua",
         "Andante",
-        "Ragno",
-        "dragoncommads"
+        "Eggo"
     ],
 
     "contact": {
@@ -19,7 +18,7 @@
         "issues": "https://github.com/hybridlabs/hybrid-birds/issues"
     },
 
-    "license": "ARR (Assets), MIT (Code)",
+    "license": "ARR",
     "icon": "assets/hybrid-birds/icon.png",
 
     "environment": "*",

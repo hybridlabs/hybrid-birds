@@ -88,5 +88,5 @@ java {
 }
 
 jar {
-    from("LICENSE", "LICENSE_ASSETS")
+    from("LICENSE")
 }
