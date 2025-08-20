@@ -1,5 +1,6 @@
 package dev.hybridlabs.birds.data.client
 
+import dev.hybridlabs.birds.block.HybridBirdsBlocks
 import dev.hybridlabs.birds.data.HybridBirdsDataGenerator.filterHybridBirds
 import dev.hybridlabs.birds.effect.HybridBirdsStatusEffects
 import dev.hybridlabs.birds.entity.HybridBirdsEntityTypes
@@ -35,8 +36,13 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridBirdsItems.COOKED_DUCK to "Cooked Duck",
             HybridBirdsItems.COOKED_GOOSE to "Cooked Goose",
             HybridBirdsItems.COOKED_TURKEY to "Cooked Turkey",
-            HybridBirdsItems.COOKED_TURDUCKEN to "Cooked Turducken",
         ).forEach(builder::add)
+
+        mapOf(
+            HybridBirdsBlocks.TURDUCKEN to "Cooked Turducken"
+        ).forEach { (block, translation) ->
+            builder.add(block, translation)
+        }
 
         mapOf(
             HybridBirdsStatusEffects.ROOSTERS_CALLING to "Roosters Calling"

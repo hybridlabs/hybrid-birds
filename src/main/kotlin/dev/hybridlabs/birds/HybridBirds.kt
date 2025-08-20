@@ -1,6 +1,7 @@
 package dev.hybridlabs.birds
 
 import dev.hybridlabs.aquatic.config.HybridBirdsConfigHandler
+import dev.hybridlabs.birds.block.HybridBirdsBlocks
 import dev.hybridlabs.birds.config.HybridBirdsConfig
 import dev.hybridlabs.birds.effect.HybridBirdsStatusEffects
 import dev.hybridlabs.birds.entity.HybridBirdsEntityTypes
@@ -34,6 +35,7 @@ object HybridBirds : ModInitializer {
         HybridBirdsSoundEvents
         HybridBirdsEntityTypes
 
+        HybridBirdsBlocks
         HybridBirdsItems
         HybridBirdsItemGroups
 

@@ -1,0 +1,174 @@
+{
+  "variants": {
+    "bites=0": [
+      {
+        "model": "hybrid-birds:block/turducken"
+      },
+      {
+        "model": "hybrid-birds:block/turducken",
+        "y": 90
+      },
+      {
+        "model": "hybrid-birds:block/turducken",
+        "y": 180
+      },
+      {
+        "model": "hybrid-birds:block/turducken",
+        "y": 270
+      }
+    ],
+    "bites=1": [
+      {
+        "model": "hybrid-birds:block/turducken_bite_1"
+      },
+      {
+        "model": "hybrid-birds:block/turducken_bite_1",
+        "y": 90
+      },
+      {
+        "model": "hybrid-birds:block/turducken_bite_1",
+        "y": 180
+      },
+      {
+        "model": "hybrid-birds:block/turducken_bite_1",
+        "y": 270
+      }
+    ],
+    "bites=2": [
+      {
+        "model": "hybrid-birds:block/turducken_bite_2"
+      },
+      {
+        "model": "hybrid-birds:block/turducken_bite_2",
+        "y": 90
+      },
+      {
+        "model": "hybrid-birds:block/turducken_bite_2",
+        "y": 180
+      },
+      {
+        "model": "hybrid-birds:block/turducken_bite_2",
+        "y": 270
+      }
+    ],
+    "bites=3": [
+      {
+        "model": "hybrid-birds:block/turducken_bite_3"
+      },
+      {
+        "model": "hybrid-birds:block/turducken_bite_3",
+        "y": 90
+      },
+      {
+        "model": "hybrid-birds:block/turducken_bite_3",
+        "y": 180
+      },
+      {
+        "model": "hybrid-birds:block/turducken_bite_3",
+        "y": 270
+      }
+    ],
+    "bites=4": [
+      {
+        "model": "hybrid-birds:block/turducken_bite_4"
+      },
+      {
+        "model": "hybrid-birds:block/turducken_bite_4",
+        "y": 90
+      },
+      {
+        "model": "hybrid-birds:block/turducken_bite_4",
+        "y": 180
+      },
+      {
+        "model": "hybrid-birds:block/turducken_bite_4",
+        "y": 270
+      }
+    ],
+    "bites=5": [
+      {
+        "model": "hybrid-birds:block/turducken_bite_5"
+      },
+      {
+        "model": "hybrid-birds:block/turducken_bite_5",
+        "y": 90
+      },
+      {
+        "model": "hybrid-birds:block/turducken_bite_5",
+        "y": 180
+      },
+      {
+        "model": "hybrid-birds:block/turducken_bite_5",
+        "y": 270
+      }
+    ],
+    "bites=6": [
+      {
+        "model": "hybrid-birds:block/turducken_bite_6"
+      },
+      {
+        "model": "hybrid-birds:block/turducken_bite_6",
+        "y": 90
+      },
+      {
+        "model": "hybrid-birds:block/turducken_bite_6",
+        "y": 180
+      },
+      {
+        "model": "hybrid-birds:block/turducken_bite_6",
+        "y": 270
+      }
+    ],
+    "bites=7": [
+      {
+        "model": "hybrid-birds:block/turducken_bite_7"
+      },
+      {
+        "model": "hybrid-birds:block/turducken_bite_7",
+        "y": 90
+      },
+      {
+        "model": "hybrid-birds:block/turducken_bite_7",
+        "y": 180
+      },
+      {
+        "model": "hybrid-birds:block/turducken_bite_7",
+        "y": 270
+      }
+    ],
+    "bites=8": [
+      {
+        "model": "hybrid-birds:block/turducken_bite_8"
+      },
+      {
+        "model": "hybrid-birds:block/turducken_bite_8",
+        "y": 90
+      },
+      {
+        "model": "hybrid-birds:block/turducken_bite_8",
+        "y": 180
+      },
+      {
+        "model": "hybrid-birds:block/turducken_bite_8",
+        "y": 270
+      }
+    ],
+    "bites=9": [
+      {
+        "model": "hybrid-birds:block/turducken_bite_9"
+      },
+      {
+        "model": "hybrid-birds:block/turducken_bite_9",
+        "y": 90
+      },
+      {
+        "model": "hybrid-birds:block/turducken_bite_9",
+        "y": 180
+      },
+      {
+        "model": "hybrid-birds:block/turducken_bite_9",
+        "y": 270
+      }
+    ]
+  }
+}

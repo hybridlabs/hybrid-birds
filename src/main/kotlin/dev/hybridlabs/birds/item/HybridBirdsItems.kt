@@ -3,10 +3,12 @@
 package dev.hybridlabs.birds.item
 
 import dev.hybridlabs.birds.HybridBirds
+import dev.hybridlabs.birds.block.HybridBirdsBlocks
 import dev.hybridlabs.birds.entity.HybridBirdsEntityTypes
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.mob.MobEntity
+import net.minecraft.item.BlockItem
 import net.minecraft.item.FoodComponent
 import net.minecraft.item.Item
 import net.minecraft.item.SpawnEggItem
@@ -21,7 +23,8 @@ object HybridBirdsItems {
     val ROOSTER_SPAWN_EGG = registerSpawnEgg("rooster_spawn_egg", HybridBirdsEntityTypes.ROOSTER, 0xa6555f, 0xa32858)
     val TURKEY_SPAWN_EGG = registerSpawnEgg("turkey_spawn_egg", HybridBirdsEntityTypes.TURKEY, 0x4b5bab, 0xbd4882)
     val PEACOCK_SPAWN_EGG = registerSpawnEgg("peacock_spawn_egg", HybridBirdsEntityTypes.PEACOCK, 0x25634c, 0x011ab2)
-    val GUINEA_FOWL_SPAWN_EGG = registerSpawnEgg("guinea_fowl_spawn_egg", HybridBirdsEntityTypes.GUINEA_FOWL, 0x356b97, 0x252533)
+    val GUINEA_FOWL_SPAWN_EGG =
+        registerSpawnEgg("guinea_fowl_spawn_egg", HybridBirdsEntityTypes.GUINEA_FOWL, 0x356b97, 0x252533)
 
     val DUCK_EGG = registerEgg("duck_egg", HybridBirdsEntityTypes.DUCKLING)
     val GOOSE_EGG = registerEgg("goose_egg", HybridBirdsEntityTypes.GOSLING)
@@ -127,8 +130,10 @@ object HybridBirdsItems {
     )
 
     val COOKED_TURDUCKEN = register(
-        "cooked_turducken", Item(
-            FabricItemSettings().food(
+        "cooked_turducken", BlockItem(
+            HybridBirdsBlocks.TURDUCKEN,
+            FabricItemSettings()
+                .food(
                 FoodComponent.Builder()
                     .hunger(12)
                     .saturationModifier(1.0F)
@@ -142,7 +147,12 @@ object HybridBirdsItems {
         return Registry.register(Registries.ITEM, Identifier(HybridBirds.MOD_ID, id), item)
     }
 
-    private fun <T : MobEntity> registerSpawnEgg(id: String, type: EntityType<T>, primaryColor: Int, secondaryColor: Int): Item {
+    private fun <T : MobEntity> registerSpawnEgg(
+        id: String,
+        type: EntityType<T>,
+        primaryColor: Int,
+        secondaryColor: Int
+    ): Item {
         return register(id, SpawnEggItem(type, primaryColor, secondaryColor, FabricItemSettings()))
     }
 

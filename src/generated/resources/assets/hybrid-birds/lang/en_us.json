@@ -1,4 +1,5 @@
 {
+  "block.hybrid-birds.turducken": "Cooked Turducken",
   "effect.hybrid-birds.roosters_calling": "Roosters Calling",
   "entity.hybrid-birds.chick": "Chick",
   "entity.hybrid-birds.cygnet": "Cygnet",
@@ -18,7 +19,6 @@
   "item.hybrid-birds.cooked_duck": "Cooked Duck",
   "item.hybrid-birds.cooked_egg": "Cooked Egg",
   "item.hybrid-birds.cooked_goose": "Cooked Goose",
-  "item.hybrid-birds.cooked_turducken": "Cooked Turducken",
   "item.hybrid-birds.cooked_turkey": "Cooked Turkey",
   "item.hybrid-birds.cygnet_spawn_egg": "Cygnet Spawn Egg",
   "item.hybrid-birds.duck": "Raw Duck",
