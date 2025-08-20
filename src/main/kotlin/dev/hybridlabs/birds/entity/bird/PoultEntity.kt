@@ -122,7 +122,7 @@ class PoultEntity(entityType: EntityType<out PoultEntity>, world: World) :
 
     internal class FollowTurkeyGoal(mob: PoultEntity, private val speed: Double) : Goal() {
         private val poult: PoultEntity = mob
-        private var turkeyEntity: GooseEntity? = null
+        private var turkeyEntity: TurkeyEntity? = null
 
         init {
             this.controls = EnumSet.of(Control.MOVE, Control.LOOK)
@@ -130,7 +130,7 @@ class PoultEntity(entityType: EntityType<out PoultEntity>, world: World) :
 
         override fun canStart(): Boolean {
             val list = this.poult.world.getNonSpectatingEntities(
-                GooseEntity::class.java,
+                TurkeyEntity::class.java,
                 this.poult.boundingBox.expand(8.0, 4.0, 8.0)
             )
             var closestDistance = Double.MAX_VALUE

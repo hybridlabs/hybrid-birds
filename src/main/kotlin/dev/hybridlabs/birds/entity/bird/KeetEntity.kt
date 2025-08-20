@@ -47,7 +47,7 @@ class KeetEntity(entityType: EntityType<out KeetEntity>, world: World) :
     override fun tickMovement() {
         super.tickMovement()
         if (!world.isClient) {
-            this.setDucklingAge(this.keetAge + 1)
+            this.setKeetAge(this.keetAge + 1)
         }
     }
 
@@ -58,10 +58,10 @@ class KeetEntity(entityType: EntityType<out KeetEntity>, world: World) :
 
     override fun readCustomDataFromNbt(nbt: NbtCompound) {
         super.readCustomDataFromNbt(nbt)
-        this.setDucklingAge(nbt.getInt("Age"))
+        this.setKeetAge(nbt.getInt("Age"))
     }
 
-    private fun setDucklingAge(keetAge: Int) {
+    private fun setKeetAge(keetAge: Int) {
         this.keetAge = keetAge
         if (this.keetAge >= MAX_KEET_AGE) {
             this.growUp()
@@ -122,7 +122,7 @@ class KeetEntity(entityType: EntityType<out KeetEntity>, world: World) :
 
     internal class FollowGuineaFowlGoal(mob: KeetEntity, private val speed: Double) : Goal() {
         private val keet: KeetEntity = mob
-        private var guineaFowlEntity: DuckEntity? = null
+        private var guineaFowlEntity: GuineaFowlEntity? = null
 
         init {
             this.controls = EnumSet.of(Control.MOVE, Control.LOOK)
@@ -130,7 +130,7 @@ class KeetEntity(entityType: EntityType<out KeetEntity>, world: World) :
 
         override fun canStart(): Boolean {
             val list = this.keet.world.getNonSpectatingEntities(
-                DuckEntity::class.java,
+                GuineaFowlEntity::class.java,
                 this.keet.boundingBox.expand(8.0, 4.0, 8.0)
             )
             var closestDistance = Double.MAX_VALUE

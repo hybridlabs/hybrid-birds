@@ -122,7 +122,7 @@ class PeachickEntity(entityType: EntityType<out PeachickEntity>, world: World) :
 
     internal class FollowPeacockGoal(mob: PeachickEntity, private val speed: Double) : Goal() {
         private val peachick: PeachickEntity = mob
-        private var peacockEntity: GooseEntity? = null
+        private var peacockEntity: PeacockEntity? = null
 
         init {
             this.controls = EnumSet.of(Control.MOVE, Control.LOOK)
@@ -130,7 +130,7 @@ class PeachickEntity(entityType: EntityType<out PeachickEntity>, world: World) :
 
         override fun canStart(): Boolean {
             val list = this.peachick.world.getNonSpectatingEntities(
-                GooseEntity::class.java,
+                PeacockEntity::class.java,
                 this.peachick.boundingBox.expand(8.0, 4.0, 8.0)
             )
             var closestDistance = Double.MAX_VALUE
