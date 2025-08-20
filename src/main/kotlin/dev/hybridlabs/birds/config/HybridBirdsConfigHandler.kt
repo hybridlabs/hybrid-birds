@@ -1,4 +1,4 @@
-package dev.hybridlabs.aquatic.config
+package dev.hybridlabs.birds.config
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -7,7 +7,6 @@ import com.google.gson.JsonParser
 import com.mojang.datafixers.util.Pair
 import com.mojang.serialization.DataResult
 import com.mojang.serialization.JsonOps
-import dev.hybridlabs.birds.config.HybridBirdsConfig
 import java.io.File
 
 class HybridBirdsConfigHandler(val file: File, val defaultConfig: HybridBirdsConfig = HybridBirdsConfig()) {
