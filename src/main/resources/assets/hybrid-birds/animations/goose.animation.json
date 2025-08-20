@@ -400,19 +400,18 @@
 					"rotation": ["0+math.sin(query.anim_time*90*4-120)*4", 0, 0]
 				},
 				"left_wing": {
-					"rotation": [-256.20068, 3.28602, "-283.9137+math.sin(query.anim_time*90*4-0)*-42"],
-					"position": [0, 2, 3]
+					"rotation": [86.29932, 3.28602, "76.086+math.sin(query.anim_time*90*4-0)*-42"],
+					"position": [0, 1.5, 3]
 				},
 				"right_wing": {
-					"rotation": [-256.20068, -3.28602, "-76.086-math.sin(query.anim_time*90*4-0)*-42"],
-					"position": [0, 2, 3]
+					"rotation": [86.29932, -3.28602, "-76.086-math.sin(query.anim_time*90*4-0)*-42"],
+					"position": [0, 1.5, 3]
 				},
 				"neck": {
 					"rotation": ["17.5-math.sin(query.anim_time*90*4-160)*3", 0, "0+math.sin(query.anim_time*90*4-180)*1"]
 				},
 				"head": {
-					"rotation": ["-5+math.sin(query.anim_time*90*4-180)*3", 0, "0+math.sin(query.anim_time*90*4-180)*1 "],
-					"position": [0, -0.24905, -0.02179]
+					"rotation": ["-5+math.sin(query.anim_time*90*4-180)*3", 0, "0+math.sin(query.anim_time*90*4-180)*1 "]
 				},
 				"left_leg": {
 					"rotation": ["66.4658052809+math.sin(query.anim_time*90*4-220)*2", 2.72706, -11.98886],
