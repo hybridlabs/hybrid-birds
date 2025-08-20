@@ -6,9 +6,10 @@ import net.minecraft.block.Blocks
 import net.minecraft.block.ShapeContext
 import net.minecraft.entity.ai.pathing.NavigationType
 import net.minecraft.entity.player.PlayerEntity
+import net.minecraft.sound.SoundCategory
+import net.minecraft.sound.SoundEvents
 import net.minecraft.state.StateManager
 import net.minecraft.state.property.IntProperty
-import net.minecraft.state.property.Properties
 import net.minecraft.state.property.Property
 import net.minecraft.util.ActionResult
 import net.minecraft.util.Hand
@@ -104,7 +105,7 @@ class TurduckenBlock(settings: Settings) : Block(settings) {
     }
 
     companion object {
-        val BITES: IntProperty = Properties.BITES
+        val BITES: IntProperty = IntProperty.of("bites", 0, 9)
         private val DEFAULT_COMPARATOR_OUTPUT: Int
         private val BITES_TO_SHAPE: Array<VoxelShape>
 
@@ -116,20 +117,33 @@ class TurduckenBlock(settings: Settings) : Block(settings) {
         ): ActionResult {
             if (!player.canConsume(false)) {
                 return ActionResult.PASS
-            } else {
-                player.hungerManager.add(4, 0.5f)
-                val i = state.get(BITES) as Int
-                world.emitGameEvent(player, GameEvent.EAT, pos)
-                if (i < 10) {
-                    world.setBlockState(pos, state.with(BITES, i + 1) as BlockState, 3)
-                } else {
-                    world.removeBlock(pos, false)
-                    world.emitGameEvent(player, GameEvent.BLOCK_DESTROY, pos)
-                }
+            }
 
-                return ActionResult.SUCCESS
+            player.hungerManager.add(4, 0.5f)
+            val bites = state[BITES]
+            world.emitGameEvent(player, GameEvent.EAT, pos)
+
+            if (world is World) {
+                world.playSound(
+                    null,
+                    pos,
+                    SoundEvents.ENTITY_FOX_EAT,
+                    SoundCategory.PLAYERS,
+                    1.0f,
+                    1.0f
+                )
+            }
+
+            return if (bites < 9) {
+                world.setBlockState(pos, state.with(BITES, bites + 1), 3)
+                ActionResult.SUCCESS
+            } else {
+                world.removeBlock(pos, false)
+                world.emitGameEvent(player, GameEvent.BLOCK_DESTROY, pos)
+                ActionResult.SUCCESS
             }
         }
+
 
         fun getComparatorOutput(bites: Int): Int {
             return (7 - bites) * 2
@@ -138,16 +152,16 @@ class TurduckenBlock(settings: Settings) : Block(settings) {
         init {
             DEFAULT_COMPARATOR_OUTPUT = getComparatorOutput(0)
             BITES_TO_SHAPE = arrayOf(
-                createCuboidShape(2.0, 0.0, 3.0, 14.0, 8.0, 13.0),
-                createCuboidShape(2.0, 0.0, 3.0, 14.0, 8.0, 13.0),
-                createCuboidShape(2.0, 0.0, 3.0, 14.0, 8.0, 13.0),
-                createCuboidShape(2.0, 0.0, 3.0, 14.0, 8.0, 13.0),
-                createCuboidShape(2.0, 0.0, 3.0, 14.0, 8.0, 13.0),
-                createCuboidShape(2.0, 0.0, 3.0, 14.0, 8.0, 13.0),
-                createCuboidShape(2.0, 0.0, 3.0, 14.0, 8.0, 13.0),
-                createCuboidShape(5.0, 0.0, 3.0, 14.0, 8.0, 13.0),
-                createCuboidShape(8.0, 0.0, 3.0, 14.0, 8.0, 13.0),
-                createCuboidShape(11.0, 0.0, 3.0, 14.0, 8.0, 13.0),
+                createCuboidShape(3.0, 0.0, 2.0, 13.0, 8.0, 14.0),
+                createCuboidShape(3.0, 0.0, 2.0, 13.0, 8.0, 14.0),
+                createCuboidShape(3.0, 0.0, 2.0, 13.0, 8.0, 14.0),
+                createCuboidShape(3.0, 0.0, 2.0, 13.0, 8.0, 14.0),
+                createCuboidShape(3.0, 0.0, 2.0, 13.0, 8.0, 14.0),
+                createCuboidShape(3.0, 0.0, 2.0, 13.0, 8.0, 14.0),
+                createCuboidShape(3.0, 0.0, 2.0, 13.0, 8.0, 14.0),
+                createCuboidShape(3.0, 0.0, 5.0, 13.0, 8.0, 14.0),
+                createCuboidShape(3.0, 0.0, 8.0, 13.0, 8.0, 14.0),
+                createCuboidShape(3.0, 0.0, 11.0, 13.0, 8.0, 14.0),
             )
         }
     }
