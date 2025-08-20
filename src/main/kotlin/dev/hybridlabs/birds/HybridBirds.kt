@@ -1,6 +1,6 @@
 package dev.hybridlabs.birds
 
-import dev.hybridlabs.aquatic.config.HybridBirdsConfigHandler
+import dev.hybridlabs.birds.config.HybridBirdsConfigHandler
 import dev.hybridlabs.birds.block.HybridBirdsBlocks
 import dev.hybridlabs.birds.config.HybridBirdsConfig
 import dev.hybridlabs.birds.effect.HybridBirdsStatusEffects
