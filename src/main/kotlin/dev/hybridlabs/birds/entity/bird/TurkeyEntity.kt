@@ -4,36 +4,36 @@ import dev.hybridlabs.birds.entity.HybridBirdsEntityTypes
 import dev.hybridlabs.birds.item.HybridBirdsItems
 import dev.hybridlabs.birds.loot.HybridBirdsLootTables
 import dev.hybridlabs.birds.sound.HybridBirdsSoundEvents
-import net.minecraft.entity.EntityType
-import net.minecraft.entity.ai.control.MoveControl
-import net.minecraft.entity.ai.goal.*
-import net.minecraft.entity.ai.pathing.EntityNavigation
-import net.minecraft.entity.attribute.DefaultAttributeContainer
-import net.minecraft.entity.attribute.EntityAttributes
-import net.minecraft.entity.damage.DamageSource
-import net.minecraft.entity.data.DataTracker
-import net.minecraft.entity.data.TrackedData
-import net.minecraft.entity.data.TrackedDataHandlerRegistry
-import net.minecraft.entity.mob.WaterCreatureEntity
-import net.minecraft.entity.passive.PassiveEntity
-import net.minecraft.entity.player.PlayerEntity
-import net.minecraft.item.ItemStack
-import net.minecraft.item.Items
-import net.minecraft.nbt.NbtCompound
-import net.minecraft.recipe.Ingredient
-import net.minecraft.registry.tag.ItemTags
-import net.minecraft.server.world.ServerWorld
-import net.minecraft.sound.SoundEvent
-import net.minecraft.sound.SoundEvents
-import net.minecraft.util.ActionResult
-import net.minecraft.util.Hand
-import net.minecraft.util.Identifier
-import net.minecraft.world.World
-import net.minecraft.world.event.GameEvent
+import net.minecraft.nbt.CompoundTag
+import net.minecraft.network.syncher.EntityDataAccessor
+import net.minecraft.network.syncher.EntityDataSerializers
+import net.minecraft.network.syncher.SynchedEntityData
+import net.minecraft.resources.ResourceLocation
+import net.minecraft.server.level.ServerLevel
+import net.minecraft.sounds.SoundEvent
+import net.minecraft.sounds.SoundEvents
+import net.minecraft.tags.ItemTags
+import net.minecraft.world.InteractionHand
+import net.minecraft.world.InteractionResult
+import net.minecraft.world.damagesource.DamageSource
+import net.minecraft.world.entity.AgeableMob
+import net.minecraft.world.entity.EntityType
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier
+import net.minecraft.world.entity.ai.attributes.Attributes
+import net.minecraft.world.entity.ai.control.MoveControl
+import net.minecraft.world.entity.ai.goal.*
+import net.minecraft.world.entity.ai.navigation.PathNavigation
+import net.minecraft.world.entity.animal.WaterAnimal
+import net.minecraft.world.entity.player.Player
+import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.Items
+import net.minecraft.world.item.crafting.Ingredient
+import net.minecraft.world.level.Level
+import net.minecraft.world.level.gameevent.GameEvent
 
-class TurkeyEntity(entityType: EntityType<out TurkeyEntity>, world: World) :
+class TurkeyEntity(entityType: EntityType<out TurkeyEntity>, world: Level) :
     HybridBirdsBirdEntity(entityType, world, false) {
-    private var turkeyNavigation: EntityNavigation = createNavigation(world)
+    private var turkeyNavigation: PathNavigation = createNavigation(world)
     private var eggLayTime: Int = 0
 
     init {
@@ -42,54 +42,54 @@ class TurkeyEntity(entityType: EntityType<out TurkeyEntity>, world: World) :
         this.eggLayTime = random.nextInt(6000) + 6000
     }
 
-    override fun getLimitPerChunk(): Int {
+    override fun getMaxSpawnClusterSize(): Int {
         return 2
     }
 
-    override fun getLootTableId(): Identifier {
+    override fun getDefaultLootTable(): ResourceLocation {
         return when (getStuffingLevel()) {
             1 -> HybridBirdsLootTables.TURKEY_FAT
             2 -> HybridBirdsLootTables.TURKEY_STUFFED
             else ->
-                return super.getLootTableId()
+                return super.defaultLootTable
         }
     }
 
-    override fun initGoals() {
-        goalSelector.add(0, SwimGoal(this))
-        goalSelector.add(0, EscapeDangerGoal(this, 0.6))
-        goalSelector.add(1, TemptGoal(this, 0.6, Ingredient.fromTag(ItemTags.VILLAGER_PLANTABLE_SEEDS), false))
-        goalSelector.add(2, AnimalMateGoal(this, 0.5))
-        goalSelector.add(2, WanderAroundGoal(this, 0.5))
-        goalSelector.add(2, LookAroundGoal(this))
-        goalSelector.add(11, LookAtEntityGoal(this, PlayerEntity::class.java, 10.0f))
+    override fun registerGoals() {
+        goalSelector.addGoal(0, FloatGoal(this))
+        goalSelector.addGoal(0, PanicGoal(this, 0.6))
+        goalSelector.addGoal(1, TemptGoal(this, 0.6, Ingredient.of(ItemTags.VILLAGER_PLANTABLE_SEEDS), false))
+        goalSelector.addGoal(2, BreedGoal(this, 0.5))
+        goalSelector.addGoal(2, RandomStrollGoal(this, 0.5))
+        goalSelector.addGoal(2, RandomLookAroundGoal(this))
+        goalSelector.addGoal(11, LookAtPlayerGoal(this, Player::class.java, 10.0f))
     }
 
-    override fun tickMovement() {
-        super.tickMovement()
-        if ((!world.isClient && this.isAlive && !this.isBaby && --this.eggLayTime <= 0)) {
+    override fun aiStep() {
+        super.aiStep()
+        if ((!level().isClientSide && this.isAlive && !this.isBaby && --this.eggLayTime <= 0)) {
             this.playSound(
-                SoundEvents.ENTITY_CHICKEN_EGG,
+                SoundEvents.CHICKEN_EGG,
                 1.0f,
                 (random.nextFloat() - random.nextFloat()) * 0.2f + 1.0f
             )
-            this.dropItem(HybridBirdsItems.TURKEY_EGG)
-            this.emitGameEvent(GameEvent.ENTITY_PLACE)
+            this.spawnAtLocation(HybridBirdsItems.TURKEY_EGG)
+            this.gameEvent(GameEvent.ENTITY_PLACE)
             this.eggLayTime = random.nextInt(6000) + 6000
         }
     }
 
     private fun isFatteningItem(stack: ItemStack): Boolean {
-        return stack.isOf(Items.WHEAT)
+        return stack.`is`(Items.WHEAT)
     }
 
     fun getStuffingLevel(): Int {
-        return dataTracker.get(STUFFING_LEVEL)
+        return entityData.get(STUFFING_LEVEL)
     }
 
     private fun setStuffingLevel(level: Int) {
         val newSpeed = level.coerceIn(0, 2)
-        dataTracker.set(STUFFING_LEVEL, newSpeed)
+        entityData.set(STUFFING_LEVEL, newSpeed)
 
         val speed = when (newSpeed) {
             0 -> 0.5
@@ -98,42 +98,42 @@ class TurkeyEntity(entityType: EntityType<out TurkeyEntity>, world: World) :
             else -> 0.5
         }
 
-        getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED)?.baseValue = speed
+        getAttribute(Attributes.MOVEMENT_SPEED)?.baseValue = speed
     }
 
-    override fun interactMob(player: PlayerEntity, hand: Hand?): ActionResult {
-        val itemStack = player.getStackInHand(hand)
+    override fun mobInteract(player: Player, hand: InteractionHand?): InteractionResult {
+        val itemStack = player.getItemInHand(hand)
 
         if (isFatteningItem(itemStack)) {
-            if (!world.isClient) {
+            if (!level().isClientSide) {
                 val currentFatness = getStuffingLevel()
                 if (currentFatness < 2) {
                     setStuffingLevel(currentFatness + 1)
-                    playSound(SoundEvents.ENTITY_FOX_EAT, 1.0f, 1.0f)
-                    if (!player.abilities.creativeMode) {
-                        itemStack.decrement(1)
+                    playSound(SoundEvents.FOX_EAT, 1.0f, 1.0f)
+                    if (!player.abilities.instabuild) {
+                        itemStack.shrink(1)
                     }
                 }
             }
-            return ActionResult.SUCCESS
+            return InteractionResult.SUCCESS
         }
-        return super.interactMob(player, hand)
+        return super.mobInteract (player, hand)
     }
 
 
-    override fun initDataTracker() {
-        super.initDataTracker()
-        dataTracker.startTracking(STUFFING_LEVEL, 0)
+    override fun defineSynchedData() {
+        super.defineSynchedData()
+        entityData.define(STUFFING_LEVEL, 0)
     }
 
-    override fun writeCustomDataToNbt(nbt: NbtCompound) {
-        super.writeCustomDataToNbt(nbt)
-        nbt.putInt("StuffingLevel", getStuffingLevel())
+    override fun addAdditionalSaveData(compoundTag: CompoundTag) {
+        super.addAdditionalSaveData(compoundTag)
+        compoundTag.putInt("StuffingLevel", getStuffingLevel())
     }
 
-    override fun readCustomDataFromNbt(nbt: NbtCompound) {
-        super.readCustomDataFromNbt(nbt)
-        setStuffingLevel(nbt.getInt("FatnessLevel"))
+    override fun readAdditionalSaveData(compoundTag: CompoundTag) {
+        super.readAdditionalSaveData(compoundTag)
+        setStuffingLevel(compoundTag.getInt("FatnessLevel"))
     }
 
     // region SFX
@@ -152,26 +152,26 @@ class TurkeyEntity(entityType: EntityType<out TurkeyEntity>, world: World) :
 
     // endregion
 
-    override fun isBreedingItem(stack: ItemStack?): Boolean {
+    override fun isFood(stack: ItemStack?): Boolean {
         return BREEDING_INGREDIENT.test(stack)
     }
 
-    override fun createChild(world: ServerWorld, entity: PassiveEntity): PassiveEntity? {
-        return HybridBirdsEntityTypes.POULT.create(world)
+    override fun getBreedOffspring(serverLevel: ServerLevel, ageableMob: AgeableMob): AgeableMob? {
+        return HybridBirdsEntityTypes.POULT.create(serverLevel)
     }
 
     companion object {
-        fun createMobAttributes(): DefaultAttributeContainer.Builder {
-            return WaterCreatureEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 8.0)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.5)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 1.0)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 12.0)
+        fun createMobAttributes(): AttributeSupplier.Builder {
+            return WaterAnimal.createMobAttributes()
+                .add(Attributes.MAX_HEALTH, 8.0)
+                .add(Attributes.MOVEMENT_SPEED, 0.5)
+                .add(Attributes.ATTACK_DAMAGE, 1.0)
+                .add(Attributes.FOLLOW_RANGE, 12.0)
         }
 
-        private val STUFFING_LEVEL: TrackedData<Int> =
-            DataTracker.registerData(TurkeyEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
+        private val STUFFING_LEVEL: EntityDataAccessor<Int> =
+            SynchedEntityData.defineId(TurkeyEntity::class.java, EntityDataSerializers.INT)
 
-        val BREEDING_INGREDIENT: Ingredient = Ingredient.fromTag(ItemTags.VILLAGER_PLANTABLE_SEEDS)
+        val BREEDING_INGREDIENT: Ingredient = Ingredient.of(ItemTags.VILLAGER_PLANTABLE_SEEDS)
     }
 }

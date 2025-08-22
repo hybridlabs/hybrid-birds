@@ -1,24 +1,25 @@
 package dev.hybridlabs.birds.entity.bird
 
-import net.minecraft.block.BlockState
-import net.minecraft.entity.EntityDimensions
-import net.minecraft.entity.EntityPose
-import net.minecraft.entity.EntityType
-import net.minecraft.entity.SpawnReason
-import net.minecraft.entity.ai.control.MoveControl
-import net.minecraft.entity.ai.pathing.MobNavigation
-import net.minecraft.entity.damage.DamageSource
-import net.minecraft.entity.passive.AnimalEntity
-import net.minecraft.entity.passive.PassiveEntity
-import net.minecraft.registry.tag.FluidTags
-import net.minecraft.server.world.ServerWorld
-import net.minecraft.sound.SoundEvent
-import net.minecraft.sound.SoundEvents
-import net.minecraft.util.math.BlockPos
-import net.minecraft.util.math.Direction
-import net.minecraft.util.math.random.Random
-import net.minecraft.world.World
-import net.minecraft.world.WorldAccess
+import net.minecraft.core.BlockPos
+import net.minecraft.core.Direction
+import net.minecraft.server.level.ServerLevel
+import net.minecraft.sounds.SoundEvent
+import net.minecraft.sounds.SoundEvents
+import net.minecraft.tags.FluidTags
+import net.minecraft.util.RandomSource
+import net.minecraft.world.damagesource.DamageSource
+import net.minecraft.world.entity.AgeableMob
+import net.minecraft.world.entity.EntityDimensions
+import net.minecraft.world.entity.EntityType
+import net.minecraft.world.entity.MobSpawnType
+import net.minecraft.world.entity.Pose
+import net.minecraft.world.entity.ai.control.MoveControl
+import net.minecraft.world.entity.ai.navigation.GroundPathNavigation
+import net.minecraft.world.entity.animal.Animal
+import net.minecraft.world.level.Level
+import net.minecraft.world.level.LevelAccessor
+import net.minecraft.world.level.block.state.BlockState
+import org.jetbrains.annotations.Nullable
 import software.bernie.geckolib.animatable.GeoEntity
 import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
@@ -32,17 +33,19 @@ import software.bernie.geckolib.util.GeckoLibUtil
 @Suppress("LeakingThis")
 open class HybridBirdsBirdEntity(
     type: EntityType<out HybridBirdsBirdEntity>,
-    world: World,
+    world: Level,
     open val isAquatic: Boolean,
 ) :
-    AnimalEntity(type, world),
+    Animal(type, world),
     GeoEntity {
     private val factory = GeckoLibUtil.createInstanceCache(this)
-    private var birdNavigation = MobNavigation(this, world)
+    private var birdNavigation = GroundPathNavigation(this, world)
 
-    override fun createChild(world: ServerWorld, entity: PassiveEntity): PassiveEntity? {
-        return null
+    @Nullable
+    override fun getBreedOffspring(serverLevel: ServerLevel, ageableMob: AgeableMob): AgeableMob? {
+        throw NotImplementedError("Breeding is not implemented")
     }
+
 
     init {
         moveControl = MoveControl(this)
@@ -50,7 +53,7 @@ open class HybridBirdsBirdEntity(
     }
 
     fun isBelowWaterline(): Boolean {
-        return this.isSubmergedInWater || this.getFluidHeight(FluidTags.WATER) > this.getWaterline()
+        return this.isUnderWater || this.getFluidHeight(FluidTags.WATER) > this.getWaterline()
     }
 
     open fun getWaterline(): Float {
@@ -63,10 +66,10 @@ open class HybridBirdsBirdEntity(
                 this, "Walk/Swim/Fly/Idle", 4
             ) { state: AnimationState<HybridBirdsBirdEntity> ->
                 when {
-                    state.isMoving && isOnGround -> state.setAndContinue(DefaultAnimations.WALK)
-                    this.isAquatic && state.isMoving && isTouchingWater -> state.setAndContinue(DefaultAnimations.SWIM)
-                    this.isAquatic && !state.isMoving && isTouchingWater -> state.setAndContinue(WATER_IDLE)
-                    !this.isOnGround && !isTouchingWater -> state.setAndContinue(DefaultAnimations.FLY)
+                    state.isMoving && onGround() -> state.setAndContinue(DefaultAnimations.WALK)
+                    this.isAquatic && state.isMoving && isInWater -> state.setAndContinue(DefaultAnimations.SWIM)
+                    this.isAquatic && !state.isMoving && isInWater -> state.setAndContinue(WATER_IDLE)
+                    !this.onGround() && !isInWater -> state.setAndContinue(DefaultAnimations.FLY)
                     else -> state.setAndContinue(DefaultAnimations.IDLE)
                 }
             }
@@ -77,37 +80,37 @@ open class HybridBirdsBirdEntity(
         return factory
     }
 
-    override fun getActiveEyeHeight(pose: EntityPose, dimensions: EntityDimensions): Float {
+    override fun getStandingEyeHeight(pose: Pose, dimensions: EntityDimensions): Float {
         return dimensions.height * 0.85f
     }
 
-    override fun canImmediatelyDespawn(distanceSquared: Double): Boolean {
+    override fun removeWhenFarAway(distanceSquared: Double): Boolean {
         return false
     }
 
-    override fun getLimitPerChunk(): Int {
+    override fun getMaxSpawnClusterSize(): Int {
         return 4
     }
 
     override fun getHurtSound(source: DamageSource): SoundEvent {
-        return SoundEvents.ENTITY_PARROT_HURT
+        return SoundEvents.PARROT_HURT
     }
 
     override fun getDeathSound(): SoundEvent {
-        return SoundEvents.ENTITY_PARROT_DEATH
+        return SoundEvents.PARROT_DEATH
     }
 
     override fun getAmbientSound(): SoundEvent {
-        return SoundEvents.ENTITY_PARROT_AMBIENT
+        return SoundEvents.PARROT_AMBIENT
     }
 
-    override fun fall(heightDifference: Double, onGround: Boolean, state: BlockState, landedPosition: BlockPos) {}
+    override fun checkFallDamage(heightDifference: Double, onGround: Boolean, state: BlockState, landedPosition: BlockPos) {}
 
-    override fun tickMovement() {
-        super.tickMovement()
-        val vec3d = this.velocity
-        if (!this.isOnGround && vec3d.y < 0.0) {
-            this.velocity = vec3d.multiply(1.0, 0.6, 1.0)
+    override fun aiStep() {
+        super.aiStep()
+        val vec3d = this.deltaMovement
+        if (!this.onGround() && vec3d.y < 0.0) {
+            this.deltaMovement = vec3d.multiply(1.0, 0.6, 1.0)
         }
     }
 
@@ -117,28 +120,28 @@ open class HybridBirdsBirdEntity(
         @Suppress("UNUSED_PARAMETER")
         fun canBirdSpawn(
             type: EntityType<out HybridBirdsBirdEntity>,
-            world: WorldAccess,
-            reason: SpawnReason,
+            level: LevelAccessor,
+            reason: MobSpawnType,
             pos: BlockPos,
-            random: Random
+            random: RandomSource,
         ): Boolean {
-            isLightLevelValidForNaturalSpawn(world, pos)
+            isBrightEnoughToSpawn(level, pos)
             return true
         }
 
         @Suppress("UNUSED_PARAMETER")
         fun canAquaticBirdSpawn(
             type: EntityType<out HybridBirdsBirdEntity>,
-            world: WorldAccess,
-            spawnReason: SpawnReason,
+            level: LevelAccessor,
+            spawnReason: MobSpawnType,
             pos: BlockPos,
-            random: Random
+            random: RandomSource
         ): Boolean {
-            val mutable = pos.mutableCopy()
+            val mutable = pos.mutable()
             do {
                 mutable.move(Direction.UP)
-            } while (world.getFluidState(mutable).isIn(FluidTags.WATER))
-            return world.getBlockState(mutable).isAir
+            } while (level.getFluidState(mutable).`is`(FluidTags.WATER))
+            return level.getBlockState(mutable).isAir
         }
     }
 }

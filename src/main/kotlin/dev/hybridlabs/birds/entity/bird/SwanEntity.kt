@@ -4,27 +4,27 @@ import dev.hybridlabs.birds.entity.HybridBirdsEntityTypes
 import dev.hybridlabs.birds.entity.ai.BirdFloatControl
 import dev.hybridlabs.birds.item.HybridBirdsItems
 import dev.hybridlabs.birds.sound.HybridBirdsSoundEvents
-import net.minecraft.entity.EntityType
-import net.minecraft.entity.ai.goal.*
-import net.minecraft.entity.ai.pathing.AmphibiousSwimNavigation
-import net.minecraft.entity.attribute.DefaultAttributeContainer
-import net.minecraft.entity.attribute.EntityAttributes
-import net.minecraft.entity.damage.DamageSource
-import net.minecraft.entity.mob.WaterCreatureEntity
-import net.minecraft.entity.passive.PassiveEntity
-import net.minecraft.entity.player.PlayerEntity
-import net.minecraft.item.ItemStack
-import net.minecraft.item.Items
-import net.minecraft.recipe.Ingredient
-import net.minecraft.server.world.ServerWorld
-import net.minecraft.sound.SoundEvent
-import net.minecraft.sound.SoundEvents
-import net.minecraft.world.World
-import net.minecraft.world.event.GameEvent
+import net.minecraft.server.level.ServerLevel
+import net.minecraft.sounds.SoundEvent
+import net.minecraft.sounds.SoundEvents
+import net.minecraft.world.damagesource.DamageSource
+import net.minecraft.world.entity.AgeableMob
+import net.minecraft.world.entity.EntityType
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier
+import net.minecraft.world.entity.ai.attributes.Attributes
+import net.minecraft.world.entity.ai.goal.*
+import net.minecraft.world.entity.ai.navigation.AmphibiousPathNavigation
+import net.minecraft.world.entity.animal.WaterAnimal
+import net.minecraft.world.entity.player.Player
+import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.Items
+import net.minecraft.world.item.crafting.Ingredient
+import net.minecraft.world.level.Level
+import net.minecraft.world.level.gameevent.GameEvent
 
-class SwanEntity(entityType: EntityType<out SwanEntity>, world: World) :
+class SwanEntity(entityType: EntityType<out SwanEntity>, world: Level) :
     HybridBirdsBirdEntity(entityType, world, true) {
-    private var swanNavigation = AmphibiousSwimNavigation(this, world)
+    private var swanNavigation = AmphibiousPathNavigation(this, world)
     private var eggLayTime: Int = 0
 
     init {
@@ -33,29 +33,29 @@ class SwanEntity(entityType: EntityType<out SwanEntity>, world: World) :
         this.eggLayTime = random.nextInt(6000) + 6000
     }
 
-    override fun getLimitPerChunk(): Int {
+    override fun getMaxSpawnClusterSize(): Int {
         return 2
     }
 
-    override fun initGoals() {
-        goalSelector.add(0, EscapeDangerGoal(this, 0.6))
-        goalSelector.add(1, TemptGoal(this, 0.5, BREEDING_INGREDIENT, false))
-        goalSelector.add(2, AnimalMateGoal(this, 0.5))
-        goalSelector.add(2, WanderAroundGoal(this, 0.5))
-        goalSelector.add(2, LookAroundGoal(this))
-        goalSelector.add(11, LookAtEntityGoal(this, PlayerEntity::class.java, 10.0f))
+    override fun registerGoals() {
+        goalSelector.addGoal(0, PanicGoal(this, 0.6))
+        goalSelector.addGoal(1, TemptGoal(this, 0.5, BREEDING_INGREDIENT, false))
+        goalSelector.addGoal(2, BreedGoal(this, 0.5))
+        goalSelector.addGoal(2, RandomStrollGoal(this, 0.5))
+        goalSelector.addGoal(2, RandomLookAroundGoal(this))
+        goalSelector.addGoal(11, LookAtPlayerGoal(this, Player::class.java, 10.0f))
     }
 
-    override fun tickMovement() {
-        super.tickMovement()
-        if ((!world.isClient && this.isAlive && !this.isBaby && --this.eggLayTime <= 0)) {
+    override fun aiStep() {
+        super.aiStep()
+        if ((!level().isClientSide && this.isAlive && !this.isBaby && --this.eggLayTime <= 0)) {
             this.playSound(
-                SoundEvents.ENTITY_CHICKEN_EGG,
+                SoundEvents.CHICKEN_EGG,
                 1.0f,
                 (random.nextFloat() - random.nextFloat()) * 0.2f + 1.0f
             )
-            this.dropItem(HybridBirdsItems.SWAN_EGG)
-            this.emitGameEvent(GameEvent.ENTITY_PLACE)
+            this.spawnAtLocation(HybridBirdsItems.SWAN_EGG)
+            this.gameEvent(GameEvent.ENTITY_PLACE)
             this.eggLayTime = random.nextInt(6000) + 6000
         }
     }
@@ -72,24 +72,24 @@ class SwanEntity(entityType: EntityType<out SwanEntity>, world: World) :
         return HybridBirdsSoundEvents.SWAN_DIE
     }
 
-    override fun isBreedingItem(stack: ItemStack?): Boolean {
+    override fun isFood(stack: ItemStack?): Boolean {
         return BREEDING_INGREDIENT.test(stack)
     }
 
-    override fun createChild(world: ServerWorld, entity: PassiveEntity): PassiveEntity? {
-        return HybridBirdsEntityTypes.CYGNET.create(world)
+    override fun getBreedOffspring(serverLevel: ServerLevel, ageableMob: AgeableMob): AgeableMob? {
+        return HybridBirdsEntityTypes.CYGNET.create(serverLevel)
     }
 
     companion object {
-        fun createMobAttributes(): DefaultAttributeContainer.Builder {
-            return WaterCreatureEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 6.0)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.5)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 1.0)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 12.0)
+        fun createMobAttributes(): AttributeSupplier.Builder {
+            return WaterAnimal.createMobAttributes()
+                .add(Attributes.MAX_HEALTH, 6.0)
+                .add(Attributes.MOVEMENT_SPEED, 0.5)
+                .add(Attributes.ATTACK_DAMAGE, 1.0)
+                .add(Attributes.FOLLOW_RANGE, 12.0)
         }
 
-        val BREEDING_INGREDIENT: Ingredient = Ingredient.ofItems(
+        val BREEDING_INGREDIENT: Ingredient = Ingredient.of(
             Items.WHEAT,
             Items.COD
         )

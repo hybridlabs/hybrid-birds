@@ -1,75 +1,78 @@
 package dev.hybridlabs.birds.block
 
-import net.minecraft.block.Block
-import net.minecraft.block.BlockState
-import net.minecraft.block.Blocks
-import net.minecraft.block.ShapeContext
-import net.minecraft.entity.ai.pathing.NavigationType
-import net.minecraft.entity.player.PlayerEntity
-import net.minecraft.sound.SoundCategory
-import net.minecraft.sound.SoundEvents
-import net.minecraft.state.StateManager
-import net.minecraft.state.property.IntProperty
-import net.minecraft.state.property.Property
-import net.minecraft.util.ActionResult
-import net.minecraft.util.Hand
-import net.minecraft.util.hit.BlockHitResult
-import net.minecraft.util.math.BlockPos
-import net.minecraft.util.math.Direction
-import net.minecraft.util.shape.VoxelShape
-import net.minecraft.world.BlockView
-import net.minecraft.world.World
-import net.minecraft.world.WorldAccess
-import net.minecraft.world.WorldView
-import net.minecraft.world.event.GameEvent
+import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
+import net.minecraft.core.BlockPos
+import net.minecraft.core.Direction
+import net.minecraft.sounds.SoundEvents
+import net.minecraft.sounds.SoundSource
+import net.minecraft.world.InteractionHand
+import net.minecraft.world.InteractionResult
+import net.minecraft.world.entity.player.Player
+import net.minecraft.world.level.BlockGetter
+import net.minecraft.world.level.Level
+import net.minecraft.world.level.LevelAccessor
+import net.minecraft.world.level.LevelReader
+import net.minecraft.world.level.block.Block
+import net.minecraft.world.level.block.Blocks
+import net.minecraft.world.level.block.state.BlockState
+import net.minecraft.world.level.block.state.StateDefinition
+import net.minecraft.world.level.block.state.properties.IntegerProperty
+import net.minecraft.world.level.block.state.properties.Property
+import net.minecraft.world.level.gameevent.GameEvent
+import net.minecraft.world.level.pathfinder.PathComputationType
+import net.minecraft.world.phys.BlockHitResult
+import net.minecraft.world.phys.shapes.CollisionContext
+import net.minecraft.world.phys.shapes.VoxelShape
 
 @Suppress("OVERRIDE_DEPRECATION", "DEPRECATION")
-class TurduckenBlock(settings: Settings) : Block(settings) {
-    override fun getOutlineShape(
+class TurduckenBlock(settings: FabricBlockSettings?) : Block(settings) {
+
+
+    override fun getShape(
         state: BlockState,
-        world: BlockView,
+        world: BlockGetter,
         pos: BlockPos,
-        context: ShapeContext
+        context: CollisionContext
     ): VoxelShape {
-        return BITES_TO_SHAPE[(state.get(BITES) as Int)]
+        return BITES_TO_SHAPE[(state.getValue(BITES) as Int)]
     }
 
-    override fun onUse(
+    override fun use(
         state: BlockState,
-        world: World,
+        world: Level,
         pos: BlockPos,
-        player: PlayerEntity,
-        hand: Hand,
+        player: Player,
+        hand: InteractionHand,
         hit: BlockHitResult
-    ): ActionResult {
-        val itemStack = player.getStackInHand(hand)
+    ): InteractionResult {
+        val itemStack = player.getItemInHand(hand)
         itemStack.item
-        if (world.isClient) {
-            if (tryEat(world, pos, state, player).isAccepted) {
-                return ActionResult.SUCCESS
+        if (world.isClientSide) {
+            if (tryEat(world, pos, state, player).consumesAction()) {
+                return InteractionResult.SUCCESS
             }
 
             if (itemStack.isEmpty) {
-                return ActionResult.CONSUME
+                return InteractionResult.CONSUME
             }
         }
 
         return tryEat(world, pos, state, player)
     }
 
-    override fun getStateForNeighborUpdate(
+    override fun updateShape(
         state: BlockState,
         direction: Direction,
         neighborState: BlockState,
-        world: WorldAccess,
+        world: LevelAccessor,
         pos: BlockPos,
         neighborPos: BlockPos
     ): BlockState {
-        return if (direction == Direction.DOWN && !state.canPlaceAt(
+        return if (direction == Direction.DOWN && !state.canSurvive(
                 world,
                 pos
             )
-        ) Blocks.AIR.defaultState else super.getStateForNeighborUpdate(
+        ) Blocks.AIR.defaultBlockState() else super.updateShape(
             state,
             direction,
             neighborState,
@@ -79,68 +82,67 @@ class TurduckenBlock(settings: Settings) : Block(settings) {
         )
     }
 
-    override fun canPlaceAt(state: BlockState, world: WorldView, pos: BlockPos): Boolean {
-        return world.getBlockState(pos.down()).isSolid
+    override fun canSurvive(state: BlockState, levelReader: LevelReader, pos: BlockPos): Boolean {
+        return levelReader.getBlockState(pos.below()).isSolid
     }
 
-    override fun appendProperties(builder: StateManager.Builder<Block, BlockState>) {
+    override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block, BlockState>) {
         builder.add(*arrayOf<Property<*>>(BITES))
     }
 
-    override fun getComparatorOutput(state: BlockState, world: World, pos: BlockPos): Int {
-        return getComparatorOutput(state.get(BITES) as Int)
+    override fun getAnalogOutputSignal(state: BlockState, world: Level, pos: BlockPos): Int {
+        return getComparatorOutput(state.getValue(BITES) as Int)
     }
 
-    override fun hasComparatorOutput(state: BlockState): Boolean {
+    override fun hasAnalogOutputSignal(state: BlockState): Boolean {
         return true
     }
 
-    override fun canPathfindThrough(state: BlockState, world: BlockView, pos: BlockPos, type: NavigationType): Boolean {
+    override fun isPathfindable(state: BlockState, world: BlockGetter, pos: BlockPos, type: PathComputationType): Boolean {
         return false
     }
 
     init {
-        this.defaultState =
-            (stateManager.defaultState as BlockState).with(BITES, 0) as BlockState
+        this.registerDefaultState(defaultBlockState().setValue(BITES,0))
     }
 
     companion object {
-        val BITES: IntProperty = IntProperty.of("bites", 0, 9)
+        val BITES: IntegerProperty = IntegerProperty.create("bites", 0, 9)
         private val DEFAULT_COMPARATOR_OUTPUT: Int
         private val BITES_TO_SHAPE: Array<VoxelShape>
 
         private fun tryEat(
-            world: WorldAccess,
+            world: LevelAccessor,
             pos: BlockPos,
             state: BlockState,
-            player: PlayerEntity
-        ): ActionResult {
-            if (!player.canConsume(false)) {
-                return ActionResult.PASS
+            player: Player
+        ): InteractionResult {
+            if (!player.canEat(false)) {
+                return InteractionResult.PASS
             }
 
-            player.hungerManager.add(4, 0.5f)
-            val bites = state[BITES]
-            world.emitGameEvent(player, GameEvent.EAT, pos)
+            player.foodData.eat (4, 0.5f)
+            val bites = state.getValue(BITES)
+            world.gameEvent(player, GameEvent.EAT, pos)
 
-            if (world is World) {
+            if (world is Level) {
                 world.playSound(
                     null,
                     pos,
-                    SoundEvents.ENTITY_FOX_EAT,
-                    SoundCategory.PLAYERS,
+                    SoundEvents.FOX_EAT,
+                    SoundSource.PLAYERS,
                     1.0f,
                     1.0f
                 )
             }
 
             return if (bites < 9) {
-                world.setBlockState(pos, state.with(BITES, bites + 1), 3)
-                ActionResult.SUCCESS
+                world.setBlock(pos, state.setValue(BITES, bites + 1), 3)
+                InteractionResult.SUCCESS
             } else {
                 world.removeBlock(pos, false)
-                world.emitGameEvent(player, GameEvent.BLOCK_DESTROY, pos)
-                ActionResult.SUCCESS
+                world.gameEvent(player, GameEvent.BLOCK_DESTROY, pos)
+                InteractionResult.SUCCESS
             }
         }
 
@@ -152,16 +154,16 @@ class TurduckenBlock(settings: Settings) : Block(settings) {
         init {
             DEFAULT_COMPARATOR_OUTPUT = getComparatorOutput(0)
             BITES_TO_SHAPE = arrayOf(
-                createCuboidShape(3.0, 0.0, 2.0, 13.0, 8.0, 14.0),
-                createCuboidShape(3.0, 0.0, 2.0, 13.0, 8.0, 14.0),
-                createCuboidShape(3.0, 0.0, 2.0, 13.0, 8.0, 14.0),
-                createCuboidShape(3.0, 0.0, 2.0, 13.0, 8.0, 14.0),
-                createCuboidShape(3.0, 0.0, 2.0, 13.0, 8.0, 14.0),
-                createCuboidShape(3.0, 0.0, 2.0, 13.0, 8.0, 14.0),
-                createCuboidShape(3.0, 0.0, 2.0, 13.0, 8.0, 14.0),
-                createCuboidShape(3.0, 0.0, 5.0, 13.0, 8.0, 14.0),
-                createCuboidShape(3.0, 0.0, 8.0, 13.0, 8.0, 14.0),
-                createCuboidShape(3.0, 0.0, 11.0, 13.0, 8.0, 14.0),
+                box(3.0, 0.0, 2.0, 13.0, 8.0, 14.0),
+                box(3.0, 0.0, 2.0, 13.0, 8.0, 14.0),
+                box(3.0, 0.0, 2.0, 13.0, 8.0, 14.0),
+                box(3.0, 0.0, 2.0, 13.0, 8.0, 14.0),
+                box(3.0, 0.0, 2.0, 13.0, 8.0, 14.0),
+                box(3.0, 0.0, 2.0, 13.0, 8.0, 14.0),
+                box(3.0, 0.0, 2.0, 13.0, 8.0, 14.0),
+                box(3.0, 0.0, 5.0, 13.0, 8.0, 14.0),
+                box(3.0, 0.0, 8.0, 13.0, 8.0, 14.0),
+                box(3.0, 0.0, 11.0, 13.0, 8.0, 14.0),
             )
         }
     }

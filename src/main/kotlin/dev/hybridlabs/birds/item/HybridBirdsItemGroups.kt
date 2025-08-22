@@ -4,50 +4,50 @@ package dev.hybridlabs.birds.item
 
 import dev.hybridlabs.birds.HybridBirds
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup
-import net.minecraft.item.ItemGroup
-import net.minecraft.item.ItemStack
-import net.minecraft.item.SpawnEggItem
-import net.minecraft.registry.Registries
-import net.minecraft.registry.Registry
-import net.minecraft.text.Text
-import net.minecraft.util.Identifier
+import net.minecraft.core.Registry
+import net.minecraft.core.registries.BuiltInRegistries
+import net.minecraft.network.chat.Component
+import net.minecraft.resources.ResourceLocation
+import net.minecraft.world.item.CreativeModeTab
+import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.SpawnEggItem
 
 object  HybridBirdsItemGroups {
     val HYBRID_BIRDS = register("hybrid_birds", FabricItemGroup.builder()
-        .displayName(Text.translatable("itemGroup.${HybridBirds.MOD_ID}.spawn_eggs"))
+        .title(Component.translatable("itemGroup.${HybridBirds.MOD_ID}.spawn_eggs"))
         .icon { ItemStack(HybridBirdsItems.GOOSE) }
-        .entries { _, entries ->
+        .displayItems { _, entries ->
 
-            entries.add(HybridBirdsItems.COOKED_EGG)
-            entries.add(HybridBirdsItems.SWAN_EGG)
-            entries.add(HybridBirdsItems.PEACOCK_EGG)
-            entries.add(HybridBirdsItems.GUINEA_FOWL_EGG)
-            entries.add(HybridBirdsItems.DUCK_EGG)
-            entries.add(HybridBirdsItems.DUCK)
-            entries.add(HybridBirdsItems.COOKED_DUCK)
-            entries.add(HybridBirdsItems.GOOSE_EGG)
-            entries.add(HybridBirdsItems.GOOSE)
-            entries.add(HybridBirdsItems.COOKED_GOOSE)
-            entries.add(HybridBirdsItems.TURKEY_EGG)
-            entries.add(HybridBirdsItems.TURKEY)
-            entries.add(HybridBirdsItems.COOKED_TURKEY)
-            entries.add(HybridBirdsItems.TURDUCKEN)
-            entries.add(HybridBirdsItems.COOKED_TURDUCKEN)
+            entries.accept(HybridBirdsItems.COOKED_EGG)
+            entries.accept(HybridBirdsItems.SWAN_EGG)
+            entries.accept(HybridBirdsItems.PEACOCK_EGG)
+            entries.accept(HybridBirdsItems.GUINEA_FOWL_EGG)
+            entries.accept(HybridBirdsItems.DUCK_EGG)
+            entries.accept(HybridBirdsItems.DUCK)
+            entries.accept(HybridBirdsItems.COOKED_DUCK)
+            entries.accept(HybridBirdsItems.GOOSE_EGG)
+            entries.accept(HybridBirdsItems.GOOSE)
+            entries.accept(HybridBirdsItems.COOKED_GOOSE)
+            entries.accept(HybridBirdsItems.TURKEY_EGG)
+            entries.accept(HybridBirdsItems.TURKEY)
+            entries.accept(HybridBirdsItems.COOKED_TURKEY)
+            entries.accept(HybridBirdsItems.TURDUCKEN)
+            entries.accept(HybridBirdsItems.COOKED_TURDUCKEN)
 
-            Registries.ITEM.forEach { item ->
-                val id = Registries.ITEM.getId(item)
+            BuiltInRegistries.ITEM.forEach { item ->
+                val id = BuiltInRegistries.ITEM.getKey(item)
                 if (id.namespace != HybridBirds.MOD_ID) {
                     return@forEach
                 }
                 if (item is SpawnEggItem) {
-                    entries.add(item)
+                    entries.accept(item)
                 }
             }
         }
         .build()
     )
 
-    private fun register(id: String, itemGroup: ItemGroup): ItemGroup {
-        return Registry.register(Registries.ITEM_GROUP, Identifier(HybridBirds.MOD_ID, id), itemGroup)
+    private fun register(id: String, itemGroup: CreativeModeTab): _root_ide_package_.net.minecraft.world.item.CreativeModeTab {
+        return Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, ResourceLocation(HybridBirds.MOD_ID, id), itemGroup)
     }
 }

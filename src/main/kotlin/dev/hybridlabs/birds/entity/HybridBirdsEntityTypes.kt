@@ -17,15 +17,15 @@ import dev.hybridlabs.birds.entity.bird.SwanEntity
 import dev.hybridlabs.birds.entity.bird.TurkeyEntity
 import net.fabricmc.fabric.api.`object`.builder.v1.entity.FabricDefaultAttributeRegistry
 import net.fabricmc.fabric.api.`object`.builder.v1.entity.FabricEntityTypeBuilder
-import net.minecraft.entity.Entity
-import net.minecraft.entity.EntityDimensions
-import net.minecraft.entity.EntityType
-import net.minecraft.entity.LivingEntity
-import net.minecraft.entity.SpawnGroup
-import net.minecraft.entity.attribute.DefaultAttributeContainer
-import net.minecraft.registry.Registries
-import net.minecraft.registry.Registry
-import net.minecraft.util.Identifier
+import net.minecraft.core.Registry
+import net.minecraft.core.registries.BuiltInRegistries
+import net.minecraft.resources.ResourceLocation
+import net.minecraft.world.entity.Entity
+import net.minecraft.world.entity.EntityDimensions
+import net.minecraft.world.entity.EntityType
+import net.minecraft.world.entity.LivingEntity
+import net.minecraft.world.entity.MobCategory
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 
 object HybridBirdsEntityTypes {
     val ROOSTER = registerBird(
@@ -130,20 +130,20 @@ object HybridBirdsEntityTypes {
         id: String,
         entityFactory: EntityType.EntityFactory<T>,
         dimensions: EntityDimensions,
-        attributeContainer: DefaultAttributeContainer.Builder
+        attributeContainer: AttributeSupplier.Builder
     ): EntityType<T> {
-        return registerCustomSpawnGroup(id, entityFactory, dimensions, attributeContainer, SpawnGroup.CREATURE)
+        return registerCustomMobCategory(id, entityFactory, dimensions, attributeContainer, MobCategory.CREATURE)
     }
 
     /**
      * Registers a living entity to the entity type registry with a Hybrid Aquatic spawn group.
      */
-    private fun <T : LivingEntity> registerCustomSpawnGroup(
+    private fun <T : LivingEntity> registerCustomMobCategory(
         id: String,
         entityFactory: EntityType.EntityFactory<T>,
         dimensions: EntityDimensions,
-        attributeContainer: DefaultAttributeContainer.Builder,
-        spawnGroup: SpawnGroup
+        attributeContainer: AttributeSupplier.Builder,
+        spawnGroup: MobCategory
     ): EntityType<T> {
         return registerLiving(id, entityFactory, dimensions, attributeContainer, spawnGroup)
     }
@@ -155,8 +155,8 @@ object HybridBirdsEntityTypes {
         id: String,
         entityFactory: EntityType.EntityFactory<T>,
         dimensions: EntityDimensions,
-        attributeContainer: DefaultAttributeContainer.Builder,
-        spawnGroup: SpawnGroup
+        attributeContainer: AttributeSupplier.Builder,
+        spawnGroup: MobCategory
     ): EntityType<T> {
         val entityType = FabricEntityTypeBuilder.create(spawnGroup, entityFactory).dimensions(dimensions).build()
         FabricDefaultAttributeRegistry.register(entityType, attributeContainer)
@@ -167,6 +167,6 @@ object HybridBirdsEntityTypes {
      * Registers an entity type to the entity type registry.
      */
     private fun <T : Entity> register(id: String, entity: EntityType<T>): EntityType<T> {
-        return Registry.register(Registries.ENTITY_TYPE, Identifier(HybridBirds.MOD_ID, id), entity)
+        return Registry.register(BuiltInRegistries.ENTITY_TYPE, ResourceLocation(HybridBirds.MOD_ID, id), entity)
     }
 }

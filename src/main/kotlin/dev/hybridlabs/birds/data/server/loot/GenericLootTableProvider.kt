@@ -1,40 +1,38 @@
 package dev.hybridlabs.birds.data.server.loot
 
-import dev.hybridlabs.birds.loot.HybridBirdsLootTables
 import dev.hybridlabs.birds.item.HybridBirdsItems
+import dev.hybridlabs.birds.loot.HybridBirdsLootTables
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.SimpleFabricLootTableProvider
-import net.minecraft.loot.LootPool
-import net.minecraft.loot.LootTable
-import net.minecraft.loot.context.LootContextTypes
-import net.minecraft.loot.entry.ItemEntry
-import net.minecraft.loot.function.SetCountLootFunction
-import net.minecraft.loot.provider.number.UniformLootNumberProvider
-import net.minecraft.util.Identifier
+import net.minecraft.resources.ResourceLocation
+import net.minecraft.world.level.storage.loot.LootPool
+import net.minecraft.world.level.storage.loot.LootTable
+import net.minecraft.world.level.storage.loot.entries.LootItem.lootTableItem
+import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets
+import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator
 import java.util.function.BiConsumer
 
 class GenericLootTableProvider(output: FabricDataOutput) :
-    SimpleFabricLootTableProvider(output, LootContextTypes.GENERIC) {
-    override fun accept(exporter: BiConsumer<Identifier, LootTable.Builder>) {
+    SimpleFabricLootTableProvider(output, LootContextParamSets.ALL_PARAMS) {
+    override fun generate(exporter: BiConsumer<ResourceLocation, LootTable.Builder>) {
         exporter.accept(
             HybridBirdsLootTables.TURKEY_FAT,
-            LootTable.builder()
+            LootTable.lootTable()
                 .pool(
-                    LootPool.builder()
-                        .with(ItemEntry.builder(HybridBirdsItems.TURKEY)
-                            .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 2.0f)))
-                        )
+                    LootPool.lootPool()
+                        .add(lootTableItem(HybridBirdsItems.TURKEY)).build()
                 )
+            .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 2.0f)))
         )
         exporter.accept(
             HybridBirdsLootTables.TURKEY_STUFFED,
-            LootTable.builder()
+            LootTable.lootTable()
                 .pool(
-                    LootPool.builder()
-                        .with(ItemEntry.builder(HybridBirdsItems.TURKEY)
-                            .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(2.0f, 3.0f)))
+                    LootPool.lootPool()
+                        .add(lootTableItem(HybridBirdsItems.TURKEY)).build()
                         )
-                )
+            .apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0f, 3.0f)))
         )
     }
 }

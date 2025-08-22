@@ -2,12 +2,12 @@ package dev.hybridlabs.birds.block
 
 import dev.hybridlabs.birds.HybridBirds
 import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
-import net.minecraft.block.Block
-import net.minecraft.block.piston.PistonBehavior
-import net.minecraft.registry.Registries
-import net.minecraft.registry.Registry
-import net.minecraft.sound.BlockSoundGroup
-import net.minecraft.util.Identifier
+import net.minecraft.core.Registry
+import net.minecraft.core.registries.BuiltInRegistries
+import net.minecraft.resources.ResourceLocation
+import net.minecraft.world.level.block.Block
+import net.minecraft.world.level.block.SoundType
+import net.minecraft.world.level.material.PushReaction
 
 /**
  * The registry of all blocks in Hybrid Aquatic.
@@ -18,12 +18,12 @@ object HybridBirdsBlocks {
             FabricBlockSettings.create()
                 .strength(0.5f)
                 .solid()
-                .pistonBehavior(PistonBehavior.DESTROY)
-                .sounds(BlockSoundGroup.WOOL)
+                .pistonBehavior(PushReaction.DESTROY)
+                .sounds(SoundType.WOOL)
         )
     )
 
     private fun register(id: String, block: Block): Block {
-        return Registry.register(Registries.BLOCK, Identifier(HybridBirds.MOD_ID, id), block)
+        return Registry.register(BuiltInRegistries.BLOCK, ResourceLocation(HybridBirds.MOD_ID, id), block)
     }
 }

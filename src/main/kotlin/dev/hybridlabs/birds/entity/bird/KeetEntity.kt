@@ -2,27 +2,27 @@ package dev.hybridlabs.birds.entity.bird
 
 import dev.hybridlabs.birds.entity.HybridBirdsEntityTypes
 import dev.hybridlabs.birds.sound.HybridBirdsSoundEvents
-import net.minecraft.entity.EntityData
-import net.minecraft.entity.EntityType
-import net.minecraft.entity.SpawnReason
-import net.minecraft.entity.ai.control.MoveControl
-import net.minecraft.entity.ai.goal.*
-import net.minecraft.entity.ai.pathing.EntityNavigation
-import net.minecraft.entity.attribute.DefaultAttributeContainer
-import net.minecraft.entity.attribute.EntityAttributes
-import net.minecraft.entity.damage.DamageSource
-import net.minecraft.entity.mob.WaterCreatureEntity
-import net.minecraft.entity.player.PlayerEntity
-import net.minecraft.nbt.NbtCompound
-import net.minecraft.server.world.ServerWorld
-import net.minecraft.sound.SoundEvent
-import net.minecraft.world.World
+import net.minecraft.nbt.CompoundTag
+import net.minecraft.server.level.ServerLevel
+import net.minecraft.sounds.SoundEvent
+import net.minecraft.world.damagesource.DamageSource
+import net.minecraft.world.entity.EntityType
+import net.minecraft.world.entity.MobSpawnType
+import net.minecraft.world.entity.SpawnGroupData
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier
+import net.minecraft.world.entity.ai.attributes.Attributes
+import net.minecraft.world.entity.ai.control.MoveControl
+import net.minecraft.world.entity.ai.goal.*
+import net.minecraft.world.entity.ai.navigation.PathNavigation
+import net.minecraft.world.entity.animal.WaterAnimal
+import net.minecraft.world.entity.player.Player
+import net.minecraft.world.level.Level
 import java.util.*
 import kotlin.math.abs
 
-class KeetEntity(entityType: EntityType<out KeetEntity>, world: World) :
+class KeetEntity(entityType: EntityType<out KeetEntity>, world: Level) :
     HybridBirdsBirdEntity(entityType, world, false) {
-    private var keetNavigation: EntityNavigation = createNavigation(world)
+    private var keetNavigation: PathNavigation = createNavigation(world)
     private var keetAge = 0
 
     init {
@@ -30,35 +30,35 @@ class KeetEntity(entityType: EntityType<out KeetEntity>, world: World) :
         navigation = keetNavigation
     }
 
-    override fun getLimitPerChunk(): Int {
+    override fun getMaxSpawnClusterSize(): Int {
         return 2
     }
 
-    override fun initGoals() {
-        goalSelector.add(0, SwimGoal(this))
-        goalSelector.add(0, FollowGuineaFowlGoal(this, 0.6))
-        goalSelector.add(0, EscapeDangerGoal(this, 0.6))
-        goalSelector.add(1, TemptGoal(this, 0.6, GuineaFowlEntity.BREEDING_INGREDIENT, false))
-        goalSelector.add(2, WanderAroundGoal(this, 0.5))
-        goalSelector.add(2, LookAroundGoal(this))
-        goalSelector.add(11, LookAtEntityGoal(this, PlayerEntity::class.java, 10.0f))
+    override fun registerGoals() {
+        goalSelector.addGoal(0, FloatGoal(this))
+        goalSelector.addGoal(0, FollowGuineaFowlGoal(this, 0.6))
+        goalSelector.addGoal(0, PanicGoal(this, 0.6))
+        goalSelector.addGoal(1, TemptGoal(this, 0.6, GuineaFowlEntity.BREEDING_INGREDIENT, false))
+        goalSelector.addGoal(2, RandomStrollGoal(this, 0.5))
+        goalSelector.addGoal(2, RandomLookAroundGoal(this))
+        goalSelector.addGoal(11, LookAtPlayerGoal(this, Player::class.java, 10.0f))
     }
 
-    override fun tickMovement() {
-        super.tickMovement()
-        if (!world.isClient) {
+    override fun aiStep() {
+        super.aiStep()
+        if (!level().isClientSide) {
             this.setKeetAge(this.keetAge + 1)
         }
     }
 
-    override fun writeCustomDataToNbt(nbt: NbtCompound) {
-        super.writeCustomDataToNbt(nbt)
-        nbt.putInt("Age", this.keetAge)
+    override fun addAdditionalSaveData(compoundTag: CompoundTag) {
+        super.addAdditionalSaveData(compoundTag)
+        compoundTag.putInt("Age", this.keetAge)
     }
 
-    override fun readCustomDataFromNbt(nbt: NbtCompound) {
-        super.readCustomDataFromNbt(nbt)
-        this.setKeetAge(nbt.getInt("Age"))
+    override fun readAdditionalSaveData(compoundTag: CompoundTag) {
+        super.readAdditionalSaveData(compoundTag)
+        this.setKeetAge(compoundTag.getInt("Age"))
     }
 
     private fun setKeetAge(keetAge: Int) {
@@ -69,28 +69,28 @@ class KeetEntity(entityType: EntityType<out KeetEntity>, world: World) :
     }
 
     private fun growUp() {
-        val var2 = this.world
-        if (var2 is ServerWorld) {
+        val var2 = this.level()
+        if (var2 is ServerLevel) {
             val grownEntityType = HybridBirdsEntityTypes.GUINEA_FOWL
-            val grownEntity = grownEntityType.create(this.world)
+            val grownEntity = grownEntityType.create(this.level())
 
             if (grownEntity != null) {
-                grownEntity.refreshPositionAndAngles(this.x, this.y, this.z, this.yaw, this.pitch)
-                grownEntity.initialize(
+                grownEntity.moveTo(this.x, this.y, this.z, this.yRot, this.xRot)
+                grownEntity.finalizeSpawn(
                     var2,
-                    world.getLocalDifficulty(grownEntity.blockPos),
-                    SpawnReason.CONVERSION,
-                    null as EntityData?,
-                    null as NbtCompound?
+                    level().getCurrentDifficultyAt(grownEntity.blockPosition()),
+                    MobSpawnType.CONVERSION,
+                    null as SpawnGroupData?,
+                    null as CompoundTag?
                 )
-                grownEntity.isAiDisabled = this.isAiDisabled
+                grownEntity.isNoAi = this.isNoAi
                 if (this.hasCustomName()) {
                     grownEntity.customName = this.customName
                     grownEntity.isCustomNameVisible = this.isCustomNameVisible
                 }
 
-                grownEntity.setPersistent()
-                var2.spawnEntityAndPassengers(grownEntity)
+                grownEntity.setPersistenceRequired()
+                var2.addFreshEntityWithPassengers(grownEntity)
                 this.discard()
             }
         }
@@ -109,12 +109,12 @@ class KeetEntity(entityType: EntityType<out KeetEntity>, world: World) :
     }
 
     companion object {
-        fun createMobAttributes(): DefaultAttributeContainer.Builder {
-            return WaterCreatureEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 2.0)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.5)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 1.0)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 12.0)
+        fun createMobAttributes(): AttributeSupplier.Builder {
+            return WaterAnimal.createMobAttributes()
+                .add(Attributes.MAX_HEALTH, 2.0)
+                .add(Attributes.MOVEMENT_SPEED, 0.5)
+                .add(Attributes.ATTACK_DAMAGE, 1.0)
+                .add(Attributes.FOLLOW_RANGE, 12.0)
         }
 
         var MAX_KEET_AGE: Int = abs(-24000.0).toInt()
@@ -125,18 +125,18 @@ class KeetEntity(entityType: EntityType<out KeetEntity>, world: World) :
         private var guineaFowlEntity: GuineaFowlEntity? = null
 
         init {
-            this.controls = EnumSet.of(Control.MOVE, Control.LOOK)
+            this.flags = EnumSet.of(Flag.MOVE, Flag.LOOK)
         }
 
-        override fun canStart(): Boolean {
-            val list = this.keet.world.getNonSpectatingEntities(
+        override fun canUse(): Boolean {
+            val list = this.keet.level().getEntitiesOfClass(
                 GuineaFowlEntity::class.java,
-                this.keet.boundingBox.expand(8.0, 4.0, 8.0)
+                this.keet.boundingBox.inflate(8.0, 4.0, 8.0)
             )
             var closestDistance = Double.MAX_VALUE
 
             for (guineaFowl in list) {
-                val distance = this.keet.squaredDistanceTo(guineaFowl)
+                val distance = this.keet.distanceToSqr(guineaFowl)
                 if (distance < closestDistance) {
                     closestDistance = distance
                     this.guineaFowlEntity = guineaFowl
@@ -146,12 +146,12 @@ class KeetEntity(entityType: EntityType<out KeetEntity>, world: World) :
             return this.guineaFowlEntity != null && closestDistance >= 1.5
         }
 
-        override fun shouldContinue(): Boolean {
-            return this.guineaFowlEntity != null && this.keet.squaredDistanceTo(this.guineaFowlEntity!!) >= 9.0
+        override fun canContinueToUse(): Boolean {
+            return this.guineaFowlEntity != null && this.keet.distanceToSqr(this.guineaFowlEntity!!) >= 9.0
         }
 
         override fun start() {
-            this.keet.navigation.startMovingTo(this.guineaFowlEntity, this.speed)
+            this.keet.navigation.moveTo(this.guineaFowlEntity, this.speed)
         }
 
         override fun stop() {
@@ -160,8 +160,8 @@ class KeetEntity(entityType: EntityType<out KeetEntity>, world: World) :
         }
 
         override fun tick() {
-            if (this.keet.squaredDistanceTo(this.guineaFowlEntity) >= 49.0) {
-                this.keet.navigation.startMovingTo(this.guineaFowlEntity, this.speed)
+            if (this.keet.distanceToSqr(this.guineaFowlEntity) >= 49.0) {
+                this.keet.navigation.moveTo(this.guineaFowlEntity, this.speed)
             }
         }
     }

@@ -1,6 +1,6 @@
 package dev.hybridlabs.birds.item
 
-import net.minecraft.entity.EntityType
-import net.minecraft.item.EggItem
+import net.minecraft.world.entity.EntityType
+import net.minecraft.world.item.EggItem
 
-class CustomEggItem(settings: Settings, val type: EntityType<*>) : EggItem(settings)
+class CustomEggItem(settings: Properties, val type: EntityType<*>) : EggItem(settings)

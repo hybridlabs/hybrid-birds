@@ -3,28 +3,27 @@ package dev.hybridlabs.birds.mixin;
 import dev.hybridlabs.birds.entity.bird.PeacockEntity;
 import dev.hybridlabs.birds.entity.bird.RoosterEntity;
 import dev.hybridlabs.birds.entity.bird.TurkeyEntity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.ai.goal.ActiveTargetGoal;
-import net.minecraft.entity.ai.goal.FleeEntityGoal;
-import net.minecraft.entity.passive.AnimalEntity;
-import net.minecraft.entity.passive.ChickenEntity;
-import net.minecraft.entity.passive.OcelotEntity;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
+import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.entity.animal.Ocelot;
+import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(OcelotEntity.class)
-public abstract class OcelotEntityMixin extends AnimalEntity {
-    protected OcelotEntityMixin(EntityType<? extends AnimalEntity> entityType, World world) {
+@Mixin(Ocelot.class)
+public abstract class OcelotEntityMixin extends Animal {
+    protected OcelotEntityMixin(EntityType<? extends Animal> entityType, Level world) {
         super(entityType, world);
     }
 
-    @Inject(method = "initGoals", at = @At("HEAD"))
+    @Inject(method = "registerGoals", at = @At("HEAD"))
     protected void registerGoals(CallbackInfo ci) {
-        this.targetSelector.add(1, new ActiveTargetGoal<>(this, PeacockEntity.class, false));
-        this.goalSelector.add(0, new FleeEntityGoal<>(this, TurkeyEntity.class, 8.0F, 1.0, 1.25));
-        this.goalSelector.add(0, new FleeEntityGoal<>(this, RoosterEntity.class, 8.0F, 1.0, 1.25));
+        this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, PeacockEntity.class, false));
+        this.goalSelector.addGoal(0, new AvoidEntityGoal<>(this, TurkeyEntity.class, 8.0F, 1.0, 1.25));
+        this.goalSelector.addGoal(0, new AvoidEntityGoal<>(this, RoosterEntity.class, 8.0F, 1.0, 1.25));
     }
 }

@@ -1,12 +1,13 @@
 package dev.hybridlabs.birds.entity
 
 import dev.hybridlabs.birds.entity.bird.HybridBirdsBirdEntity
-import net.minecraft.entity.EntityType
-import net.minecraft.entity.SpawnRestriction
-import net.minecraft.entity.SpawnRestriction.SpawnPredicate
-import net.minecraft.entity.mob.MobEntity
-import net.minecraft.entity.passive.AnimalEntity
-import net.minecraft.world.Heightmap
+import net.minecraft.world.entity.EntityType
+import net.minecraft.world.entity.Mob
+import net.minecraft.world.entity.SpawnPlacements
+import net.minecraft.world.entity.SpawnPlacements.SpawnPredicate
+import net.minecraft.world.entity.SpawnPlacements.Type
+import net.minecraft.world.entity.animal.Animal
+import net.minecraft.world.level.levelgen.Heightmap
 
 /**
  * Registers spawn restrictions for all entities when initialised.
@@ -42,23 +43,23 @@ object SpawnRestrictionRegistry {
         registerAquaticBirdEntity(entityType, HybridBirdsBirdEntity::canAquaticBirdSpawn)
     }
 
-    private fun <T : AnimalEntity> registerBirdEntity(entityType: EntityType<T>, predicate: SpawnPredicate<T>) {
+    private fun <T : Animal> registerBirdEntity(entityType: EntityType<T>, predicate: SpawnPredicate<T>) {
         register(
             entityType,
-            SpawnRestriction.Location.ON_GROUND,
+            Type.ON_GROUND,
             predicate
         )
     }
 
-    private fun <T : AnimalEntity> registerAquaticBirdEntity(entityType: EntityType<T>, predicate: SpawnPredicate<T>) {
+    private fun <T : Animal> registerAquaticBirdEntity(entityType: EntityType<T>, predicate: SpawnPredicate<T>) {
         register(
             entityType,
-            SpawnRestriction.Location.NO_RESTRICTIONS,
+            Type.NO_RESTRICTIONS,
             predicate
         )
     }
 
-    private fun <T : MobEntity> register(entityType: EntityType<T>, location: SpawnRestriction.Location, predicate: SpawnPredicate<T>) {
-        SpawnRestriction.register(entityType, location, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, predicate)
+    private fun <T : Mob> register(entityType: EntityType<T>, location: Type, predicate: SpawnPredicate<T>) {
+        SpawnPlacements.register(entityType, location, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, predicate)
     }
 }

@@ -3,24 +3,26 @@ package dev.hybridlabs.birds.entity.bird
 import dev.hybridlabs.birds.entity.HybridBirdsEntityTypes
 import dev.hybridlabs.birds.entity.ai.BirdFloatControl
 import dev.hybridlabs.birds.sound.HybridBirdsSoundEvents
-import net.minecraft.entity.*
-import net.minecraft.entity.ai.goal.*
-import net.minecraft.entity.ai.pathing.AmphibiousSwimNavigation
-import net.minecraft.entity.attribute.DefaultAttributeContainer
-import net.minecraft.entity.attribute.EntityAttributes
-import net.minecraft.entity.damage.DamageSource
-import net.minecraft.entity.mob.WaterCreatureEntity
-import net.minecraft.entity.player.PlayerEntity
-import net.minecraft.nbt.NbtCompound
-import net.minecraft.server.world.ServerWorld
-import net.minecraft.sound.SoundEvent
-import net.minecraft.world.World
+import net.minecraft.nbt.CompoundTag
+import net.minecraft.server.level.ServerLevel
+import net.minecraft.sounds.SoundEvent
+import net.minecraft.world.damagesource.DamageSource
+import net.minecraft.world.entity.EntityType
+import net.minecraft.world.entity.MobSpawnType
+import net.minecraft.world.entity.SpawnGroupData
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier
+import net.minecraft.world.entity.ai.attributes.Attributes
+import net.minecraft.world.entity.ai.goal.*
+import net.minecraft.world.entity.ai.navigation.AmphibiousPathNavigation
+import net.minecraft.world.entity.animal.WaterAnimal
+import net.minecraft.world.entity.player.Player
+import net.minecraft.world.level.Level
 import java.util.*
 import kotlin.math.abs
 
-class GoslingEntity(entityType: EntityType<out GoslingEntity>, world: World) :
+class GoslingEntity(entityType: EntityType<out GoslingEntity>, world: Level) :
     HybridBirdsBirdEntity(entityType, world, true) {
-    private var goslingNavigation = AmphibiousSwimNavigation(this, world)
+    private var goslingNavigation = AmphibiousPathNavigation(this, world)
     private var goslingAge = 0
 
     init {
@@ -32,34 +34,34 @@ class GoslingEntity(entityType: EntityType<out GoslingEntity>, world: World) :
         return 0.15f
     }
 
-    override fun getLimitPerChunk(): Int {
+    override fun getMaxSpawnClusterSize(): Int {
         return 2
     }
 
-    override fun initGoals() {
-        goalSelector.add(0, FollowGooseGoal(this, 0.5))
-        goalSelector.add(0, EscapeDangerGoal(this, 0.6))
-        goalSelector.add(1, TemptGoal(this, 0.5, GooseEntity.BREEDING_INGREDIENT, false))
-        goalSelector.add(2, WanderAroundGoal(this, 0.5))
-        goalSelector.add(2, LookAroundGoal(this))
-        goalSelector.add(11, LookAtEntityGoal(this, PlayerEntity::class.java, 10.0f))
+    override fun registerGoals() {
+        goalSelector.addGoal(0, FollowGooseGoal(this, 0.5))
+        goalSelector.addGoal(0, PanicGoal(this, 0.6))
+        goalSelector.addGoal(1, TemptGoal(this, 0.5, GooseEntity.BREEDING_INGREDIENT, false))
+        goalSelector.addGoal(2, RandomStrollGoal(this, 0.5))
+        goalSelector.addGoal(2, RandomLookAroundGoal(this))
+        goalSelector.addGoal(11, LookAtPlayerGoal(this, Player::class.java, 10.0f))
     }
 
-    override fun tickMovement() {
-        super.tickMovement()
-        if (!world.isClient) {
+    override fun aiStep() {
+        super.aiStep()
+        if (!level().isClientSide) {
             this.setGoslingAge(this.goslingAge + 1)
         }
     }
 
-    override fun writeCustomDataToNbt(nbt: NbtCompound) {
-        super.writeCustomDataToNbt(nbt)
-        nbt.putInt("Age", this.goslingAge)
+    override fun addAdditionalSaveData(compoundTag: CompoundTag) {
+        super.addAdditionalSaveData(compoundTag)
+        compoundTag.putInt("Age", this.goslingAge)
     }
 
-    override fun readCustomDataFromNbt(nbt: NbtCompound) {
-        super.readCustomDataFromNbt(nbt)
-        this.setGoslingAge(nbt.getInt("Age"))
+    override fun readAdditionalSaveData(compoundTag: CompoundTag) {
+        super.readAdditionalSaveData(compoundTag)
+        this.setGoslingAge(compoundTag.getInt("Age"))
     }
 
     private fun setGoslingAge(goslingAge: Int) {
@@ -70,28 +72,28 @@ class GoslingEntity(entityType: EntityType<out GoslingEntity>, world: World) :
     }
 
     private fun growUp() {
-        val var2 = this.world
-        if (var2 is ServerWorld) {
+        val var2 = this.level()
+        if (var2 is ServerLevel) {
             val grownEntityType = HybridBirdsEntityTypes.GOOSE
-            val grownEntity = grownEntityType.create(this.world)
+            val grownEntity = grownEntityType.create(this.level())
 
             if (grownEntity != null) {
-                grownEntity.refreshPositionAndAngles(this.x, this.y, this.z, this.yaw, this.pitch)
-                grownEntity.initialize(
+                grownEntity.moveTo(this.x, this.y, this.z, this.yRot, this.xRot)
+                grownEntity.finalizeSpawn(
                     var2,
-                    world.getLocalDifficulty(grownEntity.blockPos),
-                    SpawnReason.CONVERSION,
-                    null as EntityData?,
-                    null as NbtCompound?
+                    level().getCurrentDifficultyAt(grownEntity.blockPosition()),
+                    MobSpawnType.CONVERSION,
+                    null as SpawnGroupData?,
+                    null as CompoundTag?
                 )
-                grownEntity.isAiDisabled = this.isAiDisabled
+                grownEntity.isNoAi = this.isNoAi
                 if (this.hasCustomName()) {
                     grownEntity.customName = this.customName
                     grownEntity.isCustomNameVisible = this.isCustomNameVisible
                 }
 
-                grownEntity.setPersistent()
-                var2.spawnEntityAndPassengers(grownEntity)
+                grownEntity.setPersistenceRequired()
+                var2.addFreshEntityWithPassengers(grownEntity)
                 this.discard()
             }
         }
@@ -110,12 +112,12 @@ class GoslingEntity(entityType: EntityType<out GoslingEntity>, world: World) :
     }
 
     companion object {
-        fun createMobAttributes(): DefaultAttributeContainer.Builder {
-            return WaterCreatureEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 2.0)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.5)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 1.0)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 12.0)
+        fun createMobAttributes(): AttributeSupplier.Builder {
+            return WaterAnimal.createMobAttributes()
+                .add(Attributes.MAX_HEALTH, 2.0)
+                .add(Attributes.MOVEMENT_SPEED, 0.5)
+                .add(Attributes.ATTACK_DAMAGE, 1.0)
+                .add(Attributes.FOLLOW_RANGE, 12.0)
         }
 
         var MAX_GOSLING_AGE: Int = abs(-24000.0).toInt()
@@ -126,18 +128,18 @@ class GoslingEntity(entityType: EntityType<out GoslingEntity>, world: World) :
         private var gooseEntity: GooseEntity? = null
 
         init {
-            this.controls = EnumSet.of(Control.MOVE, Control.LOOK)
+            this.flags = EnumSet.of(Flag.MOVE, Flag.LOOK)
         }
 
-        override fun canStart(): Boolean {
-            val list = this.gosling.world.getNonSpectatingEntities(
+        override fun canUse(): Boolean {
+            val list = this.gosling.level().getEntitiesOfClass(
                 GooseEntity::class.java,
-                this.gosling.boundingBox.expand(8.0, 4.0, 8.0)
+                this.gosling.boundingBox.inflate(8.0, 4.0, 8.0)
             )
             var closestDistance = Double.MAX_VALUE
 
             for (goose in list) {
-                val distance = this.gosling.squaredDistanceTo(goose)
+                val distance = this.gosling.distanceToSqr(goose)
                 if (distance < closestDistance) {
                     closestDistance = distance
                     this.gooseEntity = goose
@@ -147,12 +149,12 @@ class GoslingEntity(entityType: EntityType<out GoslingEntity>, world: World) :
             return this.gooseEntity != null && closestDistance >= 1.5
         }
 
-        override fun shouldContinue(): Boolean {
-            return this.gooseEntity != null && this.gosling.squaredDistanceTo(this.gooseEntity!!) >= 9.0
+        override fun canContinueToUse(): Boolean {
+            return this.gooseEntity != null && this.gosling.distanceToSqr(this.gooseEntity!!) >= 9.0
         }
 
         override fun start() {
-            this.gosling.navigation.startMovingTo(this.gooseEntity, this.speed)
+            this.gosling.navigation.moveTo(this.gooseEntity, this.speed)
         }
 
         override fun stop() {
@@ -161,8 +163,8 @@ class GoslingEntity(entityType: EntityType<out GoslingEntity>, world: World) :
         }
 
         override fun tick() {
-            if (this.gosling.squaredDistanceTo(this.gooseEntity) >= 49.0) {
-                this.gosling.navigation.startMovingTo(this.gooseEntity, this.speed)
+            if (this.gosling.distanceToSqr(this.gooseEntity) >= 49.0) {
+                this.gosling.navigation.moveTo(this.gooseEntity, this.speed)
             }
         }
     }

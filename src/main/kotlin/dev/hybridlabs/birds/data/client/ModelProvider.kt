@@ -4,43 +4,43 @@ import dev.hybridlabs.birds.data.HybridBirdsDataGenerator.filterHybridBirds
 import dev.hybridlabs.birds.item.HybridBirdsItems
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider
-import net.minecraft.data.client.BlockStateModelGenerator
-import net.minecraft.data.client.ItemModelGenerator
-import net.minecraft.data.client.ModelIds
-import net.minecraft.data.client.Models
-import net.minecraft.item.SpawnEggItem
-import net.minecraft.registry.Registries
+import net.minecraft.core.registries.BuiltInRegistries
+import net.minecraft.data.models.BlockModelGenerators
+import net.minecraft.data.models.ItemModelGenerators
+import net.minecraft.data.models.model.ModelLocationUtils
+import net.minecraft.data.models.model.ModelTemplates
+import net.minecraft.world.item.SpawnEggItem
 
 class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
-    override fun generateBlockStateModels(generator: BlockStateModelGenerator) {
+    override fun generateBlockStateModels(generator: BlockModelGenerators) {
         // spawn eggs
-        Registries.ITEM
-            .filter(filterHybridBirds(Registries.ITEM))
+        BuiltInRegistries.ITEM
+            .filter(filterHybridBirds(BuiltInRegistries.ITEM))
             .forEach { item ->
                 if (item is SpawnEggItem) {
-                    generator.registerParentedItemModel(item, ModelIds.getMinecraftNamespacedItem("template_spawn_egg"))
+                    generator.delegateItemModel(item, ModelLocationUtils.decorateItemModelLocation("template_spawn_egg"))
                 }
             }
     }
 
-    override fun generateItemModels(generator: ItemModelGenerator) {
-        generator.register(HybridBirdsItems.DUCK_EGG, Models.GENERATED)
-        generator.register(HybridBirdsItems.GOOSE_EGG, Models.GENERATED)
-        generator.register(HybridBirdsItems.SWAN_EGG, Models.GENERATED)
-        generator.register(HybridBirdsItems.TURKEY_EGG, Models.GENERATED)
-        generator.register(HybridBirdsItems.PEACOCK_EGG, Models.GENERATED)
-        generator.register(HybridBirdsItems.GUINEA_FOWL_EGG, Models.GENERATED)
+    override fun generateItemModels(generator: ItemModelGenerators) {
+        generator.generateFlatItem(HybridBirdsItems.DUCK_EGG, ModelTemplates.FLAT_ITEM)
+        generator.generateFlatItem(HybridBirdsItems.GOOSE_EGG, ModelTemplates.FLAT_ITEM)
+        generator.generateFlatItem(HybridBirdsItems.SWAN_EGG, ModelTemplates.FLAT_ITEM)
+        generator.generateFlatItem(HybridBirdsItems.TURKEY_EGG, ModelTemplates.FLAT_ITEM)
+        generator.generateFlatItem(HybridBirdsItems.PEACOCK_EGG, ModelTemplates.FLAT_ITEM)
+        generator.generateFlatItem(HybridBirdsItems.GUINEA_FOWL_EGG, ModelTemplates.FLAT_ITEM)
 
-        generator.register(HybridBirdsItems.COOKED_EGG, Models.GENERATED)
+        generator.generateFlatItem(HybridBirdsItems.COOKED_EGG, ModelTemplates.FLAT_ITEM)
 
-        generator.register(HybridBirdsItems.DUCK, Models.GENERATED)
-        generator.register(HybridBirdsItems.GOOSE, Models.GENERATED)
-        generator.register(HybridBirdsItems.TURKEY, Models.GENERATED)
-        generator.register(HybridBirdsItems.TURDUCKEN, Models.GENERATED)
+        generator.generateFlatItem(HybridBirdsItems.DUCK, ModelTemplates.FLAT_ITEM)
+        generator.generateFlatItem(HybridBirdsItems.GOOSE, ModelTemplates.FLAT_ITEM)
+        generator.generateFlatItem(HybridBirdsItems.TURKEY, ModelTemplates.FLAT_ITEM)
+        generator.generateFlatItem(HybridBirdsItems.TURDUCKEN, ModelTemplates.FLAT_ITEM)
 
-        generator.register(HybridBirdsItems.COOKED_DUCK, Models.GENERATED)
-        generator.register(HybridBirdsItems.COOKED_GOOSE, Models.GENERATED)
-        generator.register(HybridBirdsItems.COOKED_TURKEY, Models.GENERATED)
-        generator.register(HybridBirdsItems.COOKED_TURDUCKEN, Models.GENERATED)
+        generator.generateFlatItem(HybridBirdsItems.COOKED_DUCK, ModelTemplates.FLAT_ITEM)
+        generator.generateFlatItem(HybridBirdsItems.COOKED_GOOSE, ModelTemplates.FLAT_ITEM)
+        generator.generateFlatItem(HybridBirdsItems.COOKED_TURKEY, ModelTemplates.FLAT_ITEM)
+        generator.generateFlatItem(HybridBirdsItems.COOKED_TURDUCKEN, ModelTemplates.FLAT_ITEM)
     }
 }

@@ -2,11 +2,11 @@ package dev.hybridlabs.birds.config
 
 import dev.hybridlabs.birds.entity.HybridBirdsEntityTypes
 import dev.hybridlabs.birds.tag.HybridBirdsBiomeTags
-import net.minecraft.entity.EntityType
-import net.minecraft.entity.SpawnGroup
-import net.minecraft.registry.tag.BiomeTags
-import net.minecraft.registry.tag.TagKey
-import net.minecraft.world.biome.Biome
+import net.minecraft.tags.BiomeTags
+import net.minecraft.tags.TagKey
+import net.minecraft.world.entity.EntityType
+import net.minecraft.world.entity.MobCategory
+import net.minecraft.world.level.biome.Biome
 
 /**
  * Applies biome modifications for entities when initialised.
@@ -32,13 +32,13 @@ class EntitySpawnConfigGenerator {
         minGroup: Int,
         maxGroup: Int
     ) {
-        add(entityType, spawnTags, SpawnGroup.CREATURE, weight, minGroup, maxGroup)
+        add(entityType, spawnTags, MobCategory.CREATURE, weight, minGroup, maxGroup)
     }
 
     private fun add(
         entityType: EntityType<*>,
         spawnTags: List<TagKey<Biome>>,
-        spawnGroup: SpawnGroup,
+        spawnGroup: MobCategory,
         weight: Int,
         minGroup: Int,
         maxGroup: Int

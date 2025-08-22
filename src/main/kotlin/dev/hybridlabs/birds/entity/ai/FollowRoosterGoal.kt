@@ -1,38 +1,38 @@
 package dev.hybridlabs.birds.entity.ai
 
 import dev.hybridlabs.birds.entity.bird.RoosterEntity
-import net.minecraft.entity.ai.TargetPredicate
-import net.minecraft.entity.ai.goal.Goal
-import net.minecraft.entity.passive.ChickenEntity
-import java.util.EnumSet
+import net.minecraft.world.entity.ai.goal.Goal
+import net.minecraft.world.entity.ai.targeting.TargetingConditions
+import net.minecraft.world.entity.animal.Chicken
+import java.util.*
 
 class FollowRoosterGoal(
-    private val chicken: ChickenEntity,
+    private val chicken: Chicken,
     private val speed: Double,
     private val minDistance: Float,
     private val maxDistance: Float
 ) : Goal() {
     private var rooster: RoosterEntity? = null
     private var delayCounter = 0
-    private val targetPredicate = TargetPredicate.createNonAttackable().setBaseMaxDistance(maxDistance.toDouble())
+    private val targetPredicate = TargetingConditions.forNonCombat().range(maxDistance.toDouble())
 
     init {
-        this.controls = EnumSet.of(Control.MOVE)
+        this.flags = EnumSet.of(Flag.MOVE)
     }
 
-    override fun canStart(): Boolean {
-        val world = chicken.world
-        val nearestRooster: RoosterEntity? = world.getClosestEntity(
+    override fun canUse(): Boolean {
+        val world = chicken.level()
+        val nearestRooster: RoosterEntity? = world.getNearestEntity(
             RoosterEntity::class.java,
             targetPredicate,
             chicken,
             chicken.x,
             chicken.y,
             chicken.z,
-            chicken.boundingBox.expand(maxDistance.toDouble())
+            chicken.boundingBox.inflate(maxDistance.toDouble())
         )
 
-        if (nearestRooster == null || nearestRooster.squaredDistanceTo(chicken) < minDistance * minDistance) {
+        if (nearestRooster == null || nearestRooster.distanceToSqr(chicken) < minDistance * minDistance) {
             return false
         }
 
@@ -40,14 +40,14 @@ class FollowRoosterGoal(
         return true
     }
 
-    override fun shouldContinue(): Boolean {
+    override fun canContinueToUse(): Boolean {
         val rooster = rooster ?: return false
 
         if (!rooster.isAlive) {
             return false
         }
 
-        return chicken.squaredDistanceTo(rooster) > minDistance * minDistance && chicken.squaredDistanceTo(rooster) < maxDistance * maxDistance
+        return chicken.distanceToSqr(rooster) > minDistance * minDistance && chicken.distanceToSqr(rooster) < maxDistance * maxDistance
     }
 
     override fun start() {
@@ -67,11 +67,11 @@ class FollowRoosterGoal(
             if (--delayCounter <= 0) {
                 delayCounter = 10
 
-                val targetPos = rooster.blockPos
+                val targetPos = rooster.position()
                 val x = targetPos.x
                 val y = targetPos.y
                 val z = targetPos.z
-                chicken.navigation.startMovingTo(x.toDouble(), y.toDouble(), z.toDouble(), speed)
+                chicken.navigation.moveTo(x.toDouble(), y.toDouble(), z.toDouble(), speed)
             }
         }
     }

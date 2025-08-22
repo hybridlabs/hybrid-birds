@@ -8,14 +8,14 @@ import dev.hybridlabs.birds.item.HybridBirdsItemGroups
 import dev.hybridlabs.birds.item.HybridBirdsItems
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider
-import net.minecraft.entity.EntityType
-import net.minecraft.entity.mob.MobEntity
-import net.minecraft.registry.Registries
+import net.minecraft.core.registries.BuiltInRegistries
+import net.minecraft.world.entity.EntityType
+import net.minecraft.world.entity.Mob
 
 class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output) {
     override fun generateTranslations(builder: TranslationBuilder) {
         builder.add(
-            Registries.ITEM_GROUP.getKey(HybridBirdsItemGroups.HYBRID_BIRDS)
+            BuiltInRegistries.CREATIVE_MODE_TAB.getResourceKey(HybridBirdsItemGroups.HYBRID_BIRDS)
                 .orElseThrow { IllegalStateException("Item group not registered") }, "Hybrid Birds"
         )
 
@@ -47,14 +47,14 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
         mapOf(
             HybridBirdsStatusEffects.ROOSTERS_CALLING to "Roosters Calling"
         ).forEach { (effect, translation) ->
-            val identifier = Registries.STATUS_EFFECT.getId(effect)
+            val identifier = BuiltInRegistries.MOB_EFFECT.getKey(effect)
             builder.add("effect.${identifier?.namespace}.${identifier?.path}", translation)
         }
 
     }
 
     private fun generateEntities(builder: TranslationBuilder) {
-        val entityNameMap = mapOf(
+        val entityNameMap = mapOf<EntityType<*>, String>(
             HybridBirdsEntityTypes.DUCK to "Duck",
             HybridBirdsEntityTypes.GOOSE to "Goose",
             HybridBirdsEntityTypes.SWAN to "Swan",
@@ -73,10 +73,10 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
 
         val nonPresentEntityNames = mutableListOf<EntityType<*>>()
 
-        Registries.ENTITY_TYPE
-            .filter(filterHybridBirds(Registries.ENTITY_TYPE))
+        BuiltInRegistries.ENTITY_TYPE
+            .filter(filterHybridBirds(BuiltInRegistries.ENTITY_TYPE))
             .forEach { type ->
-                if (type.baseClass.isAssignableFrom(MobEntity::class.java)) {
+                if (type.baseClass.isAssignableFrom(Mob::class.java)) {
                     if (!entityNameMap.containsKey(type)) {
                         nonPresentEntityNames.add(type)
                     }
@@ -88,8 +88,8 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
         }
 
         entityNameMap.forEach { (entityType, translation) ->
-            val id = Registries.ENTITY_TYPE.getId(entityType)
-            val translationKey = entityType.translationKey
+            val id = BuiltInRegistries.ENTITY_TYPE.getKey(entityType)
+            val translationKey = entityType.descriptionId
             val namespace = id.namespace
             val path = id.path
             builder.add(translationKey, translation)

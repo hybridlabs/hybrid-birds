@@ -1,10 +1,10 @@
 package dev.hybridlabs.birds.tag
 
 import dev.hybridlabs.birds.HybridBirds
-import net.minecraft.registry.RegistryKeys
-import net.minecraft.registry.tag.TagKey
-import net.minecraft.util.Identifier
-import net.minecraft.world.biome.Biome
+import net.minecraft.core.registries.Registries
+import net.minecraft.resources.ResourceLocation
+import net.minecraft.tags.TagKey
+import net.minecraft.world.level.biome.Biome
 
 object HybridBirdsBiomeTags {
 
@@ -15,6 +15,6 @@ object HybridBirdsBiomeTags {
     val TURKEY_SPAWN_BIOMES = create("turkey_spawn_biomes")
 
     private fun create(id: String): TagKey<Biome> {
-        return TagKey.of(RegistryKeys.BIOME, Identifier(HybridBirds.MOD_ID, id))
+        return TagKey.create(Registries.BIOME, ResourceLocation(HybridBirds.MOD_ID, id))
     }
 }

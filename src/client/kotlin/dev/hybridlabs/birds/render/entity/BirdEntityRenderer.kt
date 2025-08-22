@@ -1,12 +1,12 @@
 package dev.hybridlabs.birds.render.entity
 
 import dev.hybridlabs.birds.entity.bird.HybridBirdsBirdEntity
-import net.minecraft.client.render.entity.EntityRendererFactory
+import net.minecraft.client.renderer.entity.EntityRendererProvider
 import software.bernie.geckolib.model.GeoModel
 import software.bernie.geckolib.renderer.GeoEntityRenderer
 
 open class BirdEntityRenderer<T : HybridBirdsBirdEntity>(
-    context: EntityRendererFactory.Context,
+    context: EntityRendererProvider.Context,
     model: GeoModel<T>
 ) : GeoEntityRenderer<T>(context, model) {
     init {

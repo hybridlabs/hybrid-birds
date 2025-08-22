@@ -3,26 +3,26 @@ package dev.hybridlabs.birds.entity.bird
 import dev.hybridlabs.birds.entity.HybridBirdsEntityTypes
 import dev.hybridlabs.birds.entity.ai.BirdFloatControl
 import dev.hybridlabs.birds.sound.HybridBirdsSoundEvents
-import net.minecraft.entity.EntityData
-import net.minecraft.entity.EntityType
-import net.minecraft.entity.SpawnReason
-import net.minecraft.entity.ai.goal.*
-import net.minecraft.entity.ai.pathing.AmphibiousSwimNavigation
-import net.minecraft.entity.attribute.DefaultAttributeContainer
-import net.minecraft.entity.attribute.EntityAttributes
-import net.minecraft.entity.damage.DamageSource
-import net.minecraft.entity.mob.WaterCreatureEntity
-import net.minecraft.entity.player.PlayerEntity
-import net.minecraft.nbt.NbtCompound
-import net.minecraft.server.world.ServerWorld
-import net.minecraft.sound.SoundEvent
-import net.minecraft.world.World
+import net.minecraft.nbt.CompoundTag
+import net.minecraft.server.level.ServerLevel
+import net.minecraft.sounds.SoundEvent
+import net.minecraft.world.damagesource.DamageSource
+import net.minecraft.world.entity.EntityType
+import net.minecraft.world.entity.MobSpawnType
+import net.minecraft.world.entity.SpawnGroupData
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier
+import net.minecraft.world.entity.ai.attributes.Attributes
+import net.minecraft.world.entity.ai.goal.*
+import net.minecraft.world.entity.ai.navigation.AmphibiousPathNavigation
+import net.minecraft.world.entity.animal.WaterAnimal
+import net.minecraft.world.entity.player.Player
+import net.minecraft.world.level.Level
 import java.util.*
 import kotlin.math.abs
 
-class CygnetEntity(entityType: EntityType<out CygnetEntity>, world: World) :
+class CygnetEntity(entityType: EntityType<out CygnetEntity>, world: Level) :
     HybridBirdsBirdEntity(entityType, world, true) {
-    private var cygnetNavigation = AmphibiousSwimNavigation(this, world)
+    private var cygnetNavigation = AmphibiousPathNavigation(this, world)
     private var cygnetAge = 0
 
     init {
@@ -34,33 +34,33 @@ class CygnetEntity(entityType: EntityType<out CygnetEntity>, world: World) :
         return 0.2f
     }
 
-    override fun getLimitPerChunk(): Int {
+    override fun getMaxSpawnClusterSize(): Int {
         return 2
     }
 
-    override fun initGoals() {
-        goalSelector.add(0, FollowSwanGoal(this, 0.5))
-        goalSelector.add(0, EscapeDangerGoal(this, 0.6))
-        goalSelector.add(1, TemptGoal(this, 0.5, SwanEntity.BREEDING_INGREDIENT, false))
-        goalSelector.add(2, WanderAroundGoal(this, 0.5))
-        goalSelector.add(2, LookAroundGoal(this))
-        goalSelector.add(11, LookAtEntityGoal(this, PlayerEntity::class.java, 10.0f))
+    override fun registerGoals() {
+        goalSelector.addGoal(0, FollowSwanGoal(this, 0.5))
+        goalSelector.addGoal(0, PanicGoal(this, 0.6))
+        goalSelector.addGoal(1, TemptGoal(this, 0.5, SwanEntity.BREEDING_INGREDIENT, false))
+        goalSelector.addGoal(2, RandomStrollGoal(this, 0.5))
+        goalSelector.addGoal(2, RandomLookAroundGoal(this))
+        goalSelector.addGoal(11, LookAtPlayerGoal(this, Player::class.java, 10.0f))
     }
 
-    override fun tickMovement() {
-        super.tickMovement()
-        if (!world.isClient) {
+    override fun aiStep() {
+        super.aiStep()
+        if (!level().isClientSide) {
             this.setCygnetAge(this.cygnetAge + 1)
         }
     }
 
-    override fun writeCustomDataToNbt(nbt: NbtCompound) {
-        super.writeCustomDataToNbt(nbt)
+    override fun addAdditionalSaveData(nbt: CompoundTag) {
+        super.addAdditionalSaveData(nbt)
         nbt.putInt("Age", this.cygnetAge)
     }
 
-    override fun readCustomDataFromNbt(nbt: NbtCompound) {
-        super.readCustomDataFromNbt(nbt)
+    override fun readAdditionalSaveData(nbt: CompoundTag) {
+        super.readAdditionalSaveData(nbt)
         this.setCygnetAge(nbt.getInt("Age"))
     }
 
@@ -72,28 +72,28 @@ class CygnetEntity(entityType: EntityType<out CygnetEntity>, world: World) :
     }
 
     private fun growUp() {
-        val var2 = this.world
-        if (var2 is ServerWorld) {
+        val var2 = this.level()
+        if (var2 is ServerLevel) {
             val grownEntityType = HybridBirdsEntityTypes.SWAN
-            val grownEntity = grownEntityType.create(this.world)
+            val grownEntity = grownEntityType.create(this.level())
 
             if (grownEntity != null) {
-                grownEntity.refreshPositionAndAngles(this.x, this.y, this.z, this.yaw, this.pitch)
-                grownEntity.initialize(
+                grownEntity.moveTo(this.x, this.y, this.z, this.yRot, this.xRot)
+                grownEntity.finalizeSpawn(
                     var2,
-                    world.getLocalDifficulty(grownEntity.blockPos),
-                    SpawnReason.CONVERSION,
-                    null as EntityData?,
-                    null as NbtCompound?
+                    level().getCurrentDifficultyAt(grownEntity.blockPosition()),
+                    MobSpawnType.CONVERSION,
+                    null as SpawnGroupData?,
+                    null as CompoundTag?
                 )
-                grownEntity.isAiDisabled = this.isAiDisabled
+                grownEntity.isNoAi = this.isNoAi
                 if (this.hasCustomName()) {
                     grownEntity.customName = this.customName
                     grownEntity.isCustomNameVisible = this.isCustomNameVisible
                 }
 
-                grownEntity.setPersistent()
-                var2.spawnEntityAndPassengers(grownEntity)
+                grownEntity.setPersistenceRequired()
+                var2.addFreshEntityWithPassengers(grownEntity)
                 this.discard()
             }
         }
@@ -112,12 +112,12 @@ class CygnetEntity(entityType: EntityType<out CygnetEntity>, world: World) :
     }
 
     companion object {
-        fun createMobAttributes(): DefaultAttributeContainer.Builder {
-            return WaterCreatureEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 2.0)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.5)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 1.0)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 12.0)
+        fun createMobAttributes(): AttributeSupplier.Builder {
+            return WaterAnimal.createMobAttributes()
+                .add(Attributes.MAX_HEALTH, 2.0)
+                .add(Attributes.MOVEMENT_SPEED, 0.5)
+                .add(Attributes.ATTACK_DAMAGE, 1.0)
+                .add(Attributes.FOLLOW_RANGE, 12.0)
         }
 
         var MAX_CYGNET_AGE: Int = abs(-24000.0).toInt()
@@ -128,18 +128,18 @@ class CygnetEntity(entityType: EntityType<out CygnetEntity>, world: World) :
         private var swanEntity: SwanEntity? = null
 
         init {
-            this.controls = EnumSet.of(Control.MOVE, Control.LOOK)
+            this.flags = EnumSet.of(Flag.MOVE, Flag.LOOK)
         }
 
-        override fun canStart(): Boolean {
-            val list = this.cygnet.world.getNonSpectatingEntities(
+        override fun canUse(): Boolean {
+            val list = this.cygnet.level().getEntitiesOfClass(
                 SwanEntity::class.java,
-                this.cygnet.boundingBox.expand(8.0, 4.0, 8.0)
+                this.cygnet.boundingBox.inflate(8.0, 4.0, 8.0)
             )
             var closestDistance = Double.MAX_VALUE
 
             for (swan in list) {
-                val distance = this.cygnet.squaredDistanceTo(swan)
+                val distance = this.cygnet.distanceToSqr(swan)
                 if (distance < closestDistance) {
                     closestDistance = distance
                     this.swanEntity = swan
@@ -149,12 +149,12 @@ class CygnetEntity(entityType: EntityType<out CygnetEntity>, world: World) :
             return this.swanEntity != null && closestDistance >= 1.5
         }
 
-        override fun shouldContinue(): Boolean {
-            return this.swanEntity != null && this.cygnet.squaredDistanceTo(this.swanEntity!!) >= 9.0
+        override fun canContinueToUse(): Boolean {
+            return this.swanEntity != null && this.cygnet.distanceToSqr(this.swanEntity!!) >= 9.0
         }
 
         override fun start() {
-            this.cygnet.navigation.startMovingTo(this.swanEntity, this.speed)
+            this.cygnet.navigation.moveTo(this.swanEntity, this.speed)
         }
 
         override fun stop() {
@@ -163,8 +163,8 @@ class CygnetEntity(entityType: EntityType<out CygnetEntity>, world: World) :
         }
 
         override fun tick() {
-            if (this.cygnet.squaredDistanceTo(this.swanEntity) >= 49.0) {
-                this.cygnet.navigation.startMovingTo(this.swanEntity, this.speed)
+            if (this.cygnet.distanceToSqr(this.swanEntity) >= 49.0) {
+                this.cygnet.navigation.moveTo(this.swanEntity, this.speed)
             }
         }
     }

@@ -1,19 +1,19 @@
 package dev.hybridlabs.birds.model.entity.bird
 
 import dev.hybridlabs.birds.entity.bird.TurkeyEntity
-import net.minecraft.util.Identifier
+import net.minecraft.resources.ResourceLocation
 
 class TurkeyEntityModel : HybridBirdsEntityModel<TurkeyEntity>("turkey") {
 
-    private val NORMAL_MODEL = Identifier("hybrid-birds", "geo/turkey.geo.json")
-    private val FAT_MODEL = Identifier("hybrid-birds", "geo/turkey_fat.geo.json")
-    private val STUFFED_MODEL = Identifier("hybrid-birds", "geo/turkey_stuffed.geo.json")
+    private val NORMAL_MODEL = ResourceLocation("hybrid-birds", "geo/turkey.geo.json")
+    private val FAT_MODEL = ResourceLocation("hybrid-birds", "geo/turkey_fat.geo.json")
+    private val STUFFED_MODEL = ResourceLocation("hybrid-birds", "geo/turkey_stuffed.geo.json")
 
-    private val NORMAL_TEXTURE = Identifier("hybrid-birds", "textures/entity/turkey.png")
-    private val FAT_TEXTURE = Identifier("hybrid-birds", "textures/entity/turkey_fat.png")
-    private val STUFFED_TEXTURE = Identifier("hybrid-birds", "textures/entity/turkey_stuffed.png")
+    private val NORMAL_TEXTURE = ResourceLocation("hybrid-birds", "textures/entity/turkey.png")
+    private val FAT_TEXTURE = ResourceLocation("hybrid-birds", "textures/entity/turkey_fat.png")
+    private val STUFFED_TEXTURE = ResourceLocation("hybrid-birds", "textures/entity/turkey_stuffed.png")
 
-    override fun getModelResource(animatable: TurkeyEntity): Identifier {
+    override fun getModelResource(animatable: TurkeyEntity): ResourceLocation {
         return when (animatable.getStuffingLevel()) {
             0 -> NORMAL_MODEL
             1 -> FAT_MODEL
@@ -22,7 +22,7 @@ class TurkeyEntityModel : HybridBirdsEntityModel<TurkeyEntity>("turkey") {
         }
     }
 
-    override fun getTextureResource(animatable: TurkeyEntity): Identifier {
+    override fun getTextureResource(animatable: TurkeyEntity): ResourceLocation {
         return when (animatable.getStuffingLevel()) {
             0 -> NORMAL_TEXTURE
             1 -> FAT_TEXTURE
