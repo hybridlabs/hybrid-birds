@@ -1,0 +1,50 @@
+plugins {
+    id 'multiloader-common'
+    id 'net.neoforged.moddev.legacyforge'
+    id "org.jetbrains.kotlin.jvm"
+}
+
+legacyForge {
+    mcpVersion = minecraft_version
+    if (file("src/main/resources/META-INF/accesstransformer.cfg").exists()) {
+        accessTransformers = ["src/main/resources/META-INF/accesstransformer.cfg"]
+    }
+    parchment {
+        minecraftVersion = parchment_minecraft
+        mappingsVersion = parchment_version
+    }
+}
+
+repositories {
+    maven { url "https://maven.shedaniel.me/" }
+    maven {
+        name = "Geckolib"
+        url  = "https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/"
+    }
+}
+
+dependencies {
+    compileOnly group: 'org.spongepowered', name: 'mixin', version: '0.8.5'
+    implementation group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.1'
+    implementation 'org.jetbrains:annotations:25.0.0'
+    modImplementation "software.bernie.geckolib:geckolib-forge-$geckolib_version"
+    modApi("me.shedaniel.cloth:cloth-config-forge:${cloth_config_version}") {
+        exclude(group: "net.fabricmc.fabric-api")
+    }
+}
+
+configurations {
+    commonJava {
+        canBeResolved = false
+        canBeConsumed = true
+    }
+    commonResources {
+        canBeResolved = false
+        canBeConsumed = true
+    }
+}
+
+artifacts {
+    commonJava sourceSets.main.java.sourceDirectories.singleFile
+    commonResources sourceSets.main.resources.sourceDirectories.singleFile
+}
