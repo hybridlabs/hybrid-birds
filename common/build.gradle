@@ -1,7 +1,7 @@
 plugins {
     id 'multiloader-common'
     id 'net.neoforged.moddev.legacyforge'
-    id "org.jetbrains.kotlin.jvm"
+    id 'org.jetbrains.kotlin.jvm'
 }
 
 legacyForge {
@@ -21,6 +21,7 @@ repositories {
         name = "Geckolib"
         url  = "https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/"
     }
+    mavenCentral()
 }
 
 dependencies {
@@ -31,6 +32,8 @@ dependencies {
     modApi("me.shedaniel.cloth:cloth-config-forge:${cloth_config_version}") {
         exclude(group: "net.fabricmc.fabric-api")
     }
+    compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.5.0"))
+    implementation(jarJar("io.github.llamalad7:mixinextras-forge:0.5.0"))
 }
 
 configurations {
@@ -38,6 +41,12 @@ configurations {
         canBeResolved = false
         canBeConsumed = true
     }
+
+    commonKotlin {
+        canBeResolved = false
+        canBeConsumed = true
+    }
+
     commonResources {
         canBeResolved = false
         canBeConsumed = true
@@ -47,4 +56,23 @@ configurations {
 artifacts {
     commonJava sourceSets.main.java.sourceDirectories.singleFile
     commonResources sourceSets.main.resources.sourceDirectories.singleFile
+}
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'org.jetbrains.kotlin.jvm'
+    apply plugin: 'kotlin'
+
+    repositories {
+        mavenCentral()
+    }
+
+    sourceSets {
+        main.kotlin.srcDirs = ['src/main/java', 'src/main/kotlin']
+    }
+
+    compileKotlin {
+        source(project(":common").sourceSets.main.allSource)
+        inputs.file "../gradle.properties"
+    }
 }

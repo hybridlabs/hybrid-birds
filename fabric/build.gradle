@@ -49,16 +49,6 @@ loom {
         defaultRefmapName.set("${mod_id}.refmap.json")
     }
 
-    splitEnvironmentSourceSets()
-    /*
-    mods {
-        mod_id {
-            sourceSet sourceSets.main
-            sourceSet sourceSets.client
-        }
-    }
-     */
-
     runs {
         client {
             client()
