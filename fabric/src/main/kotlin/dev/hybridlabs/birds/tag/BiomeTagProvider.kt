@@ -1,6 +1,5 @@
-package dev.hybridlabs.birds.data.server.tag
+package dev.hybridlabs.birds.tag
 
-import dev.hybridlabs.birds.tag.HybridBirdsBiomeTags
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider
 import net.minecraft.core.HolderLookup

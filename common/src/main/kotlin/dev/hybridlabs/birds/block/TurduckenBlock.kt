@@ -1,6 +1,5 @@
 package dev.hybridlabs.birds.block
 
-import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.sounds.SoundEvents
@@ -25,7 +24,7 @@ import net.minecraft.world.phys.shapes.CollisionContext
 import net.minecraft.world.phys.shapes.VoxelShape
 
 @Suppress("OVERRIDE_DEPRECATION", "DEPRECATION")
-class TurduckenBlock(settings: FabricBlockSettings?) : Block(settings) {
+class TurduckenBlock(settings: Properties?) : Block(settings!!) {
 
 
     override fun getShape(
