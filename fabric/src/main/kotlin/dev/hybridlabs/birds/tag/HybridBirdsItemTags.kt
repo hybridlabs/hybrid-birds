@@ -2,7 +2,7 @@
 
 package dev.hybridlabs.birds.tag
 
-import dev.hybridlabs.birds.HybridBirds
+import dev.hybridlabs.birds.Constants
 import net.fabricmc.fabric.impl.tag.convention.TagRegistration
 import net.minecraft.core.registries.Registries
 import net.minecraft.resources.ResourceLocation
@@ -15,7 +15,7 @@ object HybridBirdsItemTags {
     val EGGS = create("eggs")
 
     private fun create(id: String): TagKey<Item> {
-        return TagKey.create(Registries.ITEM, ResourceLocation(HybridBirds.MOD_ID, id))
+        return TagKey.create(Registries.ITEM, ResourceLocation(Constants.MOD_ID, id))
     }
 
     private fun createConventional(id: String): TagKey<Item> {

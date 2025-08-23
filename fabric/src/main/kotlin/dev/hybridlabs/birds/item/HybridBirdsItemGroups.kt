@@ -2,7 +2,7 @@
 
 package dev.hybridlabs.birds.item
 
-import dev.hybridlabs.birds.HybridBirds
+import dev.hybridlabs.birds.Constants
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup
 import net.minecraft.core.Registry
 import net.minecraft.core.registries.BuiltInRegistries
@@ -14,7 +14,7 @@ import net.minecraft.world.item.SpawnEggItem
 
 object  HybridBirdsItemGroups {
     val HYBRID_BIRDS = register("hybrid_birds", FabricItemGroup.builder()
-        .title(Component.translatable("itemGroup.${HybridBirds.MOD_ID}.spawn_eggs"))
+        .title(Component.translatable("itemGroup.${Constants.MOD_ID}.spawn_eggs"))
         .icon { ItemStack(HybridBirdsItems.GOOSE) }
         .displayItems { _, entries ->
 
@@ -36,7 +36,7 @@ object  HybridBirdsItemGroups {
 
             BuiltInRegistries.ITEM.forEach { item ->
                 val id = BuiltInRegistries.ITEM.getKey(item)
-                if (id.namespace != HybridBirds.MOD_ID) {
+                if (id.namespace != Constants.MOD_ID) {
                     return@forEach
                 }
                 if (item is SpawnEggItem) {
@@ -48,6 +48,6 @@ object  HybridBirdsItemGroups {
     )
 
     private fun register(id: String, itemGroup: CreativeModeTab): _root_ide_package_.net.minecraft.world.item.CreativeModeTab {
-        return Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, ResourceLocation(HybridBirds.MOD_ID, id), itemGroup)
+        return Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, ResourceLocation(Constants.MOD_ID, id), itemGroup)
     }
 }

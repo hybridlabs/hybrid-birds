@@ -1,15 +1,15 @@
 package dev.hybridlabs.birds.data
 
-import dev.hybridlabs.birds.HybridBirds
+import dev.hybridlabs.birds.Constants
 import dev.hybridlabs.birds.data.client.LanguageProvider
 import dev.hybridlabs.birds.data.client.ModelProvider
-import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint
-import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator
+import dev.hybridlabs.birds.data.server.RecipeProvider
 import dev.hybridlabs.birds.data.server.loot.EntityTypeLootTableProvider
 import dev.hybridlabs.birds.data.server.loot.GenericLootTableProvider
 import dev.hybridlabs.birds.data.server.tag.BiomeTagProvider
 import dev.hybridlabs.birds.data.server.tag.ItemTagProvider
-import dev.hybridlabs.birds.data.server.RecipeProvider
+import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint
+import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator
 import net.minecraft.core.Registry
 
 object HybridBirdsDataGenerator : DataGeneratorEntrypoint {
@@ -27,7 +27,7 @@ object HybridBirdsDataGenerator : DataGeneratorEntrypoint {
 	fun <T> filterHybridBirds(registry: Registry<T>): (T) -> Boolean {
 		return { o ->
 			val id = registry.getKey(o)
-			id?.namespace == HybridBirds.MOD_ID
+			id?.namespace == Constants.MOD_ID
 		}
 	}
 }
