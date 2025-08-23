@@ -2,19 +2,14 @@
 
 package dev.hybridlabs.birds.item
 
-import dev.hybridlabs.birds.HybridBirds
 import dev.hybridlabs.birds.block.HybridBirdsBlocks
 import dev.hybridlabs.birds.entity.HybridBirdsEntityTypes
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings
-import net.minecraft.core.Registry
-import net.minecraft.core.registries.BuiltInRegistries
-import net.minecraft.resources.ResourceLocation
+import dev.hybridlabs.birds.platform.Services
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.Mob
 import net.minecraft.world.food.FoodProperties
 import net.minecraft.world.item.BlockItem
 import net.minecraft.world.item.Item
-import net.minecraft.world.item.SpawnEggItem
 
 object HybridBirdsItems {
     val DUCK_SPAWN_EGG = registerSpawnEgg("duck_spawn_egg", HybridBirdsEntityTypes.DUCK, 0xcfb99a, 0x1a854b)
@@ -34,7 +29,7 @@ object HybridBirdsItems {
 
     val COOKED_EGG = register(
         "cooked_egg", Item(
-            FabricItemSettings().food(
+            itemSettings().food(
                 FoodProperties.Builder()
                     .nutrition(4)
                     .saturationMod(0.4F)
@@ -47,7 +42,7 @@ object HybridBirdsItems {
 
     val DUCK = register(
         "duck", Item(
-            FabricItemSettings().food(
+            itemSettings().food(
                 FoodProperties.Builder()
                     .nutrition(2)
                     .saturationMod(0.3F)
@@ -58,7 +53,7 @@ object HybridBirdsItems {
 
     val GOOSE = register(
         "goose", Item(
-            FabricItemSettings().food(
+            itemSettings().food(
                 FoodProperties.Builder()
                     .nutrition(3)
                     .saturationMod(0.4F)
@@ -70,7 +65,7 @@ object HybridBirdsItems {
 
     val TURKEY = register(
         "turkey", Item(
-            FabricItemSettings().food(
+            itemSettings().food(
                 FoodProperties.Builder()
                     .nutrition(4)
                     .saturationMod(0.4F)
@@ -82,7 +77,7 @@ object HybridBirdsItems {
 
     val TURDUCKEN = register(
         "turducken", Item(
-            FabricItemSettings().food(
+            itemSettings().food(
                 FoodProperties.Builder()
                     .nutrition(5)
                     .saturationMod(0.6F)
@@ -94,7 +89,7 @@ object HybridBirdsItems {
 
     val COOKED_DUCK = register(
         "cooked_duck", Item(
-            FabricItemSettings().food(
+            itemSettings().food(
                 FoodProperties.Builder()
                     .nutrition(6)
                     .saturationMod(0.6F)
@@ -106,7 +101,7 @@ object HybridBirdsItems {
 
     val COOKED_GOOSE = register(
         "cooked_goose", Item(
-            FabricItemSettings().food(
+            itemSettings().food(
                 FoodProperties.Builder()
                     .nutrition(7)
                     .saturationMod(0.6F)
@@ -118,7 +113,7 @@ object HybridBirdsItems {
 
     val COOKED_TURKEY = register(
         "cooked_turkey", Item(
-            FabricItemSettings().food(
+            itemSettings().food(
                 FoodProperties.Builder()
                     .nutrition(8)
                     .saturationMod(0.8F)
@@ -131,7 +126,7 @@ object HybridBirdsItems {
     val COOKED_TURDUCKEN = register(
         "cooked_turducken", BlockItem(
             HybridBirdsBlocks.TURDUCKEN,
-            FabricItemSettings()
+            itemSettings()
                 .food(
                     FoodProperties.Builder()
                         .nutrition(12)
@@ -143,7 +138,7 @@ object HybridBirdsItems {
     )
 
     private fun <T : Item> register(id: String, item: T): T {
-        return Registry.register(BuiltInRegistries.ITEM, ResourceLocation(HybridBirds.MOD_ID, id), item)
+        return Services.ITEM.register(id,item)
     }
 
     private fun <T : Mob> registerSpawnEgg(
@@ -152,10 +147,14 @@ object HybridBirdsItems {
         primaryColor: Int,
         secondaryColor: Int
     ): Item {
-        return register(id, SpawnEggItem(type, primaryColor, secondaryColor, FabricItemSettings()))
+        return Services.ITEM.registerSpawnEgg(id, type, primaryColor, secondaryColor)
     }
 
-    private fun registerEgg(id: String, type: EntityType<*>): dev.hybridlabs.birds.item.CustomEggItem {
-        return register(id, dev.hybridlabs.birds.item.CustomEggItem(FabricItemSettings().maxCount(16), type))
+    private fun registerEgg(id: String, type: EntityType<*>): CustomEggItem {
+        return Services.ITEM.registerEgg(id,type)
+    }
+
+    private fun itemSettings(): Item.Properties {
+        return Services.ITEM.itemProperties()
     }
 }

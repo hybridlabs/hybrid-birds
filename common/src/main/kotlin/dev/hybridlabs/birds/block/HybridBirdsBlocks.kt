@@ -1,7 +1,7 @@
 package dev.hybridlabs.birds.block
 
-import dev.hybridlabs.birds.HybridBirds
-import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
+import dev.hybridlabs.birds.Constants
+import dev.hybridlabs.birds.platform.Services
 import net.minecraft.core.Registry
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.resources.ResourceLocation
@@ -14,16 +14,16 @@ import net.minecraft.world.level.material.PushReaction
  */
 object HybridBirdsBlocks {
     val TURDUCKEN = register(
-        "turducken", TurduckenBlock(
-            FabricBlockSettings.create()
+        "turducken", dev.hybridlabs.birds.block.TurduckenBlock(
+            Services.BLOCK.blockSettings
                 .strength(0.5f)
-                .solid()
-                .pistonBehavior(PushReaction.DESTROY)
-                .sounds(SoundType.WOOL)
+                .forceSolidOn()
+                .pushReaction(PushReaction.DESTROY)
+                .sound(SoundType.WOOL)
         )
     )
 
     private fun register(id: String, block: Block): Block {
-        return Registry.register(BuiltInRegistries.BLOCK, ResourceLocation(HybridBirds.MOD_ID, id), block)
+        return Registry.register(BuiltInRegistries.BLOCK, ResourceLocation(Constants.MOD_ID, id), block)
     }
 }

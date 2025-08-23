@@ -1,6 +1,6 @@
 package dev.hybridlabs.birds.effect
 
-import dev.hybridlabs.birds.HybridBirds
+import dev.hybridlabs.birds.Constants
 import net.minecraft.core.Registry
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.resources.ResourceLocation
@@ -10,6 +10,6 @@ object HybridBirdsStatusEffects {
     val ROOSTERS_CALLING = register("roosters_calling", RoostersCallingStatusEffect())
 
     private fun register(id: String, effect: MobEffect): MobEffect {
-        return Registry.register(BuiltInRegistries.MOB_EFFECT, ResourceLocation(HybridBirds.MOD_ID, id), effect)
+        return Registry.register(BuiltInRegistries.MOB_EFFECT, ResourceLocation(Constants.MOD_ID, id), effect)
     }
 }
