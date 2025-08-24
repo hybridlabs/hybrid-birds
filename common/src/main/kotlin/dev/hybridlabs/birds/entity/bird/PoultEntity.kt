@@ -72,7 +72,7 @@ class PoultEntity(entityType: EntityType<out PoultEntity>, world: Level) :
         val var2 = this.level()
         if (var2 is ServerLevel) {
             val grownEntityType = HybridBirdsEntityTypes.TURKEY
-            val grownEntity = grownEntityType.create(this.level())
+            val grownEntity = grownEntityType!!.get().create(this.level())
 
             if (grownEntity != null) {
                 grownEntity.moveTo(this.x, this.y, this.z, this.yRot, this.xRot)
@@ -97,15 +97,15 @@ class PoultEntity(entityType: EntityType<out PoultEntity>, world: Level) :
     }
 
     override fun getAmbientSound(): SoundEvent {
-        return HybridBirdsSoundEvents.POULT_AMBIENT
+        return HybridBirdsSoundEvents.POULT_AMBIENT.get()
     }
 
     override fun getHurtSound(source: DamageSource): SoundEvent {
-        return HybridBirdsSoundEvents.POULT_HURT
+        return HybridBirdsSoundEvents.POULT_HURT.get()
     }
 
     override fun getDeathSound(): SoundEvent {
-        return HybridBirdsSoundEvents.POULT_DIE
+        return HybridBirdsSoundEvents.POULT_DIE.get()
     }
 
     companion object {
@@ -151,7 +151,7 @@ class PoultEntity(entityType: EntityType<out PoultEntity>, world: Level) :
         }
 
         override fun start() {
-            this.poult.navigation.moveTo(this.turkeyEntity, this.speed)
+            this.poult.navigation.moveTo(this.turkeyEntity!!, this.speed)
         }
 
         override fun stop() {
@@ -160,8 +160,8 @@ class PoultEntity(entityType: EntityType<out PoultEntity>, world: Level) :
         }
 
         override fun tick() {
-            if (this.poult.distanceToSqr(this.turkeyEntity) >= 49.0) {
-                this.poult.navigation.moveTo(this.turkeyEntity, this.speed)
+            if (this.poult.distanceToSqr(this.turkeyEntity!!) >= 49.0) {
+                this.poult.navigation.moveTo(this.turkeyEntity!!, this.speed)
             }
         }
     }

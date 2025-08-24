@@ -7,8 +7,8 @@ plugins {
 mixin {
     add(sourceSets.main, "${mod_id}.refmap.json")
 
-    config("${mod_id}.mixins.json")
-    config("${mod_id}.forge.mixins.json")
+    //config("${mod_id}.mixins.json")
+    //config("${mod_id}.forge.mixins.json")
 }
 
 legacyForge {
@@ -16,7 +16,7 @@ legacyForge {
     apply plugin: 'kotlin'
     version = "${minecraft_version}-${forge_version}"
 
-    validateAccessTransformers = true
+    validateAccessTransformers = false
 
     def at = project(':common').file('src/main/resources/META-INF/accesstransformer.cfg')
     if (at.exists()) {

@@ -75,7 +75,7 @@ class DucklingEntity(entityType: EntityType<out DucklingEntity>, world: Level) :
         val var2 = this.level()
         if (var2 is ServerLevel) {
             val grownEntityType = HybridBirdsEntityTypes.DUCK
-            val grownEntity = grownEntityType.create(this.level())
+            val grownEntity = grownEntityType!!.get().create(this.level())
 
             if (grownEntity != null) {
                 grownEntity.moveTo(this.x, this.y, this.z, this.yRot, this.xRot)
@@ -100,15 +100,15 @@ class DucklingEntity(entityType: EntityType<out DucklingEntity>, world: Level) :
     }
 
     override fun getAmbientSound(): SoundEvent {
-        return HybridBirdsSoundEvents.DUCKLING_AMBIENT
+        return HybridBirdsSoundEvents.DUCKLING_AMBIENT.get()
     }
 
     override fun getHurtSound(source: DamageSource): SoundEvent {
-        return HybridBirdsSoundEvents.DUCKLING_HURT
+        return HybridBirdsSoundEvents.DUCKLING_HURT.get()
     }
 
     override fun getDeathSound(): SoundEvent {
-        return HybridBirdsSoundEvents.DUCKLING_DIE
+        return HybridBirdsSoundEvents.DUCKLING_DIE.get()
     }
 
     companion object {
@@ -154,7 +154,7 @@ class DucklingEntity(entityType: EntityType<out DucklingEntity>, world: Level) :
         }
 
         override fun start() {
-            this.duckling.navigation.moveTo(this.duckEntity, this.speed)
+            this.duckling.navigation.moveTo(this.duckEntity!!, this.speed)
         }
 
         override fun stop() {
@@ -163,8 +163,8 @@ class DucklingEntity(entityType: EntityType<out DucklingEntity>, world: Level) :
         }
 
         override fun tick() {
-            if (this.duckling.distanceToSqr(this.duckEntity) >= 49.0) {
-                this.duckling.navigation.moveTo(this.duckEntity, this.speed)
+            if (this.duckling.distanceToSqr(this.duckEntity!!) >= 49.0) {
+                this.duckling.navigation.moveTo(this.duckEntity!!, this.speed)
             }
         }
     }

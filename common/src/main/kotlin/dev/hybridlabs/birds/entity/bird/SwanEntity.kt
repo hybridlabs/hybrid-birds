@@ -54,22 +54,22 @@ class SwanEntity(entityType: EntityType<out SwanEntity>, world: Level) :
                 1.0f,
                 (random.nextFloat() - random.nextFloat()) * 0.2f + 1.0f
             )
-            this.spawnAtLocation(HybridBirdsItems.SWAN_EGG)
+            this.spawnAtLocation(HybridBirdsItems.SWAN_EGG.get())
             this.gameEvent(GameEvent.ENTITY_PLACE)
             this.eggLayTime = random.nextInt(6000) + 6000
         }
     }
 
     override fun getAmbientSound(): SoundEvent {
-        return HybridBirdsSoundEvents.SWAN_AMBIENT
+        return HybridBirdsSoundEvents.SWAN_AMBIENT.get()
     }
 
     override fun getHurtSound(source: DamageSource): SoundEvent {
-        return HybridBirdsSoundEvents.SWAN_HURT
+        return HybridBirdsSoundEvents.SWAN_HURT.get()
     }
 
     override fun getDeathSound(): SoundEvent {
-        return HybridBirdsSoundEvents.SWAN_DIE
+        return HybridBirdsSoundEvents.SWAN_DIE.get()
     }
 
     override fun isFood(stack: ItemStack?): Boolean {
@@ -77,7 +77,7 @@ class SwanEntity(entityType: EntityType<out SwanEntity>, world: Level) :
     }
 
     override fun getBreedOffspring(serverLevel: ServerLevel, ageableMob: AgeableMob): AgeableMob? {
-        return HybridBirdsEntityTypes.CYGNET.create(serverLevel)
+        return HybridBirdsEntityTypes.CYGNET!!.get().create(serverLevel)
     }
 
     companion object {

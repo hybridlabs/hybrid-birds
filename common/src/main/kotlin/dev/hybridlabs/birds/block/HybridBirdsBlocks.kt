@@ -1,12 +1,13 @@
 package dev.hybridlabs.birds.block
 
+import dev.hybridlabs.birds.CommonClass
 import dev.hybridlabs.birds.Constants
-import dev.hybridlabs.birds.platform.Services
-import net.minecraft.core.Registry
+import dev.hybridlabs.birds.platform.registration.RegistrationProvider
+import dev.hybridlabs.birds.platform.registration.RegistryObject
 import net.minecraft.core.registries.BuiltInRegistries
-import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.SoundType
+import net.minecraft.world.level.block.state.BlockBehaviour
 import net.minecraft.world.level.material.PushReaction
 
 /**
@@ -14,8 +15,8 @@ import net.minecraft.world.level.material.PushReaction
  */
 object HybridBirdsBlocks {
     val TURDUCKEN = register(
-        "turducken", dev.hybridlabs.birds.block.TurduckenBlock(
-            Services.BLOCK.blockSettings
+        "turducken", TurduckenBlock(
+            BlockBehaviour.Properties.of()
                 .strength(0.5f)
                 .forceSolidOn()
                 .pushReaction(PushReaction.DESTROY)
@@ -23,7 +24,7 @@ object HybridBirdsBlocks {
         )
     )
 
-    private fun register(id: String, block: Block): Block {
-        return Registry.register(BuiltInRegistries.BLOCK, ResourceLocation(Constants.MOD_ID, id), block)
+    private fun register(id: String, block: Block): RegistryObject<Block> {
+        return CommonClass.BLOCKS.register(id){block}
     }
 }

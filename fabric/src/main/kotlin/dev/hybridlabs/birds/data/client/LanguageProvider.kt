@@ -41,7 +41,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
         mapOf(
             HybridBirdsBlocks.TURDUCKEN to "Cooked Turducken"
         ).forEach { (block, translation) ->
-            builder.add(block, translation)
+            builder.add(block.get(), translation)
         }
 
         mapOf(
@@ -55,20 +55,20 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
 
     private fun generateEntities(builder: TranslationBuilder) {
         val entityNameMap = mapOf<EntityType<*>, String>(
-            HybridBirdsEntityTypes.DUCK to "Duck",
-            HybridBirdsEntityTypes.GOOSE to "Goose",
-            HybridBirdsEntityTypes.SWAN to "Swan",
-            HybridBirdsEntityTypes.ROOSTER to "Rooster",
-            HybridBirdsEntityTypes.CHICK to "Chick",
-            HybridBirdsEntityTypes.DUCKLING to "Duckling",
-            HybridBirdsEntityTypes.GOSLING to "Gosling",
-            HybridBirdsEntityTypes.CYGNET to "Cygnet",
-            HybridBirdsEntityTypes.POULT to "Poult",
-            HybridBirdsEntityTypes.PEACHICK to "Peachick",
-            HybridBirdsEntityTypes.KEET to "Keet",
-            HybridBirdsEntityTypes.TURKEY to "Turkey",
-            HybridBirdsEntityTypes.PEACOCK to "Peacock",
-            HybridBirdsEntityTypes.GUINEA_FOWL to "Guinea Fowl",
+            HybridBirdsEntityTypes.DUCK!!.get() to "Duck",
+            HybridBirdsEntityTypes.GOOSE!!.get() to "Goose",
+            HybridBirdsEntityTypes.SWAN!!.get() to "Swan",
+            HybridBirdsEntityTypes.ROOSTER!!.get() to "Rooster",
+            HybridBirdsEntityTypes.CHICK!!.get() to "Chick",
+            HybridBirdsEntityTypes.DUCKLING!!.get() to "Duckling",
+            HybridBirdsEntityTypes.GOSLING!!.get() to "Gosling",
+            HybridBirdsEntityTypes.CYGNET!!.get() to "Cygnet",
+            HybridBirdsEntityTypes.POULT!!.get() to "Poult",
+            HybridBirdsEntityTypes.PEACHICK!!.get() to "Peachick",
+            HybridBirdsEntityTypes.KEET!!.get() to "Keet",
+            HybridBirdsEntityTypes.TURKEY!!.get() to "Turkey",
+            HybridBirdsEntityTypes.PEACOCK!!.get() to "Peacock",
+            HybridBirdsEntityTypes.GUINEA_FOWL!!.get() to "Guinea Fowl",
         )
 
         val nonPresentEntityNames = mutableListOf<EntityType<*>>()

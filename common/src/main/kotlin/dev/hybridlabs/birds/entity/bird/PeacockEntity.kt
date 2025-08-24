@@ -62,7 +62,7 @@ class PeacockEntity(entityType: EntityType<out PeacockEntity>, world: Level) :
                 1.0f,
                 (random.nextFloat() - random.nextFloat()) * 0.2f + 1.0f
             )
-            this.spawnAtLocation(HybridBirdsItems.PEACOCK_EGG)
+            this.spawnAtLocation(HybridBirdsItems.PEACOCK_EGG.get())
             this.gameEvent(GameEvent.ENTITY_PLACE)
             this.eggLayTime = random.nextInt(6000) + 6000
         }
@@ -104,22 +104,22 @@ class PeacockEntity(entityType: EntityType<out PeacockEntity>, world: Level) :
     }
 
     override fun getBreedOffspring(serverLevel: ServerLevel, ageableMob: AgeableMob): AgeableMob? {
-        return HybridBirdsEntityTypes.PEACHICK.create(serverLevel)
+        return HybridBirdsEntityTypes.PEACHICK!!.get().create(serverLevel)
     }
 
     override fun getAmbientSound(): SoundEvent {
-        return HybridBirdsSoundEvents.PEACOCK_AMBIENT
+        return HybridBirdsSoundEvents.PEACOCK_AMBIENT.get()
     }
 
     override fun getHurtSound(source: DamageSource): SoundEvent {
-        return HybridBirdsSoundEvents.PEACOCK_HURT
+        return HybridBirdsSoundEvents.PEACOCK_HURT.get()
     }
 
     override fun getDeathSound(): SoundEvent {
-        return HybridBirdsSoundEvents.PEACOCK_DIE
+        return HybridBirdsSoundEvents.PEACOCK_DIE.get()
     }
 
-    override fun isFood(stack: ItemStack?): Boolean {
+    override fun isFood(stack: ItemStack): Boolean {
         return BREEDING_INGREDIENT.test(stack)
     }
 

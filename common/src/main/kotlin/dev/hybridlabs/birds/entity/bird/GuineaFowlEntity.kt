@@ -55,7 +55,7 @@ class GuineaFowlEntity(entityType: EntityType<out GuineaFowlEntity>, world: Leve
                 1.0f,
                 (random.nextFloat() - random.nextFloat()) * 0.2f + 1.0f
             )
-            this.spawnAtLocation(HybridBirdsItems.GUINEA_FOWL_EGG)
+            this.spawnAtLocation(HybridBirdsItems.GUINEA_FOWL_EGG.get())
             this.gameEvent(GameEvent.ENTITY_PLACE)
             this.eggLayTime = random.nextInt(6000) + 6000
         }
@@ -74,12 +74,10 @@ class GuineaFowlEntity(entityType: EntityType<out GuineaFowlEntity>, world: Leve
     }
 
     override fun getBreedOffspring(serverLevel: ServerLevel, ageableMob: AgeableMob): AgeableMob? {
-        return HybridBirdsEntityTypes.KEET.create(serverLevel)
+        return HybridBirdsEntityTypes.KEET!!.get().create(serverLevel)
     }
 
-    override fun spawnChildFromBreeding(world: ServerLevel, other: Animal?) {
-        if (other == null) return
-
+    override fun spawnChildFromBreeding(world: ServerLevel, other: Animal) {
         val babyCount = 1 + random.nextInt(4)
 
         repeat(babyCount) {

@@ -1,9 +1,9 @@
 package dev.hybridlabs.birds.entity
 
 import dev.hybridlabs.birds.entity.bird.HybridBirdsBirdEntity
+import dev.hybridlabs.birds.platform.Services
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.Mob
-import net.minecraft.world.entity.SpawnPlacements
 import net.minecraft.world.entity.SpawnPlacements.SpawnPredicate
 import net.minecraft.world.entity.SpawnPlacements.Type
 import net.minecraft.world.entity.animal.Animal
@@ -15,23 +15,23 @@ import net.minecraft.world.level.levelgen.Heightmap
 object SpawnRestrictionRegistry {
     init {
         setOf(
-            HybridBirdsEntityTypes.ROOSTER,
-            HybridBirdsEntityTypes.CHICK,
-            HybridBirdsEntityTypes.POULT,
-            HybridBirdsEntityTypes.PEACHICK,
-            HybridBirdsEntityTypes.KEET,
-            HybridBirdsEntityTypes.TURKEY,
-            HybridBirdsEntityTypes.PEACOCK,
-            HybridBirdsEntityTypes.GUINEA_FOWL
+            HybridBirdsEntityTypes.ROOSTER!!.get(),
+            HybridBirdsEntityTypes.CHICK!!.get(),
+            HybridBirdsEntityTypes.POULT!!.get(),
+            HybridBirdsEntityTypes.PEACHICK!!.get(),
+            HybridBirdsEntityTypes.KEET!!.get(),
+            HybridBirdsEntityTypes.TURKEY!!.get(),
+            HybridBirdsEntityTypes.PEACOCK!!.get(),
+            HybridBirdsEntityTypes.GUINEA_FOWL!!.get()
         ).forEach { registerTerrestrialBird(it) }
 
         setOf(
-            HybridBirdsEntityTypes.DUCKLING,
-            HybridBirdsEntityTypes.GOSLING,
-            HybridBirdsEntityTypes.CYGNET,
-            HybridBirdsEntityTypes.DUCK,
-            HybridBirdsEntityTypes.GOOSE,
-            HybridBirdsEntityTypes.SWAN,
+            HybridBirdsEntityTypes.DUCKLING!!.get(),
+            HybridBirdsEntityTypes.GOSLING!!.get(),
+            HybridBirdsEntityTypes.CYGNET!!.get(),
+            HybridBirdsEntityTypes.DUCK!!.get(),
+            HybridBirdsEntityTypes.GOOSE!!.get(),
+            HybridBirdsEntityTypes.SWAN!!.get(),
         ).forEach { registerAquaticBird(it) }
     }
 
@@ -60,6 +60,6 @@ object SpawnRestrictionRegistry {
     }
 
     private fun <T : Mob> register(entityType: EntityType<T>, location: Type, predicate: SpawnPredicate<T>) {
-        SpawnPlacements.register(entityType, location, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, predicate)
+        Services.SPAWN_PLACEMENT.register(entityType, location, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, predicate)
     }
 }

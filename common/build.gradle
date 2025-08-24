@@ -5,6 +5,7 @@ plugins {
 }
 
 legacyForge {
+    validateAccessTransformers = false
     mcpVersion = minecraft_version
     if (file("src/main/resources/META-INF/accesstransformer.cfg").exists()) {
         accessTransformers = ["src/main/resources/META-INF/accesstransformer.cfg"]
@@ -63,6 +64,7 @@ subprojects {
     apply plugin: 'org.jetbrains.kotlin.jvm'
     apply plugin: 'kotlin'
 
+
     repositories {
         mavenCentral()
     }
@@ -72,6 +74,9 @@ subprojects {
     }
 
     compileKotlin {
+        if (file("src/main/resources/META-INF/accesstransformer.cfg").exists()) {
+            accessTransformers = ["src/main/resources/META-INF/accesstransformer.cfg"]
+        }
         source(project(":common").sourceSets.main.allSource)
         inputs.file "../gradle.properties"
     }

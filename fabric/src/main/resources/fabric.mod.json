@@ -19,7 +19,7 @@
     },
 
     "license": "ARR",
-    "icon": "assets/hybrid-birds/icon.png",
+    "icon": "assets/hybrid_birds/icon.png",
 
     "environment": "*",
     "entrypoints": {
@@ -30,10 +30,6 @@
             }
         ],
         "client": [
-            {
-                "value": "dev.hybridlabs.birds.HybridBirdsClient",
-                "adapter": "kotlin"
-            }
         ],
         "fabric-datagen": [
             {
@@ -47,7 +43,7 @@
     },
 
     "mixins": [
-        "hybrid_birds.mixins.json",
+        "hybrid_birds.fabric.mixins.json",
         {
             "config": "hybrid_birds.client.mixins.json",
             "environment": "client"

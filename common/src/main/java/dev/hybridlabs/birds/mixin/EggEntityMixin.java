@@ -56,6 +56,6 @@ public abstract class EggEntityMixin extends ThrowableItemProjectile {
         if (stack.getItem() instanceof CustomEggItem eggItem) {
             return eggItem.getType();
         }
-        return HybridBirdsEntityTypes.INSTANCE.getCHICK();
+        return HybridBirdsEntityTypes.INSTANCE.getCHICK().get();
     }
 }

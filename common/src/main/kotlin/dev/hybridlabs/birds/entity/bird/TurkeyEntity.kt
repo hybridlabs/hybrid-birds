@@ -73,7 +73,7 @@ class TurkeyEntity(entityType: EntityType<out TurkeyEntity>, world: Level) :
                 1.0f,
                 (random.nextFloat() - random.nextFloat()) * 0.2f + 1.0f
             )
-            this.spawnAtLocation(HybridBirdsItems.TURKEY_EGG)
+            this.spawnAtLocation(HybridBirdsItems.TURKEY_EGG.get())
             this.gameEvent(GameEvent.ENTITY_PLACE)
             this.eggLayTime = random.nextInt(6000) + 6000
         }
@@ -139,15 +139,15 @@ class TurkeyEntity(entityType: EntityType<out TurkeyEntity>, world: Level) :
     // region SFX
 
     override fun getAmbientSound(): SoundEvent {
-        return HybridBirdsSoundEvents.TURKEY_AMBIENT
+        return HybridBirdsSoundEvents.TURKEY_AMBIENT.get()
     }
 
     override fun getHurtSound(source: DamageSource): SoundEvent {
-        return HybridBirdsSoundEvents.TURKEY_HURT
+        return HybridBirdsSoundEvents.TURKEY_HURT.get()
     }
 
     override fun getDeathSound(): SoundEvent {
-        return HybridBirdsSoundEvents.TURKEY_DIE
+        return HybridBirdsSoundEvents.TURKEY_DIE.get()
     }
 
     // endregion
@@ -157,7 +157,7 @@ class TurkeyEntity(entityType: EntityType<out TurkeyEntity>, world: Level) :
     }
 
     override fun getBreedOffspring(serverLevel: ServerLevel, ageableMob: AgeableMob): AgeableMob? {
-        return HybridBirdsEntityTypes.POULT.create(serverLevel)
+        return HybridBirdsEntityTypes.POULT!!.get().create(serverLevel)
     }
 
     companion object {

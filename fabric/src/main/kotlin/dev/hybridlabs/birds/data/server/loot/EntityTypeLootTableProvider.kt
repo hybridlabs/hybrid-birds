@@ -18,7 +18,7 @@ import java.util.function.BiConsumer
 class EntityTypeLootTableProvider(output: FabricDataOutput) :
     SimpleFabricLootTableProvider(output, LootContextParamSets.ENTITY) {
     override fun generate(exporter: BiConsumer<ResourceLocation, LootTable.Builder>) {
-        export(exporter, HybridBirdsEntityTypes.ROOSTER) {
+        export(exporter, HybridBirdsEntityTypes.ROOSTER!!.get()) {
             pool(
                 LootPool.lootPool().add(
                     LootItem.lootTableItem(Items.CHICKEN)
@@ -35,7 +35,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
                 )
         }
 
-        export(exporter, HybridBirdsEntityTypes.GUINEA_FOWL) {
+        export(exporter, HybridBirdsEntityTypes.GUINEA_FOWL!!.get()) {
             pool(
                 LootPool.lootPool().add(
                     LootItem.lootTableItem(Items.CHICKEN)
@@ -50,7 +50,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
                 .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F)))
         }
 
-        export(exporter, HybridBirdsEntityTypes.DUCK) {
+        export(exporter, HybridBirdsEntityTypes.DUCK!!.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -65,7 +65,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
                 .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F)))
         }
 
-        export(exporter, HybridBirdsEntityTypes.GOOSE) {
+        export(exporter, HybridBirdsEntityTypes.GOOSE!!.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -80,7 +80,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
                 .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F)))
         }
 
-        export(exporter, HybridBirdsEntityTypes.TURKEY) {
+        export(exporter, HybridBirdsEntityTypes.TURKEY!!.get()) {
             pool(
                 LootPool.lootPool()
                     .add( LootItem.lootTableItem(HybridBirdsItems.TURKEY)).build()
@@ -93,7 +93,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
                 .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F)))
         }
 
-        export(exporter, HybridBirdsEntityTypes.SWAN) {
+        export(exporter, HybridBirdsEntityTypes.SWAN!!.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -102,7 +102,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
                 .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F)))
         }
 
-        export(exporter, HybridBirdsEntityTypes.PEACOCK) {
+        export(exporter, HybridBirdsEntityTypes.PEACOCK!!.get()) {
             pool(
                 LootPool.lootPool()
                     .add(

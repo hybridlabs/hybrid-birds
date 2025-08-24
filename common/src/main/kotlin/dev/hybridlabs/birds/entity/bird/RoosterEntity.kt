@@ -14,6 +14,7 @@ import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.effect.MobEffectInstance
 import net.minecraft.world.entity.AgeableMob
 import net.minecraft.world.entity.EntityType
+import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.entity.ai.control.MoveControl
@@ -106,7 +107,7 @@ class RoosterEntity(entityType: EntityType<out RoosterEntity>, world: Level) :
     private fun morningCall() {
         val timeOfDay = level().dayTime() % 24000L
         if (timeOfDay in 0..5 && !hasCalled) {
-            this.playSound(HybridBirdsSoundEvents.ROOSTER_CALL, 1.0F, 1.0F)
+            this.playSound(HybridBirdsSoundEvents.ROOSTER_CALL.get(), 1.0F, 1.0F)
             applySpeedEffectToNearbyPlayers()
             hasCalled = true
         } else if (timeOfDay !in 0..5) {
@@ -116,7 +117,7 @@ class RoosterEntity(entityType: EntityType<out RoosterEntity>, world: Level) :
 
     private fun applySpeedEffectToNearbyPlayers() {
         val effectRadius = 32.0
-        val speedEffect = MobEffectInstance(HybridBirdsStatusEffects.ROOSTERS_CALLING, 6000, 0)
+        val speedEffect = MobEffectInstance(HybridBirdsStatusEffects.ROOSTERS_CALLING.get(), 6000, 0)
 
         val players = level().players()
         for (player in players) {
@@ -143,26 +144,26 @@ class RoosterEntity(entityType: EntityType<out RoosterEntity>, world: Level) :
     // region SFX
 
     override fun getAmbientSound(): SoundEvent {
-        return HybridBirdsSoundEvents.ROOSTER_AMBIENT
+        return HybridBirdsSoundEvents.ROOSTER_AMBIENT.get()
     }
 
     override fun getHurtSound(source: DamageSource): SoundEvent {
-        return HybridBirdsSoundEvents.ROOSTER_HURT
+        return HybridBirdsSoundEvents.ROOSTER_HURT.get()
     }
 
     override fun getDeathSound(): SoundEvent {
-        return HybridBirdsSoundEvents.ROOSTER_DIE
+        return HybridBirdsSoundEvents.ROOSTER_DIE.get()
     }
 
     // endregion
 
     override fun getBreedOffspring(serverLevel: ServerLevel, ageableMob: AgeableMob): AgeableMob? {
-        return HybridBirdsEntityTypes.CHICK.create(serverLevel)
+        return HybridBirdsEntityTypes.CHICK!!.get().create(serverLevel)
     }
 
     companion object {
         fun createMobAttributes(): AttributeSupplier.Builder {
-            return WaterAnimal.createMobAttributes()
+            return WaterAnimal.createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 6.0)
                 .add(Attributes.MOVEMENT_SPEED, 0.5)
                 .add(Attributes.ATTACK_DAMAGE, 1.0)

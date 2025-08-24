@@ -72,7 +72,7 @@ class KeetEntity(entityType: EntityType<out KeetEntity>, world: Level) :
         val var2 = this.level()
         if (var2 is ServerLevel) {
             val grownEntityType = HybridBirdsEntityTypes.GUINEA_FOWL
-            val grownEntity = grownEntityType.create(this.level())
+            val grownEntity = grownEntityType!!.get().create(this.level())
 
             if (grownEntity != null) {
                 grownEntity.moveTo(this.x, this.y, this.z, this.yRot, this.xRot)
@@ -97,15 +97,15 @@ class KeetEntity(entityType: EntityType<out KeetEntity>, world: Level) :
     }
 
     override fun getAmbientSound(): SoundEvent {
-        return HybridBirdsSoundEvents.CHICK_AMBIENT
+        return HybridBirdsSoundEvents.CHICK_AMBIENT.get()
     }
 
     override fun getHurtSound(source: DamageSource): SoundEvent {
-        return HybridBirdsSoundEvents.CHICK_HURT
+        return HybridBirdsSoundEvents.CHICK_HURT.get()
     }
 
     override fun getDeathSound(): SoundEvent {
-        return HybridBirdsSoundEvents.CHICK_DIE
+        return HybridBirdsSoundEvents.CHICK_DIE.get()
     }
 
     companion object {
@@ -151,7 +151,7 @@ class KeetEntity(entityType: EntityType<out KeetEntity>, world: Level) :
         }
 
         override fun start() {
-            this.keet.navigation.moveTo(this.guineaFowlEntity, this.speed)
+            this.keet.navigation.moveTo(this.guineaFowlEntity!!, this.speed)
         }
 
         override fun stop() {
@@ -160,8 +160,8 @@ class KeetEntity(entityType: EntityType<out KeetEntity>, world: Level) :
         }
 
         override fun tick() {
-            if (this.keet.distanceToSqr(this.guineaFowlEntity) >= 49.0) {
-                this.keet.navigation.moveTo(this.guineaFowlEntity, this.speed)
+            if (this.keet.distanceToSqr(this.guineaFowlEntity!!) >= 49.0) {
+                this.keet.navigation.moveTo(this.guineaFowlEntity!!, this.speed)
             }
         }
     }

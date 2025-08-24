@@ -74,7 +74,7 @@ class CygnetEntity(entityType: EntityType<out CygnetEntity>, world: Level) :
     private fun growUp() {
         val var2 = this.level()
         if (var2 is ServerLevel) {
-            val grownEntityType = HybridBirdsEntityTypes.SWAN
+            val grownEntityType = HybridBirdsEntityTypes.SWAN!!.get()
             val grownEntity = grownEntityType.create(this.level())
 
             if (grownEntity != null) {
@@ -100,15 +100,15 @@ class CygnetEntity(entityType: EntityType<out CygnetEntity>, world: Level) :
     }
 
     override fun getAmbientSound(): SoundEvent {
-        return HybridBirdsSoundEvents.CYGNET_AMBIENT
+        return HybridBirdsSoundEvents.CYGNET_AMBIENT.get()
     }
 
     override fun getHurtSound(source: DamageSource): SoundEvent {
-        return HybridBirdsSoundEvents.CYGNET_HURT
+        return HybridBirdsSoundEvents.CYGNET_HURT.get()
     }
 
     override fun getDeathSound(): SoundEvent {
-        return HybridBirdsSoundEvents.CYGNET_DIE
+        return HybridBirdsSoundEvents.CYGNET_DIE.get()
     }
 
     companion object {
@@ -154,7 +154,7 @@ class CygnetEntity(entityType: EntityType<out CygnetEntity>, world: Level) :
         }
 
         override fun start() {
-            this.cygnet.navigation.moveTo(this.swanEntity, this.speed)
+            this.cygnet.navigation.moveTo(this.swanEntity!!, this.speed)
         }
 
         override fun stop() {
@@ -163,8 +163,8 @@ class CygnetEntity(entityType: EntityType<out CygnetEntity>, world: Level) :
         }
 
         override fun tick() {
-            if (this.cygnet.distanceToSqr(this.swanEntity) >= 49.0) {
-                this.cygnet.navigation.moveTo(this.swanEntity, this.speed)
+            if (this.cygnet.distanceToSqr(this.swanEntity!!) >= 49.0) {
+                this.cygnet.navigation.moveTo(this.swanEntity!!, this.speed)
             }
         }
     }

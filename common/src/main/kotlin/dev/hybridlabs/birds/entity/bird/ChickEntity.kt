@@ -77,7 +77,7 @@ class ChickEntity(entityType: EntityType<out ChickEntity>, world: Level) :
         val var2 = this.level()
         if (var2 is ServerLevel) {
             val isRooster = Random.nextFloat() < 0.25
-            val grownEntityType = if (isRooster) HybridBirdsEntityTypes.ROOSTER else EntityType.CHICKEN
+            val grownEntityType = if (isRooster) HybridBirdsEntityTypes.ROOSTER!!.get() else EntityType.CHICKEN
             val grownEntity = grownEntityType.create(this.level())
 
             if (grownEntity != null) {
@@ -103,15 +103,15 @@ class ChickEntity(entityType: EntityType<out ChickEntity>, world: Level) :
     }
 
     override fun getAmbientSound(): SoundEvent {
-        return HybridBirdsSoundEvents.CHICK_AMBIENT
+        return HybridBirdsSoundEvents.CHICK_AMBIENT.get()
     }
 
     override fun getHurtSound(source: DamageSource): SoundEvent {
-        return HybridBirdsSoundEvents.CHICK_HURT
+        return HybridBirdsSoundEvents.CHICK_HURT.get()
     }
 
     override fun getDeathSound(): SoundEvent {
-        return HybridBirdsSoundEvents.CHICK_DIE
+        return HybridBirdsSoundEvents.CHICK_DIE.get()
     }
 
     companion object {
@@ -157,7 +157,7 @@ class ChickEntity(entityType: EntityType<out ChickEntity>, world: Level) :
         }
 
         override fun start() {
-            this.chick.navigation.moveTo(this.chickenEntity, this.speed)
+            this.chick.navigation.moveTo(this.chickenEntity!!, this.speed)
         }
 
         override fun stop() {
@@ -166,8 +166,8 @@ class ChickEntity(entityType: EntityType<out ChickEntity>, world: Level) :
         }
 
         override fun tick() {
-            if (this.chick.distanceToSqr(this.chickenEntity) >= 49.0) {
-                this.chick.navigation.moveTo(this.chickenEntity, this.speed)
+            if (this.chick.distanceToSqr(this.chickenEntity!!) >= 49.0) {
+                this.chick.navigation.moveTo(this.chickenEntity!!, this.speed)
             }
         }
     }

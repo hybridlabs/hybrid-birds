@@ -1,12 +1,16 @@
 package dev.hybridlabs.birds.sound
 
+import dev.hybridlabs.birds.CommonClass
 import dev.hybridlabs.birds.Constants
+import dev.hybridlabs.birds.platform.registration.RegistryObject
 import net.minecraft.core.Registry
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.sounds.SoundEvent
 
 object HybridBirdsSoundEvents {
+    @JvmStatic
+    fun load(){}
 
     val DUCK_AMBIENT = register("duck_ambient")
     val DUCK_HURT = register("duck_hurt")
@@ -52,8 +56,8 @@ object HybridBirdsSoundEvents {
     val PEACHICK_HURT = register("peachick_hurt")
     val PEACHICK_DIE = register("peachick_die")
 
-    private fun register(id: String): SoundEvent {
+    private fun register(id: String): RegistryObject<SoundEvent> {
         val identifier = ResourceLocation(Constants.MOD_ID, id)
-        return Registry.register(BuiltInRegistries.SOUND_EVENT, identifier, SoundEvent.createVariableRangeEvent(identifier))
+        return CommonClass.SOUND_EVENTS.register(id){SoundEvent.createVariableRangeEvent(identifier)}
     }
 }

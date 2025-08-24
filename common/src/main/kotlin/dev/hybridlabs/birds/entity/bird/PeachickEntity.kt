@@ -72,7 +72,7 @@ class PeachickEntity(entityType: EntityType<out PeachickEntity>, world: Level) :
         val var2 = this.level()
         if (var2 is ServerLevel) {
             val grownEntityType = HybridBirdsEntityTypes.PEACOCK
-            val grownEntity = grownEntityType.create(this.level())
+            val grownEntity = grownEntityType!!.get().create(this.level())
 
             if (grownEntity != null) {
                 grownEntity.moveTo(this.x, this.y, this.z, this.yRot, this.xRot)
@@ -97,15 +97,15 @@ class PeachickEntity(entityType: EntityType<out PeachickEntity>, world: Level) :
     }
 
     override fun getAmbientSound(): SoundEvent {
-        return HybridBirdsSoundEvents.PEACHICK_AMBIENT
+        return HybridBirdsSoundEvents.PEACHICK_AMBIENT.get()
     }
 
     override fun getHurtSound(source: DamageSource): SoundEvent {
-        return HybridBirdsSoundEvents.PEACHICK_HURT
+        return HybridBirdsSoundEvents.PEACHICK_HURT.get()
     }
 
     override fun getDeathSound(): SoundEvent {
-        return HybridBirdsSoundEvents.PEACHICK_DIE
+        return HybridBirdsSoundEvents.PEACHICK_DIE.get()
     }
 
     companion object {
@@ -151,7 +151,7 @@ class PeachickEntity(entityType: EntityType<out PeachickEntity>, world: Level) :
         }
 
         override fun start() {
-            this.peachick.navigation.moveTo(this.peacockEntity, this.speed)
+            this.peachick.navigation.moveTo(this.peacockEntity!!, this.speed)
         }
 
         override fun stop() {
@@ -160,8 +160,8 @@ class PeachickEntity(entityType: EntityType<out PeachickEntity>, world: Level) :
         }
 
         override fun tick() {
-            if (this.peachick.distanceToSqr(this.peacockEntity) >= 49.0) {
-                this.peachick.navigation.moveTo(this.peacockEntity, this.speed)
+            if (this.peachick.distanceToSqr(this.peacockEntity!!) >= 49.0) {
+                this.peachick.navigation.moveTo(this.peacockEntity!!, this.speed)
             }
         }
     }

@@ -58,30 +58,30 @@ class GooseEntity(entityType: EntityType<out GooseEntity>, world: Level) :
                 1.0f,
                 (random.nextFloat() - random.nextFloat()) * 0.2f + 1.0f
             )
-            this.spawnAtLocation(HybridBirdsItems.GOOSE_EGG)
+            this.spawnAtLocation(HybridBirdsItems.GOOSE_EGG.get())
             this.gameEvent(GameEvent.ENTITY_PLACE)
             this.eggLayTime = random.nextInt(6000) + 6000
         }
     }
 
     override fun getAmbientSound(): SoundEvent {
-        return HybridBirdsSoundEvents.GOOSE_AMBIENT
+        return HybridBirdsSoundEvents.GOOSE_AMBIENT.get()
     }
 
     override fun getHurtSound(source: DamageSource): SoundEvent {
-        return HybridBirdsSoundEvents.GOOSE_HURT
+        return HybridBirdsSoundEvents.GOOSE_HURT.get()
     }
 
     override fun getDeathSound(): SoundEvent {
-        return HybridBirdsSoundEvents.GOOSE_DIE
+        return HybridBirdsSoundEvents.GOOSE_DIE.get()
     }
 
-    override fun isFood(stack: ItemStack?): Boolean {
+    override fun isFood(stack: ItemStack): Boolean {
         return BREEDING_INGREDIENT.test(stack)
     }
 
     override fun getBreedOffspring(serverLevel: ServerLevel, ageableMob: AgeableMob): AgeableMob? {
-        return HybridBirdsEntityTypes.GOSLING.create(serverLevel)
+        return HybridBirdsEntityTypes.GOSLING!!.get().create(serverLevel)
     }
 
     companion object {

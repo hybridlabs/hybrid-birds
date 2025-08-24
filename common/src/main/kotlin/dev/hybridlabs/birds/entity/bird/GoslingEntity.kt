@@ -75,7 +75,7 @@ class GoslingEntity(entityType: EntityType<out GoslingEntity>, world: Level) :
         val var2 = this.level()
         if (var2 is ServerLevel) {
             val grownEntityType = HybridBirdsEntityTypes.GOOSE
-            val grownEntity = grownEntityType.create(this.level())
+            val grownEntity = grownEntityType!!.get().create(this.level())
 
             if (grownEntity != null) {
                 grownEntity.moveTo(this.x, this.y, this.z, this.yRot, this.xRot)
@@ -100,15 +100,15 @@ class GoslingEntity(entityType: EntityType<out GoslingEntity>, world: Level) :
     }
 
     override fun getAmbientSound(): SoundEvent {
-        return HybridBirdsSoundEvents.GOSLING_AMBIENT
+        return HybridBirdsSoundEvents.GOSLING_AMBIENT.get()
     }
 
     override fun getHurtSound(source: DamageSource): SoundEvent {
-        return HybridBirdsSoundEvents.GOSLING_HURT
+        return HybridBirdsSoundEvents.GOSLING_HURT.get()
     }
 
     override fun getDeathSound(): SoundEvent {
-        return HybridBirdsSoundEvents.GOSLING_DIE
+        return HybridBirdsSoundEvents.GOSLING_DIE.get()
     }
 
     companion object {
@@ -154,7 +154,7 @@ class GoslingEntity(entityType: EntityType<out GoslingEntity>, world: Level) :
         }
 
         override fun start() {
-            this.gosling.navigation.moveTo(this.gooseEntity, this.speed)
+            this.gosling.navigation.moveTo(this.gooseEntity!!, this.speed)
         }
 
         override fun stop() {
@@ -163,8 +163,8 @@ class GoslingEntity(entityType: EntityType<out GoslingEntity>, world: Level) :
         }
 
         override fun tick() {
-            if (this.gosling.distanceToSqr(this.gooseEntity) >= 49.0) {
-                this.gosling.navigation.moveTo(this.gooseEntity, this.speed)
+            if (this.gosling.distanceToSqr(this.gooseEntity!!) >= 49.0) {
+                this.gosling.navigation.moveTo(this.gooseEntity!!, this.speed)
             }
         }
     }
