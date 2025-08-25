@@ -15,9 +15,9 @@ class BirdFloatControl(bird: HybridBirdsBirdEntity) : MoveControl(bird) {
             if (this.mob.isUnderWater)
                 deltaMovement = this.mob.deltaMovement
                 this.mob.deltaMovement = deltaMovement.add(0.0, 0.05, 0.0)
-            }
             deltaMovement = this.mob.deltaMovement
             this.mob.setDeltaMovement(deltaMovement.x, max(deltaMovement.y, 0.0), deltaMovement.z)
+        }
         super.tick()
     }
 }
