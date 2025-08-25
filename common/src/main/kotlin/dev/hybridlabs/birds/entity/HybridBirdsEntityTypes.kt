@@ -2,11 +2,8 @@ package dev.hybridlabs.birds.entity
 
 import dev.hybridlabs.birds.CommonClass
 import dev.hybridlabs.birds.entity.bird.*
-import dev.hybridlabs.birds.platform.ClientServices
 import dev.hybridlabs.birds.platform.Services
 import dev.hybridlabs.birds.platform.registration.RegistryObject
-import dev.hybridlabs.birds.render.entity.*
-import net.minecraft.client.renderer.entity.EntityRendererProvider
 import net.minecraft.world.entity.EntityDimensions
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.LivingEntity
@@ -23,128 +20,112 @@ object HybridBirdsEntityTypes {
         "rooster",
         ::RoosterEntity,
         EntityDimensions.fixed(0.5f, 0.7f),
-        RoosterEntity::createMobAttributes,
-        ::RoosterEntityRenderer
+        RoosterEntity::createMobAttributes
     )
 
     val CHICK = registerBird(
         "chick",
         ::ChickEntity,
         EntityDimensions.fixed(0.25f, 0.25f),
-        ChickEntity::createMobAttributes,
-        ::ChickEntityRenderer
+        ChickEntity::createMobAttributes
     )
 
     val DUCKLING = registerBird(
         "duckling",
         ::DucklingEntity,
         EntityDimensions.fixed(0.25f, 0.4f),
-        DucklingEntity::createMobAttributes,
-        ::DucklingEntityRenderer
+        DucklingEntity::createMobAttributes
     )
 
     val GOSLING = registerBird(
         "gosling",
         ::GoslingEntity,
         EntityDimensions.fixed(0.25f, 0.4f),
-        GoslingEntity::createMobAttributes,
-        ::GoslingEntityRenderer
+        GoslingEntity::createMobAttributes
     )
 
     val CYGNET = registerBird(
         "cygnet",
         ::CygnetEntity,
         EntityDimensions.fixed(0.25f, 0.4f),
-        CygnetEntity::createMobAttributes,
-        ::CygnetEntityRenderer
+        CygnetEntity::createMobAttributes
     )
 
     val POULT = registerBird(
         "poult",
         ::PoultEntity,
         EntityDimensions.fixed(0.25f, 0.25f),
-        PoultEntity::createMobAttributes,
-        ::PoultEntityRenderer
+        PoultEntity::createMobAttributes
     )
 
     val PEACHICK = registerBird(
         "peachick",
         ::PeachickEntity,
         EntityDimensions.fixed(0.25f, 0.25f),
-        PeachickEntity::createMobAttributes,
-        ::PeachickEntityRenderer
+        PeachickEntity::createMobAttributes
     )
 
     val KEET = registerBird(
         "keet",
         ::KeetEntity,
         EntityDimensions.fixed(0.25f, 0.25f),
-        KeetEntity::createMobAttributes,
-        ::KeetEntityRenderer
+        KeetEntity::createMobAttributes
     )
 
     val TURKEY = registerBird(
         "turkey",
         ::TurkeyEntity,
         EntityDimensions.fixed(0.65f, 0.75f),
-        TurkeyEntity::createMobAttributes,
-        ::TurkeyEntityRenderer
+        TurkeyEntity::createMobAttributes
     )
 
     val PEACOCK = registerBird(
         "peacock",
         ::PeacockEntity,
         EntityDimensions.fixed(0.6f, 0.6f),
-        PeacockEntity::createMobAttributes,
-        ::PeacockEntityRenderer
+        PeacockEntity::createMobAttributes
     )
 
     val GUINEA_FOWL = registerBird(
         "guinea_fowl",
         ::GuineaFowlEntity,
         EntityDimensions.fixed(0.6f, 0.6f),
-        GuineaFowlEntity::createMobAttributes,
-        ::GuineaFowlEntityRenderer
+        GuineaFowlEntity::createMobAttributes
     )
 
     val DUCK = registerBird(
         "duck",
         ::DuckEntity,
         EntityDimensions.fixed(0.5f, 0.5f),
-        DuckEntity::createMobAttributes,
-        ::DuckEntityRenderer
+        DuckEntity::createMobAttributes
     )
 
     val GOOSE = registerBird(
         "goose",
         ::GooseEntity,
         EntityDimensions.fixed(0.6f, 1.0f),
-        GooseEntity::createMobAttributes,
-        ::GooseEntityRenderer
+        GooseEntity::createMobAttributes
     )
 
     val SWAN = registerBird(
         "swan",
         ::SwanEntity,
         EntityDimensions.fixed(0.8f, 1.5f),
-        SwanEntity::createMobAttributes,
-        ::SwanEntityRenderer
+        SwanEntity::createMobAttributes
     )
 
     private fun <T : LivingEntity> registerBird(
         id: String,
         entityFactory: EntityType.EntityFactory<T>,
         dimensions: EntityDimensions,
-        attributeContainer: Callable<AttributeSupplier.Builder>,
-        entityRenderer: EntityRendererProvider<T>
+        attributeContainer: Callable<AttributeSupplier.Builder>
     ): RegistryObject<EntityType<T>>? {
         return registerCustomMobCategory(
             id,
             entityFactory,
             dimensions,
             attributeContainer,
-            MobCategory.CREATURE,
-            entityRenderer
+            MobCategory.CREATURE
         )
     }
 
@@ -155,12 +136,10 @@ object HybridBirdsEntityTypes {
         id: String,
         entityFactory: EntityType.EntityFactory<T>,
         dimensions: EntityDimensions,
-
         attributeContainer: Callable<AttributeSupplier.Builder>,
         spawnGroup: MobCategory,
-        entityRenderer: EntityRendererProvider<T>
     ): RegistryObject<EntityType<T>>? {
-        return registerLiving(id, entityFactory, dimensions, attributeContainer, spawnGroup, entityRenderer)
+        return registerLiving(id, entityFactory, dimensions, attributeContainer, spawnGroup)
     }
 
     /**
@@ -172,11 +151,10 @@ object HybridBirdsEntityTypes {
         dimensions: EntityDimensions,
         attributeContainer: Callable<AttributeSupplier.Builder>,
         spawnGroup: MobCategory,
-        entityRenderer: EntityRendererProvider<T>
     ): RegistryObject<EntityType<T>>? {
 
         val entityType = EntityType.Builder.of(entityFactory, spawnGroup).sized(dimensions.width, dimensions.height)
-        return register(id, entityType, attributeContainer, entityRenderer)
+        return register(id, entityType, attributeContainer)
     }
 
     /**
@@ -186,12 +164,10 @@ object HybridBirdsEntityTypes {
         id: String,
         entity: EntityType.Builder<T>,
         attributeContainer: Callable<AttributeSupplier.Builder>,
-        entityRenderer: EntityRendererProvider<T>
     ): RegistryObject<EntityType<T>>? {
         return CommonClass.ENTITY_TYPES.register(id) {
             val entityType = entity.build(id);
             Services.ATTRIBUTE.register(id, entityType, attributeContainer);
-            ClientServices.RENDERER.register(entityType, entityRenderer)
             entityType
         }
     }

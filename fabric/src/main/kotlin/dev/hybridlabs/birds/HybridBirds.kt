@@ -2,8 +2,8 @@ package dev.hybridlabs.birds
 
 import dev.hybridlabs.birds.Constants.MOD_ID
 import dev.hybridlabs.birds.Constants.MOD_NAME
-import dev.hybridlabs.birds.config.HybridBirdsConfigHandler
 import dev.hybridlabs.birds.block.HybridBirdsBlocks
+import dev.hybridlabs.birds.config.HybridBirdsConfigHandler
 import dev.hybridlabs.birds.config.HybridBirdsConfig
 import dev.hybridlabs.birds.effect.HybridBirdsStatusEffects
 import dev.hybridlabs.birds.entity.HybridBirdsEntityTypes
@@ -18,7 +18,6 @@ import net.fabricmc.fabric.api.biome.v1.BiomeModifications
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors
 import net.fabricmc.loader.api.FabricLoader
 import org.slf4j.Logger
-import org.slf4j.LoggerFactory
 import java.nio.file.Path
 import kotlin.io.path.notExists
 

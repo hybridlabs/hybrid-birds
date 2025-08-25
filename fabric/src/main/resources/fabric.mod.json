@@ -1,6 +1,6 @@
 {
     "schemaVersion": 1,
-    "id": "hybrid-birds",
+    "id": "hybrid_birds",
     "version": "${version}",
 
     "name": "Hybrid Birds",
@@ -30,6 +30,10 @@
             }
         ],
         "client": [
+            {
+                "value": "dev.hybridlabs.birds.HybridBirdsClient",
+                "adapter": "kotlin"
+            }
         ],
         "fabric-datagen": [
             {
@@ -43,6 +47,7 @@
     },
 
     "mixins": [
+        "hybrid_birds.mixins.json",
         "hybrid_birds.fabric.mixins.json",
         {
             "config": "hybrid_birds.client.mixins.json",

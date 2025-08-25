@@ -2,6 +2,7 @@ package dev.hybridlabs.birds.entity
 
 import dev.hybridlabs.birds.entity.bird.HybridBirdsBirdEntity
 import dev.hybridlabs.birds.platform.Services
+import dev.hybridlabs.birds.platform.registration.RegistryObject
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.Mob
 import net.minecraft.world.entity.SpawnPlacements.SpawnPredicate
@@ -12,38 +13,42 @@ import net.minecraft.world.level.levelgen.Heightmap
 /**
  * Registers spawn restrictions for all entities when initialised.
  */
+@Suppress("UNCHECKED_CAST")
 object SpawnRestrictionRegistry {
+    @JvmStatic
+    fun load() { }
+
     init {
         setOf(
-            HybridBirdsEntityTypes.ROOSTER!!.get(),
-            HybridBirdsEntityTypes.CHICK!!.get(),
-            HybridBirdsEntityTypes.POULT!!.get(),
-            HybridBirdsEntityTypes.PEACHICK!!.get(),
-            HybridBirdsEntityTypes.KEET!!.get(),
-            HybridBirdsEntityTypes.TURKEY!!.get(),
-            HybridBirdsEntityTypes.PEACOCK!!.get(),
-            HybridBirdsEntityTypes.GUINEA_FOWL!!.get()
-        ).forEach { registerTerrestrialBird(it) }
+            HybridBirdsEntityTypes.ROOSTER,
+            HybridBirdsEntityTypes.CHICK,
+            HybridBirdsEntityTypes.POULT,
+            HybridBirdsEntityTypes.PEACHICK,
+            HybridBirdsEntityTypes.KEET,
+            HybridBirdsEntityTypes.TURKEY,
+            HybridBirdsEntityTypes.PEACOCK,
+            HybridBirdsEntityTypes.GUINEA_FOWL
+        ).forEach { registerTerrestrialBird(it as RegistryObject<EntityType<HybridBirdsBirdEntity>>) }
 
         setOf(
-            HybridBirdsEntityTypes.DUCKLING!!.get(),
-            HybridBirdsEntityTypes.GOSLING!!.get(),
-            HybridBirdsEntityTypes.CYGNET!!.get(),
-            HybridBirdsEntityTypes.DUCK!!.get(),
-            HybridBirdsEntityTypes.GOOSE!!.get(),
-            HybridBirdsEntityTypes.SWAN!!.get(),
-        ).forEach { registerAquaticBird(it) }
+            HybridBirdsEntityTypes.DUCKLING,
+            HybridBirdsEntityTypes.GOSLING,
+            HybridBirdsEntityTypes.CYGNET,
+            HybridBirdsEntityTypes.DUCK,
+            HybridBirdsEntityTypes.GOOSE,
+            HybridBirdsEntityTypes.SWAN,
+        ).forEach { registerAquaticBird(it as RegistryObject<EntityType<HybridBirdsBirdEntity>>) }
     }
 
-    private fun <T : HybridBirdsBirdEntity> registerTerrestrialBird(entityType: EntityType<T>) {
+    private fun <T : HybridBirdsBirdEntity> registerTerrestrialBird(entityType: RegistryObject<EntityType<T>>) {
         registerBirdEntity(entityType, HybridBirdsBirdEntity::canBirdSpawn)
     }
 
-    private fun <T : HybridBirdsBirdEntity> registerAquaticBird(entityType: EntityType<T>) {
+    private fun <T : HybridBirdsBirdEntity> registerAquaticBird(entityType: RegistryObject<EntityType<T>>) {
         registerAquaticBirdEntity(entityType, HybridBirdsBirdEntity::canAquaticBirdSpawn)
     }
 
-    private fun <T : Animal> registerBirdEntity(entityType: EntityType<T>, predicate: SpawnPredicate<T>) {
+    private fun <T : Animal> registerBirdEntity(entityType: RegistryObject<EntityType<T>>, predicate: SpawnPredicate<T>) {
         register(
             entityType,
             Type.ON_GROUND,
@@ -51,7 +56,7 @@ object SpawnRestrictionRegistry {
         )
     }
 
-    private fun <T : Animal> registerAquaticBirdEntity(entityType: EntityType<T>, predicate: SpawnPredicate<T>) {
+    private fun <T : Animal> registerAquaticBirdEntity(entityType: RegistryObject<EntityType<T>>, predicate: SpawnPredicate<T>) {
         register(
             entityType,
             Type.NO_RESTRICTIONS,
@@ -59,7 +64,7 @@ object SpawnRestrictionRegistry {
         )
     }
 
-    private fun <T : Mob> register(entityType: EntityType<T>, location: Type, predicate: SpawnPredicate<T>) {
+    private fun <T : Mob> register(entityType: RegistryObject<EntityType<T>>, location: Type, predicate: SpawnPredicate<T>) {
         Services.SPAWN_PLACEMENT.register(entityType, location, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, predicate)
     }
 }

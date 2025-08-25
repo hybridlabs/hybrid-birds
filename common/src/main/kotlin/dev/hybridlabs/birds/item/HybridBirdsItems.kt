@@ -18,6 +18,8 @@ import net.minecraft.world.item.Item
 import net.minecraft.world.item.SpawnEggItem
 
 object HybridBirdsItems {
+    @JvmStatic
+    fun load() { }
 
     val DUCK_SPAWN_EGG = registerSpawnEgg("duck_spawn_egg", HybridBirdsEntityTypes.DUCK!!.get(), 0xcfb99a, 0x1a854b)
     val GOOSE_SPAWN_EGG = registerSpawnEgg("goose_spawn_egg", HybridBirdsEntityTypes.GOOSE!!.get(), 0x3e312f, 0xdcdce7)

@@ -1,6 +1,7 @@
 package dev.hybridlabs.birds.platform;
 
 import dev.hybridlabs.birds.Constants;
+import dev.hybridlabs.birds.platform.registration.RegistryObject;
 import dev.hybridlabs.birds.platform.services.RendererHelper;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.world.entity.Entity;
@@ -17,7 +18,7 @@ public class ForgeRendererHelper implements RendererHelper {
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public <E extends Entity> void register(EntityType<E> entityType, EntityRendererProvider<E> entityRendererFactory) {
+    public <E extends Entity> void register(RegistryObject<EntityType<E>> entityType, EntityRendererProvider<E> entityRendererFactory) {
         final ModContainer cont = ModList.get().getModContainerById(Constants.MOD_ID).orElseThrow();
         if (cont instanceof FMLModContainer fmlModContainer) {
             var handler = new ForgeRendererHelper.RendererRegistrationHandler<E>(entityType, entityRendererFactory);
@@ -25,10 +26,10 @@ public class ForgeRendererHelper implements RendererHelper {
         }
     }
 
-    private record RendererRegistrationHandler<T extends Entity>(EntityType<T> type,
+    private record RendererRegistrationHandler<T extends Entity>(RegistryObject<EntityType<T>> type,
                                                                  EntityRendererProvider<T> rendererProvider) {
         private void handleEvent(EntityRenderersEvent.RegisterRenderers event) {
-            event.registerEntityRenderer(type, rendererProvider);
+            event.registerEntityRenderer(type.get(), rendererProvider);
         }
     }
 
