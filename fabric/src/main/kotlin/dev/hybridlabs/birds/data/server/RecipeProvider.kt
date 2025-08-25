@@ -21,21 +21,21 @@ import java.util.function.Consumer
 class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
     override fun buildRecipes(exporter: Consumer<FinishedRecipe>) {
         // misc recipes
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, HybridBirdsItems.TURDUCKEN, 1)
-            .requires(HybridBirdsItems.TURKEY)
-            .requires(HybridBirdsItems.DUCK)
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, HybridBirdsItems.TURDUCKEN.get(), 1)
+            .requires(HybridBirdsItems.TURKEY.get())
+            .requires(HybridBirdsItems.DUCK.get())
             .requires(Items.CHICKEN)
             .unlockedBy("has_turducken_ingredient", InventoryChangeTrigger.TriggerInstance.hasItems(
                 ItemPredicate.Builder.item().of(HybridBirdsItemTags.TURDUCKEN_INGREDIENTS).build()))
             .save(exporter)
 
         // cooking recipes
-        offerEggCookingRecipes(exporter, HybridBirdsItemTags.EGGS, HybridBirdsItems.COOKED_EGG, 0.15f)
+        offerEggCookingRecipes(exporter, HybridBirdsItemTags.EGGS, HybridBirdsItems.COOKED_EGG.get(), 0.15f)
 
-        offerCookingRecipes(exporter, HybridBirdsItems.DUCK, HybridBirdsItems.COOKED_DUCK, 0.15f)
-        offerCookingRecipes(exporter, HybridBirdsItems.GOOSE, HybridBirdsItems.COOKED_GOOSE, 0.15f)
-        offerCookingRecipes(exporter, HybridBirdsItems.TURKEY, HybridBirdsItems.COOKED_TURKEY, 0.15f)
-        offerCookingRecipes(exporter, HybridBirdsItems.TURDUCKEN, HybridBirdsItems.COOKED_TURDUCKEN, 0.15f)
+        offerCookingRecipes(exporter, HybridBirdsItems.DUCK.get(), HybridBirdsItems.COOKED_DUCK.get(), 0.15f)
+        offerCookingRecipes(exporter, HybridBirdsItems.GOOSE.get(), HybridBirdsItems.COOKED_GOOSE.get(), 0.15f)
+        offerCookingRecipes(exporter, HybridBirdsItems.TURKEY.get(), HybridBirdsItems.COOKED_TURKEY.get(), 0.15f)
+        offerCookingRecipes(exporter, HybridBirdsItems.TURDUCKEN.get(), HybridBirdsItems.COOKED_TURDUCKEN.get(), 0.15f)
     }
 
     private fun offerCookingRecipes(

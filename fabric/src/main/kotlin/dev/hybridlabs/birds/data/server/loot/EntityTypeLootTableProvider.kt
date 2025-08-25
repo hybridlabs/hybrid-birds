@@ -54,7 +54,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             pool(
                 LootPool.lootPool()
                     .add(
-                        LootItem.lootTableItem(HybridBirdsItems.DUCK)
+                        LootItem.lootTableItem(HybridBirdsItems.DUCK.get())
                     ).build()
             )
             pool(
@@ -69,7 +69,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             pool(
                 LootPool.lootPool()
                     .add(
-                        LootItem.lootTableItem(HybridBirdsItems.GOOSE)
+                        LootItem.lootTableItem(HybridBirdsItems.GOOSE.get())
                     ).build()
             )
             pool(
@@ -83,7 +83,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
         export(exporter, HybridBirdsEntityTypes.TURKEY!!.get()) {
             pool(
                 LootPool.lootPool()
-                    .add( LootItem.lootTableItem(HybridBirdsItems.TURKEY)).build()
+                    .add( LootItem.lootTableItem(HybridBirdsItems.TURKEY.get())).build()
                     )
             pool(
                 LootPool.lootPool()

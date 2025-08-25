@@ -24,23 +24,23 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
     }
 
     override fun generateItemModels(generator: ItemModelGenerators) {
-        generator.generateFlatItem(HybridBirdsItems.DUCK_EGG, ModelTemplates.FLAT_ITEM)
-        generator.generateFlatItem(HybridBirdsItems.GOOSE_EGG, ModelTemplates.FLAT_ITEM)
-        generator.generateFlatItem(HybridBirdsItems.SWAN_EGG, ModelTemplates.FLAT_ITEM)
-        generator.generateFlatItem(HybridBirdsItems.TURKEY_EGG, ModelTemplates.FLAT_ITEM)
-        generator.generateFlatItem(HybridBirdsItems.PEACOCK_EGG, ModelTemplates.FLAT_ITEM)
-        generator.generateFlatItem(HybridBirdsItems.GUINEA_FOWL_EGG, ModelTemplates.FLAT_ITEM)
+        generator.generateFlatItem(HybridBirdsItems.DUCK_EGG.get(), ModelTemplates.FLAT_ITEM)
+        generator.generateFlatItem(HybridBirdsItems.GOOSE_EGG.get(), ModelTemplates.FLAT_ITEM)
+        generator.generateFlatItem(HybridBirdsItems.SWAN_EGG.get(), ModelTemplates.FLAT_ITEM)
+        generator.generateFlatItem(HybridBirdsItems.TURKEY_EGG.get(), ModelTemplates.FLAT_ITEM)
+        generator.generateFlatItem(HybridBirdsItems.PEACOCK_EGG.get(), ModelTemplates.FLAT_ITEM)
+        generator.generateFlatItem(HybridBirdsItems.GUINEA_FOWL_EGG.get(), ModelTemplates.FLAT_ITEM)
 
-        generator.generateFlatItem(HybridBirdsItems.COOKED_EGG, ModelTemplates.FLAT_ITEM)
+        generator.generateFlatItem(HybridBirdsItems.COOKED_EGG.get(), ModelTemplates.FLAT_ITEM)
 
-        generator.generateFlatItem(HybridBirdsItems.DUCK, ModelTemplates.FLAT_ITEM)
-        generator.generateFlatItem(HybridBirdsItems.GOOSE, ModelTemplates.FLAT_ITEM)
-        generator.generateFlatItem(HybridBirdsItems.TURKEY, ModelTemplates.FLAT_ITEM)
-        generator.generateFlatItem(HybridBirdsItems.TURDUCKEN, ModelTemplates.FLAT_ITEM)
+        generator.generateFlatItem(HybridBirdsItems.DUCK.get(), ModelTemplates.FLAT_ITEM)
+        generator.generateFlatItem(HybridBirdsItems.GOOSE.get(), ModelTemplates.FLAT_ITEM)
+        generator.generateFlatItem(HybridBirdsItems.TURKEY.get(), ModelTemplates.FLAT_ITEM)
+        generator.generateFlatItem(HybridBirdsItems.TURDUCKEN.get(), ModelTemplates.FLAT_ITEM)
 
-        generator.generateFlatItem(HybridBirdsItems.COOKED_DUCK, ModelTemplates.FLAT_ITEM)
-        generator.generateFlatItem(HybridBirdsItems.COOKED_GOOSE, ModelTemplates.FLAT_ITEM)
-        generator.generateFlatItem(HybridBirdsItems.COOKED_TURKEY, ModelTemplates.FLAT_ITEM)
-        generator.generateFlatItem(HybridBirdsItems.COOKED_TURDUCKEN, ModelTemplates.FLAT_ITEM)
+        generator.generateFlatItem(HybridBirdsItems.COOKED_DUCK.get(), ModelTemplates.FLAT_ITEM)
+        generator.generateFlatItem(HybridBirdsItems.COOKED_GOOSE.get(), ModelTemplates.FLAT_ITEM)
+        generator.generateFlatItem(HybridBirdsItems.COOKED_TURKEY.get(), ModelTemplates.FLAT_ITEM)
+        generator.generateFlatItem(HybridBirdsItems.COOKED_TURDUCKEN.get(), ModelTemplates.FLAT_ITEM)
     }
 }

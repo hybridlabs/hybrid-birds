@@ -21,7 +21,7 @@ class GenericLootTableProvider(output: FabricDataOutput) :
             LootTable.lootTable()
                 .pool(
                     LootPool.lootPool()
-                        .add(lootTableItem(HybridBirdsItems.TURKEY)).build()
+                        .add(lootTableItem(HybridBirdsItems.TURKEY.get())).build()
                 )
             .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 2.0f)))
         )
@@ -30,7 +30,7 @@ class GenericLootTableProvider(output: FabricDataOutput) :
             LootTable.lootTable()
                 .pool(
                     LootPool.lootPool()
-                        .add(lootTableItem(HybridBirdsItems.TURKEY)).build()
+                        .add(lootTableItem(HybridBirdsItems.TURKEY.get())).build()
                         )
             .apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0f, 3.0f)))
         )

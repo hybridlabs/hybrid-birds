@@ -22,20 +22,20 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
         generateEntities(builder)
 
         mapOf(
-            HybridBirdsItems.COOKED_EGG to "Cooked Egg",
-            HybridBirdsItems.TURKEY_EGG to "Turkey Egg",
-            HybridBirdsItems.PEACOCK_EGG to "Peacock Egg",
-            HybridBirdsItems.GUINEA_FOWL_EGG to "Guinea Fowl Egg",
-            HybridBirdsItems.DUCK_EGG to "Duck Egg",
-            HybridBirdsItems.GOOSE_EGG to "Goose Egg",
-            HybridBirdsItems.SWAN_EGG to "Swan Egg",
-            HybridBirdsItems.DUCK to "Raw Duck",
-            HybridBirdsItems.GOOSE to "Raw Goose",
-            HybridBirdsItems.TURKEY to "Raw Turkey",
-            HybridBirdsItems.TURDUCKEN to "Raw Turducken",
-            HybridBirdsItems.COOKED_DUCK to "Cooked Duck",
-            HybridBirdsItems.COOKED_GOOSE to "Cooked Goose",
-            HybridBirdsItems.COOKED_TURKEY to "Cooked Turkey",
+            HybridBirdsItems.COOKED_EGG.get() to "Cooked Egg",
+            HybridBirdsItems.TURKEY_EGG.get() to "Turkey Egg",
+            HybridBirdsItems.PEACOCK_EGG.get() to "Peacock Egg",
+            HybridBirdsItems.GUINEA_FOWL_EGG.get() to "Guinea Fowl Egg",
+            HybridBirdsItems.DUCK_EGG.get() to "Duck Egg",
+            HybridBirdsItems.GOOSE_EGG.get() to "Goose Egg",
+            HybridBirdsItems.SWAN_EGG.get() to "Swan Egg",
+            HybridBirdsItems.DUCK.get() to "Raw Duck",
+            HybridBirdsItems.GOOSE.get() to "Raw Goose",
+            HybridBirdsItems.TURKEY.get() to "Raw Turkey",
+            HybridBirdsItems.TURDUCKEN.get() to "Raw Turducken",
+            HybridBirdsItems.COOKED_DUCK.get() to "Cooked Duck",
+            HybridBirdsItems.COOKED_GOOSE.get() to "Cooked Goose",
+            HybridBirdsItems.COOKED_TURKEY.get() to "Cooked Turkey",
         ).forEach(builder::add)
 
         mapOf(
@@ -45,7 +45,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
         }
 
         mapOf(
-            HybridBirdsStatusEffects.ROOSTERS_CALLING to "Roosters Calling"
+            HybridBirdsStatusEffects.ROOSTERS_CALLING.get() to "Roosters Calling"
         ).forEach { (effect, translation) ->
             val identifier = BuiltInRegistries.MOB_EFFECT.getKey(effect)
             builder.add("effect.${identifier?.namespace}.${identifier?.path}", translation)
