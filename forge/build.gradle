@@ -3,12 +3,21 @@ plugins {
     id 'net.neoforged.moddev.legacyforge'
     id 'org.jetbrains.kotlin.jvm'
 }
+configurations.create('fabricDatagen')
+dependencies {
+    fabricDatagen project(path: ':fabric', configuration: 'datagenOutput')
+}
+tasks.register('copyDatagen', Copy) {
+    group "build"
+    from configurations.fabricDatagen // this will create a task dependency
+    into "src/generated/resources"
+}
+tasks.processResources.dependsOn(copyDatagen)
 
 mixin {
     add(sourceSets.main, "${mod_id}.refmap.json")
-
-    //config("${mod_id}.mixins.json")
-    //config("${mod_id}.forge.mixins.json")
+    config("${mod_id}.mixins.json")
+    config("${mod_id}.forge.mixins.json")
 }
 
 legacyForge {

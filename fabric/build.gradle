@@ -3,6 +3,9 @@ plugins {
     id 'fabric-loom'
     id "org.jetbrains.kotlin.jvm"
 }
+configurations {
+    datagenOutput
+}
 repositories {
     maven { url "https://maven.shedaniel.me/" }
     maven { url "https://maven.terraformersmc.com/releases/" }
@@ -25,6 +28,9 @@ repositories {
 fabricApi {
     configureDataGeneration {
         outputDirectory = file("src/generated/resources")
+    }
+    dependencies {
+        datagenOutput files(runDatagen)
     }
 }
 
