@@ -1,0 +1,76 @@
+package dev.hybridlabs.birds
+import dev.hybridlabs.birds.block.HybridBirdsBlocks
+import dev.hybridlabs.birds.effect.HybridBirdsStatusEffects
+import dev.hybridlabs.birds.entity.HybridBirdsEntityTypes
+import dev.hybridlabs.birds.entity.SpawnRestrictionRegistry
+import dev.hybridlabs.birds.item.HybridBirdsItemGroups
+import dev.hybridlabs.birds.item.HybridBirdsItems
+import dev.hybridlabs.birds.render.entity.HybridBirdsEntityRenderers
+import dev.hybridlabs.birds.sound.HybridBirdsSoundEvents
+import dev.hybridlabs.birds.tag.HybridBirdsBiomeTags
+import dev.hybridlabs.birds.tag.HybridBirdsItemTags
+import net.minecraft.client.Minecraft
+import net.minecraftforge.fml.common.Mod
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent
+import net.minecraftforge.fml.event.lifecycle.FMLDedicatedServerSetupEvent
+import thedarkcolour.kotlinforforge.forge.MOD_BUS
+import thedarkcolour.kotlinforforge.forge.runForDist
+
+/**
+ * Main mod class. Should be an `object` declaration annotated with `@Mod`.
+ * The modid should be declared in this object and should match the modId entry
+ * in mods.toml.
+ *
+ * An example for blocks is in the `blocks` package of this mod.
+ */
+@Mod(Constants.MOD_ID)
+object ExampleMod {
+    private val LOGGER = Constants.LOG
+    init {
+        HybridBirdsCommon.init()
+
+        HybridBirdsSoundEvents
+        HybridBirdsEntityTypes
+
+        HybridBirdsBlocks
+        HybridBirdsItems
+        HybridBirdsItemGroups
+
+        HybridBirdsBiomeTags
+        HybridBirdsItemTags
+
+        HybridBirdsStatusEffects
+
+        SpawnRestrictionRegistry
+
+
+        val obj = runForDist(
+            clientTarget = {
+                MOD_BUS.addListener(ExampleMod::onClientSetup)
+                Minecraft.getInstance()
+            },
+            serverTarget = {
+                MOD_BUS.addListener(ExampleMod::onServerSetup)
+                "test"
+            })
+
+        println(obj)
+    }
+
+    /**
+     * This is used for initializing client specific
+     * things such as renderers and keymaps
+     * Fired on the mod specific event bus.
+     */
+    private fun onClientSetup(event: FMLClientSetupEvent) {
+        LOGGER.info("Initializing client...")
+        HybridBirdsEntityRenderers
+    }
+
+    /**
+     * Fired on the global Forge bus.
+     */
+    private fun onServerSetup(event: FMLDedicatedServerSetupEvent) {
+        LOGGER.info("Server starting...")
+    }
+}

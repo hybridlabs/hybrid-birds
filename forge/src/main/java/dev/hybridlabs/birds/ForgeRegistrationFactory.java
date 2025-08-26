@@ -10,6 +10,7 @@ import net.minecraftforge.fml.ModContainer;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.javafmlmod.FMLModContainer;
 import net.minecraftforge.registries.DeferredRegister;
+import thedarkcolour.kotlinforforge.KotlinModContainer;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -24,6 +25,8 @@ public class ForgeRegistrationFactory implements RegistrationProvider.Factory {
         final ModContainer cont = ModList.get().getModContainerById(modId).orElseThrow();
         if (cont instanceof FMLModContainer fmlModContainer) {
             register.register(fmlModContainer.getEventBus());
+        } else if (cont instanceof KotlinModContainer kotlinModContainer) {
+            register.register(kotlinModContainer.getEventBus$kfflang());
         } else {
             throw new ClassCastException("The container of the mod " + modId + " is not a FML one!");
         }
