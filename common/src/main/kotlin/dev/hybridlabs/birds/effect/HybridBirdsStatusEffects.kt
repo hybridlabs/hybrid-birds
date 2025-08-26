@@ -5,8 +5,6 @@ import dev.hybridlabs.birds.platform.registration.RegistryObject
 import net.minecraft.world.effect.MobEffect
 
 object HybridBirdsStatusEffects {
-    @JvmStatic
-    fun load(){}
 
     val ROOSTERS_CALLING = register("roosters_calling", RoostersCallingStatusEffect())
 

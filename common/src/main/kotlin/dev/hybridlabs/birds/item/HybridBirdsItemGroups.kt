@@ -12,8 +12,6 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.SpawnEggItem
 
 object  HybridBirdsItemGroups {
-    @JvmStatic
-    fun load() {}
 
     val HYBRID_BIRDS = register(
         "hybrid_birds", CreativeModeTab.builder(CreativeModeTab.Row.TOP,0)

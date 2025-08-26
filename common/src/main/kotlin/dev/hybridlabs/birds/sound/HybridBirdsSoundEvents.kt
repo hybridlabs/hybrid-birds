@@ -7,8 +7,6 @@ import net.minecraft.resources.ResourceLocation
 import net.minecraft.sounds.SoundEvent
 
 object HybridBirdsSoundEvents {
-    @JvmStatic
-    fun load(){}
 
     val DUCK_AMBIENT = register("duck_ambient")
     val DUCK_HURT = register("duck_hurt")

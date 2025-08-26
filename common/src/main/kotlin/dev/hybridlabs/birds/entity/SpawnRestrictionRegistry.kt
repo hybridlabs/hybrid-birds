@@ -15,8 +15,6 @@ import net.minecraft.world.level.levelgen.Heightmap
  */
 @Suppress("UNCHECKED_CAST")
 object SpawnRestrictionRegistry {
-    @JvmStatic
-    fun load() { }
 
     init {
         setOf(

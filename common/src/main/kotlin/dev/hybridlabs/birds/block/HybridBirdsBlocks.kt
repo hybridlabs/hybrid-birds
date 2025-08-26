@@ -12,9 +12,7 @@ import java.util.function.Supplier
  * The registry of all blocks in Hybrid Aquatic.
  */
 object HybridBirdsBlocks {
-    @JvmStatic
-    fun load() {
-    }
+
     val TURDUCKEN = register(
         "turducken", {
             TurduckenBlock(

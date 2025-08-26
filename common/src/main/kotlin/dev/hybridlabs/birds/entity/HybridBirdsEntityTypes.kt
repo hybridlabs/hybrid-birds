@@ -13,8 +13,6 @@ import java.util.concurrent.Callable
 
 
 object HybridBirdsEntityTypes {
-    @JvmStatic
-    fun load() { }
 
     val ROOSTER = registerBird(
         "rooster",

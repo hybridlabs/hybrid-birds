@@ -4,8 +4,7 @@ import dev.hybridlabs.birds.entity.HybridBirdsEntityTypes
 import dev.hybridlabs.birds.platform.ClientServices
 
 object HybridBirdsEntityRenderers {
-    @JvmStatic
-    fun load() { }
+
     val ROOSTER = ClientServices.RENDERER.registerEntityRenderer(HybridBirdsEntityTypes.ROOSTER, ::RoosterEntityRenderer)
     val CHICK = ClientServices.RENDERER.registerEntityRenderer(HybridBirdsEntityTypes.CHICK, ::ChickEntityRenderer)
     val DUCKLING = ClientServices.RENDERER.registerEntityRenderer(HybridBirdsEntityTypes.DUCKLING, ::DucklingEntityRenderer)
