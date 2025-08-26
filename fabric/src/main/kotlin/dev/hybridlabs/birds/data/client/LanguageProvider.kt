@@ -15,7 +15,7 @@ import net.minecraft.world.entity.Mob
 class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output) {
     override fun generateTranslations(builder: TranslationBuilder) {
         builder.add(
-            BuiltInRegistries.CREATIVE_MODE_TAB.getResourceKey(HybridBirdsItemGroups.HYBRID_BIRDS)
+            BuiltInRegistries.CREATIVE_MODE_TAB.getResourceKey(HybridBirdsItemGroups.HYBRID_BIRDS.get())
                 .orElseThrow { IllegalStateException("Item group not registered") }, "Hybrid Birds"
         )
 

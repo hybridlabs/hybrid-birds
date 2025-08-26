@@ -2,7 +2,7 @@
 
 package dev.hybridlabs.birds.item
 
-import dev.hybridlabs.birds.CommonClass
+import dev.hybridlabs.birds.HybridBirdsCommon
 import dev.hybridlabs.birds.block.HybridBirdsBlocks
 import dev.hybridlabs.birds.entity.HybridBirdsEntityTypes
 import dev.hybridlabs.birds.platform.Services
@@ -13,7 +13,6 @@ import net.minecraft.world.food.FoodProperties
 import net.minecraft.world.item.BlockItem
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.SpawnEggItem
-import net.minecraft.world.level.block.Blocks
 import java.util.function.Supplier
 
 object HybridBirdsItems {
@@ -159,7 +158,7 @@ object HybridBirdsItems {
     }
 
     private fun <T : Item> register(id: String, item: Supplier<T>): RegistryObject<T> {
-        return CommonClass.ITEMS.register(id, item)
+        return HybridBirdsCommon.ITEMS.register(id, item)
     }
 
     private fun <T : Mob> registerSpawnEgg(
@@ -172,7 +171,7 @@ object HybridBirdsItems {
     }
 
     private fun <T : Mob> registerEgg(id: String, type: RegistryObject<EntityType<T>>?): RegistryObject<Item> {
-        return CommonClass.ITEMS.register(id){CustomEggItem(itemSettings().stacksTo(16), type)}
+        return HybridBirdsCommon.ITEMS.register(id){CustomEggItem(itemSettings().stacksTo(16), type)}
 
     }
 

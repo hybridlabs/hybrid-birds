@@ -1,6 +1,6 @@
 package dev.hybridlabs.birds.entity
 
-import dev.hybridlabs.birds.CommonClass
+import dev.hybridlabs.birds.HybridBirdsCommon
 import dev.hybridlabs.birds.entity.bird.*
 import dev.hybridlabs.birds.platform.Services
 import dev.hybridlabs.birds.platform.registration.RegistryObject
@@ -165,7 +165,7 @@ object HybridBirdsEntityTypes {
         entity: EntityType.Builder<T>,
         attributeContainer: Callable<AttributeSupplier.Builder>,
     ): RegistryObject<EntityType<T>>? {
-        return CommonClass.ENTITY_TYPES.register(id) {
+        return HybridBirdsCommon.ENTITY_TYPES.register(id) {
             val entityType = entity.build(id);
             Services.ATTRIBUTE.register(id, entityType, attributeContainer);
             entityType

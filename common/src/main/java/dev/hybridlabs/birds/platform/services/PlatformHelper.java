@@ -1,12 +1,12 @@
 package dev.hybridlabs.birds.platform.services;
 
-import dev.hybridlabs.birds.platform.registration.RegistryObject;
+import dev.hybridlabs.birds.config.HybridBirdsConfig;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.SpawnEggItem;
 import org.jetbrains.annotations.NotNull;
 
+import java.nio.file.Path;
 import java.util.function.Supplier;
 
 public interface PlatformHelper {
@@ -44,4 +44,6 @@ public interface PlatformHelper {
     }
 
     <T extends Mob> Supplier<SpawnEggItem> registerSpawnEggItem(@NotNull String name, Supplier<EntityType<T>> entityType, int backgroundColor, int highlightColor);
+
+   Path getConfigDir();
 }
