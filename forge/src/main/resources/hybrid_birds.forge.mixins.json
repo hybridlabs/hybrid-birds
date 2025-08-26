@@ -2,7 +2,7 @@
     "required": true,
     "minVersion": "0.8",
     "package": "dev.hybridlabs.birds.mixin",
-    "refmap": "${mod_id}.refmap.json",
+    "refmap": "hybrid_bird.refmap.json",
     "compatibilityLevel": "JAVA_17",
     "mixins": [
         "ChickenEntityMixin",
