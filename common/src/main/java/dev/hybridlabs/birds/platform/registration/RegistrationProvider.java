@@ -14,7 +14,7 @@ import java.util.function.Supplier;
  * Example usage:
  * <pre>{@code
  * public static final RegistrationProvider<Test> PROVIDER = RegistrationProvider.get(Test.REGISTRY, "modid");
- * public static final RegistryObject<Test> OBJECT = PROVIDER.register("object", () -> new Test());
+ * public static final RegistryObject<Test> OBJECT = PROVIDER.registerEntityRenderer("object", () -> new Test());
  *
  * // The purpose of this method is to be called in the mod's constructor, in order to assure that the class is loaded, and that objects can be registered.
  * public static void loadClass(){}
@@ -30,7 +30,7 @@ public interface RegistrationProvider<T> {
      * the {@link Factory#INSTANCE factory} creating multiple providers for the same resource key and mod id.
      *
      * @param resourceKey the {@link ResourceKey} of the registry of the provider
-     * @param modId       the mod id that the provider will register objects for
+     * @param modId       the mod id that the provider will registerEntityRenderer objects for
      * @param <T>         the type of the provider
      * @return the provider
      */
@@ -44,7 +44,7 @@ public interface RegistrationProvider<T> {
      * the {@link Factory#INSTANCE factory} creating multiple providers for the same resource key and mod id.
      *
      * @param registry the {@link Registry} of the provider
-     * @param modId    the mod id that the provider will register objects for
+     * @param modId    the mod id that the provider will registerEntityRenderer objects for
      * @param <T>      the type of the provider
      * @return the provider
      */
@@ -56,7 +56,7 @@ public interface RegistrationProvider<T> {
      * Registers an object.
      *
      * @param name     the name of the object
-     * @param supplier a supplier of the object to register
+     * @param supplier a supplier of the object to registerEntityRenderer
      * @param <I>      the type of the object
      * @return a wrapper containing the lazy registered object. <strong>Calling {@link RegistryObject#get() get} too early
      * on the wrapper might result in crashes!</strong>
@@ -94,7 +94,7 @@ public interface RegistrationProvider<T> {
          * Creates a {@link RegistrationProvider}.
          *
          * @param resourceKey the {@link ResourceKey} of the registry to create this provider for
-         * @param modId       the mod id for which the provider will register objects
+         * @param modId       the mod id for which the provider will registerEntityRenderer objects
          * @param <T>         the type of the provider
          * @return the provider
          */
@@ -104,7 +104,7 @@ public interface RegistrationProvider<T> {
          * Creates a {@link RegistrationProvider}.
          *
          * @param registry the {@link Registry} to create this provider for
-         * @param modId    the mod id for which the provider will register objects
+         * @param modId    the mod id for which the provider will registerEntityRenderer objects
          * @param <T>      the type of the provider
          * @return the provider
          */

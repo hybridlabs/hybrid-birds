@@ -14,7 +14,6 @@ import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.effect.MobEffectInstance
 import net.minecraft.world.entity.AgeableMob
 import net.minecraft.world.entity.EntityType
-import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.entity.ai.control.MoveControl
@@ -52,8 +51,7 @@ class RoosterEntity(entityType: EntityType<out RoosterEntity>, world: Level) :
     override fun registerGoals() {
         goalSelector.addGoal(0, FloatGoal(this))
         goalSelector.addGoal(2, PanicGoal(this, 0.6))
-        goalSelector.addGoal(/* i = */ 3, /* goal = */
-            TemptGoal(this, 0.5,Ingredient.of(ItemTags.VILLAGER_PLANTABLE_SEEDS), false))
+        goalSelector.addGoal(3, TemptGoal(this, 0.5,Ingredient.of(ItemTags.VILLAGER_PLANTABLE_SEEDS), false))
         goalSelector.addGoal(5, RandomStrollGoal(this, 0.5))
         goalSelector.addGoal(7, RandomLookAroundGoal(this))
         goalSelector.addGoal(6, LookAtPlayerGoal(this, Player::class.java, 8.0f))
@@ -71,7 +69,7 @@ class RoosterEntity(entityType: EntityType<out RoosterEntity>, world: Level) :
         return stack.`is`(Items.GLOW_BERRIES)
     }
 
-    override fun mobInteract(player: Player, hand: InteractionHand?): InteractionResult {
+    override fun mobInteract(player: Player, hand: InteractionHand): InteractionResult {
         val itemStack = player.getItemInHand(hand)
 
         if (isAngeringItem(itemStack) && !isAngry()) {
@@ -88,7 +86,7 @@ class RoosterEntity(entityType: EntityType<out RoosterEntity>, world: Level) :
         return super.mobInteract(player, hand)
     }
 
-    override fun usePlayerItem(player: Player, hand: InteractionHand?, stack: ItemStack) {
+    override fun usePlayerItem(player: Player, hand: InteractionHand, stack: ItemStack) {
         if (!player.abilities.instabuild) {
             stack.shrink(1)
         }

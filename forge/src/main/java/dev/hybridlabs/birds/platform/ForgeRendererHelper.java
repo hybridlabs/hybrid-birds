@@ -2,7 +2,7 @@ package dev.hybridlabs.birds.platform;
 
 import dev.hybridlabs.birds.Constants;
 import dev.hybridlabs.birds.platform.registration.RegistryObject;
-import dev.hybridlabs.birds.platform.services.RendererHelper;
+import dev.hybridlabs.birds.platform.services.ClientPlatformHelper;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -14,11 +14,11 @@ import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.javafmlmod.FMLModContainer;
 
 
-public class ForgeRendererHelper implements RendererHelper {
+public class ForgeRendererHelper implements ClientPlatformHelper {
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public <E extends Entity> void register(RegistryObject<EntityType<E>> entityType, EntityRendererProvider<E> entityRendererFactory) {
+    public <E extends Entity> void registerEntityRenderer(RegistryObject<EntityType<E>> entityType, EntityRendererProvider<E> entityRendererFactory) {
         final ModContainer cont = ModList.get().getModContainerById(Constants.MOD_ID).orElseThrow();
         if (cont instanceof FMLModContainer fmlModContainer) {
             var handler = new ForgeRendererHelper.RendererRegistrationHandler<E>(entityType, entityRendererFactory);

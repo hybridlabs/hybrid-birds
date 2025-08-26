@@ -132,6 +132,7 @@ object HybridBirdsEntityTypes {
     /**
      * Registers a living entity to the entity type registry with a Hybrid Aquatic spawn group.
      */
+    @Suppress("SameParameterValue")
     private fun <T : LivingEntity> registerCustomMobCategory(
         id: String,
         entityFactory: EntityType.EntityFactory<T>,
@@ -166,8 +167,8 @@ object HybridBirdsEntityTypes {
         attributeContainer: Callable<AttributeSupplier.Builder>,
     ): RegistryObject<EntityType<T>>? {
         return HybridBirdsCommon.ENTITY_TYPES.register(id) {
-            val entityType = entity.build(id);
-            Services.PLATFORM.registerAttributes(id, entityType, attributeContainer);
+            val entityType = entity.build(id)
+            Services.PLATFORM.registerAttributes(id, entityType, attributeContainer)
             entityType
         }
     }
