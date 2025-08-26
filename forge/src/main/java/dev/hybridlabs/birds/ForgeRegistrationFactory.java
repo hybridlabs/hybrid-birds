@@ -1,16 +1,13 @@
 package dev.hybridlabs.birds;
 
+import dev.hybridlabs.birds.platform.ForgePlatformHelper;
 import dev.hybridlabs.birds.platform.registration.RegistrationProvider;
 import dev.hybridlabs.birds.platform.registration.RegistryObject;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.fml.ModContainer;
-import net.minecraftforge.fml.ModList;
-import net.minecraftforge.fml.javafmlmod.FMLModContainer;
 import net.minecraftforge.registries.DeferredRegister;
-import thedarkcolour.kotlinforforge.KotlinModContainer;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -22,17 +19,9 @@ public class ForgeRegistrationFactory implements RegistrationProvider.Factory {
     @Override
     public <T> RegistrationProvider<T> create(ResourceKey<? extends Registry<T>> resourceKey, String modId) {
         final var register = DeferredRegister.create(resourceKey, modId);
-        final ModContainer cont = ModList.get().getModContainerById(modId).orElseThrow();
-        if (cont instanceof FMLModContainer fmlModContainer) {
-            register.register(fmlModContainer.getEventBus());
-        } else if (cont instanceof KotlinModContainer kotlinModContainer) {
-            register.register(kotlinModContainer.getEventBus$kfflang());
-        } else {
-            throw new ClassCastException("The container of the mod " + modId + " is not a FML one!");
-        }
+        register.register(ForgePlatformHelper.getEvenBus());
         return new Provider<>(modId, register);
     }
-
 
     private static class Provider<T> implements RegistrationProvider<T> {
         private final String modId;

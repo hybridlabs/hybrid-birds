@@ -16,18 +16,31 @@ import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.event.entity.SpawnPlacementRegisterEvent;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModContainer;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.javafmlmod.FMLModContainer;
 import net.minecraftforge.fml.loading.FMLLoader;
 import net.minecraftforge.fml.loading.FMLPaths;
 import org.jetbrains.annotations.NotNull;
+import thedarkcolour.kotlinforforge.KotlinModContainer;
 
 import java.nio.file.Path;
 import java.util.concurrent.Callable;
 import java.util.function.Supplier;
 
 public class ForgePlatformHelper implements PlatformHelper {
+
+    public static IEventBus getEvenBus() {
+        final ModContainer cont = ModList.get().getModContainerById(Constants.MOD_ID).orElseThrow();
+        if (cont instanceof FMLModContainer fmlModContainer) {
+            return fmlModContainer.getEventBus();
+        } else if (cont instanceof KotlinModContainer kotlinModContainer) {
+            return kotlinModContainer.getEventBus$kfflang();
+        } else {
+            throw new ClassCastException("The container of the mod " + Constants.MOD_ID + " is not a FML one!");
+        }
+    }
 
     @Override
     public String getPlatformName() {
@@ -60,31 +73,27 @@ public class ForgePlatformHelper implements PlatformHelper {
     @Override
     public <T extends Mob> void registerSpawnPlacement(RegistryObject<EntityType<T>> entityType, SpawnPlacements.Type decoratorType
             , Heightmap.Types heightMapType, SpawnPlacements.SpawnPredicate<T> decoratorPredicate) {
-        final ModContainer cont = ModList.get().getModContainerById(Constants.MOD_ID).orElseThrow();
-        if (cont instanceof FMLModContainer fmlModContainer) {
-            var handler = new SpawnPlacementRegistrationHandler<T>(entityType, decoratorType, heightMapType,
-                    decoratorPredicate);
-            fmlModContainer.getEventBus().addListener(handler::handleEvent);
-        }
+
+        var handler = new SpawnPlacementRegistrationHandler<T>(entityType, decoratorType, heightMapType,
+                decoratorPredicate);
+        ForgePlatformHelper.getEvenBus().addListener(handler::handleEvent);
+    }
+
+    @Override
+    public <T extends LivingEntity> void registerAttributes(@NotNull String id, EntityType<T> entityType,
+                                                            Callable<AttributeSupplier.Builder> attributeContainer) {
+        var handler = new AttributeRegistrationHandler(id, entityType, attributeContainer);
+        ForgePlatformHelper.getEvenBus().addListener(handler::handleEvent);
     }
 
     private record SpawnPlacementRegistrationHandler<T extends LivingEntity>(RegistryObject<EntityType<T>> type,
                                                                              SpawnPlacements.Type decoratorType,
                                                                              Heightmap.Types heightMapType,
                                                                              SpawnPlacements.SpawnPredicate<T> decoratorPredicate) {
+
         private void handleEvent(SpawnPlacementRegisterEvent event) {
             event.register(type.get(), decoratorType, heightMapType, decoratorPredicate,
                     SpawnPlacementRegisterEvent.Operation.REPLACE);
-        }
-    }
-
-    @Override
-    public <T extends LivingEntity> void registerAttributes(@NotNull String id, EntityType<T> entityType,
-                                                            Callable<AttributeSupplier.Builder> attributeContainer) {
-        final ModContainer cont = ModList.get().getModContainerById(Constants.MOD_ID).orElseThrow();
-        if (cont instanceof FMLModContainer fmlModContainer) {
-            var handler = new AttributeRegistrationHandler(id, entityType, attributeContainer);
-            fmlModContainer.getEventBus().addListener(handler::handleEvent);
         }
     }
 

@@ -48,6 +48,7 @@ object ExampleMod {
             clientTarget = {
                 MOD_BUS.addListener(ExampleMod::onClientSetup)
                 Minecraft.getInstance()
+                HybridBirdsEntityRenderers
             },
             serverTarget = {
                 MOD_BUS.addListener(ExampleMod::onServerSetup)
@@ -64,7 +65,6 @@ object ExampleMod {
      */
     private fun onClientSetup(event: FMLClientSetupEvent) {
         LOGGER.info("Initializing client...")
-        HybridBirdsEntityRenderers
     }
 
     /**
