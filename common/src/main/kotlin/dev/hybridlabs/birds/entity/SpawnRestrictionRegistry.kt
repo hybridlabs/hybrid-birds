@@ -65,6 +65,6 @@ object SpawnRestrictionRegistry {
     }
 
     private fun <T : Mob> register(entityType: RegistryObject<EntityType<T>>, location: Type, predicate: SpawnPredicate<T>) {
-        Services.SPAWN_PLACEMENT.register(entityType, location, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, predicate)
+        Services.PLATFORM.registerSpawnPlacement(entityType, location, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, predicate)
     }
 }

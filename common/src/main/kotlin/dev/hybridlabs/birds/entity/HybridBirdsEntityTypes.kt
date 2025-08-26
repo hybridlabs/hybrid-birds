@@ -167,7 +167,7 @@ object HybridBirdsEntityTypes {
     ): RegistryObject<EntityType<T>>? {
         return HybridBirdsCommon.ENTITY_TYPES.register(id) {
             val entityType = entity.build(id);
-            Services.ATTRIBUTE.register(id, entityType, attributeContainer);
+            Services.PLATFORM.registerAttributes(id, entityType, attributeContainer);
             entityType
         }
     }
