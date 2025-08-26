@@ -47,15 +47,15 @@
     },
 
     "mixins": [
-        "hybrid_birds.mixins.json",
-        "hybrid_birds.fabric.mixins.json",
+      "hybrid-birds.mixins.json",
+      "hybrid-birds.fabric.mixins.json",
         {
-            "config": "hybrid_birds.client.mixins.json",
+            "config": "hybrid-birds.client.mixins.json",
             "environment": "client"
         }
     ],
 
-    "accessWidener": "hybrid_birds.accesswidener",
+    "accessWidener": "hybrid-birds.accesswidener",
 
     "depends": {
         "minecraft": "~1.20.1",

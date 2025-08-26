@@ -23,8 +23,8 @@ import thedarkcolour.kotlinforforge.forge.runForDist
  *
  * An example for blocks is in the `blocks` package of this mod.
  */
-@Mod(Constants.MOD_ID)
-object ExampleMod {
+@Mod("hybrid_birds")
+object HybridBirdsForge {
     private val LOGGER = Constants.LOG
     init {
         HybridBirdsCommon.init()
@@ -46,12 +46,12 @@ object ExampleMod {
 
         val obj = runForDist(
             clientTarget = {
-                MOD_BUS.addListener(ExampleMod::onClientSetup)
+                MOD_BUS.addListener(HybridBirdsForge::onClientSetup)
                 Minecraft.getInstance()
                 HybridBirdsEntityRenderers
             },
             serverTarget = {
-                MOD_BUS.addListener(ExampleMod::onServerSetup)
+                MOD_BUS.addListener(HybridBirdsForge::onServerSetup)
                 "test"
             })
 
