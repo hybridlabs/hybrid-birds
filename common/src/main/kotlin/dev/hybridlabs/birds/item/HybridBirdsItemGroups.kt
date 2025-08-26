@@ -2,8 +2,8 @@
 
 package dev.hybridlabs.birds.item
 
-import dev.hybridlabs.birds.HybridBirdsCommon
 import dev.hybridlabs.birds.Constants
+import dev.hybridlabs.birds.HybridBirdsCommon
 import dev.hybridlabs.birds.platform.registration.RegistryObject
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.network.chat.Component
@@ -14,7 +14,7 @@ import net.minecraft.world.item.SpawnEggItem
 object  HybridBirdsItemGroups {
 
     val HYBRID_BIRDS = register(
-        "hybrid_birds", CreativeModeTab.builder(CreativeModeTab.Row.TOP,0)
+        Constants.MOD_ID, CreativeModeTab.builder(CreativeModeTab.Row.TOP,0)
         .title(Component.translatable("itemGroup.${Constants.MOD_ID}.spawn_eggs"))
         .icon { ItemStack(HybridBirdsItems.GOOSE.get()) }
         .displayItems { _, entries ->

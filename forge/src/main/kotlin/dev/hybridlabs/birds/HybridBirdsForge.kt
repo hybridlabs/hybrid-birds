@@ -23,7 +23,7 @@ import thedarkcolour.kotlinforforge.forge.runForDist
  *
  * An example for blocks is in the `blocks` package of this mod.
  */
-@Mod("hybrid_birds")
+@Mod(Constants.FORGE_MOD_ID)
 object HybridBirdsForge {
     private val LOGGER = Constants.LOG
     init {
