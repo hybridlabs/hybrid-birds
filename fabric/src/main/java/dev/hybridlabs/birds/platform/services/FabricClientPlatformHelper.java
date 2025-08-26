@@ -7,10 +7,10 @@ import net.minecraft.world.entity.EntityType;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 
 
-public class FabricRendererHelper implements ClientPlatformHelper {
+public class FabricClientPlatformHelper implements ClientPlatformHelper {
 
     @Override
     public <E extends Entity> void registerEntityRenderer(RegistryObject<EntityType<E>> entityType, EntityRendererProvider<E> entityRendererFactory) {
-        EntityRendererRegistry.register(entityType.get(),entityRendererFactory);
+        EntityRendererRegistry.register(entityType.get(), entityRendererFactory);
     }
 }

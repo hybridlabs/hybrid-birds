@@ -10,13 +10,13 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 
 
-public class ForgeRendererHelper implements ClientPlatformHelper {
+public class ForgeClientPlatformHelper implements ClientPlatformHelper {
 
     @Override
     @OnlyIn(Dist.CLIENT)
     public <E extends Entity> void registerEntityRenderer(RegistryObject<EntityType<E>> entityType, EntityRendererProvider<E> entityRendererFactory) {
 
-        var handler = new ForgeRendererHelper.RendererRegistrationHandler<E>(entityType, entityRendererFactory);
+        var handler = new ForgeClientPlatformHelper.RendererRegistrationHandler<E>(entityType, entityRendererFactory);
         ForgePlatformHelper.getEvenBus().addListener(handler::handleEvent);
     }
 
