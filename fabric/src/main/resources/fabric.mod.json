@@ -1,6 +1,6 @@
 {
     "schemaVersion": 1,
-    "id": "hybrid_birds",
+    "id": "hybrid-birds",
     "version": "${version}",
 
     "name": "Hybrid Birds",
@@ -19,7 +19,7 @@
     },
 
     "license": "ARR",
-    "icon": "assets/hybrid_birds/icon.png",
+    "icon": "assets/hybrid-birds/icon.png",
 
     "environment": "*",
     "entrypoints": {
@@ -48,11 +48,7 @@
 
     "mixins": [
       "hybrid-birds.mixins.json",
-      "hybrid-birds.fabric.mixins.json",
-        {
-            "config": "hybrid-birds.client.mixins.json",
-            "environment": "client"
-        }
+      "hybrid-birds.fabric.mixins.json"
     ],
 
     "accessWidener": "hybrid-birds.accesswidener",

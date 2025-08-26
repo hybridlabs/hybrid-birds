@@ -1,0 +1,224 @@
+{
+  "rooster_call": {
+    "subtitle": "sounds.hybrid-birds.rooster_calls",
+    "sounds": [
+      "hybrid-birds:rooster_call"
+    ]
+  },
+  "rooster_ambient": {
+    "subtitle": "sounds.hybrid-birds.rooster_ambient",
+    "sounds": [
+      "hybrid-birds:rooster_ambient"
+    ]
+  },
+  "rooster_hurt": {
+    "subtitle": "sounds.hybrid-birds.rooster_hurt",
+    "sounds": [
+      "hybrid-birds:rooster_hurt"
+    ]
+  },
+  "rooster_die": {
+    "subtitle": "sounds.hybrid-birds.rooster_die",
+    "sounds": [
+      "hybrid-birds:rooster_die"
+    ]
+  },
+  "chick_ambient": {
+    "subtitle": "sounds.hybrid-birds.chick_ambient",
+    "sounds": [
+      "hybrid-birds:chick_ambient"
+    ]
+  },
+  "chick_hurt": {
+    "subtitle": "sounds.hybrid-birds.chick_hurt",
+    "sounds": [
+      "hybrid-birds:chick_hurt"
+    ]
+  },
+  "chick_die": {
+    "subtitle": "sounds.hybrid-birds.chick_die",
+    "sounds": [
+      "hybrid-birds:chick_die"
+    ]
+  },
+  "duck_ambient": {
+    "subtitle": "sounds.hybrid-birds.duck_ambient",
+    "sounds": [
+      "hybrid-birds:duck_ambient"
+    ]
+  },
+  "duck_hurt": {
+    "subtitle": "sounds.hybrid-birds.duck_hurt",
+    "sounds": [
+      "hybrid-birds:duck_hurt"
+    ]
+  },
+  "duck_die": {
+    "subtitle": "sounds.hybrid-birds.duck_die",
+    "sounds": [
+      "hybrid-birds:duckling_die"
+    ]
+  },
+  "duckling_ambient": {
+    "subtitle": "sounds.hybrid-birds.duckling_ambient",
+    "sounds": [
+      "hybrid-birds:duck_ambient"
+    ]
+  },
+  "duckling_hurt": {
+    "subtitle": "sounds.hybrid-birds.duckling_hurt",
+    "sounds": [
+      "hybrid-birds:duckling_hurt"
+    ]
+  },
+  "duckling_die": {
+    "subtitle": "sounds.hybrid-birds.duckling_die",
+    "sounds": [
+      "hybrid-birds:duckling_die"
+    ]
+  },
+  "goose_ambient": {
+    "subtitle": "sounds.hybrid-birds.goose_ambient",
+    "sounds": [
+      "hybrid-birds:goose_ambient"
+    ]
+  },
+  "goose_hurt": {
+    "subtitle": "sounds.hybrid-birds.goose_hurt",
+    "sounds": [
+      "hybrid-birds:goose_hurt"
+    ]
+  },
+  "goose_die": {
+    "subtitle": "sounds.hybrid-birds.goose_die",
+    "sounds": [
+      "hybrid-birds:goose_die"
+    ]
+  },
+  "gosling_ambient": {
+    "subtitle": "sounds.hybrid-birds.gosling_ambient",
+    "sounds": [
+      "hybrid-birds:gosling_ambient"
+    ]
+  },
+  "gosling_hurt": {
+    "subtitle": "sounds.hybrid-birds.gosling_hurt",
+    "sounds": [
+      "hybrid-birds:gosling_hurt"
+    ]
+  },
+  "gosling_die": {
+    "subtitle": "sounds.hybrid-birds.gosling_die",
+    "sounds": [
+      "hybrid-birds:gosling_die"
+    ]
+  },
+  "swan_ambient": {
+    "subtitle": "sounds.hybrid-birds.swan_ambient",
+    "sounds": [
+      "hybrid-birds:swan_ambient"
+    ]
+  },
+  "swan_hurt": {
+    "subtitle": "sounds.hybrid-birds.swan_hurt",
+    "sounds": [
+      "hybrid-birds:swan_hurt"
+    ]
+  },
+  "swan_die": {
+    "subtitle": "sounds.hybrid-birds.swan_die",
+    "sounds": [
+      "hybrid-birds:swan_die"
+    ]
+  },
+  "cygnet_ambient": {
+    "subtitle": "sounds.hybrid-birds.cygnet_ambient",
+    "sounds": [
+      "hybrid-birds:cygnet_ambient"
+    ]
+  },
+  "cygnet_hurt": {
+    "subtitle": "sounds.hybrid-birds.cygnet_hurt",
+    "sounds": [
+      "hybrid-birds:cygnet_hurt"
+    ]
+  },
+  "cygnet_die": {
+    "subtitle": "sounds.hybrid-birds.cygnet_die",
+    "sounds": [
+      "hybrid-birds:cygnet_die"
+    ]
+  },
+  "turkey_ambient": {
+    "subtitle": "sounds.hybrid-birds.turkey_ambient",
+    "sounds": [
+      "hybrid-birds:turkey_ambient"
+    ]
+  },
+  "turkey_hurt": {
+    "subtitle": "sounds.hybrid-birds.turkey_hurt",
+    "sounds": [
+      "hybrid-birds:turkey_hurt"
+    ]
+  },
+  "turkey_die": {
+    "subtitle": "sounds.hybrid-birds.turkey_die",
+    "sounds": [
+      "hybrid-birds:turkey_die"
+    ]
+  },
+  "poult_ambient": {
+    "subtitle": "sounds.hybrid-birds.poult_ambient",
+    "sounds": [
+      "hybrid-birds:poult_ambient"
+    ]
+  },
+  "poult_hurt": {
+    "subtitle": "sounds.hybrid-birds.poult_hurt",
+    "sounds": [
+      "hybrid-birds:poult_hurt"
+    ]
+  },
+  "poult_die": {
+    "subtitle": "sounds.hybrid-birds.poult_die",
+    "sounds": [
+      "hybrid-birds:poult_die"
+    ]
+  },
+  "peacock_ambient": {
+    "subtitle": "sounds.hybrid-birds.peacock_ambient",
+    "sounds": [
+      "hybrid-birds:peacock_ambient"
+    ]
+  },
+  "peacock_hurt": {
+    "subtitle": "sounds.hybrid-birds.peacock_hurt",
+    "sounds": [
+      "hybrid-birds:peacock_hurt"
+    ]
+  },
+  "peacock_die": {
+    "subtitle": "sounds.hybrid-birds.peacock_die",
+    "sounds": [
+      "hybrid-birds:peacock_die"
+    ]
+  },
+  "peachick_ambient": {
+    "subtitle": "sounds.hybrid-birds.peachick_ambient",
+    "sounds": [
+      "hybrid-birds:peachick_ambient"
+    ]
+  },
+  "peachick_hurt": {
+    "subtitle": "sounds.hybrid-birds.peachick_hurt",
+    "sounds": [
+      "hybrid-birds:peachick_hurt"
+    ]
+  },
+  "peachick_die": {
+    "subtitle": "sounds.hybrid-birds.peachick_die",
+    "sounds": [
+      "hybrid-birds:peachick_die"
+    ]
+  }
+}

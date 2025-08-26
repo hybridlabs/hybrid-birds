@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "hybrid-birds:turkey"
+    },
+    {
+      "item": "hybrid-birds:duck"
+    },
+    {
+      "item": "minecraft:chicken"
+    }
+  ],
+  "result": {
+    "item": "hybrid-birds:turducken"
+  }
+}
