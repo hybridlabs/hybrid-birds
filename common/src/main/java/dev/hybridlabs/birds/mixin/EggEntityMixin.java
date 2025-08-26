@@ -54,7 +54,7 @@ public abstract class EggEntityMixin extends ThrowableItemProjectile {
     private EntityType<?> getTypeForChild() {
         ItemStack stack = this.getItem();
         if (stack.getItem() instanceof CustomEggItem eggItem) {
-            return eggItem.getType();
+            return (EntityType<?>) eggItem.getType().get();
         }
         return HybridBirdsEntityTypes.INSTANCE.getCHICK().get();
     }

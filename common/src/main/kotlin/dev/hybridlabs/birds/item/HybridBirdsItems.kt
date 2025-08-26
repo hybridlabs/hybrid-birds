@@ -3,41 +3,43 @@
 package dev.hybridlabs.birds.item
 
 import dev.hybridlabs.birds.CommonClass
-import dev.hybridlabs.birds.Constants
 import dev.hybridlabs.birds.block.HybridBirdsBlocks
 import dev.hybridlabs.birds.entity.HybridBirdsEntityTypes
 import dev.hybridlabs.birds.platform.Services
-import dev.hybridlabs.birds.platform.registration.RegistrationProvider
 import dev.hybridlabs.birds.platform.registration.RegistryObject
-import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.Mob
 import net.minecraft.world.food.FoodProperties
 import net.minecraft.world.item.BlockItem
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.SpawnEggItem
+import net.minecraft.world.level.block.Blocks
+import java.util.function.Supplier
 
 object HybridBirdsItems {
     @JvmStatic
-    fun load() { }
+    fun load() {}
 
-    val DUCK_SPAWN_EGG = registerSpawnEgg("duck_spawn_egg", HybridBirdsEntityTypes.DUCK!!.get(), 0xcfb99a, 0x1a854b)
-    val GOOSE_SPAWN_EGG = registerSpawnEgg("goose_spawn_egg", HybridBirdsEntityTypes.GOOSE!!.get(), 0x3e312f, 0xdcdce7)
-    val SWAN_SPAWN_EGG = registerSpawnEgg("swan_spawn_egg", HybridBirdsEntityTypes.SWAN!!.get(), 0xdcdce7, 0x272736)
-    val ROOSTER_SPAWN_EGG = registerSpawnEgg("rooster_spawn_egg", HybridBirdsEntityTypes.ROOSTER!!.get(), 0xc08585, 0x603d68)
-    val TURKEY_SPAWN_EGG = registerSpawnEgg("turkey_spawn_egg", HybridBirdsEntityTypes.TURKEY!!.get(), 0x383551, 0xcc4468)
-    val PEACOCK_SPAWN_EGG = registerSpawnEgg("peacock_spawn_egg", HybridBirdsEntityTypes.PEACOCK!!.get(), 0x3faa73, 0x010c86)
-    val GUINEA_FOWL_SPAWN_EGG = registerSpawnEgg("guinea_fowl_spawn_egg", HybridBirdsEntityTypes.GUINEA_FOWL!!.get(), 0x356b97, 0x252533)
+    val DUCK_SPAWN_EGG = registerSpawnEgg("duck_spawn_egg", HybridBirdsEntityTypes.DUCK, 0xcfb99a, 0x1a854b)
+    val GOOSE_SPAWN_EGG = registerSpawnEgg("goose_spawn_egg", HybridBirdsEntityTypes.GOOSE, 0x3e312f, 0xdcdce7)
+    val SWAN_SPAWN_EGG = registerSpawnEgg("swan_spawn_egg", HybridBirdsEntityTypes.SWAN, 0xdcdce7, 0x272736)
+    val ROOSTER_SPAWN_EGG = registerSpawnEgg("rooster_spawn_egg", HybridBirdsEntityTypes.ROOSTER, 0xc08585, 0x603d68)
+    val TURKEY_SPAWN_EGG = registerSpawnEgg("turkey_spawn_egg", HybridBirdsEntityTypes.TURKEY, 0x383551, 0xcc4468)
+    val PEACOCK_SPAWN_EGG = registerSpawnEgg("peacock_spawn_egg", HybridBirdsEntityTypes.PEACOCK, 0x3faa73, 0x010c86)
+    val GUINEA_FOWL_SPAWN_EGG =
+        registerSpawnEgg("guinea_fowl_spawn_egg", HybridBirdsEntityTypes.GUINEA_FOWL, 0x356b97, 0x252533)
 
-    val DUCK_EGG = registerEgg("duck_egg", HybridBirdsEntityTypes.DUCKLING!!.get())
-    val GOOSE_EGG = registerEgg("goose_egg", HybridBirdsEntityTypes.GOSLING!!.get())
-    val SWAN_EGG = registerEgg("swan_egg", HybridBirdsEntityTypes.CYGNET!!.get())
-    val TURKEY_EGG = registerEgg("turkey_egg", HybridBirdsEntityTypes.POULT!!.get())
-    val PEACOCK_EGG = registerEgg("peacock_egg", HybridBirdsEntityTypes.PEACHICK!!.get())
-    val GUINEA_FOWL_EGG = registerEgg("guinea_fowl_egg", HybridBirdsEntityTypes.KEET!!.get())
+    val DUCK_EGG = registerEgg("duck_egg", HybridBirdsEntityTypes.DUCKLING)
+    val GOOSE_EGG = registerEgg("goose_egg", HybridBirdsEntityTypes.GOSLING)
+    val SWAN_EGG = registerEgg("swan_egg", HybridBirdsEntityTypes.CYGNET)
+    val TURKEY_EGG = registerEgg("turkey_egg", HybridBirdsEntityTypes.POULT)
+    val PEACOCK_EGG = registerEgg("peacock_egg", HybridBirdsEntityTypes.PEACHICK)
+    val GUINEA_FOWL_EGG = registerEgg("guinea_fowl_egg", HybridBirdsEntityTypes.KEET)
 
     val COOKED_EGG = register(
-        "cooked_egg", Item(
+        "cooked_egg"
+    ) {
+        Item(
             itemSettings().food(
                 FoodProperties.Builder()
                     .nutrition(4)
@@ -47,10 +49,10 @@ object HybridBirdsItems {
                     .build()
             )
         )
-    )
+    }
 
-    val DUCK = register(
-        "duck", Item(
+    val DUCK = register("duck") {
+        Item(
             itemSettings().food(
                 FoodProperties.Builder()
                     .nutrition(2)
@@ -58,10 +60,10 @@ object HybridBirdsItems {
                     .meat().build()
             )
         )
-    )
+    }
 
-    val GOOSE = register(
-        "goose", Item(
+    val GOOSE = register("goose") {
+        Item(
             itemSettings().food(
                 FoodProperties.Builder()
                     .nutrition(3)
@@ -70,10 +72,12 @@ object HybridBirdsItems {
                     .build()
             )
         )
-    )
+    }
 
     val TURKEY = register(
-        "turkey", Item(
+        "turkey"
+    ) {
+        Item(
             itemSettings().food(
                 FoodProperties.Builder()
                     .nutrition(4)
@@ -82,10 +86,10 @@ object HybridBirdsItems {
                     .build()
             )
         )
-    )
+    }
 
-    val TURDUCKEN = register(
-        "turducken", Item(
+    val TURDUCKEN = register("turducken") {
+        Item(
             itemSettings().food(
                 FoodProperties.Builder()
                     .nutrition(5)
@@ -94,10 +98,12 @@ object HybridBirdsItems {
                     .build()
             )
         )
-    )
+    }
 
     val COOKED_DUCK = register(
-        "cooked_duck", Item(
+        "cooked_duck"
+    ) {
+        Item(
             itemSettings().food(
                 FoodProperties.Builder()
                     .nutrition(6)
@@ -106,10 +112,12 @@ object HybridBirdsItems {
                     .build()
             )
         )
-    )
+    }
 
     val COOKED_GOOSE = register(
-        "cooked_goose", Item(
+        "cooked_goose"
+    ) {
+        Item(
             itemSettings().food(
                 FoodProperties.Builder()
                     .nutrition(7)
@@ -118,10 +126,12 @@ object HybridBirdsItems {
                     .build()
             )
         )
-    )
+    }
 
     val COOKED_TURKEY = register(
-        "cooked_turkey", Item(
+        "cooked_turkey"
+    ) {
+        Item(
             itemSettings().food(
                 FoodProperties.Builder()
                     .nutrition(8)
@@ -130,10 +140,12 @@ object HybridBirdsItems {
                     .build()
             )
         )
-    )
+    }
 
     val COOKED_TURDUCKEN = register(
-        "cooked_turducken", BlockItem(
+        "cooked_turducken"
+    ) {
+        BlockItem(
             HybridBirdsBlocks.TURDUCKEN.get(),
             itemSettings()
                 .food(
@@ -144,22 +156,22 @@ object HybridBirdsItems {
                         .build()
                 )
         )
-    )
+    }
 
-    private fun <T : Item> register(id: String, item: T): RegistryObject<T> {
-        return CommonClass.ITEMS.register(id){item}
+    private fun <T : Item> register(id: String, item: Supplier<T>): RegistryObject<T> {
+        return CommonClass.ITEMS.register(id, item)
     }
 
     private fun <T : Mob> registerSpawnEgg(
         id: String,
-        type: EntityType<T>,
+        type: RegistryObject<EntityType<T>>?,
         primaryColor: Int,
         secondaryColor: Int
-    ): RegistryObject<Item> {
-        return CommonClass.ITEMS.register(id){SpawnEggItem(type, primaryColor, secondaryColor, itemSettings())}
+    ): Supplier<SpawnEggItem> {
+        return Services.PLATFORM.registerSpawnEggItem(id, { type?.get() }, primaryColor, secondaryColor)
     }
 
-    private fun registerEgg(id: String, type: EntityType<*>): RegistryObject<Item> {
+    private fun <T : Mob> registerEgg(id: String, type: RegistryObject<EntityType<T>>?): RegistryObject<Item> {
         return CommonClass.ITEMS.register(id){CustomEggItem(itemSettings().stacksTo(16), type)}
 
     }
