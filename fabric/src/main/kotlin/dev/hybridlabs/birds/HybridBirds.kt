@@ -1,10 +1,9 @@
 package dev.hybridlabs.birds
 
-import dev.hybridlabs.birds.Constants.MOD_ID
 import dev.hybridlabs.birds.Constants.MOD_NAME
 import dev.hybridlabs.birds.block.HybridBirdsBlocks
-import dev.hybridlabs.birds.config.HybridBirdsConfigHandler
 import dev.hybridlabs.birds.config.HybridBirdsConfig
+import dev.hybridlabs.birds.config.HybridBirdsConfigHandler
 import dev.hybridlabs.birds.effect.HybridBirdsStatusEffects
 import dev.hybridlabs.birds.entity.HybridBirdsEntityTypes
 import dev.hybridlabs.birds.entity.SpawnRestrictionRegistry
@@ -16,20 +15,20 @@ import dev.hybridlabs.birds.tag.HybridBirdsItemTags
 import net.fabricmc.api.ModInitializer
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors
-import net.fabricmc.loader.api.FabricLoader
 import org.slf4j.Logger
-import java.nio.file.Path
-import kotlin.io.path.notExists
 
+@Suppress("UnusedExpression")
 object HybridBirds : ModInitializer {
 
     private val logger: Logger = Constants.LOG
 
-    private val configFile: Path = FabricLoader.getInstance().configDir.resolve("$MOD_ID.json")
-    private val configHandler = HybridBirdsConfigHandler(configFile.toFile())
 
 	override fun onInitialize() {
+
 		logger.info("Initializing $MOD_NAME")
+        val configFile = Constants.CONFIG_FILE
+        val configHandler = HybridBirdsConfigHandler(configFile.toFile())
+
 
         HybridBirdsSoundEvents
         HybridBirdsEntityTypes
@@ -45,34 +44,9 @@ object HybridBirds : ModInitializer {
 
         SpawnRestrictionRegistry
 
-        initializeConfig()
-
+        initializeConfig(configFile, configHandler)
         registerBiomeModifications(configHandler.config)
 	}
-
-    private fun initializeConfig() {
-        if (configFile.notExists()) {
-            logger.info("$MOD_NAME config file did not exist, creating one")
-            configHandler.save()
-        } else {
-            logger.info("Loading $MOD_NAME config file")
-            configHandler.load()
-
-            // check config data version, if updated then reset
-            val defaultConfig = configHandler.defaultConfig
-            val config = configHandler.config
-            if (config.dataVersion < defaultConfig.dataVersion) {
-                logger.info("Old $MOD_NAME config file found, upgrading")
-
-                configHandler.backup()
-
-                configHandler.config = defaultConfig
-                configHandler.save()
-
-                logger.info("$MOD_NAME config reset, the old config has been backed up to \"${configHandler.backupFile}\"")
-            }
-        }
-    }
 
 
     private fun registerBiomeModifications(config: HybridBirdsConfig) {

@@ -1,3 +1,5 @@
+import org.gradle.api.internal.artifacts.dependencies.DefaultFileCollectionDependency
+
 plugins {
     id 'multiloader-loader'
     id 'fabric-loom'

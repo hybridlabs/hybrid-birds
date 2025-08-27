@@ -9,7 +9,6 @@ import dev.hybridlabs.birds.render.entity.HybridBirdsEntityRenderers
 import dev.hybridlabs.birds.sound.HybridBirdsSoundEvents
 import dev.hybridlabs.birds.tag.HybridBirdsBiomeTags
 import dev.hybridlabs.birds.tag.HybridBirdsItemTags
-import net.minecraft.client.Minecraft
 import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent
 import net.minecraftforge.fml.event.lifecycle.FMLDedicatedServerSetupEvent
@@ -23,9 +22,11 @@ import thedarkcolour.kotlinforforge.forge.runForDist
  *
  * An example for blocks is in the `blocks` package of this mod.
  */
+@Suppress("UnusedExpression")
 @Mod(Constants.FORGE_MOD_ID)
 object HybridBirdsForge {
     private val LOGGER = Constants.LOG
+
     init {
         HybridBirdsCommon.init()
 
@@ -44,18 +45,14 @@ object HybridBirdsForge {
         SpawnRestrictionRegistry
 
 
-        val obj = runForDist(
+        runForDist(
             clientTarget = {
                 MOD_BUS.addListener(HybridBirdsForge::onClientSetup)
-                Minecraft.getInstance()
-                HybridBirdsEntityRenderers
             },
             serverTarget = {
                 MOD_BUS.addListener(HybridBirdsForge::onServerSetup)
-                "test"
             })
 
-        println(obj)
     }
 
     /**
@@ -65,6 +62,7 @@ object HybridBirdsForge {
      */
     private fun onClientSetup(event: FMLClientSetupEvent) {
         LOGGER.info("Initializing client...")
+        HybridBirdsEntityRenderers
     }
 
     /**

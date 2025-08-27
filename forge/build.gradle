@@ -10,7 +10,7 @@ dependencies {
 tasks.register('copyDatagen', Copy) {
     group "build"
     from configurations.fabricDatagen // this will create a task dependency
-    into "src/generated/resources"
+    into "src/generated/fabric/resources"
 }
 tasks.processResources.dependsOn(copyDatagen)
 
@@ -50,7 +50,10 @@ legacyForge {
         }
         data {
             data()
-            programArguments.addAll '--mod', project.mod_id, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
+            programArguments.addAll '--mod', 'hybrid_birds', '--all',
+                    '--output', file('src/generated/resources/').getAbsolutePath(),
+                    '--existing', file('src/main/resources/').getAbsolutePath(),
+                    '--existing', file('src/generated/fabric/resources/').getAbsolutePath()
         }
         server {
             server()
@@ -65,6 +68,7 @@ legacyForge {
 }
 
 sourceSets.main.resources.srcDir 'src/generated/resources'
+sourceSets.main.resources.srcDir 'src/generated/fabric/resources'
 
 repositories {
     maven { url "https://maven.shedaniel.me/" }
