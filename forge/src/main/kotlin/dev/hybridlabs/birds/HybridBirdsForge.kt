@@ -47,6 +47,7 @@ object HybridBirdsForge {
 
         runForDist(
             clientTarget = {
+                HybridBirdsEntityRenderers
                 MOD_BUS.addListener(HybridBirdsForge::onClientSetup)
             },
             serverTarget = {
@@ -62,7 +63,6 @@ object HybridBirdsForge {
      */
     private fun onClientSetup(event: FMLClientSetupEvent) {
         LOGGER.info("Initializing client...")
-        HybridBirdsEntityRenderers
     }
 
     /**
