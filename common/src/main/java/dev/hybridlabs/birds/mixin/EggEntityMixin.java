@@ -12,8 +12,11 @@ import net.minecraft.world.entity.projectile.ThrownEgg;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.phys.HitResult;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
+
+import java.util.Objects;
 
 @Mixin(ThrownEgg.class)
 public abstract class EggEntityMixin extends ThrowableItemProjectile {
@@ -21,8 +24,8 @@ public abstract class EggEntityMixin extends ThrowableItemProjectile {
         super(type, world);
     }
 
-    @WrapMethod(method = "onHitEntity")
-    private void onHitEntity(EntityHitResult entityHitResult, Operation<Void> original) {
+    @WrapMethod(method = "onHit")
+    private void onHit(HitResult result, Operation<Void> original) {
         Level world = this.level();
         if (!world.isClientSide) {
             if (world.random.nextInt(8) == 0) {
@@ -34,30 +37,27 @@ public abstract class EggEntityMixin extends ThrowableItemProjectile {
                 for (int j = 0; j < i; ++j) {
                     EntityType<?> childType = getTypeForChild();
                     Entity childEntity = childType.create(world);
+                    if (childEntity instanceof AgeableMob passiveChildEntity) {
+                        passiveChildEntity.setAge(-24000);
+                    }
                     if (childEntity != null) {
-                        if (childEntity instanceof AgeableMob passiveChildEntity) {
-                            passiveChildEntity.setAge(-24000);
-                        }
-
                         childEntity.moveTo(this.getX(), this.getY(), this.getZ(), this.getYRot(), 0.0F);
                         world.addFreshEntity(childEntity);
                     }
                 }
             }
 
-            world.broadcastEntityEvent(this, (byte) 3);
+            world.broadcastEntityEvent(this, (byte)3);
             this.discard();
-            return;
         }
     }
-
 
     @Unique
     private EntityType<?> getTypeForChild() {
         ItemStack stack = this.getItem();
         if (stack.getItem() instanceof CustomEggItem eggItem) {
-            return (EntityType<?>) eggItem.getType().get();
+            return (EntityType<?>) Objects.requireNonNull(eggItem.getType()).get();
         }
-        return HybridBirdsEntityTypes.INSTANCE.getCHICK().get();
+        return Objects.requireNonNull(HybridBirdsEntityTypes.INSTANCE.getCHICK()).get();
     }
 }
