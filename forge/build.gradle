@@ -1,0 +1,118 @@
+plugins {
+    id 'multiloader-loader'
+    id 'net.neoforged.moddev.legacyforge'
+    id 'org.jetbrains.kotlin.jvm'
+}
+
+// This config will copy the output of Fabric's runDatagen task into
+// 'src/generated/resources/fabric' when the Forge runData task is run.
+configurations.create('fabricDatagen')
+dependencies {
+    fabricDatagen project(path: ':fabric', configuration: 'datagenOutput')
+}
+tasks.register('copyDatagen', Copy) {
+    group "build"
+    from configurations.fabricDatagen // this will create a task dependency
+    into "src/generated/fabric/resources"
+}
+
+// Include both the Forge-generated resources and the ones copied from Fabric
+sourceSets.main.resources.srcDir 'src/generated/resources'
+sourceSets.main.resources.srcDir 'src/generated/fabric/resources'
+
+// We load mixins in the individual loader configs to avoid mapping issues.
+mixin {
+    add(sourceSets.main, "${mod_id}.refmap.json")
+    config("${mod_id}.forge.mixins.json")
+}
+
+legacyForge {
+    apply plugin: 'org.jetbrains.kotlin.jvm'
+    apply plugin: 'kotlin'
+    version = "${minecraft_version}-${forge_version}"
+
+
+    // AT validation is broken on Forge 1.20.1
+    validateAccessTransformers = false
+
+    def at = project(':common').file('src/main/resources/META-INF/accesstransformer.cfg')
+    if (at.exists()) {
+        accessTransformers = ["src/main/resources/META-INF/accesstransformer.cfg"]
+    }
+
+    parchment {
+        minecraftVersion = parchment_minecraft
+        mappingsVersion = parchment_version
+    }
+
+    sourceSets {
+        main.kotlin.srcDirs = ['src/main/java', 'src/main/kotlin']
+    }
+
+    compileKotlin {
+        source(project(":common").sourceSets.main.kotlin)
+        inputs.file "../gradle.properties"
+    }
+
+    runs {
+        client {
+            client()
+        }
+        data {
+            data()
+            programArguments.addAll '--mod', 'hybrid_birds', '--all',
+                    '--output', file('src/generated/resources/').getAbsolutePath(),
+                    '--existing', file('src/main/resources/').getAbsolutePath(),
+                    '--existing', file('src/generated/fabric/resources/').getAbsolutePath()
+        }
+        server {
+            server()
+        }
+    }
+
+    mods {
+        "${mod_id}" {
+            sourceSet sourceSets.main
+        }
+    }
+}
+
+repositories {
+    maven {
+        name = 'Kotlin for Forge'
+        url = 'https://thedarkcolour.github.io/KotlinForForge/'
+    }
+    maven {
+        name = "Geckolib"
+        url  = "https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/"
+    }
+    mavenCentral()
+}
+
+
+dependencies {
+    compileOnly project(":common")
+    compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.5.0"))
+    annotationProcessor("org.spongepowered:mixin:0.8.5-SNAPSHOT:processor")
+    modImplementation "software.bernie.geckolib:geckolib-forge-$geckolib_version"
+    implementation 'org.jetbrains:annotations:25.0.0'
+    implementation 'thedarkcolour:kotlinforforge:4.11.0'
+    implementation(jarJar("io.github.llamalad7:mixinextras-forge:0.5.0"))
+    tasks.runData.dependsOn(copyDatagen)
+}
+
+jar {
+    finalizedBy('reobfJar')
+    manifest.attributes([
+            "MixinConfigs": "${mod_id}.forge.mixins.json"
+    ])
+}
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'org.jetbrains.kotlin.jvm'
+    apply plugin: 'kotlin'
+    repositories {
+        mavenCentral()
+    }
+}

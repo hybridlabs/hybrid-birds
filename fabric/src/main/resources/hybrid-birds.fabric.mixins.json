@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "package": "dev.hybridlabs.birds.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "ChickenEntityMixin",
+    "OcelotEntityMixin",
+    "EggEntityMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+	}
+}
