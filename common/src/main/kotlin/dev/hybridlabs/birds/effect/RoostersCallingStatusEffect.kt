@@ -8,7 +8,7 @@ import net.minecraft.world.entity.player.Player
 class RoostersCallingStatusEffect : MobEffect(MobEffectCategory.BENEFICIAL, 0x695672) {
 
     override fun isDurationEffectTick(duration: Int, amplifier: Int): Boolean {
-        return duration % 40 == 0
+        return duration % 60 == 0
     }
 
     override fun applyEffectTick(entity: LivingEntity, amplifier: Int) {
@@ -16,7 +16,7 @@ class RoostersCallingStatusEffect : MobEffect(MobEffectCategory.BENEFICIAL, 0x69
             entity.heal(0.5f)
         }
         if (!entity.level().isClientSide) {
-            (entity as Player).foodData.eat(amplifier + 1, 0.5f)
+            (entity as Player).foodData.eat(0, 0.5f)
         }
     }
 }
