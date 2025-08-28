@@ -49,6 +49,6 @@ object  HybridBirdsItemGroups {
     )
 
     private fun register(id: String, itemGroup: CreativeModeTab): RegistryObject<CreativeModeTab> {
-        return HybridBirdsCommon.CREATIVE_MODE_TABS.register(id,{itemGroup})
+        return HybridBirdsCommon.CREATIVE_MODE_TABS.register(id) { itemGroup }
     }
 }
