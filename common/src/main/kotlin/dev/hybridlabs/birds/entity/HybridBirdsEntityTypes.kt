@@ -24,49 +24,49 @@ object HybridBirdsEntityTypes {
     val CHICK = registerBird(
         "chick",
         ::ChickEntity,
-        EntityDimensions.fixed(0.25f, 0.25f),
+        EntityDimensions.fixed(0.5f, 0.5f),
         ChickEntity::createMobAttributes
     )
 
     val DUCKLING = registerBird(
         "duckling",
         ::DucklingEntity,
-        EntityDimensions.fixed(0.25f, 0.4f),
+        EntityDimensions.fixed(0.5f, 0.8f),
         DucklingEntity::createMobAttributes
     )
 
     val GOSLING = registerBird(
         "gosling",
         ::GoslingEntity,
-        EntityDimensions.fixed(0.25f, 0.4f),
+        EntityDimensions.fixed(0.5f, 0.8f),
         GoslingEntity::createMobAttributes
     )
 
     val CYGNET = registerBird(
         "cygnet",
         ::CygnetEntity,
-        EntityDimensions.fixed(0.25f, 0.4f),
+        EntityDimensions.fixed(0.5f, 0.8f),
         CygnetEntity::createMobAttributes
     )
 
     val POULT = registerBird(
         "poult",
         ::PoultEntity,
-        EntityDimensions.fixed(0.25f, 0.25f),
+        EntityDimensions.fixed(0.5f, 0.5f),
         PoultEntity::createMobAttributes
     )
 
     val PEACHICK = registerBird(
         "peachick",
         ::PeachickEntity,
-        EntityDimensions.fixed(0.25f, 0.25f),
+        EntityDimensions.fixed(0.5f, 0.5f),
         PeachickEntity::createMobAttributes
     )
 
     val KEET = registerBird(
         "keet",
         ::KeetEntity,
-        EntityDimensions.fixed(0.25f, 0.25f),
+        EntityDimensions.fixed(0.5f, 0.5f),
         KeetEntity::createMobAttributes
     )
 
