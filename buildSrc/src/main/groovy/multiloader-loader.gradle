@@ -22,7 +22,7 @@ dependencies {
 }
 
 tasks.named('compileJava', JavaCompile) {
-    dependsOn(configurations.commonJava)
+    //dependsOn(configurations.commonJava)
     source(configurations.commonJava)
 }
 
@@ -37,8 +37,8 @@ tasks.named('javadoc', Javadoc).configure {
 }
 
 tasks.named('sourcesJar', Jar) {
-    dependsOn(configurations.commonJava)
-    from(configurations.commonJava)
+    //dependsOn(configurations.commonJava)
+    //from(configurations.commonJava)
     dependsOn(configurations.commonResources)
     from(configurations.commonResources)
 }

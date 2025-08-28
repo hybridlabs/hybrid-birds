@@ -24,7 +24,13 @@ repositories {
     mavenCentral()
 }
 
+configurations{
+    commonKotlin
+    commonJava
+}
 
+configurations.create('commonKotlinOut')
+configurations.create('commonJavaOut')
 dependencies {
     compileOnly group: 'org.spongepowered', name: 'mixin', version: '0.8.5'
     compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.5.0"))
@@ -33,6 +39,8 @@ dependencies {
 
     //We load the Forge version of any included mod dependencies
     modImplementation "software.bernie.geckolib:geckolib-forge-$geckolib_version"
+    commonKotlinOut files("src/main/kotlin")
+    commonJavaOut files("src/main/java/")
 }
 
 configurations {
@@ -53,10 +61,11 @@ configurations {
 }
 
 artifacts {
-    commonJava sourceSets.main.java.sourceDirectories.singleFile
+    //commonJava sourceSets.main.java.sourceDirectories.singleFile
     commonResources sourceSets.main.resources.sourceDirectories.singleFile
 }
 
+/*
 subprojects {
     apply plugin: 'java'
     apply plugin: 'org.jetbrains.kotlin.jvm'
@@ -79,3 +88,4 @@ subprojects {
         inputs.file "../gradle.properties"
     }
 }
+*/
