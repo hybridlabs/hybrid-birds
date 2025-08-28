@@ -22,6 +22,10 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             pool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(Items.CHICKEN))
+                    .build()
+            )
+            pool(
+                LootPool.lootPool()
                     .add(LootItem.lootTableItem(Items.FEATHER)
                         .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0f, 2.0f))))
                     .build()
@@ -32,6 +36,10 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             pool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(Items.CHICKEN))
+                    .build()
+            )
+            pool(
+                LootPool.lootPool()
                     .add(LootItem.lootTableItem(Items.FEATHER)
                         .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0f, 2.0f))))
                     .build()
@@ -42,6 +50,10 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             pool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(HybridBirdsItems.DUCK.get()))
+                    .build()
+            )
+            pool(
+                LootPool.lootPool()
                     .add(LootItem.lootTableItem(Items.FEATHER)
                         .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F))))
                     .build()
@@ -53,6 +65,10 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HybridBirdsItems.GOOSE.get()))
+                    .build()
+            )
+            pool(
+                LootPool.lootPool()
                     .add(LootItem.lootTableItem(Items.FEATHER)
                         .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F))))
                     .build()
@@ -63,6 +79,10 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             pool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(HybridBirdsItems.TURKEY.get()))
+                    .build()
+            )
+            pool(
+                LootPool.lootPool()
                     .add(LootItem.lootTableItem(Items.FEATHER)
                         .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F))))
                     .build()

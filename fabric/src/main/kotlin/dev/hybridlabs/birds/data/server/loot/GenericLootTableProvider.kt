@@ -5,6 +5,7 @@ import dev.hybridlabs.birds.loot.HybridBirdsLootTables
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.SimpleFabricLootTableProvider
 import net.minecraft.resources.ResourceLocation
+import net.minecraft.world.item.Items
 import net.minecraft.world.level.storage.loot.LootPool
 import net.minecraft.world.level.storage.loot.LootTable
 import net.minecraft.world.level.storage.loot.entries.LootItem.lootTableItem
@@ -19,20 +20,30 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         exporter.accept(
             HybridBirdsLootTables.TURKEY_FAT,
             LootTable.lootTable()
-                .pool(
-                    LootPool.lootPool()
-                        .add(lootTableItem(HybridBirdsItems.TURKEY.get())).build()
+                .pool(LootPool.lootPool()
+                        .add(lootTableItem(HybridBirdsItems.TURKEY.get())
+                            .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 2.0f))))
+                        .build()
                 )
-            .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 2.0f)))
+                .pool(LootPool.lootPool()
+                        .add(lootTableItem(Items.FEATHER)
+                            .apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0f, 3.0f))))
+                        .build()
+                )
         )
         exporter.accept(
             HybridBirdsLootTables.TURKEY_STUFFED,
             LootTable.lootTable()
-                .pool(
-                    LootPool.lootPool()
-                        .add(lootTableItem(HybridBirdsItems.TURKEY.get())).build()
-                        )
-            .apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0f, 3.0f)))
+                .pool(LootPool.lootPool()
+                    .add(lootTableItem(HybridBirdsItems.TURKEY.get())
+                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0f, 3.0f))))
+                    .build()
+                )
+                .pool(LootPool.lootPool()
+                    .add(lootTableItem(Items.FEATHER)
+                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0f, 4.0f))))
+                    .build()
+                )
         )
     }
 }

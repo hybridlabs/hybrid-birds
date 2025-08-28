@@ -47,8 +47,8 @@
     },
 
     "mixins": [
-      "hybrid-birds.mixins.json",
-      "hybrid-birds.fabric.mixins.json"
+        "hybrid-birds.mixins.json",
+        "hybrid-birds.fabric.mixins.json"
     ],
 
     "accessWidener": "hybrid-birds.accesswidener",
