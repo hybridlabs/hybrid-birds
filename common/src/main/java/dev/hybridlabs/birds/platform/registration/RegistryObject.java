@@ -28,8 +28,7 @@ public interface RegistryObject<T> extends Supplier<T> {
     ResourceLocation getId();
 
     /**
-     * Gets the object behind this wrapper. Calling this method too early
-     * might result in crashes.
+     * Gets the object behind this wrapper. Calling this method too early might result in crashes.
      *
      * @return the object behind this wrapper
      */

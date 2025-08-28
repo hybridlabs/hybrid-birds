@@ -2,6 +2,7 @@ package dev.hybridlabs.birds.platform.services;
 
 import dev.hybridlabs.birds.HybridBirdsCommon;
 import dev.hybridlabs.birds.platform.registration.RegistryObject;
+
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.loader.api.FabricLoader;
@@ -14,6 +15,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.levelgen.Heightmap;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.nio.file.Path;
@@ -40,9 +42,19 @@ public class FabricPlatformHelper implements PlatformHelper {
     }
 
     @Override
-    public <T extends Mob> Supplier<SpawnEggItem> registerSpawnEggItem(@NotNull String name, Supplier<EntityType<T>> entityType, int backgroundColor, int highlightColor) {
-        return HybridBirdsCommon.ITEMS.register(name, () -> new SpawnEggItem(entityType.get(), backgroundColor,
-                highlightColor, new Item.Properties()));
+    public <T extends Mob> Supplier<SpawnEggItem> registerSpawnEggItem(
+            @NotNull String name,
+            Supplier<EntityType<T>> entityType,
+            int backgroundColor,
+            int highlightColor) {
+        return HybridBirdsCommon.ITEMS.register(
+                name,
+                () ->
+                        new SpawnEggItem(
+                                entityType.get(),
+                                backgroundColor,
+                                highlightColor,
+                                new Item.Properties()));
     }
 
     @Override
@@ -51,13 +63,20 @@ public class FabricPlatformHelper implements PlatformHelper {
     }
 
     @Override
-    public <T extends Mob> void registerSpawnPlacement(RegistryObject<EntityType<T>> entityType, SpawnPlacements.Type decoratorType, Heightmap.Types heightMapType, SpawnPlacements.SpawnPredicate<T> decoratorPredicate) {
-        SpawnPlacements.register(entityType.get(), decoratorType, heightMapType, decoratorPredicate);
+    public <T extends Mob> void registerSpawnPlacement(
+            RegistryObject<EntityType<T>> entityType,
+            SpawnPlacements.Type decoratorType,
+            Heightmap.Types heightMapType,
+            SpawnPlacements.SpawnPredicate<T> decoratorPredicate) {
+        SpawnPlacements.register(
+                entityType.get(), decoratorType, heightMapType, decoratorPredicate);
     }
 
     @Override
-    public <T extends LivingEntity> void registerAttributes(@NotNull String id, EntityType<T> entityType,
-                                                            Callable<AttributeSupplier.Builder> attributeContainer) {
+    public <T extends LivingEntity> void registerAttributes(
+            @NotNull String id,
+            EntityType<T> entityType,
+            Callable<AttributeSupplier.Builder> attributeContainer) {
         try {
             FabricDefaultAttributeRegistry.register(entityType, attributeContainer.call());
         } catch (Exception e) {

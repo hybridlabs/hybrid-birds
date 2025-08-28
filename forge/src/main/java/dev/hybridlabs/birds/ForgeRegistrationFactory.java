@@ -3,6 +3,7 @@ package dev.hybridlabs.birds;
 import dev.hybridlabs.birds.platform.ForgePlatformHelper;
 import dev.hybridlabs.birds.platform.registration.RegistrationProvider;
 import dev.hybridlabs.birds.platform.registration.RegistryObject;
+
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
@@ -17,9 +18,10 @@ import java.util.function.Supplier;
 public class ForgeRegistrationFactory implements RegistrationProvider.Factory {
 
     @Override
-    public <T> RegistrationProvider<T> create(ResourceKey<? extends Registry<T>> resourceKey, String modId) {
+    public <T> RegistrationProvider<T> create(
+            ResourceKey<? extends Registry<T>> resourceKey, String modId) {
         final var register = DeferredRegister.create(resourceKey, modId);
-        register.register(ForgePlatformHelper.getEvenBus());
+        register.register(ForgePlatformHelper.getEventBus());
         return new Provider<>(modId, register);
     }
 
@@ -42,30 +44,32 @@ public class ForgeRegistrationFactory implements RegistrationProvider.Factory {
 
         @Override
         @SuppressWarnings("unchecked")
-        public <I extends T> RegistryObject<I> register(String name, Supplier<? extends I> supplier) {
+        public <I extends T> RegistryObject<I> register(
+                String name, Supplier<? extends I> supplier) {
             final var obj = registry.<I>register(name, supplier);
-            final var ro = new RegistryObject<I>() {
+            final var ro =
+                    new RegistryObject<I>() {
 
-                @Override
-                public ResourceKey<I> getResourceKey() {
-                    return obj.getKey();
-                }
+                        @Override
+                        public ResourceKey<I> getResourceKey() {
+                            return obj.getKey();
+                        }
 
-                @Override
-                public ResourceLocation getId() {
-                    return obj.getId();
-                }
+                        @Override
+                        public ResourceLocation getId() {
+                            return obj.getId();
+                        }
 
-                @Override
-                public I get() {
-                    return obj.get();
-                }
+                        @Override
+                        public I get() {
+                            return obj.get();
+                        }
 
-                @Override
-                public Holder<I> asHolder() {
-                    return obj.getHolder().orElseThrow();
-                }
-            };
+                        @Override
+                        public Holder<I> asHolder() {
+                            return obj.getHolder().orElseThrow();
+                        }
+                    };
             entries.add((RegistryObject<T>) ro);
             return ro;
         }

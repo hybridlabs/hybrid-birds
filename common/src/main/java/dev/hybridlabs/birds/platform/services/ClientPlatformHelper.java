@@ -6,5 +6,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 
 public interface ClientPlatformHelper {
-    <E extends Entity> void registerEntityRenderer(RegistryObject<EntityType<E>> entityType, EntityRendererProvider<E> entityRendererFactory);
+    <E extends Entity> void registerEntityRenderer(
+            RegistryObject<EntityType<E>> entityType,
+            EntityRendererProvider<E> entityRendererFactory);
 }

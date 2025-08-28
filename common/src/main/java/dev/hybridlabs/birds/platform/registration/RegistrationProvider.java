@@ -1,6 +1,7 @@
 package dev.hybridlabs.birds.platform.registration;
 
 import dev.hybridlabs.birds.platform.Services;
+
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 
@@ -10,8 +11,9 @@ import java.util.function.Supplier;
 
 /**
  * Utility class for multiloader registration.
- * <p>
- * Example usage:
+ *
+ * <p>Example usage:
+ *
  * <pre>{@code
  * public static final RegistrationProvider<Test> PROVIDER = RegistrationProvider.get(Test.REGISTRY, "modid");
  * public static final RegistryObject<Test> OBJECT = PROVIDER.registerEntityRenderer("object", () -> new Test());
@@ -26,26 +28,29 @@ public interface RegistrationProvider<T> {
 
     /**
      * Gets a provider for specified {@code modId} and {@code resourceKey}. <br>
-     * It is <i>recommended</i> to store the resulted provider in a {@code static final} field to
-     * the {@link Factory#INSTANCE factory} creating multiple providers for the same resource key and mod id.
+     * It is <i>recommended</i> to store the resulting provider in a {@code static final} field to
+     * the {@link Factory#INSTANCE factory} to avoid creating multiple providers for the same
+     * resource key and mod id.
      *
      * @param resourceKey the {@link ResourceKey} of the registry of the provider
-     * @param modId       the mod id that the provider will registerEntityRenderer objects for
-     * @param <T>         the type of the provider
+     * @param modId the mod id that the provider will registerEntityRenderer objects for
+     * @param <T> the type of the provider
      * @return the provider
      */
-    static <T> RegistrationProvider<T> get(ResourceKey<? extends Registry<T>> resourceKey, String modId) {
+    static <T> RegistrationProvider<T> get(
+            ResourceKey<? extends Registry<T>> resourceKey, String modId) {
         return Factory.INSTANCE.create(resourceKey, modId);
     }
 
     /**
      * Gets a provider for specified {@code modId} and {@code registry}. <br>
      * It is <i>recommended</i> to store the resulted provider in a {@code static final} field to
-     * the {@link Factory#INSTANCE factory} creating multiple providers for the same resource key and mod id.
+     * the {@link Factory#INSTANCE factory} to avoid creating multiple providers for the same
+     * resource key and mod id.
      *
      * @param registry the {@link Registry} of the provider
-     * @param modId    the mod id that the provider will registerEntityRenderer objects for
-     * @param <T>      the type of the provider
+     * @param modId the mod id that the provider will registerEntityRenderer objects for
+     * @param <T> the type of the provider
      * @return the provider
      */
     static <T> RegistrationProvider<T> get(Registry<T> registry, String modId) {
@@ -55,11 +60,11 @@ public interface RegistrationProvider<T> {
     /**
      * Registers an object.
      *
-     * @param name     the name of the object
+     * @param name the name of the object
      * @param supplier a supplier of the object to registerEntityRenderer
-     * @param <I>      the type of the object
-     * @return a wrapper containing the lazy registered object. <strong>Calling {@link RegistryObject#get() get} too early
-     * on the wrapper might result in crashes!</strong>
+     * @param <I> the type of the object
+     * @return a wrapper containing the lazy registered object. <strong>Calling {@link
+     *     RegistryObject#get() get} too early on the wrapper might result in crashes!</strong>
      */
     <I extends T> RegistryObject<I> register(String name, Supplier<? extends I> supplier);
 
@@ -77,40 +82,37 @@ public interface RegistrationProvider<T> {
      */
     String getModId();
 
-
     /**
      * Factory class for {@link RegistrationProvider registration providers}. <br>
-     * This class is loaded using {@link ServiceLoader Service Loaders}, and only one
-     * should exist per mod loader.
+     * This class is loaded using {@link ServiceLoader Service Loaders}, and only one should exist
+     * per mod loader.
      */
     interface Factory {
 
-        /**
-         * The singleton instance of the {@link Factory}. This is different on each loader.
-         */
+        /** The singleton instance of the {@link Factory}. This is different on each loader. */
         Factory INSTANCE = Services.load(Factory.class);
 
         /**
          * Creates a {@link RegistrationProvider}.
          *
          * @param resourceKey the {@link ResourceKey} of the registry to create this provider for
-         * @param modId       the mod id for which the provider will registerEntityRenderer objects
-         * @param <T>         the type of the provider
+         * @param modId the mod id for which the provider will registerEntityRenderer objects
+         * @param <T> the type of the provider
          * @return the provider
          */
-        <T> RegistrationProvider<T> create(ResourceKey<? extends Registry<T>> resourceKey, String modId);
+        <T> RegistrationProvider<T> create(
+                ResourceKey<? extends Registry<T>> resourceKey, String modId);
 
         /**
          * Creates a {@link RegistrationProvider}.
          *
          * @param registry the {@link Registry} to create this provider for
-         * @param modId    the mod id for which the provider will registerEntityRenderer objects
-         * @param <T>      the type of the provider
+         * @param modId the mod id for which the provider will registerEntityRenderer objects
+         * @param <T> the type of the provider
          * @return the provider
          */
         default <T> RegistrationProvider<T> create(Registry<T> registry, String modId) {
             return create(registry.key(), modId);
         }
-
     }
 }

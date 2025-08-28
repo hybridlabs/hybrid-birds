@@ -2,6 +2,7 @@ package dev.hybridlabs.birds;
 
 import dev.hybridlabs.birds.platform.registration.RegistrationProvider;
 import dev.hybridlabs.birds.platform.registration.RegistryObject;
+
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -17,7 +18,8 @@ import java.util.function.Supplier;
 public class FabricRegistrationFactory implements RegistrationProvider.Factory {
 
     @Override
-    public <T> RegistrationProvider<T> create(ResourceKey<? extends Registry<T>> resourceKey, String modId) {
+    public <T> RegistrationProvider<T> create(
+            ResourceKey<? extends Registry<T>> resourceKey, String modId) {
         return new Provider<>(modId, resourceKey);
     }
 
@@ -39,7 +41,8 @@ public class FabricRegistrationFactory implements RegistrationProvider.Factory {
 
             final var reg = BuiltInRegistries.REGISTRY.get(key.location());
             if (reg == null) {
-                throw new RuntimeException("Registry with name " + key.location() + " was not found!");
+                throw new RuntimeException(
+                        "Registry with name " + key.location() + " was not found!");
             }
             registry = (Registry<T>) reg;
         }
@@ -51,32 +54,37 @@ public class FabricRegistrationFactory implements RegistrationProvider.Factory {
 
         @Override
         @SuppressWarnings("unchecked")
-        public <I extends T> RegistryObject<I> register(String name, Supplier<? extends I> supplier) {
+        public <I extends T> RegistryObject<I> register(
+                String name, Supplier<? extends I> supplier) {
             final var rl = new ResourceLocation(modId, name);
             final var obj = Registry.register(registry, rl, supplier.get());
-            final var ro = new RegistryObject<I>() {
-                final ResourceKey<I> key = ResourceKey.create((ResourceKey<? extends Registry<I>>) registry.key(), rl);
+            final var ro =
+                    new RegistryObject<I>() {
+                        final ResourceKey<I> key =
+                                ResourceKey.create(
+                                        (ResourceKey<? extends Registry<I>>) registry.key(), rl);
 
-                @Override
-                public ResourceKey<I> getResourceKey() {
-                    return key;
-                }
+                        @Override
+                        public ResourceKey<I> getResourceKey() {
+                            return key;
+                        }
 
-                @Override
-                public ResourceLocation getId() {
-                    return rl;
-                }
+                        @Override
+                        public ResourceLocation getId() {
+                            return rl;
+                        }
 
-                @Override
-                public I get() {
-                    return obj;
-                }
+                        @Override
+                        public I get() {
+                            return obj;
+                        }
 
-                @Override
-                public Holder<I> asHolder() {
-                    return (Holder<I>) registry.getHolder((ResourceKey<T>) this.key).orElseThrow();
-                }
-            };
+                        @Override
+                        public Holder<I> asHolder() {
+                            return (Holder<I>)
+                                    registry.getHolder((ResourceKey<T>) this.key).orElseThrow();
+                        }
+                    };
             entries.add((RegistryObject<T>) ro);
             return ro;
         }

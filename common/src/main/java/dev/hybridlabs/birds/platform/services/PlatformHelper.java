@@ -1,6 +1,7 @@
 package dev.hybridlabs.birds.platform.services;
 
 import dev.hybridlabs.birds.platform.registration.RegistryObject;
+
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
@@ -9,6 +10,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.levelgen.Heightmap;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.nio.file.Path;
@@ -49,14 +51,24 @@ public interface PlatformHelper {
         return isDevelopmentEnvironment() ? "development" : "production";
     }
 
-    <T extends Mob> Supplier<SpawnEggItem> registerSpawnEggItem(@NotNull String name, Supplier<EntityType<T>> entityType, int backgroundColor, int highlightColor);
+    <T extends Mob> Supplier<SpawnEggItem> registerSpawnEggItem(
+            @NotNull String name,
+            Supplier<EntityType<T>> entityType,
+            int backgroundColor,
+            int highlightColor);
 
-   Path getConfigDir();
+    Path getConfigDir();
 
-    <T extends Mob> void registerSpawnPlacement(RegistryObject<EntityType<T>> entityType, SpawnPlacements.Type decoratorType, Heightmap.Types heightMapType, SpawnPlacements.SpawnPredicate<T> decoratorPredicate);
+    <T extends Mob> void registerSpawnPlacement(
+            RegistryObject<EntityType<T>> entityType,
+            SpawnPlacements.Type decoratorType,
+            Heightmap.Types heightMapType,
+            SpawnPlacements.SpawnPredicate<T> decoratorPredicate);
 
     BlockBehaviour.Properties getBlockSettings();
 
-    <T extends LivingEntity> void registerAttributes(@NotNull String id, EntityType<T> entityType,
-                                                         Callable<AttributeSupplier.Builder> attributeContainer);
+    <T extends LivingEntity> void registerAttributes(
+            @NotNull String id,
+            EntityType<T> entityType,
+            Callable<AttributeSupplier.Builder> attributeContainer);
 }

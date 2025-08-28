@@ -3,6 +3,9 @@ plugins {
     id 'net.neoforged.moddev.legacyforge'
     id 'org.jetbrains.kotlin.jvm'
 }
+
+// This config will copy the output of Fabric's runDatagen task into
+// 'src/generated/resources/fabric' when the Forge runData task is run.
 configurations.create('fabricDatagen')
 dependencies {
     fabricDatagen project(path: ':fabric', configuration: 'datagenOutput')
@@ -12,11 +15,14 @@ tasks.register('copyDatagen', Copy) {
     from configurations.fabricDatagen // this will create a task dependency
     into "src/generated/fabric/resources"
 }
-tasks.processResources.dependsOn(copyDatagen)
 
+// Include both the Forge-generated resources and the ones copied from Fabric
+sourceSets.main.resources.srcDir 'src/generated/resources'
+sourceSets.main.resources.srcDir 'src/generated/fabric/resources'
+
+// We load mixins in the individual loader configs to avoid mapping issues.
 mixin {
     add(sourceSets.main, "${mod_id}.refmap.json")
-    //config("${mod_id}.mixins.json")
     config("${mod_id}.forge.mixins.json")
 }
 
@@ -25,16 +31,20 @@ legacyForge {
     apply plugin: 'kotlin'
     version = "${minecraft_version}-${forge_version}"
 
+
+    // AT validation is broken on Forge 1.20.1
     validateAccessTransformers = false
 
     def at = project(':common').file('src/main/resources/META-INF/accesstransformer.cfg')
     if (at.exists()) {
         accessTransformers = ["src/main/resources/META-INF/accesstransformer.cfg"]
     }
+
     parchment {
         minecraftVersion = parchment_minecraft
         mappingsVersion = parchment_version
     }
+
     sourceSets {
         main.kotlin.srcDirs = ['src/main/java', 'src/main/kotlin']
     }
@@ -67,11 +77,7 @@ legacyForge {
     }
 }
 
-sourceSets.main.resources.srcDir 'src/generated/resources'
-sourceSets.main.resources.srcDir 'src/generated/fabric/resources'
-
 repositories {
-    maven { url "https://maven.shedaniel.me/" }
     maven {
         name = 'Kotlin for Forge'
         url = 'https://thedarkcolour.github.io/KotlinForForge/'
@@ -84,16 +90,15 @@ repositories {
 }
 
 
-
 dependencies {
     compileOnly project(":common")
-    implementation 'org.jetbrains:annotations:25.0.0'
-    annotationProcessor("org.spongepowered:mixin:0.8.5-SNAPSHOT:processor")
-    modApi("me.shedaniel.cloth:cloth-config-forge:${cloth_config_version}")
-    implementation 'thedarkcolour:kotlinforforge:4.11.0'
-    modImplementation "software.bernie.geckolib:geckolib-forge-$geckolib_version"
     compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.5.0"))
+    annotationProcessor("org.spongepowered:mixin:0.8.5-SNAPSHOT:processor")
+    modImplementation "software.bernie.geckolib:geckolib-forge-$geckolib_version"
+    implementation 'org.jetbrains:annotations:25.0.0'
+    implementation 'thedarkcolour:kotlinforforge:4.11.0'
     implementation(jarJar("io.github.llamalad7:mixinextras-forge:0.5.0"))
+    tasks.runData.dependsOn(copyDatagen)
 }
 
 jar {
@@ -110,5 +115,4 @@ subprojects {
     repositories {
         mavenCentral()
     }
-
 }
