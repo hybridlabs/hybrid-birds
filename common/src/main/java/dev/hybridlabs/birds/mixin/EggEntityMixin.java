@@ -47,8 +47,10 @@ public abstract class EggEntityMixin extends ThrowableItemProjectile {
 
             world.broadcastEntityEvent(this, (byte) 3);
             this.discard();
+            return;
         }
     }
+
 
     @Unique
     private EntityType<?> getTypeForChild() {
