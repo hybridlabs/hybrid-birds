@@ -85,7 +85,7 @@ class GuineaFowlEntity(entityType: EntityType<out GuineaFowlEntity>, world: Leve
             if (passiveEntity != null) {
                 passiveEntity.isBaby = true
                 passiveEntity.moveTo(this.x, this.y, this.z, 0.0f, 0.0f)
-                this.spawnChildFromBreeding(world, other)
+                this.finalizeSpawnChildFromBreeding(world, other, passiveEntity)
                 world.addFreshEntityWithPassengers(passiveEntity)
             }
         }
