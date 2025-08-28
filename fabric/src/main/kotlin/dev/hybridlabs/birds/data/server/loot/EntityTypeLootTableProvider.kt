@@ -20,95 +20,71 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
     override fun generate(exporter: BiConsumer<ResourceLocation, LootTable.Builder>) {
         export(exporter, HybridBirdsEntityTypes.ROOSTER!!.get()) {
             pool(
-                LootPool.lootPool().add(
-                    LootItem.lootTableItem(Items.CHICKEN)
-                ).build()
+                LootPool.lootPool()
+                    .add(LootItem.lootTableItem(Items.CHICKEN))
+                    .add(LootItem.lootTableItem(Items.FEATHER)
+                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0f, 2.0f))))
+                    .build()
             )
-
-            pool(
-                LootPool.lootPool().add(
-                    LootItem.lootTableItem(Items.FEATHER)
-                ).build()
-            )
-                .apply(
-                    SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F))
-                )
         }
 
         export(exporter, HybridBirdsEntityTypes.GUINEA_FOWL!!.get()) {
             pool(
-                LootPool.lootPool().add(
-                    LootItem.lootTableItem(Items.CHICKEN)
-                ).build()
-            )
-            pool(
                 LootPool.lootPool()
-                    .add(
-                        LootItem.lootTableItem(Items.FEATHER)
-                    ).build()
+                    .add(LootItem.lootTableItem(Items.CHICKEN))
+                    .add(LootItem.lootTableItem(Items.FEATHER)
+                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0f, 2.0f))))
+                    .build()
             )
-                .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F)))
         }
 
         export(exporter, HybridBirdsEntityTypes.DUCK!!.get()) {
             pool(
                 LootPool.lootPool()
-                    .add(
-                        LootItem.lootTableItem(HybridBirdsItems.DUCK.get())
-                    ).build()
+                    .add(LootItem.lootTableItem(HybridBirdsItems.DUCK.get()))
+                    .add(LootItem.lootTableItem(Items.FEATHER)
+                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F))))
+                    .build()
             )
-            pool(
-                LootPool.lootPool()
-                    .add(
-                        LootItem.lootTableItem(Items.FEATHER)).build()
-                    )
-                .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F)))
         }
 
         export(exporter, HybridBirdsEntityTypes.GOOSE!!.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
-                        LootItem.lootTableItem(HybridBirdsItems.GOOSE.get())
-                    ).build()
+                        LootItem.lootTableItem(HybridBirdsItems.GOOSE.get()))
+                    .add(LootItem.lootTableItem(Items.FEATHER)
+                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F))))
+                    .build()
             )
-            pool(
-                LootPool.lootPool()
-                    .add(
-                        LootItem.lootTableItem(Items.FEATHER)).build()
-                    )
-                .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F)))
         }
 
         export(exporter, HybridBirdsEntityTypes.TURKEY!!.get()) {
             pool(
                 LootPool.lootPool()
-                    .add( LootItem.lootTableItem(HybridBirdsItems.TURKEY.get())).build()
-                    )
-            pool(
-                LootPool.lootPool()
-                    .add(
-                        LootItem.lootTableItem(Items.FEATHER)).build()
-                    )
-                .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F)))
+                    .add(LootItem.lootTableItem(HybridBirdsItems.TURKEY.get()))
+                    .add(LootItem.lootTableItem(Items.FEATHER)
+                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F))))
+                    .build()
+            )
         }
 
         export(exporter, HybridBirdsEntityTypes.SWAN!!.get()) {
             pool(
                 LootPool.lootPool()
-                    .add(
-                        LootItem.lootTableItem(Items.FEATHER)).build()
-                    )
-                .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F)))
+                    .add(LootItem.lootTableItem(Items.FEATHER)
+                            .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F))))
+                    .build()
+            )
         }
 
         export(exporter, HybridBirdsEntityTypes.PEACOCK!!.get()) {
             pool(
                 LootPool.lootPool()
-                    .add(
-                        LootItem.lootTableItem(Items.FEATHER)).build()
-                    )
-                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 5.0F)))
+                    .add(LootItem.lootTableItem(Items.FEATHER)
+                            .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 5.0F))))
+                    .build()
+            )
         }
     }
 
