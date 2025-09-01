@@ -10,6 +10,7 @@ configurations {
         canBeResolved = true
     }
 }
+
 dependencies {
     commonJava project(path: ':common', configuration: 'commonJava')
     commonResources project(path: ':common', configuration: 'commonResources')

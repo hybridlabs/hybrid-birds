@@ -44,7 +44,6 @@ object HybridBirdsForge {
 
         SpawnRestrictionRegistry
 
-
         runForDist(
             clientTarget = {
                 HybridBirdsEntityRenderers
@@ -52,8 +51,8 @@ object HybridBirdsForge {
             },
             serverTarget = {
                 MOD_BUS.addListener(HybridBirdsForge::onServerSetup)
-            })
-
+            }
+        )
     }
 
     /**
