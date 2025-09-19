@@ -4,10 +4,13 @@ plugins {
     id 'org.jetbrains.kotlin.jvm'
 }
 
-mixin {
-    add(sourceSets.main, "${forge_mod_id}.refmap.json")
-    config("${mod_id}.forge.mixins.json")
+// Create a configuration to acesss the output of the Fabric datagen task
+configurations.create('fabricDatagen')
+dependencies {
+    fabricDatagen project(path: ':fabric', configuration: 'datagenOutput')
 }
+
+
 
 legacyForge {
     apply plugin: 'org.jetbrains.kotlin.jvm'
@@ -23,6 +26,11 @@ legacyForge {
         accessTransformers = ["src/main/resources/META-INF/accesstransformer.cfg"]
     }
 
+    mixin {
+        add(sourceSets.main, "${forge_mod_id}.refmap.json")
+        config("${mod_id}.forge.mixins.json")
+    }
+
     parchment {
         minecraftVersion = parchment_minecraft
         mappingsVersion = parchment_version
@@ -30,11 +38,6 @@ legacyForge {
 
     sourceSets {
         main.kotlin.srcDirs = ['src/main/java', 'src/main/kotlin']
-    }
-
-    compileKotlin {
-        source(project(":common").sourceSets.main.kotlin)
-        inputs.file "../gradle.properties"
     }
 
     runs {
@@ -45,8 +48,7 @@ legacyForge {
             data()
             programArguments.addAll '--mod', 'hybrid_birds', '--all',
                     '--output', file('src/generated/resources/').getAbsolutePath(),
-                    '--existing', file('src/main/resources/').getAbsolutePath(),
-                    '--existing', file('src/generated/fabric/resources/').getAbsolutePath()
+                    '--existing', file('src/main/resources/').getAbsolutePath()
         }
         server {
             server()
@@ -72,10 +74,14 @@ repositories {
     mavenCentral()
 }
 
-sourceSets.main.resources.srcDirs += project(':fabric').file("src/generated/resources")
-sourceSets.main.java.srcDirs += project(":common").file('src/main/java')
+sourceSets.main.resources.srcDirs += 'src/generated/resources'
+
+processResources {
+    from configurations.fabricDatagen.singleFile
+}
 
 dependencies {
+    compileOnly project(":common")
     compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.5.0"))
     annotationProcessor("org.spongepowered:mixin:0.8.5-SNAPSHOT:processor")
     modImplementation "software.bernie.geckolib:geckolib-forge-$geckolib_version"
@@ -91,11 +97,7 @@ jar {
     ])
 }
 
-subprojects {
-    apply plugin: 'java'
-    apply plugin: 'org.jetbrains.kotlin.jvm'
-    apply plugin: 'kotlin'
-    repositories {
-        mavenCentral()
-    }
+compileKotlin {
+    source(project(":common").sourceSets.main.allSource)
+    inputs.file "../gradle.properties"
 }

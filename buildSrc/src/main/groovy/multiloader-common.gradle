@@ -1,4 +1,5 @@
 plugins {
+    id 'multiloader-common'
     id 'java-library'
     id 'maven-publish'
 }
@@ -99,7 +100,8 @@ processResources {
             "forge_version"             : forge_version,
             "forge_loader_version_range": forge_loader_version_range,
             'credits'                   : credits,
-            'java_version'              : java_version
+            'java_version'              : java_version,
+            'kotlin_version'            : kotlin_version,
     ]
 
     var jsonExpandProps = expandProps.collectEntries {
