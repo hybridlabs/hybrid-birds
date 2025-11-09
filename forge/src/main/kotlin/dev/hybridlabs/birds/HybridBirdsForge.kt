@@ -5,10 +5,13 @@ import dev.hybridlabs.birds.entity.HybridBirdsEntityTypes
 import dev.hybridlabs.birds.entity.SpawnRestrictionRegistry
 import dev.hybridlabs.birds.item.HybridBirdsItemGroups
 import dev.hybridlabs.birds.item.HybridBirdsItems
+import dev.hybridlabs.birds.utils.HybridBirdsSpawnGroup
 import dev.hybridlabs.birds.render.entity.HybridBirdsEntityRenderers
 import dev.hybridlabs.birds.sound.HybridBirdsSoundEvents
 import dev.hybridlabs.birds.tag.HybridBirdsBiomeTags
 import dev.hybridlabs.birds.tag.HybridBirdsItemTags
+import net.minecraft.world.entity.MobCategory
+import net.minecraftforge.event.entity.SpawnPlacementRegisterEvent
 import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent
 import net.minecraftforge.fml.event.lifecycle.FMLDedicatedServerSetupEvent
@@ -30,6 +33,7 @@ object HybridBirdsForge {
     init {
         HybridBirdsCommon.init()
 
+        createSpawnGroups()
         HybridBirdsSoundEvents
         HybridBirdsEntityTypes
 
@@ -53,6 +57,24 @@ object HybridBirdsForge {
                 MOD_BUS.addListener(HybridBirdsForge::onServerSetup)
             }
         )
+    }
+
+    private fun createSpawnGroups() {
+        // Extend the MobCategory enum with our spawn groups
+        HybridBirdsSpawnGroup.entries.toTypedArray().forEach {
+            MobCategory.create(
+                it.name,
+                it.name,
+                it.spawnCap,
+                it.peaceful,
+                it.rare,
+                it.immediateDespawnRange
+            )
+        }
+    }
+
+    private fun registerSpawnPlacements(event: SpawnPlacementRegisterEvent) {
+        SpawnRestrictionRegistry.registerSpawnRestrictions()
     }
 
     /**

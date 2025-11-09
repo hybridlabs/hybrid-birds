@@ -117,7 +117,7 @@ object HybridBirdsEntityTypes {
         entityFactory: EntityType.EntityFactory<T>,
         dimensions: EntityDimensions,
         attributeContainer: Callable<AttributeSupplier.Builder>
-    ): RegistryObject<EntityType<T>>? {
+    ): RegistryObject<EntityType<T>> {
         return registerCustomMobCategory(
             id,
             entityFactory,
@@ -137,7 +137,7 @@ object HybridBirdsEntityTypes {
         dimensions: EntityDimensions,
         attributeContainer: Callable<AttributeSupplier.Builder>,
         spawnGroup: MobCategory,
-    ): RegistryObject<EntityType<T>>? {
+    ): RegistryObject<EntityType<T>> {
         return registerLiving(id, entityFactory, dimensions, attributeContainer, spawnGroup)
     }
 
@@ -150,20 +150,16 @@ object HybridBirdsEntityTypes {
         dimensions: EntityDimensions,
         attributeContainer: Callable<AttributeSupplier.Builder>,
         spawnGroup: MobCategory,
-    ): RegistryObject<EntityType<T>>? {
-
+    ): RegistryObject<EntityType<T>> {
         val entityType = EntityType.Builder.of(entityFactory, spawnGroup).sized(dimensions.width, dimensions.height)
         return register(id, entityType, attributeContainer)
     }
 
-    /**
-     * Registers an entity type to the entity type registry.
-     */
     private fun <T : LivingEntity> register(
         id: String,
         entity: EntityType.Builder<T>,
         attributeContainer: Callable<AttributeSupplier.Builder>,
-    ): RegistryObject<EntityType<T>>? {
+    ): RegistryObject<EntityType<T>> {
         return HybridBirdsCommon.ENTITY_TYPES.register(id) {
             val entityType = entity.build(id)
             Services.PLATFORM.registerAttributes(id, entityType, attributeContainer)
