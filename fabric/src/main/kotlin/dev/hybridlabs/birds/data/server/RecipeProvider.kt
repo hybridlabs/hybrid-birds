@@ -30,7 +30,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             .save(exporter)
 
         // cooking recipes
-        offerEggCookingRecipes(exporter, HybridBirdsItemTags.EGGS, HybridBirdsItems.COOKED_EGG.get(), 0.15f)
+        // offerEggCookingRecipes(exporter, HybridBirdsItemTags.EGGS, HybridBirdsItems.COOKED_EGG.get(), 0.15f)
 
         offerCookingRecipes(exporter, HybridBirdsItems.DUCK.get(), HybridBirdsItems.COOKED_DUCK.get(), 0.15f)
         offerCookingRecipes(exporter, HybridBirdsItems.GOOSE.get(), HybridBirdsItems.COOKED_GOOSE.get(), 0.15f)
