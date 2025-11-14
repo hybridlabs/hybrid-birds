@@ -46,7 +46,6 @@ open class HybridBirdsBirdEntity(
         throw NotImplementedError("Breeding is not implemented")
     }
 
-
     init {
         moveControl = MoveControl(this)
         navigation = this.birdNavigation
