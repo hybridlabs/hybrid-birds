@@ -1,6 +1,6 @@
 {
     "schemaVersion": 1,
-    "id": "hybridbirds",
+    "id": "hybrid_birds",
     "version": "${version}",
 
     "name": "Hybrid Birds",
@@ -19,7 +19,7 @@
     },
 
     "license": "ARR",
-    "icon": "assets/hybridbirds/icon.png",
+    "icon": "assets/hybrid_birds/icon.png",
 
     "environment": "*",
     "entrypoints": {
@@ -47,10 +47,10 @@
     },
 
     "mixins": [
-        "hybridbirds.fabric.mixins.json"
+        "hybrid_birds.fabric.mixins.json"
     ],
 
-    "accessWidener": "hybridbirds.accesswidener",
+    "accessWidener": "hybrid_birds.accesswidener",
 
     "depends": {
         "minecraft": "~1.20.1",

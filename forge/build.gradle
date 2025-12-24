@@ -46,7 +46,7 @@ legacyForge {
         }
         data {
             data()
-            programArguments.addAll '--mod', 'hybridbirds', '--all',
+            programArguments.addAll '--mod', mod_id, '--all',
                     '--output', file('src/generated/resources/').getAbsolutePath(),
                     '--existing', file('src/main/resources/').getAbsolutePath()
         }

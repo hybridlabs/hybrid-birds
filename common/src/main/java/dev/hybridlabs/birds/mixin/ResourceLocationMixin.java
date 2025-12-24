@@ -1,5 +1,6 @@
 package dev.hybridlabs.birds.mixin;
 
+import dev.hybridlabs.birds.Constants;
 import net.minecraft.resources.ResourceLocation;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -22,7 +23,7 @@ public class ResourceLocationMixin {
     private void onInit(String namespace, String path, CallbackInfo ci) {
         // because DFU can suck my-
         if (Objects.equals(namespace, "hybrid-birds") || Objects.equals(namespace, "hybrid_birds")) {
-            this.namespace = "hybridbirds";
+            this.namespace = Constants.MOD_ID;
         }
     }
 }
