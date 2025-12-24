@@ -5,11 +5,11 @@ import dev.hybridlabs.birds.entity.HybridBirdsEntityTypes
 import dev.hybridlabs.birds.entity.SpawnRestrictionRegistry
 import dev.hybridlabs.birds.item.HybridBirdsItemGroups
 import dev.hybridlabs.birds.item.HybridBirdsItems
-import dev.hybridlabs.birds.utils.HybridBirdsSpawnGroup
 import dev.hybridlabs.birds.render.entity.HybridBirdsEntityRenderers
 import dev.hybridlabs.birds.sound.HybridBirdsSoundEvents
 import dev.hybridlabs.birds.tag.HybridBirdsBiomeTags
 import dev.hybridlabs.birds.tag.HybridBirdsItemTags
+import dev.hybridlabs.birds.utils.HybridBirdsSpawnGroup
 import net.minecraft.world.entity.MobCategory
 import net.minecraftforge.event.entity.SpawnPlacementRegisterEvent
 import net.minecraftforge.fml.common.Mod
@@ -26,7 +26,7 @@ import thedarkcolour.kotlinforforge.forge.runForDist
  * An example for blocks is in the `blocks` package of this mod.
  */
 @Suppress("UnusedExpression")
-@Mod(Constants.FORGE_MOD_ID)
+@Mod(Constants.MOD_ID)
 object HybridBirdsForge {
     private val LOGGER = Constants.LOG
 

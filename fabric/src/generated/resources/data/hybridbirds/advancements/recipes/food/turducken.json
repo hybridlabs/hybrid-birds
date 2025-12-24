@@ -1,0 +1,33 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "hybridbirds:turducken"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_turducken_ingredient": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "hybridbirds:turducken_ingredients"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_turducken_ingredient",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "hybridbirds:turducken"
+    ]
+  },
+  "sends_telemetry_event": false
+}

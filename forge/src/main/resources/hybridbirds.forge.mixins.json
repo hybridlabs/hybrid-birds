@@ -1,0 +1,20 @@
+{
+    "required": true,
+    "minVersion": "0.8",
+    "package": "dev.hybridlabs.birds.mixin",
+    "refmap": "hybridbirds.refmap.json",
+    "compatibilityLevel": "JAVA_17",
+    "mixins": [
+        "ChickenEntityMixin",
+        "EggEntityMixin",
+        "OcelotEntityMixin",
+        "ResourceLocationMixin"
+    ],
+    "client": [
+    ],
+    "server": [
+    ],
+    "injectors": {
+        "defaultRequire": 1
+    }
+}

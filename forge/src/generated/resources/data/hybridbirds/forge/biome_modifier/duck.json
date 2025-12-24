@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#hybridbirds:duck_spawn_biomes",
+  "spawners": {
+    "type": "hybridbirds:duck",
+    "maxCount": 3,
+    "minCount": 1,
+    "weight": 5
+  }
+}

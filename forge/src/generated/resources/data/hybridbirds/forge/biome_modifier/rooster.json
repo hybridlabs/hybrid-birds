@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#hybridbirds:rooster_spawn_biomes",
+  "spawners": {
+    "type": "hybridbirds:rooster",
+    "maxCount": 2,
+    "minCount": 1,
+    "weight": 5
+  }
+}

@@ -27,7 +27,7 @@ legacyForge {
     }
 
     mixin {
-        add(sourceSets.main, "${forge_mod_id}.refmap.json")
+        add(sourceSets.main, "${mod_id}.refmap.json")
         config("${mod_id}.forge.mixins.json")
     }
 
@@ -46,7 +46,7 @@ legacyForge {
         }
         data {
             data()
-            programArguments.addAll '--mod', 'hybrid_birds', '--all',
+            programArguments.addAll '--mod', 'hybridbirds', '--all',
                     '--output', file('src/generated/resources/').getAbsolutePath(),
                     '--existing', file('src/main/resources/').getAbsolutePath()
         }

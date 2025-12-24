@@ -4,9 +4,9 @@
     "cookingtime": 100,
     "experience": 0.15,
     "ingredient": {
-        "tag": "hybrid-birds:eggs"
+        "tag": "hybridbirds:eggs"
     },
-    "result": "hybrid-birds:cooked_egg",
+    "result": "hybridbirds:cooked_egg",
     "fabric:load_conditions": [
         {
             "condition": "fabric:not",

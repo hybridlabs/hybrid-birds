@@ -16,7 +16,7 @@ import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.registries.ForgeRegistries
 
 
-@Mod.EventBusSubscriber(modid = Constants.FORGE_MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(modid = Constants.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 object DataGenerators {
 
     @SubscribeEvent

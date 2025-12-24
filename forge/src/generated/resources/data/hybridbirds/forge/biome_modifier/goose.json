@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#hybridbirds:goose_spawn_biomes",
+  "spawners": {
+    "type": "hybridbirds:goose",
+    "maxCount": 3,
+    "minCount": 1,
+    "weight": 3
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#hybridbirds:swan_spawn_biomes",
+  "spawners": {
+    "type": "hybridbirds:swan",
+    "maxCount": 2,
+    "minCount": 1,
+    "weight": 1
+  }
+}
