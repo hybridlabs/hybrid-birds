@@ -113,7 +113,7 @@ class GoslingEntity(entityType: EntityType<out GoslingEntity>, world: Level) :
 
     companion object {
         fun createMobAttributes(): AttributeSupplier.Builder {
-            return WaterAnimal.createMobAttributes()
+            return createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 2.0)
                 .add(Attributes.MOVEMENT_SPEED, 0.5)
                 .add(Attributes.ATTACK_DAMAGE, 1.0)

@@ -1,6 +1,7 @@
 package dev.hybridlabs.birds.entity
 
 import dev.hybridlabs.birds.entity.bird.HybridBirdsBirdEntity
+import dev.hybridlabs.birds.entity.bird.HybridBirdsParrotEntity
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.Mob
 import net.minecraft.world.entity.SpawnPlacements
@@ -35,6 +36,14 @@ object SpawnRestrictionRegistry {
             HybridBirdsEntityTypes.GOOSE.get(),
             HybridBirdsEntityTypes.SWAN.get(),
         ).forEach { registerAquaticBird(it) }
+
+        setOf(
+            HybridBirdsEntityTypes.BLUE_JAY.get(),
+        ).forEach { registerParrot(it) }
+    }
+
+    private fun <T : HybridBirdsParrotEntity> registerParrot(entityType: EntityType<T>) {
+        registerBirdEntity(entityType, HybridBirdsParrotEntity::canBirdSpawn)
     }
 
     private fun <T : HybridBirdsBirdEntity> registerTerrestrialBird(entityType: EntityType<T>) {

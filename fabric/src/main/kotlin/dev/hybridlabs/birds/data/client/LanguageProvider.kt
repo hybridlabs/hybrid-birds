@@ -55,20 +55,21 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
 
     private fun generateEntities(builder: TranslationBuilder) {
         val entityNameMap = mapOf<EntityType<*>, String>(
-            HybridBirdsEntityTypes.DUCK!!.get() to "Duck",
-            HybridBirdsEntityTypes.GOOSE!!.get() to "Goose",
-            HybridBirdsEntityTypes.SWAN!!.get() to "Swan",
-            HybridBirdsEntityTypes.ROOSTER!!.get() to "Rooster",
-            HybridBirdsEntityTypes.CHICK!!.get() to "Chick",
-            HybridBirdsEntityTypes.DUCKLING!!.get() to "Duckling",
-            HybridBirdsEntityTypes.GOSLING!!.get() to "Gosling",
-            HybridBirdsEntityTypes.CYGNET!!.get() to "Cygnet",
-            HybridBirdsEntityTypes.POULT!!.get() to "Poult",
-            HybridBirdsEntityTypes.PEACHICK!!.get() to "Peachick",
-            HybridBirdsEntityTypes.KEET!!.get() to "Keet",
-            HybridBirdsEntityTypes.TURKEY!!.get() to "Turkey",
-            HybridBirdsEntityTypes.PEACOCK!!.get() to "Peacock",
-            HybridBirdsEntityTypes.GUINEA_FOWL!!.get() to "Guinea Fowl",
+            HybridBirdsEntityTypes.DUCK.get() to "Duck",
+            HybridBirdsEntityTypes.GOOSE.get() to "Goose",
+            HybridBirdsEntityTypes.SWAN.get() to "Swan",
+            HybridBirdsEntityTypes.ROOSTER.get() to "Rooster",
+            HybridBirdsEntityTypes.CHICK.get() to "Chick",
+            HybridBirdsEntityTypes.DUCKLING.get() to "Duckling",
+            HybridBirdsEntityTypes.GOSLING.get() to "Gosling",
+            HybridBirdsEntityTypes.CYGNET.get() to "Cygnet",
+            HybridBirdsEntityTypes.POULT.get() to "Poult",
+            HybridBirdsEntityTypes.PEACHICK.get() to "Peachick",
+            HybridBirdsEntityTypes.KEET.get() to "Keet",
+            HybridBirdsEntityTypes.TURKEY.get() to "Turkey",
+            HybridBirdsEntityTypes.PEACOCK.get() to "Peacock",
+            HybridBirdsEntityTypes.GUINEA_FOWL.get() to "Guinea Fowl",
+            HybridBirdsEntityTypes.BLUE_JAY.get() to "Blue Jay",
         )
 
         val nonPresentEntityNames = mutableListOf<EntityType<*>>()

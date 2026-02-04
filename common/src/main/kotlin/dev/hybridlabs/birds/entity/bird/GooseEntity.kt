@@ -86,7 +86,7 @@ class GooseEntity(entityType: EntityType<out GooseEntity>, world: Level) :
 
     companion object {
         fun createMobAttributes(): AttributeSupplier.Builder {
-            return WaterAnimal.createMobAttributes()
+            return createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 6.0)
                 .add(Attributes.MOVEMENT_SPEED, 0.5)
                 .add(Attributes.ATTACK_DAMAGE, 1.0)

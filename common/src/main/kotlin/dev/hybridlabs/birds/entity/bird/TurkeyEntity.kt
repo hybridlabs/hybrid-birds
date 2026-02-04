@@ -162,7 +162,7 @@ class TurkeyEntity(entityType: EntityType<out TurkeyEntity>, world: Level) :
 
     companion object {
         fun createMobAttributes(): AttributeSupplier.Builder {
-            return WaterAnimal.createMobAttributes()
+            return createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 8.0)
                 .add(Attributes.MOVEMENT_SPEED, 0.5)
                 .add(Attributes.ATTACK_DAMAGE, 1.0)
