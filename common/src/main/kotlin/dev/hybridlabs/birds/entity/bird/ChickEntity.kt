@@ -116,7 +116,7 @@ class ChickEntity(entityType: EntityType<out ChickEntity>, world: Level) :
 
     companion object {
         fun createMobAttributes(): AttributeSupplier.Builder {
-            return createMobAttributes()
+            return createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 2.0)
                 .add(Attributes.MOVEMENT_SPEED, 0.5)
                 .add(Attributes.ATTACK_DAMAGE, 1.0)

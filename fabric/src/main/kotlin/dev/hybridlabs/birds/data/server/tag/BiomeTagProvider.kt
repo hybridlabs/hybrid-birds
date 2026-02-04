@@ -14,7 +14,7 @@ import java.util.concurrent.CompletableFuture
 class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFuture<HolderLookup.Provider>) :
     FabricTagProvider<Biome>(output, Registries.BIOME, registriesFuture) {
 
-    override fun addTags(arg: HolderLookup.Provider?) {
+    override fun addTags(arg: HolderLookup.Provider) {
         // spawn biomes
 
         getOrCreateTagBuilder(HybridBirdsBiomeTags.DUCK_SPAWN_BIOMES)

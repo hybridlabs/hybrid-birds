@@ -101,7 +101,7 @@ class TurkeyEntity(entityType: EntityType<out TurkeyEntity>, world: Level) :
         getAttribute(Attributes.MOVEMENT_SPEED)?.baseValue = speed
     }
 
-    override fun mobInteract(player: Player, hand: InteractionHand?): InteractionResult {
+    override fun mobInteract(player: Player, hand: InteractionHand): InteractionResult {
         val itemStack = player.getItemInHand(hand)
 
         if (isFatteningItem(itemStack)) {
@@ -152,7 +152,7 @@ class TurkeyEntity(entityType: EntityType<out TurkeyEntity>, world: Level) :
 
     // endregion
 
-    override fun isFood(stack: ItemStack?): Boolean {
+    override fun isFood(stack: ItemStack): Boolean {
         return BREEDING_INGREDIENT.test(stack)
     }
 
@@ -162,7 +162,7 @@ class TurkeyEntity(entityType: EntityType<out TurkeyEntity>, world: Level) :
 
     companion object {
         fun createMobAttributes(): AttributeSupplier.Builder {
-            return createMobAttributes()
+            return createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 8.0)
                 .add(Attributes.MOVEMENT_SPEED, 0.5)
                 .add(Attributes.ATTACK_DAMAGE, 1.0)

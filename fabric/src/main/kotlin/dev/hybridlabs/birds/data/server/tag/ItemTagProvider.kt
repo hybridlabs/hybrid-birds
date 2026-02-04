@@ -9,7 +9,7 @@ import net.minecraft.world.item.Items
 import java.util.concurrent.CompletableFuture
 
 class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFuture<HolderLookup.Provider>) : FabricTagProvider.ItemTagProvider(output, registriesFuture) {
-    override fun addTags(arg: HolderLookup.Provider?) {
+    override fun addTags(arg: HolderLookup.Provider) {
         setOf(
             HybridBirdsItems.DUCK.get(),
             HybridBirdsItems.TURKEY.get(),

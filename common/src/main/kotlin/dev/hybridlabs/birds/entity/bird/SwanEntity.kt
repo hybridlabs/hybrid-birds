@@ -72,7 +72,7 @@ class SwanEntity(entityType: EntityType<out SwanEntity>, world: Level) :
         return HybridBirdsSoundEvents.SWAN_DIE.get()
     }
 
-    override fun isFood(stack: ItemStack?): Boolean {
+    override fun isFood(stack: ItemStack): Boolean {
         return BREEDING_INGREDIENT.test(stack)
     }
 
@@ -82,7 +82,7 @@ class SwanEntity(entityType: EntityType<out SwanEntity>, world: Level) :
 
     companion object {
         fun createMobAttributes(): AttributeSupplier.Builder {
-            return createMobAttributes()
+            return createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 6.0)
                 .add(Attributes.MOVEMENT_SPEED, 0.5)
                 .add(Attributes.ATTACK_DAMAGE, 1.0)
