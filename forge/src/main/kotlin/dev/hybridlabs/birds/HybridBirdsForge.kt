@@ -1,11 +1,11 @@
 package dev.hybridlabs.birds
 import dev.hybridlabs.birds.block.HybridBirdsBlocks
+import dev.hybridlabs.birds.client.render.entity.HybridBirdsEntityRenderers
 import dev.hybridlabs.birds.effect.HybridBirdsStatusEffects
 import dev.hybridlabs.birds.entity.HybridBirdsEntityTypes
 import dev.hybridlabs.birds.entity.SpawnRestrictionRegistry
 import dev.hybridlabs.birds.item.HybridBirdsItemGroups
 import dev.hybridlabs.birds.item.HybridBirdsItems
-import dev.hybridlabs.birds.render.entity.HybridBirdsEntityRenderers
 import dev.hybridlabs.birds.sound.HybridBirdsSoundEvents
 import dev.hybridlabs.birds.tag.HybridBirdsBiomeTags
 import dev.hybridlabs.birds.tag.HybridBirdsItemTags

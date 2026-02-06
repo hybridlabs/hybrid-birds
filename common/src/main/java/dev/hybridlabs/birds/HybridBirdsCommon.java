@@ -6,6 +6,7 @@ import dev.hybridlabs.birds.platform.Services;
 import dev.hybridlabs.birds.platform.registration.RegistrationProvider;
 
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EntityType;
@@ -44,5 +45,9 @@ public class HybridBirdsCommon {
         if (Services.PLATFORM.isModLoaded(MOD_ID)) {
             Constants.LOG.info("Hybrid Birds loaded.");
         }
+    }
+
+    public static ResourceLocation locate(String path) {
+        return new ResourceLocation(MOD_ID, path);
     }
 }
