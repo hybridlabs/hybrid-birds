@@ -46,7 +46,7 @@ object HybridBirdsForge {
 
         HybridBirdsStatusEffects
 
-        SpawnRestrictionRegistry
+        MOD_BUS.addListener(::registerSpawnPlacements)
 
         runForDist(
             clientTarget = {
