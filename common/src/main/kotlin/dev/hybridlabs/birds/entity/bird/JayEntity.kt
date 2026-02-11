@@ -1,19 +1,26 @@
 package dev.hybridlabs.birds.entity.bird
 
+import dev.hybridlabs.birds.entity.HybridBirdsEntityTypes
 import dev.hybridlabs.birds.sound.HybridBirdsSoundEvents
+import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.world.damagesource.DamageSource
+import net.minecraft.world.entity.AgeableMob
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
 
 
-class BlueJayEntity(type: EntityType<out BlueJayEntity>, world: Level) :
+class JayEntity(type: EntityType<out JayEntity>, world: Level) :
     HybridBirdsParrotEntity(type, world) {
 
     override fun getMaxSpawnClusterSize(): Int {
         return 2
+    }
+
+    override fun getBreedOffspring(serverLevel: ServerLevel, ageableMob: AgeableMob): JayEntity? {
+        return HybridBirdsEntityTypes.JAY.get().create(serverLevel)
     }
 
     override fun getAmbientSound(): SoundEvent {

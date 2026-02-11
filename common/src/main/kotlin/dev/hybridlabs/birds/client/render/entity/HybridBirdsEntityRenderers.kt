@@ -13,5 +13,5 @@ object HybridBirdsEntityRenderers {
     val DUCK = ClientServices.RENDERER.registerEntityRenderer(HybridBirdsEntityTypes.DUCK, ::DuckEntityRenderer)
     val GOOSE = ClientServices.RENDERER.registerEntityRenderer(HybridBirdsEntityTypes.GOOSE, ::GooseEntityRenderer)
     val SWAN = ClientServices.RENDERER.registerEntityRenderer(HybridBirdsEntityTypes.SWAN, ::SwanEntityRenderer)
-    val BLUE_JAY = ClientServices.RENDERER.registerEntityRenderer(HybridBirdsEntityTypes.BLUE_JAY, ::BlueJayEntityRenderer)
+    val JAY = ClientServices.RENDERER.registerEntityRenderer(HybridBirdsEntityTypes.JAY, ::JayEntityRenderer)
 }

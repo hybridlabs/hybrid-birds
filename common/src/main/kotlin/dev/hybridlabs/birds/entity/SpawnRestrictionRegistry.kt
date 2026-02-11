@@ -32,7 +32,7 @@ object SpawnRestrictionRegistry {
         ).forEach { registerAquaticBird(it) }
 
         setOf(
-            HybridBirdsEntityTypes.BLUE_JAY.get(),
+            HybridBirdsEntityTypes.JAY.get(),
         ).forEach { registerParrot(it) }
     }
 

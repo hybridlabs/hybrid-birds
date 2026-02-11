@@ -70,11 +70,11 @@ object HybridBirdsEntityTypes {
         SwanEntity::createMobAttributes
     )
 
-    val BLUE_JAY = registerBird(
-        "blue_jay",
-        ::BlueJayEntity,
+    val JAY = registerBird(
+        "jay",
+        ::JayEntity,
         EntityDimensions.fixed(0.25f, 0.3f),
-        BlueJayEntity::createMobAttributes
+        JayEntity::createMobAttributes
     )
 
     private fun <T : LivingEntity> registerBird(
