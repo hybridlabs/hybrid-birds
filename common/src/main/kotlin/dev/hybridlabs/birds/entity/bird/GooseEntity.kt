@@ -14,7 +14,6 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.entity.ai.goal.*
 import net.minecraft.world.entity.ai.navigation.AmphibiousPathNavigation
-import net.minecraft.world.entity.animal.WaterAnimal
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
@@ -47,6 +46,7 @@ class GooseEntity(entityType: EntityType<out GooseEntity>, world: Level) :
         goalSelector.addGoal(2, BreedGoal(this, 0.5))
         goalSelector.addGoal(2, RandomStrollGoal(this, 0.5))
         goalSelector.addGoal(2, RandomLookAroundGoal(this))
+        goalSelector.addGoal(5, FollowParentGoal(this, 1.1))
         goalSelector.addGoal(11, LookAtPlayerGoal(this, Player::class.java, 10.0f))
     }
 
@@ -81,7 +81,7 @@ class GooseEntity(entityType: EntityType<out GooseEntity>, world: Level) :
     }
 
     override fun getBreedOffspring(serverLevel: ServerLevel, ageableMob: AgeableMob): AgeableMob? {
-        return HybridBirdsEntityTypes.GOSLING!!.get().create(serverLevel)
+        return HybridBirdsEntityTypes.GOOSE.get().create(serverLevel)
     }
 
     companion object {

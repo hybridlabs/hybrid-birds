@@ -7,12 +7,6 @@ object HybridBirdsEntityRenderers {
 
     val ROOSTER = ClientServices.RENDERER.registerEntityRenderer(HybridBirdsEntityTypes.ROOSTER, ::RoosterEntityRenderer)
     val CHICK = ClientServices.RENDERER.registerEntityRenderer(HybridBirdsEntityTypes.CHICK, ::ChickEntityRenderer)
-    val DUCKLING = ClientServices.RENDERER.registerEntityRenderer(HybridBirdsEntityTypes.DUCKLING, ::DucklingEntityRenderer)
-    val GOSLING = ClientServices.RENDERER.registerEntityRenderer(HybridBirdsEntityTypes.GOSLING, ::GoslingEntityRenderer)
-    val CYGNET = ClientServices.RENDERER.registerEntityRenderer(HybridBirdsEntityTypes.CYGNET, ::CygnetEntityRenderer)
-    val POULT = ClientServices.RENDERER.registerEntityRenderer(HybridBirdsEntityTypes.POULT, ::PoultEntityRenderer)
-    val PEACHICK = ClientServices.RENDERER.registerEntityRenderer(HybridBirdsEntityTypes.PEACHICK, ::PeachickEntityRenderer)
-    val KEET = ClientServices.RENDERER.registerEntityRenderer(HybridBirdsEntityTypes.KEET, ::KeetEntityRenderer)
     val TURKEY = ClientServices.RENDERER.registerEntityRenderer(HybridBirdsEntityTypes.TURKEY, ::TurkeyEntityRenderer)
     val PEACOCK = ClientServices.RENDERER.registerEntityRenderer(HybridBirdsEntityTypes.PEACOCK, ::PeacockEntityRenderer)
     val GUINEA_FOWL = ClientServices.RENDERER.registerEntityRenderer(HybridBirdsEntityTypes.GUINEA_FOWL, ::GuineaFowlEntityRenderer)

@@ -9,16 +9,29 @@ import software.bernie.geckolib.core.animation.AnimationState
 import software.bernie.geckolib.model.GeoModel
 
 abstract class HybridBirdsEntityModel<T: HybridBirdsBirdEntity> (private val id: String) : GeoModel<T>() {
+
     override fun getModelResource(animatable: T): ResourceLocation {
-        return ResourceLocation(Constants.MOD_ID, "geo/$id.geo.json")
+        return if (animatable.isBaby) {
+            ResourceLocation(Constants.MOD_ID, "geo/baby_$id.geo.json")
+        } else {
+            ResourceLocation(Constants.MOD_ID, "geo/$id.geo.json")
+        }
     }
 
     override fun getTextureResource(animatable: T): ResourceLocation {
-        return ResourceLocation(Constants.MOD_ID, "textures/entity/$id.png")
+        return if (animatable.isBaby) {
+            ResourceLocation(Constants.MOD_ID, "textures/entity/baby_$id.png")
+        } else {
+            ResourceLocation(Constants.MOD_ID, "textures/entity/$id.png")
+        }
     }
 
     override fun getAnimationResource(animatable: T): ResourceLocation {
-        return ResourceLocation(Constants.MOD_ID, "animations/$id.animation.json")
+        return if (animatable.isBaby) {
+            ResourceLocation(Constants.MOD_ID, "animations/baby_$id.animation.json")
+        } else {
+            ResourceLocation(Constants.MOD_ID, "animations/$id.animation.json")
+        }
     }
 
     override fun setCustomAnimations(animatable: T, instanceId: Long, animationState: AnimationState<T>) {

@@ -14,7 +14,6 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.entity.ai.goal.*
 import net.minecraft.world.entity.ai.navigation.AmphibiousPathNavigation
-import net.minecraft.world.entity.animal.WaterAnimal
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
@@ -43,6 +42,7 @@ class SwanEntity(entityType: EntityType<out SwanEntity>, world: Level) :
         goalSelector.addGoal(2, BreedGoal(this, 0.5))
         goalSelector.addGoal(2, RandomStrollGoal(this, 0.5))
         goalSelector.addGoal(2, RandomLookAroundGoal(this))
+        goalSelector.addGoal(5, FollowParentGoal(this, 1.1))
         goalSelector.addGoal(11, LookAtPlayerGoal(this, Player::class.java, 10.0f))
     }
 
@@ -77,7 +77,7 @@ class SwanEntity(entityType: EntityType<out SwanEntity>, world: Level) :
     }
 
     override fun getBreedOffspring(serverLevel: ServerLevel, ageableMob: AgeableMob): AgeableMob? {
-        return HybridBirdsEntityTypes.CYGNET!!.get().create(serverLevel)
+        return HybridBirdsEntityTypes.SWAN.get().create(serverLevel)
     }
 
     companion object {

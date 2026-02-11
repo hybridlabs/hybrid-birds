@@ -22,7 +22,6 @@ import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal
 import net.minecraft.world.entity.ai.navigation.PathNavigation
 import net.minecraft.world.entity.animal.Chicken
-import net.minecraft.world.entity.animal.WaterAnimal
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
@@ -60,6 +59,7 @@ class RoosterEntity(entityType: EntityType<out RoosterEntity>, world: Level) :
         goalSelector.addGoal(5, LookAtPlayerGoal(this, ChickEntity::class.java, 8.0f))
         goalSelector.addGoal(1, MeleeAttackGoal(this, 0.5, false))
         targetSelector.addGoal(1, HurtByTargetGoal(this))
+        goalSelector.addGoal(5, FollowParentGoal(this, 1.1))
         targetSelector.addGoal(2, NearestAttackableTargetGoal(this, RoosterEntity::class.java, true) { other ->
             other is RoosterEntity && this.isAngry() && other.isAngry()
         })
@@ -156,7 +156,7 @@ class RoosterEntity(entityType: EntityType<out RoosterEntity>, world: Level) :
     // endregion
 
     override fun getBreedOffspring(serverLevel: ServerLevel, ageableMob: AgeableMob): AgeableMob? {
-        return HybridBirdsEntityTypes.CHICK!!.get().create(serverLevel)
+        return HybridBirdsEntityTypes.CHICK.get().create(serverLevel)
     }
 
     companion object {

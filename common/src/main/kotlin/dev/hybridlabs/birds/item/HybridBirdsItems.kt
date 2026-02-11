@@ -26,12 +26,12 @@ object HybridBirdsItems {
     val GUINEA_FOWL_SPAWN_EGG = registerSpawnEgg("guinea_fowl_spawn_egg", HybridBirdsEntityTypes.GUINEA_FOWL, 0x356b97, 0x252533)
     val BLUE_JAY_SPAWN_EGG = registerSpawnEgg("blue_jay_spawn_egg", HybridBirdsEntityTypes.BLUE_JAY, 0x356b97, 0x252533)
 
-    val DUCK_EGG = registerEgg("duck_egg", HybridBirdsEntityTypes.DUCKLING)
-    val GOOSE_EGG = registerEgg("goose_egg", HybridBirdsEntityTypes.GOSLING)
-    val SWAN_EGG = registerEgg("swan_egg", HybridBirdsEntityTypes.CYGNET)
-    val TURKEY_EGG = registerEgg("turkey_egg", HybridBirdsEntityTypes.POULT)
-    val PEACOCK_EGG = registerEgg("peacock_egg", HybridBirdsEntityTypes.PEACHICK)
-    val GUINEA_FOWL_EGG = registerEgg("guinea_fowl_egg", HybridBirdsEntityTypes.KEET)
+    val DUCK_EGG = registerEgg("duck_egg", HybridBirdsEntityTypes.DUCK)
+    val GOOSE_EGG = registerEgg("goose_egg", HybridBirdsEntityTypes.GOOSE)
+    val SWAN_EGG = registerEgg("swan_egg", HybridBirdsEntityTypes.SWAN)
+    val TURKEY_EGG = registerEgg("turkey_egg", HybridBirdsEntityTypes.TURKEY)
+    val PEACOCK_EGG = registerEgg("peacock_egg", HybridBirdsEntityTypes.PEACOCK)
+    val GUINEA_FOWL_EGG = registerEgg("guinea_fowl_egg", HybridBirdsEntityTypes.GUINEA_FOWL)
 
     val COOKED_EGG = register(
         "cooked_egg"

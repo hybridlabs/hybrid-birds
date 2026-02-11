@@ -20,18 +20,12 @@ object SpawnRestrictionRegistry {
         setOf(
             HybridBirdsEntityTypes.ROOSTER.get(),
             HybridBirdsEntityTypes.CHICK.get(),
-            HybridBirdsEntityTypes.POULT.get(),
-            HybridBirdsEntityTypes.PEACHICK.get(),
-            HybridBirdsEntityTypes.KEET.get(),
             HybridBirdsEntityTypes.TURKEY.get(),
             HybridBirdsEntityTypes.PEACOCK.get(),
             HybridBirdsEntityTypes.GUINEA_FOWL.get(),
         ).forEach { registerTerrestrialBird(it) }
 
         setOf(
-            HybridBirdsEntityTypes.DUCKLING.get(),
-            HybridBirdsEntityTypes.GOSLING.get(),
-            HybridBirdsEntityTypes.CYGNET.get(),
             HybridBirdsEntityTypes.DUCK.get(),
             HybridBirdsEntityTypes.GOOSE.get(),
             HybridBirdsEntityTypes.SWAN.get(),
