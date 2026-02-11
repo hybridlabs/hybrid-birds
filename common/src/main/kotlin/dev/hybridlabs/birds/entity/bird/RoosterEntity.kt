@@ -164,6 +164,7 @@ class RoosterEntity(entityType: EntityType<out RoosterEntity>, world: Level) :
             return createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 6.0)
                 .add(Attributes.MOVEMENT_SPEED, 0.5)
+                .add(Attributes.ATTACK_KNOCKBACK, 0.1)
                 .add(Attributes.ATTACK_DAMAGE, 1.0)
                 .add(Attributes.FOLLOW_RANGE, 8.0)
         }
