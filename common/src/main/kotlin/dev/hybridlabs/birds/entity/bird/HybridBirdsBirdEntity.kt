@@ -5,14 +5,11 @@ import net.minecraft.core.Direction
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.sounds.SoundEvents
+import net.minecraft.tags.BlockTags
 import net.minecraft.tags.FluidTags
 import net.minecraft.util.RandomSource
 import net.minecraft.world.damagesource.DamageSource
-import net.minecraft.world.entity.AgeableMob
-import net.minecraft.world.entity.EntityDimensions
-import net.minecraft.world.entity.EntityType
-import net.minecraft.world.entity.MobSpawnType
-import net.minecraft.world.entity.Pose
+import net.minecraft.world.entity.*
 import net.minecraft.world.entity.ai.control.MoveControl
 import net.minecraft.world.entity.ai.navigation.GroundPathNavigation
 import net.minecraft.world.entity.animal.Animal
@@ -28,7 +25,6 @@ import software.bernie.geckolib.core.animation.AnimationController
 import software.bernie.geckolib.core.animation.AnimationState
 import software.bernie.geckolib.core.animation.RawAnimation
 import software.bernie.geckolib.util.GeckoLibUtil
-
 
 @Suppress("LeakingThis")
 open class HybridBirdsBirdEntity(
@@ -84,7 +80,7 @@ open class HybridBirdsBirdEntity(
     }
 
     override fun removeWhenFarAway(distanceSquared: Double): Boolean {
-        return false
+        return !this.hasCustomName()
     }
 
     override fun getMaxSpawnClusterSize(): Int {
@@ -124,7 +120,8 @@ open class HybridBirdsBirdEntity(
             pos: BlockPos,
             random: RandomSource,
         ): Boolean {
-            isBrightEnoughToSpawn(level, pos)
+            isBrightEnoughToSpawn(level, pos) &&
+                    level.getBlockState(pos.below()).`is`(BlockTags.ANIMALS_SPAWNABLE_ON)
             return true
         }
 
@@ -134,7 +131,7 @@ open class HybridBirdsBirdEntity(
             level: LevelAccessor,
             spawnReason: MobSpawnType,
             pos: BlockPos,
-            random: RandomSource
+            random: RandomSource,
         ): Boolean {
             val mutable = pos.mutable()
             do {

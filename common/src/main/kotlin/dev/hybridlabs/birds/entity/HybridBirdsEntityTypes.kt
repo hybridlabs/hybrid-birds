@@ -88,7 +88,7 @@ object HybridBirdsEntityTypes {
             entityFactory,
             dimensions,
             attributeContainer,
-            MobCategory.CREATURE
+            Services.PLATFORM.getMobCategoryByName("BIRD"),
         )
     }
 

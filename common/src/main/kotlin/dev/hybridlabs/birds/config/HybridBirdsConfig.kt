@@ -16,7 +16,7 @@ data class HybridBirdsConfig(
         val CODEC: Codec<HybridBirdsConfig> = RecordCodecBuilder.create { instance ->
             instance.group(
                 Codec.INT.fieldOf("data_version").forGetter(HybridBirdsConfig::dataVersion),
-                EntitySpawnConfig.Companion.CODEC.listOf().fieldOf("spawn_configuration").forGetter(
+                EntitySpawnConfig.CODEC.listOf().fieldOf("spawn_configuration").forGetter(
                     HybridBirdsConfig::entitySpawnConfig),
             ).apply(instance, ::HybridBirdsConfig)
         }
