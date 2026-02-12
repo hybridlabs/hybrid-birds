@@ -27,6 +27,7 @@ object SpawnRestrictionRegistry {
 
         setOf(
             HybridBirdsEntityTypes.OSTRICH.get(),
+            HybridBirdsEntityTypes.KIWI.get(),
         ).forEach { registerRatite(it) }
 
         setOf(

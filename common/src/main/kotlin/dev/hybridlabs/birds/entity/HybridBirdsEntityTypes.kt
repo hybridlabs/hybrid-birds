@@ -84,6 +84,13 @@ object HybridBirdsEntityTypes {
         OstrichEntity::createMobAttributes
     )
 
+    val KIWI = registerBird(
+        "kiwi",
+        ::KiwiEntity,
+        EntityDimensions.fixed(0.5f, 0.5f),
+        KiwiEntity::createMobAttributes
+    )
+
     private fun <T : LivingEntity> registerBird(
         id: String,
         entityFactory: EntityType.EntityFactory<T>,

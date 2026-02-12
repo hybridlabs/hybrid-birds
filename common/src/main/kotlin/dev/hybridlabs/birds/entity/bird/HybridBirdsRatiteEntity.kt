@@ -36,6 +36,7 @@ import software.bernie.geckolib.util.GeckoLibUtil
 open class HybridBirdsRatiteEntity(
     type: EntityType<out HybridBirdsRatiteEntity>,
     world: Level,
+    private val isRideable: Boolean
 ) :
     Animal(type, world), PlayerRideableJumping,
     GeoEntity {
@@ -123,14 +124,14 @@ open class HybridBirdsRatiteEntity(
 
     //#region Jumping
     override fun canJump(): Boolean {
-        return true
+        return isRideable
     }
 
     override fun onPlayerJump(power: Int) {
+        if (!isRideable) return
         if (!this.onGround()) return
 
         val jumpStrength = power / 100.0f
-
         val verticalBoost = 0.4 + (jumpStrength * 0.6)
 
         this.deltaMovement = this.deltaMovement.add(0.0, verticalBoost, 0.0)
@@ -138,6 +139,7 @@ open class HybridBirdsRatiteEntity(
     }
 
     override fun handleStartJump(power: Int) {
+        if (!isRideable) return
         if (canJump()) {
             this.playSound(SoundEvents.CAMEL_DASH, 1.0f, 1.0f)
             this.onPlayerJump(power)
@@ -154,7 +156,7 @@ open class HybridBirdsRatiteEntity(
             return super.mobInteract(player, hand)
         }
 
-        if (!isBaby && !isVehicle && !player.isSecondaryUseActive) {
+        if (isRideable && !isBaby && !isVehicle && !player.isSecondaryUseActive) {
             if (!level().isClientSide) {
                 player.startRiding(this)
             }
@@ -165,11 +167,15 @@ open class HybridBirdsRatiteEntity(
     }
 
     override fun getControllingPassenger(): LivingEntity? {
+        if (!isRideable) return null
         return if (firstPassenger is Player) firstPassenger as Player else null
     }
 
-
     override fun tickRidden(player: Player, travelVector: Vec3) {
+        if (!isRideable) {
+            super.tickRidden(player, travelVector)
+            return
+        }
         super.tickRidden(player, travelVector)
         this.setRot(player.yRot, player.xRot * 0.5f)
         this.yHeadRot = this.yRot
@@ -178,7 +184,7 @@ open class HybridBirdsRatiteEntity(
     }
 
     override fun travel(travelVector: Vec3) {
-        if (isAlive && isVehicle) {
+        if (isRideable && isAlive && isVehicle) {
             val passenger = controllingPassenger
             if (passenger is Player) {
 
@@ -202,11 +208,12 @@ open class HybridBirdsRatiteEntity(
     }
 
     override fun getRiddenInput(player: Player, travelVector: Vec3): Vec3 {
-        return Vec3(0.0, 0.0, 1.0)
+        return if (isRideable) Vec3(0.0, 0.0, 1.0) else super.getRiddenInput(player, travelVector)
     }
 
     override fun getRiddenSpeed(player: Player): Float {
-        return getAttributeValue(Attributes.MOVEMENT_SPEED).toFloat()
+        return if (isRideable) getAttributeValue(Attributes.MOVEMENT_SPEED).toFloat()
+        else super.getRiddenSpeed(player)
     }
     //#endregion
 
