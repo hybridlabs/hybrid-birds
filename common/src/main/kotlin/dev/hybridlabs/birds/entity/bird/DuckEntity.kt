@@ -34,7 +34,10 @@ class DuckEntity(entityType: EntityType<out DuckEntity>, world: Level) :
     }
 
     override fun getWaterline(): Float {
-        return 0.2f
+        return if (this.isBaby)
+            0.15f
+        else
+            return 0.2f
     }
 
     override fun getMaxSpawnClusterSize(): Int {

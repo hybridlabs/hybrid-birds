@@ -36,6 +36,13 @@ class SwanEntity(entityType: EntityType<out SwanEntity>, world: Level) :
         return 2
     }
 
+    override fun getWaterline(): Float {
+        return if (this.isBaby)
+            0.2f
+        else
+            return 0.4f
+    }
+
     override fun registerGoals() {
         super.registerGoals()
         goalSelector.addGoal(1, TemptGoal(this, 1.0, BREEDING_INGREDIENT, false))

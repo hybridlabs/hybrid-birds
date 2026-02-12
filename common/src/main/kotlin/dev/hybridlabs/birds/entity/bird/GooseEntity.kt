@@ -33,7 +33,10 @@ class GooseEntity(entityType: EntityType<out GooseEntity>, world: Level) :
     }
 
     override fun getWaterline(): Float {
-        return 0.3f
+        return if (this.isBaby)
+            0.15f
+        else
+            return 0.3f
     }
 
     override fun getMaxSpawnClusterSize(): Int {
