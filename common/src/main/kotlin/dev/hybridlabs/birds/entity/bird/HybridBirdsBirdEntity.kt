@@ -1,6 +1,5 @@
 package dev.hybridlabs.birds.entity.bird
 
-import dev.hybridlabs.birds.entity.bird.PeacockEntity.Companion.BREEDING_INGREDIENT
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.server.level.ServerLevel
@@ -12,14 +11,7 @@ import net.minecraft.util.RandomSource
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.entity.*
 import net.minecraft.world.entity.ai.control.MoveControl
-import net.minecraft.world.entity.ai.goal.BreedGoal
-import net.minecraft.world.entity.ai.goal.FloatGoal
-import net.minecraft.world.entity.ai.goal.FollowParentGoal
-import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal
-import net.minecraft.world.entity.ai.goal.PanicGoal
-import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal
-import net.minecraft.world.entity.ai.goal.RandomStrollGoal
-import net.minecraft.world.entity.ai.goal.TemptGoal
+import net.minecraft.world.entity.ai.goal.*
 import net.minecraft.world.entity.ai.navigation.GroundPathNavigation
 import net.minecraft.world.entity.animal.Animal
 import net.minecraft.world.entity.player.Player

@@ -15,7 +15,6 @@ import net.minecraft.world.entity.ai.control.MoveControl
 import net.minecraft.world.entity.ai.goal.*
 import net.minecraft.world.entity.ai.navigation.PathNavigation
 import net.minecraft.world.entity.animal.Animal
-import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.crafting.Ingredient
 import net.minecraft.world.level.Level
@@ -38,7 +37,7 @@ class GuineaFowlEntity(entityType: EntityType<out GuineaFowlEntity>, world: Leve
 
     override fun registerGoals() {
         super.registerGoals()
-        goalSelector.addGoal(1, TemptGoal(this, 1.0, GooseEntity.Companion.BREEDING_INGREDIENT, false))
+        goalSelector.addGoal(1, TemptGoal(this, 1.0, BREEDING_INGREDIENT, false))
         goalSelector.addGoal(2, BreedGoal(this, 1.1))
     }
 

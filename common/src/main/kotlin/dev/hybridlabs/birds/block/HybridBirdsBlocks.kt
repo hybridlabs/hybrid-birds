@@ -14,15 +14,16 @@ import java.util.function.Supplier
 object HybridBirdsBlocks {
 
     val TURDUCKEN = register(
-        "turducken", {
-            TurduckenBlock(
+        "turducken"
+    ) {
+        TurduckenBlock(
             BlockBehaviour.Properties.of()
                 .strength(0.5f)
                 .forceSolidOn()
                 .pushReaction(PushReaction.DESTROY)
                 .sound(SoundType.WOOL)
-            )
-        })
+        )
+    }
 
     private fun register(id: String, block: Supplier<Block>): RegistryObject<Block> {
         return HybridBirdsCommon.BLOCKS.register(id, block)
