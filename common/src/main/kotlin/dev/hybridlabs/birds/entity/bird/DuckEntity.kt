@@ -12,9 +12,9 @@ import net.minecraft.world.entity.AgeableMob
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
-import net.minecraft.world.entity.ai.goal.*
+import net.minecraft.world.entity.ai.goal.BreedGoal
+import net.minecraft.world.entity.ai.goal.TemptGoal
 import net.minecraft.world.entity.ai.navigation.AmphibiousPathNavigation
-import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
 import net.minecraft.world.item.crafting.Ingredient
@@ -42,13 +42,9 @@ class DuckEntity(entityType: EntityType<out DuckEntity>, world: Level) :
     }
 
     override fun registerGoals() {
-        goalSelector.addGoal(0, PanicGoal(this, 0.6))
-        goalSelector.addGoal(1, TemptGoal(this, 0.5, BREEDING_INGREDIENT, false))
-        goalSelector.addGoal(2, BreedGoal(this, 0.5))
-        goalSelector.addGoal(2, RandomStrollGoal(this, 0.5))
-        goalSelector.addGoal(2, RandomLookAroundGoal(this))
-        goalSelector.addGoal(5, FollowParentGoal(this, 1.1))
-        goalSelector.addGoal(11, LookAtPlayerGoal(this, Player::class.java, 10.0f))
+        super.registerGoals()
+        goalSelector.addGoal(1, TemptGoal(this, 1.0, BREEDING_INGREDIENT, false))
+        goalSelector.addGoal(2, BreedGoal(this, 1.1))
     }
 
     override fun aiStep() {
@@ -89,7 +85,7 @@ class DuckEntity(entityType: EntityType<out DuckEntity>, world: Level) :
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 6.0)
-                .add(Attributes.MOVEMENT_SPEED, 0.5)
+                .add(Attributes.MOVEMENT_SPEED, 0.25)
                 .add(Attributes.ATTACK_DAMAGE, 1.0)
                 .add(Attributes.FOLLOW_RANGE, 12.0)
         }

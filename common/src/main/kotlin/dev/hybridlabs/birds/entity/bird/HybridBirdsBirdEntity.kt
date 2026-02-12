@@ -1,5 +1,6 @@
 package dev.hybridlabs.birds.entity.bird
 
+import dev.hybridlabs.birds.entity.bird.PeacockEntity.Companion.BREEDING_INGREDIENT
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.server.level.ServerLevel
@@ -11,8 +12,17 @@ import net.minecraft.util.RandomSource
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.entity.*
 import net.minecraft.world.entity.ai.control.MoveControl
+import net.minecraft.world.entity.ai.goal.BreedGoal
+import net.minecraft.world.entity.ai.goal.FloatGoal
+import net.minecraft.world.entity.ai.goal.FollowParentGoal
+import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal
+import net.minecraft.world.entity.ai.goal.PanicGoal
+import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal
+import net.minecraft.world.entity.ai.goal.RandomStrollGoal
+import net.minecraft.world.entity.ai.goal.TemptGoal
 import net.minecraft.world.entity.ai.navigation.GroundPathNavigation
 import net.minecraft.world.entity.animal.Animal
+import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.LevelAccessor
 import net.minecraft.world.level.block.state.BlockState
@@ -45,6 +55,16 @@ open class HybridBirdsBirdEntity(
     init {
         moveControl = MoveControl(this)
         navigation = this.birdNavigation
+    }
+
+    override fun registerGoals() {
+        super.registerGoals()
+        goalSelector.addGoal(0, FloatGoal(this))
+        goalSelector.addGoal(0, PanicGoal(this, 1.2))
+        goalSelector.addGoal(2, RandomStrollGoal(this, 1.0))
+        goalSelector.addGoal(2, RandomLookAroundGoal(this))
+        goalSelector.addGoal(5, FollowParentGoal(this, 1.1))
+        goalSelector.addGoal(11, LookAtPlayerGoal(this, Player::class.java, 10.0f))
     }
 
     fun isBelowWaterline(): Boolean {

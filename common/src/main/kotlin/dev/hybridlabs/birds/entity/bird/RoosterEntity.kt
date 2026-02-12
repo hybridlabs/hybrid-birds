@@ -48,18 +48,13 @@ class RoosterEntity(entityType: EntityType<out RoosterEntity>, world: Level) :
     }
 
     override fun registerGoals() {
-        goalSelector.addGoal(0, FloatGoal(this))
-        goalSelector.addGoal(2, PanicGoal(this, 0.6))
-        goalSelector.addGoal(3, TemptGoal(this, 0.5,Ingredient.of(ItemTags.VILLAGER_PLANTABLE_SEEDS), false))
-        goalSelector.addGoal(5, RandomStrollGoal(this, 0.5))
-        goalSelector.addGoal(7, RandomLookAroundGoal(this))
-        goalSelector.addGoal(6, LookAtPlayerGoal(this, Player::class.java, 8.0f))
+        super.registerGoals()
+        goalSelector.addGoal(3, TemptGoal(this, 1.0,Ingredient.of(ItemTags.VILLAGER_PLANTABLE_SEEDS), false))
         goalSelector.addGoal(6, LookAtPlayerGoal(this, RoosterEntity::class.java, 8.0f))
         goalSelector.addGoal(6, LookAtPlayerGoal(this, Chicken::class.java, 8.0f))
         goalSelector.addGoal(5, LookAtPlayerGoal(this, ChickEntity::class.java, 8.0f))
-        goalSelector.addGoal(1, MeleeAttackGoal(this, 0.5, false))
+        goalSelector.addGoal(1, MeleeAttackGoal(this, 1.0, false))
         targetSelector.addGoal(1, HurtByTargetGoal(this))
-        goalSelector.addGoal(5, FollowParentGoal(this, 1.1))
         targetSelector.addGoal(2, NearestAttackableTargetGoal(this, RoosterEntity::class.java, true) { other ->
             other is RoosterEntity && this.isAngry() && other.isAngry()
         })
@@ -163,7 +158,7 @@ class RoosterEntity(entityType: EntityType<out RoosterEntity>, world: Level) :
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 6.0)
-                .add(Attributes.MOVEMENT_SPEED, 0.5)
+                .add(Attributes.MOVEMENT_SPEED, 0.25)
                 .add(Attributes.ATTACK_KNOCKBACK, 0.1)
                 .add(Attributes.ATTACK_DAMAGE, 1.0)
                 .add(Attributes.FOLLOW_RANGE, 8.0)

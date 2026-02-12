@@ -39,7 +39,7 @@ class JayEntity(type: EntityType<out JayEntity>, world: Level) :
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 6.0)
-                .add(Attributes.MOVEMENT_SPEED, 0.5)
+                .add(Attributes.MOVEMENT_SPEED, 0.25)
                 .add(Attributes.FLYING_SPEED, 0.4)
                 .add(Attributes.ATTACK_DAMAGE, 1.0)
                 .add(Attributes.FOLLOW_RANGE, 12.0)

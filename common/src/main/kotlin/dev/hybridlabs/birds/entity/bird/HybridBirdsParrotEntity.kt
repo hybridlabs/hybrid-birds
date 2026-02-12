@@ -46,7 +46,7 @@ open class HybridBirdsParrotEntity(
     }
 
     override fun registerGoals() {
-        goalSelector.addGoal(0, PanicGoal(this, 1.25))
+        goalSelector.addGoal(0, PanicGoal(this, 1.1))
         goalSelector.addGoal(0, FloatGoal(this))
         goalSelector.addGoal(0, WaterAvoidingRandomFlyingGoal(this,1.0))
         goalSelector.addGoal(1, LookAtPlayerGoal(this, Player::class.java, 8.0f))
