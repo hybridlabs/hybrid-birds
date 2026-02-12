@@ -120,9 +120,8 @@ open class HybridBirdsBirdEntity(
             pos: BlockPos,
             random: RandomSource,
         ): Boolean {
-            isBrightEnoughToSpawn(level, pos) &&
+            return isBrightEnoughToSpawn(level, pos) &&
                     level.getBlockState(pos.below()).`is`(BlockTags.ANIMALS_SPAWNABLE_ON)
-            return true
         }
 
         @Suppress("UNUSED_PARAMETER")

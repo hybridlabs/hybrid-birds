@@ -1,6 +1,5 @@
 package dev.hybridlabs.birds.client.render.entity
 
-import dev.hybridlabs.birds.entity.bird.HybridBirdsBirdEntity
 import dev.hybridlabs.birds.entity.bird.HybridBirdsParrotEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider
 import software.bernie.geckolib.model.GeoModel

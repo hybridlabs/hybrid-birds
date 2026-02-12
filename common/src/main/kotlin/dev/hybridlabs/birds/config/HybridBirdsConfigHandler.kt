@@ -20,7 +20,7 @@ class HybridBirdsConfigHandler(val file: File, val defaultConfig: HybridBirdsCon
      */
     fun read(): DataResult<Pair<HybridBirdsConfig, JsonElement>> {
         val json = file.reader().use(JsonParser::parseReader)
-        return HybridBirdsConfig.Companion.CODEC.decode(JsonOps.INSTANCE, json)
+        return HybridBirdsConfig.CODEC.decode(JsonOps.INSTANCE, json)
     }
 
     /**
@@ -40,7 +40,7 @@ class HybridBirdsConfigHandler(val file: File, val defaultConfig: HybridBirdsCon
     }
 
     fun save(): Boolean {
-        val dataResult = HybridBirdsConfig.Companion.CODEC.encodeStart(JsonOps.INSTANCE, config)
+        val dataResult = HybridBirdsConfig.CODEC.encodeStart(JsonOps.INSTANCE, config)
         val result = dataResult.result()
 
         if (!result.isPresent) {

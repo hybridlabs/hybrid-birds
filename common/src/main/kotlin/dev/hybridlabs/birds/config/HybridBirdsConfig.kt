@@ -10,7 +10,7 @@ data class HybridBirdsConfig(
      */
     val dataVersion: Int = 5,
 
-    val entitySpawnConfig: List<EntitySpawnConfig> = EntitySpawnConfigGenerator.Companion.generate(),
+    val entitySpawnConfig: List<EntitySpawnConfig> = EntitySpawnConfigGenerator.generate(),
 ) {
     companion object {
         val CODEC: Codec<HybridBirdsConfig> = RecordCodecBuilder.create { instance ->

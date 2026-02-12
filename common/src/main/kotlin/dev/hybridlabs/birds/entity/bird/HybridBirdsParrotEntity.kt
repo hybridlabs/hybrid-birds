@@ -46,10 +46,10 @@ open class HybridBirdsParrotEntity(
     }
 
     override fun registerGoals() {
-        this.goalSelector.addGoal(0, PanicGoal(this, 1.25))
-        this.goalSelector.addGoal(0, FloatGoal(this))
-        this.goalSelector.addGoal(0, WaterAvoidingRandomFlyingGoal(this,1.0))
-        this.goalSelector.addGoal(1, LookAtPlayerGoal(this, Player::class.java, 8.0f))
+        goalSelector.addGoal(0, PanicGoal(this, 1.25))
+        goalSelector.addGoal(0, FloatGoal(this))
+        goalSelector.addGoal(0, WaterAvoidingRandomFlyingGoal(this,1.0))
+        goalSelector.addGoal(1, LookAtPlayerGoal(this, Player::class.java, 8.0f))
     }
 
     init {
@@ -116,8 +116,7 @@ open class HybridBirdsParrotEntity(
             pos: BlockPos,
             random: RandomSource,
         ): Boolean {
-            isBrightEnoughToSpawn(level, pos)
-            return true
+            return isBrightEnoughToSpawn(level, pos)
         }
     }
 }

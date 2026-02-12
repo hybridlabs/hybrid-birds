@@ -71,7 +71,7 @@ class FollowRoosterGoal(
                 val x = targetPos.x
                 val y = targetPos.y
                 val z = targetPos.z
-                chicken.navigation.moveTo(x.toDouble(), y.toDouble(), z.toDouble(), speed)
+                chicken.navigation.moveTo(x, y, z, speed)
             }
         }
     }
