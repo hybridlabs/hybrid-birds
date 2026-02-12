@@ -77,6 +77,13 @@ object HybridBirdsEntityTypes {
         JayEntity::createMobAttributes
     )
 
+    val OSTRICH = registerBird(
+        "ostrich",
+        ::OstrichEntity,
+        EntityDimensions.fixed(1.0f, 2.0f),
+        OstrichEntity::createMobAttributes
+    )
+
     private fun <T : LivingEntity> registerBird(
         id: String,
         entityFactory: EntityType.EntityFactory<T>,

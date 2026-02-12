@@ -37,6 +37,9 @@ object HybridBirdsSoundEvents {
     val PEACOCK_HURT = register("peacock_hurt")
     val PEACOCK_DIE = register("peacock_die")
 
+    val OSTRICH_AMBIENT = register("ostrich_ambient")
+    val OSTRICH_HURT = register("ostrich_hurt")
+
     private fun register(id: String): RegistryObject<SoundEvent> {
         val identifier = ResourceLocation(Constants.MOD_ID, id)
         return HybridBirdsCommon.SOUND_EVENTS.register(id){SoundEvent.createVariableRangeEvent(identifier)}

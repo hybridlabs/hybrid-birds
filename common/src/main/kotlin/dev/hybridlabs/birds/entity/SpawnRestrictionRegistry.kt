@@ -2,6 +2,7 @@ package dev.hybridlabs.birds.entity
 
 import dev.hybridlabs.birds.entity.bird.HybridBirdsBirdEntity
 import dev.hybridlabs.birds.entity.bird.HybridBirdsParrotEntity
+import dev.hybridlabs.birds.entity.bird.HybridBirdsRatiteEntity
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.Mob
 import net.minecraft.world.entity.SpawnPlacements
@@ -16,7 +17,6 @@ import net.minecraft.world.level.levelgen.Heightmap
 @Suppress("UNCHECKED_CAST")
 object SpawnRestrictionRegistry {
     fun registerSpawnRestrictions() {
-        // shallow fish
         setOf(
             HybridBirdsEntityTypes.ROOSTER.get(),
             HybridBirdsEntityTypes.CHICK.get(),
@@ -24,6 +24,10 @@ object SpawnRestrictionRegistry {
             HybridBirdsEntityTypes.PEACOCK.get(),
             HybridBirdsEntityTypes.GUINEA_FOWL.get(),
         ).forEach { registerTerrestrialBird(it) }
+
+        setOf(
+            HybridBirdsEntityTypes.OSTRICH.get(),
+        ).forEach { registerRatite(it) }
 
         setOf(
             HybridBirdsEntityTypes.DUCK.get(),
@@ -42,6 +46,10 @@ object SpawnRestrictionRegistry {
 
     private fun <T : HybridBirdsBirdEntity> registerTerrestrialBird(entityType: EntityType<T>) {
         registerBirdEntity(entityType, HybridBirdsBirdEntity::canBirdSpawn)
+    }
+
+    private fun <T : HybridBirdsRatiteEntity> registerRatite(entityType: EntityType<T>) {
+        registerBirdEntity(entityType, HybridBirdsRatiteEntity::canBirdSpawn)
     }
 
     private fun <T : HybridBirdsBirdEntity> registerAquaticBird(entityType: EntityType<T>) {
