@@ -55,6 +55,7 @@ class TurkeyEntity(entityType: EntityType<out TurkeyEntity>, world: Level) :
     }
 
     override fun registerGoals() {
+        super.registerGoals()
         goalSelector.addGoal(1, TemptGoal(this, 1.0, Ingredient.of(ItemTags.VILLAGER_PLANTABLE_SEEDS), false))
         goalSelector.addGoal(2, BreedGoal(this, 1.1))
     }
@@ -98,7 +99,7 @@ class TurkeyEntity(entityType: EntityType<out TurkeyEntity>, world: Level) :
     override fun mobInteract(player: Player, hand: InteractionHand): InteractionResult {
         val itemStack = player.getItemInHand(hand)
 
-        if (isFatteningItem(itemStack)) {
+        if (isFatteningItem(itemStack) && !this.isBaby) {
             if (!level().isClientSide) {
                 val currentFatness = getStuffingLevel()
                 if (currentFatness < 2) {
