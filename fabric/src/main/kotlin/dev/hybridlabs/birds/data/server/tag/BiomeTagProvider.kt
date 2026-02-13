@@ -103,5 +103,13 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .add(Biomes.TAIGA)
             .add(Biomes.OLD_GROWTH_PINE_TAIGA)
             .add(Biomes.OLD_GROWTH_SPRUCE_TAIGA)
+
+        getOrCreateTagBuilder(HybridBirdsBiomeTags.KIWI_SPAWN_BIOMES)
+            .add(Biomes.OLD_GROWTH_PINE_TAIGA)
+            .add(Biomes.OLD_GROWTH_SPRUCE_TAIGA)
+
+        getOrCreateTagBuilder(HybridBirdsBiomeTags.HUMMINGBIRD_SPAWN_BIOMES)
+            .add(Biomes.FLOWER_FOREST)
+            .add(Biomes.SUNFLOWER_PLAINS)
     }
 }

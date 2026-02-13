@@ -27,6 +27,8 @@ object HybridBirdsItems {
     val JAY_SPAWN_EGG = registerSpawnEgg("jay_spawn_egg", HybridBirdsEntityTypes.JAY, 0x356b97, 0x252533)
     val OSTRICH_SPAWN_EGG = registerSpawnEgg("ostrich_spawn_egg", HybridBirdsEntityTypes.OSTRICH, 0x356b97, 0x252533)
     val KIWI_SPAWN_EGG = registerSpawnEgg("kiwi_spawn_egg", HybridBirdsEntityTypes.KIWI, 0x356b97, 0x252533)
+    val HUMMINGBIRD_SPAWN_EGG = registerSpawnEgg("hummingbird_spawn_egg", HybridBirdsEntityTypes.HUMMINGBIRD, 0x356b97, 0x252533)
+    val FLAMINGO_SPAWN_EGG = registerSpawnEgg("flamingo_spawn_egg", HybridBirdsEntityTypes.FLAMINGO, 0x356b97, 0x252533)
 
     val DUCK_EGG = registerEgg("duck_egg", HybridBirdsEntityTypes.DUCK)
     val GOOSE_EGG = registerEgg("goose_egg", HybridBirdsEntityTypes.GOOSE)

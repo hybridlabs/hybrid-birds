@@ -66,6 +66,8 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridBirdsEntityTypes.JAY.get() to "Jay",
             HybridBirdsEntityTypes.OSTRICH.get() to "Ostrich",
             HybridBirdsEntityTypes.KIWI.get() to "Kiwi",
+            HybridBirdsEntityTypes.HUMMINGBIRD.get() to "Hummingbird",
+            HybridBirdsEntityTypes.FLAMINGO.get() to "Flamingo",
         )
 
         val nonPresentEntityNames = mutableListOf<EntityType<*>>()

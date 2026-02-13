@@ -70,11 +70,25 @@ object HybridBirdsEntityTypes {
         SwanEntity::createMobAttributes
     )
 
+    val FLAMINGO = registerBird(
+        "flamingo",
+        ::FlamingoEntity,
+        EntityDimensions.fixed(0.8f, 1.8f),
+        FlamingoEntity::createMobAttributes
+    )
+
     val JAY = registerBird(
         "jay",
         ::JayEntity,
         EntityDimensions.fixed(0.25f, 0.3f),
         JayEntity::createMobAttributes
+    )
+
+    val HUMMINGBIRD = registerBird(
+        "hummingbird",
+        ::HummingbirdEntity,
+        EntityDimensions.fixed(0.25f, 0.3f),
+        HummingbirdEntity::createMobAttributes
     )
 
     val OSTRICH = registerBird(

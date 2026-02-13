@@ -25,8 +25,10 @@ class EntitySpawnConfigGenerator {
         addBird(HybridBirdsEntityTypes.PEACOCK.get(), listOf(BiomeTags.IS_JUNGLE), 2, 1, 2)
         addBird(HybridBirdsEntityTypes.GUINEA_FOWL.get(), listOf(BiomeTags.IS_SAVANNA), 3, 1, 3)
         addBird(HybridBirdsEntityTypes.OSTRICH.get(), listOf(BiomeTags.IS_SAVANNA), 2, 1, 3)
-        addBird(HybridBirdsEntityTypes.KIWI.get(), listOf(BiomeTags.IS_FOREST), 2, 1, 1)
+        addBird(HybridBirdsEntityTypes.KIWI.get(), listOf(HybridBirdsBiomeTags.KIWI_SPAWN_BIOMES), 2, 1, 1)
         addBird(HybridBirdsEntityTypes.JAY.get(), listOf(BiomeTags.IS_FOREST, BiomeTags.IS_TAIGA), 3, 1, 3)
+        addBird(HybridBirdsEntityTypes.FLAMINGO.get(), listOf(BiomeTags.IS_SAVANNA, BiomeTags.IS_JUNGLE), 3, 1, 3)
+        addBird(HybridBirdsEntityTypes.HUMMINGBIRD.get(), listOf(HybridBirdsBiomeTags.HUMMINGBIRD_SPAWN_BIOMES), 3, 1, 3)
     }
 
     private fun addBird(

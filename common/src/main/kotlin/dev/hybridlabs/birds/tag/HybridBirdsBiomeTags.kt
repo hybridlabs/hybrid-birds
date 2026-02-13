@@ -13,6 +13,8 @@ object HybridBirdsBiomeTags {
     val SWAN_SPAWN_BIOMES = create("swan_spawn_biomes")
     val ROOSTER_SPAWN_BIOMES = create("rooster_spawn_biomes")
     val TURKEY_SPAWN_BIOMES = create("turkey_spawn_biomes")
+    val KIWI_SPAWN_BIOMES = create("kiwi_spawn_biomes")
+    val HUMMINGBIRD_SPAWN_BIOMES = create("hummingbird_spawn_biomes")
 
     private fun create(id: String): TagKey<Biome> {
         return TagKey.create(Registries.BIOME, ResourceLocation(Constants.MOD_ID, id))

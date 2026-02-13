@@ -16,4 +16,6 @@ object HybridBirdsEntityRenderers {
     val JAY = ClientServices.RENDERER.registerEntityRenderer(HybridBirdsEntityTypes.JAY, ::JayEntityRenderer)
     val OSTRICH = ClientServices.RENDERER.registerEntityRenderer(HybridBirdsEntityTypes.OSTRICH, ::OstrichEntityRenderer)
     val KIWI = ClientServices.RENDERER.registerEntityRenderer(HybridBirdsEntityTypes.KIWI, ::KiwiEntityRenderer)
+    val HUMMINGBIRD = ClientServices.RENDERER.registerEntityRenderer(HybridBirdsEntityTypes.HUMMINGBIRD, ::HummingbirdEntityRenderer)
+    val FLAMINGO = ClientServices.RENDERER.registerEntityRenderer(HybridBirdsEntityTypes.FLAMINGO, ::FlamingoEntityRenderer)
 }
