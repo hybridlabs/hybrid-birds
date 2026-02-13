@@ -34,16 +34,10 @@ open class HBBirdEntity(
     Animal(type, world),
     GeoEntity {
     private val factory = GeckoLibUtil.createInstanceCache(this)
-    private var birdNavigation = GroundPathNavigation(this, world)
-
-    @Nullable
-    override fun getBreedOffspring(serverLevel: ServerLevel, ageableMob: AgeableMob): AgeableMob? {
-        throw NotImplementedError("Breeding is not implemented")
-    }
 
     init {
         moveControl = MoveControl(this)
-        navigation = this.birdNavigation
+        navigation = GroundPathNavigation(this, world)
         this.setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
     }
 
@@ -54,6 +48,11 @@ open class HBBirdEntity(
         goalSelector.addGoal(2, RandomLookAroundGoal(this))
         goalSelector.addGoal(5, FollowParentGoal(this, 1.1))
         goalSelector.addGoal(11, LookAtPlayerGoal(this, Player::class.java, 10.0f))
+    }
+
+    @Nullable
+    override fun getBreedOffspring(serverLevel: ServerLevel, ageableMob: AgeableMob): AgeableMob? {
+        throw NotImplementedError("Breeding is not implemented")
     }
 
     override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {

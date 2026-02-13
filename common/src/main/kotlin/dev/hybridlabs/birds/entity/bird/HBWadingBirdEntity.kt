@@ -22,8 +22,8 @@ import software.bernie.geckolib.core.animation.AnimationState
 import software.bernie.geckolib.core.animation.RawAnimation
 
 @Suppress("LeakingThis")
-open class HBAquaticBirdEntity(
-    type: EntityType<out HBAquaticBirdEntity>,
+open class HBWadingBirdEntity(
+    type: EntityType<out HBWadingBirdEntity>,
     world: Level
 ) :
     HBBirdEntity(type, world),
@@ -54,7 +54,7 @@ open class HBAquaticBirdEntity(
         controllerRegistrar.add(
             AnimationController(
                 this, "Walk/Swim/Fly/Idle", 4
-            ) { state: AnimationState<HBAquaticBirdEntity> ->
+            ) { state: AnimationState<HBWadingBirdEntity> ->
                 when {
                     state.isMoving && onGround() -> state.setAndContinue(DefaultAnimations.WALK)
                     state.isMoving && isInWater -> state.setAndContinue(DefaultAnimations.SWIM)
@@ -75,7 +75,7 @@ open class HBAquaticBirdEntity(
 
         @Suppress("UNUSED_PARAMETER")
         fun canAquaticBirdSpawn(
-            type: EntityType<out HBAquaticBirdEntity>,
+            type: EntityType<out HBWadingBirdEntity>,
             level: LevelAccessor,
             spawnReason: MobSpawnType,
             pos: BlockPos,

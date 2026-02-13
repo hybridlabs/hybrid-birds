@@ -38,11 +38,10 @@ open class HBParrotEntity(
     FlyingAnimal,
     GeoEntity {
     private val factory = GeckoLibUtil.createInstanceCache(this)
-    private var birdNavigation = FlyingPathNavigation(this, world)
 
-    @Nullable
-    override fun getBreedOffspring(serverLevel: ServerLevel, ageableMob: AgeableMob): AgeableMob? {
-        return null
+    init {
+        moveControl = FlyingMoveControl(this, 10, false)
+        navigation = FlyingPathNavigation(this, world)
     }
 
     override fun registerGoals() {
@@ -52,9 +51,9 @@ open class HBParrotEntity(
         goalSelector.addGoal(1, LookAtPlayerGoal(this, Player::class.java, 8.0f))
     }
 
-    init {
-        moveControl = FlyingMoveControl(this, 10, false)
-        navigation = this.birdNavigation
+    @Nullable
+    override fun getBreedOffspring(serverLevel: ServerLevel, ageableMob: AgeableMob): AgeableMob? {
+        return null
     }
 
     override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
