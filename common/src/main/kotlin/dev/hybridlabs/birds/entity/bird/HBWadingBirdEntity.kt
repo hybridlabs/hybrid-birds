@@ -59,7 +59,7 @@ open class HBWadingBirdEntity(
     }
 
     override fun getStandingEyeHeight(pose: Pose, dimensions: EntityDimensions): Float {
-        return dimensions.height * 1.1f
+        return dimensions.height * 1.0f
     }
 
     override fun isAffectedByFluids(): Boolean {
