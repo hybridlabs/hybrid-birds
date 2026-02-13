@@ -18,6 +18,7 @@ import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.LevelAccessor
 import net.minecraft.world.level.block.state.BlockState
+import net.minecraft.world.level.pathfinder.BlockPathTypes
 import org.jetbrains.annotations.Nullable
 import software.bernie.geckolib.animatable.GeoEntity
 import software.bernie.geckolib.constant.DefaultAnimations
@@ -47,13 +48,14 @@ open class HybridBirdsBirdEntity(
     init {
         moveControl = MoveControl(this)
         navigation = this.birdNavigation
+        this.setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
     }
 
     override fun registerGoals() {
         super.registerGoals()
         goalSelector.addGoal(0, FloatGoal(this))
         goalSelector.addGoal(0, PanicGoal(this, 1.2))
-        goalSelector.addGoal(2, RandomStrollGoal(this, 1.0))
+        goalSelector.addGoal(2, WaterAvoidingRandomStrollGoal(this, 1.0))
         goalSelector.addGoal(2, RandomLookAroundGoal(this))
         goalSelector.addGoal(5, FollowParentGoal(this, 1.1))
         goalSelector.addGoal(11, LookAtPlayerGoal(this, Player::class.java, 10.0f))
