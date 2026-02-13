@@ -5,6 +5,7 @@ import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.tags.BlockTags
+import net.minecraft.tags.FluidTags
 import net.minecraft.util.RandomSource
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.entity.*
@@ -48,6 +49,14 @@ open class HBBirdEntity(
         goalSelector.addGoal(2, RandomLookAroundGoal(this))
         goalSelector.addGoal(5, FollowParentGoal(this, 1.1))
         goalSelector.addGoal(11, LookAtPlayerGoal(this, Player::class.java, 10.0f))
+    }
+
+    fun isBelowWaterline(): Boolean {
+        return this.isUnderWater || this.getFluidHeight(FluidTags.WATER) > this.getWaterline()
+    }
+
+    open fun getWaterline(): Float {
+        return 0.4f
     }
 
     @Nullable

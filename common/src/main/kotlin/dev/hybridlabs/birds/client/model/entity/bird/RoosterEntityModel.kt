@@ -4,7 +4,7 @@ import dev.hybridlabs.birds.Constants
 import dev.hybridlabs.birds.entity.bird.RoosterEntity
 import net.minecraft.resources.ResourceLocation
 
-class RoosterEntityModel : HybridBirdsEntityModel<RoosterEntity>("rooster") {
+class RoosterEntityModel : HBBirdEntityModel<RoosterEntity>("rooster") {
 
     override fun getModelResource(animatable: RoosterEntity): ResourceLocation {
         return ResourceLocation(Constants.MOD_ID, "geo/rooster.geo.json")

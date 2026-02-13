@@ -8,7 +8,7 @@ import software.bernie.geckolib.constant.DataTickets
 import software.bernie.geckolib.core.animation.AnimationState
 import software.bernie.geckolib.model.GeoModel
 
-abstract class HybridBirdsRatiteEntityModel<T: HBRatiteEntity> (private val id: String) : GeoModel<T>() {
+abstract class HBRatiteEntityModel<T: HBRatiteEntity> (private val id: String) : GeoModel<T>() {
     override fun getModelResource(animatable: T): ResourceLocation {
         return ResourceLocation(Constants.MOD_ID, "geo/$id.geo.json")
     }

@@ -4,7 +4,7 @@ import dev.hybridlabs.birds.Constants
 import dev.hybridlabs.birds.entity.bird.TurkeyEntity
 import net.minecraft.resources.ResourceLocation
 
-class TurkeyEntityModel : HybridBirdsEntityModel<TurkeyEntity>("turkey") {
+class TurkeyEntityModel : HBBirdEntityModel<TurkeyEntity>("turkey") {
 
     private val BABY_MODEL = ResourceLocation(Constants.MOD_ID, "geo/baby_turkey.geo.json")
     private val NORMAL_MODEL = ResourceLocation(Constants.MOD_ID, "geo/turkey.geo.json")

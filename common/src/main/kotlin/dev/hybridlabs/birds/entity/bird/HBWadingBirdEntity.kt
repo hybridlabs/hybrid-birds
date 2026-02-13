@@ -42,14 +42,6 @@ open class HBWadingBirdEntity(
         goalSelector.addGoal(11, LookAtPlayerGoal(this, Player::class.java, 10.0f))
     }
 
-    fun isBelowWaterline(): Boolean {
-        return this.isUnderWater || this.getFluidHeight(FluidTags.WATER) > this.getWaterline()
-    }
-
-    open fun getWaterline(): Float {
-        return 0.4f
-    }
-
     override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
         controllerRegistrar.add(
             AnimationController(
@@ -67,14 +59,30 @@ open class HBWadingBirdEntity(
     }
 
     override fun getStandingEyeHeight(pose: Pose, dimensions: EntityDimensions): Float {
-        return dimensions.height * 0.85f
+        return dimensions.height * 1.1f
+    }
+
+    override fun isAffectedByFluids(): Boolean {
+        return !onGround()
+    }
+
+    override fun getWaterline(): Float {
+        return 1.4f
+    }
+
+    override fun isInWater(): Boolean {
+        if (!super.isInWater()) return false
+
+        val fluidHeight = this.getFluidHeight(FluidTags.WATER)
+
+        return fluidHeight > (this.getWaterline() - 0.2f)
     }
 
     companion object {
         val WATER_IDLE: RawAnimation = RawAnimation.begin().thenPlay("misc.water_idle")
 
         @Suppress("UNUSED_PARAMETER")
-        fun canAquaticBirdSpawn(
+        fun canWadingBirdSpawn(
             type: EntityType<out HBWadingBirdEntity>,
             level: LevelAccessor,
             spawnReason: MobSpawnType,

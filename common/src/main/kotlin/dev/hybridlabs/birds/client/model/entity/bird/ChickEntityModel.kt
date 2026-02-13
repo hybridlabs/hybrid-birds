@@ -4,7 +4,7 @@ import dev.hybridlabs.birds.Constants
 import dev.hybridlabs.birds.entity.bird.ChickEntity
 import net.minecraft.resources.ResourceLocation
 
-class ChickEntityModel : HybridBirdsEntityModel<ChickEntity>("chick") {
+class ChickEntityModel : HBBirdEntityModel<ChickEntity>("chick") {
 
     override fun getModelResource(animatable: ChickEntity): ResourceLocation {
         return ResourceLocation(Constants.MOD_ID, "geo/chick.geo.json")

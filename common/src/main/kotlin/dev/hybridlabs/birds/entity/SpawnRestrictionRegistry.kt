@@ -4,6 +4,7 @@ import dev.hybridlabs.birds.entity.bird.HBAquaticBirdEntity
 import dev.hybridlabs.birds.entity.bird.HBBirdEntity
 import dev.hybridlabs.birds.entity.bird.HBParrotEntity
 import dev.hybridlabs.birds.entity.bird.HBRatiteEntity
+import dev.hybridlabs.birds.entity.bird.HBWadingBirdEntity
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.Mob
 import net.minecraft.world.entity.SpawnPlacements
@@ -35,8 +36,11 @@ object SpawnRestrictionRegistry {
             HybridBirdsEntityTypes.DUCK.get(),
             HybridBirdsEntityTypes.GOOSE.get(),
             HybridBirdsEntityTypes.SWAN.get(),
-            HybridBirdsEntityTypes.FLAMINGO.get(),
         ).forEach { registerAquaticBird(it) }
+
+        setOf(
+            HybridBirdsEntityTypes.FLAMINGO.get(),
+        ).forEach { registerWadingBird(it) }
 
         setOf(
             HybridBirdsEntityTypes.JAY.get(),
@@ -58,6 +62,10 @@ object SpawnRestrictionRegistry {
 
     private fun <T : HBAquaticBirdEntity> registerAquaticBird(entityType: EntityType<T>) {
         registerAquaticBirdEntity(entityType, HBAquaticBirdEntity::canAquaticBirdSpawn)
+    }
+
+    private fun <T : HBWadingBirdEntity> registerWadingBird(entityType: EntityType<T>) {
+        registerAquaticBirdEntity(entityType, HBWadingBirdEntity::canWadingBirdSpawn)
     }
 
     private fun <T : Animal> registerBirdEntity(entityType: EntityType<T>, predicate: SpawnPredicate<T>) {

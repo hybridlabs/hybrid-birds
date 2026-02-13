@@ -11,7 +11,7 @@ import kotlin.math.max
 class BirdFloatControl(bird: HBBirdEntity) : MoveControl(bird) {
     override fun tick() {
         var deltaMovement: Vec3 = this.mob.deltaMovement
-        if ((this.mob as HBAquaticBirdEntity).isBelowWaterline()) {
+        if ((this.mob as HBBirdEntity).isBelowWaterline()) {
             this.mob.deltaMovement = deltaMovement.add(0.0, 0.05, 0.0)
             if (this.mob.isUnderWater)
                 deltaMovement = this.mob.deltaMovement

@@ -8,7 +8,7 @@ import software.bernie.geckolib.constant.DataTickets
 import software.bernie.geckolib.core.animation.AnimationState
 import software.bernie.geckolib.model.GeoModel
 
-abstract class HybridBirdsEntityModel<T: HBBirdEntity> (private val id: String) : GeoModel<T>() {
+abstract class HBBirdEntityModel<T: HBBirdEntity> (private val id: String) : GeoModel<T>() {
 
     override fun getModelResource(animatable: T): ResourceLocation {
         return if (animatable.isBaby) {
