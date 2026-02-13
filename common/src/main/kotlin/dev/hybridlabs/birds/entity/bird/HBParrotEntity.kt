@@ -5,17 +5,18 @@ import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.util.RandomSource
+import net.minecraft.world.InteractionHand
+import net.minecraft.world.InteractionResult
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.entity.*
 import net.minecraft.world.entity.ai.control.FlyingMoveControl
-import net.minecraft.world.entity.ai.goal.FloatGoal
-import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal
-import net.minecraft.world.entity.ai.goal.PanicGoal
-import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomFlyingGoal
+import net.minecraft.world.entity.ai.goal.*
 import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation
 import net.minecraft.world.entity.animal.FlyingAnimal
 import net.minecraft.world.entity.animal.ShoulderRidingEntity
 import net.minecraft.world.entity.player.Player
+import net.minecraft.world.item.Item
+import net.minecraft.world.item.Items
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.LevelAccessor
 import net.minecraft.world.level.block.state.BlockState
@@ -28,11 +29,11 @@ import software.bernie.geckolib.core.animation.AnimationController
 import software.bernie.geckolib.core.animation.AnimationState
 import software.bernie.geckolib.util.GeckoLibUtil
 
-
 @Suppress("LeakingThis")
 open class HBParrotEntity(
     type: EntityType<out HBParrotEntity>,
     world: Level,
+    private val isTameable: Boolean
 ) :
     ShoulderRidingEntity(type, world),
     FlyingAnimal,
@@ -47,8 +48,59 @@ open class HBParrotEntity(
     override fun registerGoals() {
         goalSelector.addGoal(0, PanicGoal(this, 1.1))
         goalSelector.addGoal(0, FloatGoal(this))
-        goalSelector.addGoal(0, WaterAvoidingRandomFlyingGoal(this,1.0))
-        goalSelector.addGoal(1, LookAtPlayerGoal(this, Player::class.java, 8.0f))
+        goalSelector.addGoal(2, WaterAvoidingRandomFlyingGoal(this, 1.0))
+        goalSelector.addGoal(2, LookAtPlayerGoal(this, Player::class.java, 8.0f))
+        goalSelector.addGoal(1, SitWhenOrderedToGoal(this))
+        goalSelector.addGoal(1, FollowOwnerGoal(this, 1.0, 5.0f, 1.0f, true))
+    }
+
+    override fun doPush(entity: Entity) {
+        if (entity !is Player) {
+            super.doPush(entity)
+        }
+    }
+
+    override fun mobInteract(player: Player, hand: InteractionHand): InteractionResult {
+        val itemStack = player.getItemInHand(hand)
+
+        if (this.isTameable && !this.isTame && TAME_FOOD.contains(itemStack.item)) {
+            if (!player.abilities.instabuild) {
+                itemStack.shrink(1)
+            }
+
+            if (!this.isSilent) {
+                this.level().playSound(
+                    null,
+                    this.x,
+                    this.y,
+                    this.z,
+                    SoundEvents.PARROT_EAT,
+                    this.soundSource,
+                    1.0f,
+                    1.0f + (this.random.nextFloat() - this.random.nextFloat()) * 0.2f
+                )
+            }
+
+            if (!this.level().isClientSide) {
+                if (this.random.nextInt(10) == 0) {
+                    this.tame(player)
+                    this.level().broadcastEntityEvent(this, 7.toByte())
+                } else {
+                    this.level().broadcastEntityEvent(this, 6.toByte())
+                }
+            }
+
+            return InteractionResult.sidedSuccess(this.level().isClientSide)
+        }
+
+        if (!this.isFlying && this.isTame && this.isOwnedBy(player)) {
+            if (!this.level().isClientSide) {
+                this.isOrderedToSit = !this.isOrderedToSit
+            }
+            return InteractionResult.sidedSuccess(this.level().isClientSide)
+        }
+
+        return super.mobInteract(player, hand)
     }
 
     @Nullable
@@ -98,7 +150,13 @@ open class HBParrotEntity(
         return SoundEvents.PARROT_AMBIENT
     }
 
-    override fun checkFallDamage(heightDifference: Double, onGround: Boolean, state: BlockState, landedPosition: BlockPos) {}
+    override fun checkFallDamage(
+        heightDifference: Double,
+        onGround: Boolean,
+        state: BlockState,
+        landedPosition: BlockPos,
+    ) {
+    }
 
 
     override fun isFlying(): Boolean {
@@ -106,7 +164,6 @@ open class HBParrotEntity(
     }
 
     companion object {
-
         @Suppress("UNUSED_PARAMETER")
         fun canBirdSpawn(
             type: EntityType<out HBParrotEntity>,
@@ -118,4 +175,13 @@ open class HBParrotEntity(
             return isBrightEnoughToSpawn(level, pos)
         }
     }
+
+    val TAME_FOOD: Set<Item> = setOf(
+        Items.WHEAT_SEEDS,
+        Items.MELON_SEEDS,
+        Items.PUMPKIN_SEEDS,
+        Items.BEETROOT_SEEDS,
+        Items.TORCHFLOWER_SEEDS,
+        Items.PITCHER_POD
+    )
 }

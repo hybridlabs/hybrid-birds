@@ -9,10 +9,16 @@ import net.minecraft.world.entity.AgeableMob
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
+import net.minecraft.world.entity.ai.goal.LandOnOwnersShoulderGoal
 import net.minecraft.world.level.Level
 
 class JayEntity(type: EntityType<out JayEntity>, world: Level) :
-    HBParrotEntity(type, world) {
+    HBParrotEntity(type, world, true) {
+
+    override fun registerGoals() {
+        super.registerGoals()
+        this.goalSelector.addGoal(3, LandOnOwnersShoulderGoal(this))
+    }
 
     override fun getMaxSpawnClusterSize(): Int {
         return 2

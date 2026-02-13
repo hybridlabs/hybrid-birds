@@ -9,7 +9,7 @@ import net.minecraft.world.entity.ai.goal.TemptGoal
 import net.minecraft.world.level.Level
 
 class HummingbirdEntity(entityType: EntityType<out HummingbirdEntity>, world: Level) :
-    HBParrotEntity(entityType, world) {
+    HBParrotEntity(entityType, world, false) {
 
     override fun registerGoals() {
         super.registerGoals()
