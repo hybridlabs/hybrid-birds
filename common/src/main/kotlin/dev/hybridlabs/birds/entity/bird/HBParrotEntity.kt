@@ -48,10 +48,10 @@ open class HBParrotEntity(
     override fun registerGoals() {
         goalSelector.addGoal(0, PanicGoal(this, 1.1))
         goalSelector.addGoal(0, FloatGoal(this))
+        goalSelector.addGoal(1, SitWhenOrderedToGoal(this))
+        goalSelector.addGoal(2, FollowOwnerGoal(this, 1.0, 5.0f, 1.0f, true))
         goalSelector.addGoal(2, WaterAvoidingRandomFlyingGoal(this, 1.0))
         goalSelector.addGoal(2, LookAtPlayerGoal(this, Player::class.java, 8.0f))
-        goalSelector.addGoal(1, SitWhenOrderedToGoal(this))
-        goalSelector.addGoal(1, FollowOwnerGoal(this, 1.0, 5.0f, 1.0f, true))
     }
 
     override fun doPush(entity: Entity) {
