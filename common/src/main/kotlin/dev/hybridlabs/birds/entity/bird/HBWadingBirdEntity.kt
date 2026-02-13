@@ -78,6 +78,10 @@ open class HBWadingBirdEntity(
         return fluidHeight > (this.getWaterline() - 0.2f)
     }
 
+    override fun maxUpStep(): Float {
+        return 1.25f
+    }
+
     companion object {
         val WATER_IDLE: RawAnimation = RawAnimation.begin().thenPlay("misc.water_idle")
 
