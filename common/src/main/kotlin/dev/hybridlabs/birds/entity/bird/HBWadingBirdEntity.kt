@@ -79,7 +79,8 @@ open class HBWadingBirdEntity(
     }
 
     override fun maxUpStep(): Float {
-        return 1.25f
+        return if (!super.isInWater()) 1.75f
+        else 1.25f
     }
 
     companion object {
