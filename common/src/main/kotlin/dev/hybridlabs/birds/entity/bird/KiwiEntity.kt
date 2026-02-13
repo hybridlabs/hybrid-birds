@@ -14,7 +14,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
 
 class KiwiEntity(entityType: EntityType<out KiwiEntity>, world: Level) :
-    HybridBirdsRatiteEntity(entityType, world, false) {
+    HBRatiteEntity(entityType, world, false) {
 
     override fun getMaxSpawnClusterSize(): Int {
         return 2

@@ -12,24 +12,16 @@ import net.minecraft.world.entity.MobSpawnType
 import net.minecraft.world.entity.SpawnGroupData
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
-import net.minecraft.world.entity.ai.control.MoveControl
 import net.minecraft.world.entity.ai.goal.FollowMobGoal
 import net.minecraft.world.entity.ai.goal.TemptGoal
-import net.minecraft.world.entity.ai.navigation.PathNavigation
 import net.minecraft.world.item.crafting.Ingredient
 import net.minecraft.world.level.Level
 import kotlin.math.abs
 import kotlin.random.Random
 
 class ChickEntity(entityType: EntityType<out ChickEntity>, world: Level) :
-    HybridBirdsBirdEntity(entityType, world, false) {
-    private var chickNavigation: PathNavigation = createNavigation(world)
+    HBBirdEntity(entityType, world) {
     private var chickAge = 0
-
-    init {
-        moveControl = MoveControl(this)
-        navigation = chickNavigation
-    }
 
     override fun getMaxSpawnClusterSize(): Int {
         return 2

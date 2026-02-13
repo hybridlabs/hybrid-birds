@@ -11,9 +11,8 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
 
-
 class JayEntity(type: EntityType<out JayEntity>, world: Level) :
-    HybridBirdsParrotEntity(type, world) {
+    HBParrotEntity(type, world) {
 
     override fun getMaxSpawnClusterSize(): Int {
         return 2

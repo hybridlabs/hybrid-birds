@@ -12,10 +12,8 @@ import net.minecraft.world.entity.AgeableMob
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
-import net.minecraft.world.entity.ai.control.MoveControl
 import net.minecraft.world.entity.ai.goal.BreedGoal
 import net.minecraft.world.entity.ai.goal.TemptGoal
-import net.minecraft.world.entity.ai.navigation.PathNavigation
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.crafting.Ingredient
 import net.minecraft.world.level.Level
@@ -27,15 +25,12 @@ import software.bernie.geckolib.core.animation.AnimationState
 import software.bernie.geckolib.core.animation.RawAnimation
 
 class PeacockEntity(entityType: EntityType<out PeacockEntity>, world: Level) :
-    HybridBirdsBirdEntity(entityType, world, false) {
-    private var peacockNavigation: PathNavigation = createNavigation(world)
+    HBBirdEntity(entityType, world) {
     private var eggLayTime: Int = 0
     private var tailUp = false
     private var tailUpTimer = 0
 
     init {
-        moveControl = MoveControl(this)
-        navigation = peacockNavigation
         this.eggLayTime = random.nextInt(6000) + 6000
     }
 
@@ -81,7 +76,7 @@ class PeacockEntity(entityType: EntityType<out PeacockEntity>, world: Level) :
         controllerRegistrar.add(
             AnimationController(
                 this, "Walk/Fly/Idle", 4
-            ) { state: AnimationState<HybridBirdsBirdEntity> ->
+            ) { state: AnimationState<HBBirdEntity> ->
                 when {
                     state.isMoving && onGround() -> state.setAndContinue(DefaultAnimations.WALK)
                     !this.onGround() && !isInWater -> state.setAndContinue(DefaultAnimations.FLY)

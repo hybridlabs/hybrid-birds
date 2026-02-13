@@ -1,12 +1,10 @@
 package dev.hybridlabs.birds.entity.bird
 
 import net.minecraft.core.BlockPos
-import net.minecraft.core.Direction
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.tags.BlockTags
-import net.minecraft.tags.FluidTags
 import net.minecraft.util.RandomSource
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.entity.*
@@ -26,14 +24,12 @@ import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
 import software.bernie.geckolib.core.animation.AnimatableManager
 import software.bernie.geckolib.core.animation.AnimationController
 import software.bernie.geckolib.core.animation.AnimationState
-import software.bernie.geckolib.core.animation.RawAnimation
 import software.bernie.geckolib.util.GeckoLibUtil
 
 @Suppress("LeakingThis")
-open class HybridBirdsBirdEntity(
-    type: EntityType<out HybridBirdsBirdEntity>,
-    world: Level,
-    open val isAquatic: Boolean,
+open class HBBirdEntity(
+    type: EntityType<out HBBirdEntity>,
+    world: Level
 ) :
     Animal(type, world),
     GeoEntity {
@@ -52,7 +48,6 @@ open class HybridBirdsBirdEntity(
     }
 
     override fun registerGoals() {
-        super.registerGoals()
         goalSelector.addGoal(0, FloatGoal(this))
         goalSelector.addGoal(0, PanicGoal(this, 1.2))
         goalSelector.addGoal(2, WaterAvoidingRandomStrollGoal(this, 1.0))
@@ -61,23 +56,13 @@ open class HybridBirdsBirdEntity(
         goalSelector.addGoal(11, LookAtPlayerGoal(this, Player::class.java, 10.0f))
     }
 
-    fun isBelowWaterline(): Boolean {
-        return this.isUnderWater || this.getFluidHeight(FluidTags.WATER) > this.getWaterline()
-    }
-
-    open fun getWaterline(): Float {
-        return 0.4f
-    }
-
     override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
         controllerRegistrar.add(
             AnimationController(
                 this, "Walk/Swim/Fly/Idle", 4
-            ) { state: AnimationState<HybridBirdsBirdEntity> ->
+            ) { state: AnimationState<HBBirdEntity> ->
                 when {
                     state.isMoving && onGround() -> state.setAndContinue(DefaultAnimations.WALK)
-                    this.isAquatic && state.isMoving && isInWater -> state.setAndContinue(DefaultAnimations.SWIM)
-                    this.isAquatic && !state.isMoving && isInWater -> state.setAndContinue(WATER_IDLE)
                     !this.onGround() && !isInWater -> state.setAndContinue(DefaultAnimations.FLY)
                     else -> state.setAndContinue(DefaultAnimations.IDLE)
                 }
@@ -124,11 +109,9 @@ open class HybridBirdsBirdEntity(
     }
 
     companion object {
-        val WATER_IDLE: RawAnimation = RawAnimation.begin().thenPlay("misc.water_idle")
-
         @Suppress("UNUSED_PARAMETER")
         fun canBirdSpawn(
-            type: EntityType<out HybridBirdsBirdEntity>,
+            type: EntityType<out HBBirdEntity>,
             level: LevelAccessor,
             reason: MobSpawnType,
             pos: BlockPos,
@@ -136,21 +119,6 @@ open class HybridBirdsBirdEntity(
         ): Boolean {
             return isBrightEnoughToSpawn(level, pos) &&
                     level.getBlockState(pos.below()).`is`(BlockTags.ANIMALS_SPAWNABLE_ON)
-        }
-
-        @Suppress("UNUSED_PARAMETER")
-        fun canAquaticBirdSpawn(
-            type: EntityType<out HybridBirdsBirdEntity>,
-            level: LevelAccessor,
-            spawnReason: MobSpawnType,
-            pos: BlockPos,
-            random: RandomSource,
-        ): Boolean {
-            val mutable = pos.mutable()
-            do {
-                mutable.move(Direction.UP)
-            } while (level.getFluidState(mutable).`is`(FluidTags.WATER))
-            return level.getBlockState(mutable).isAir
         }
     }
 }

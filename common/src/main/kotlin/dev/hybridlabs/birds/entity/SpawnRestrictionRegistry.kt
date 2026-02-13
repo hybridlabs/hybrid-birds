@@ -1,8 +1,9 @@
 package dev.hybridlabs.birds.entity
 
-import dev.hybridlabs.birds.entity.bird.HybridBirdsBirdEntity
-import dev.hybridlabs.birds.entity.bird.HybridBirdsParrotEntity
-import dev.hybridlabs.birds.entity.bird.HybridBirdsRatiteEntity
+import dev.hybridlabs.birds.entity.bird.HBAquaticBirdEntity
+import dev.hybridlabs.birds.entity.bird.HBBirdEntity
+import dev.hybridlabs.birds.entity.bird.HBParrotEntity
+import dev.hybridlabs.birds.entity.bird.HBRatiteEntity
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.Mob
 import net.minecraft.world.entity.SpawnPlacements
@@ -41,20 +42,20 @@ object SpawnRestrictionRegistry {
         ).forEach { registerParrot(it) }
     }
 
-    private fun <T : HybridBirdsParrotEntity> registerParrot(entityType: EntityType<T>) {
-        registerBirdEntity(entityType, HybridBirdsParrotEntity::canBirdSpawn)
+    private fun <T : HBParrotEntity> registerParrot(entityType: EntityType<T>) {
+        registerBirdEntity(entityType, HBParrotEntity::canBirdSpawn)
     }
 
-    private fun <T : HybridBirdsBirdEntity> registerTerrestrialBird(entityType: EntityType<T>) {
-        registerBirdEntity(entityType, HybridBirdsBirdEntity::canBirdSpawn)
+    private fun <T : HBBirdEntity> registerTerrestrialBird(entityType: EntityType<T>) {
+        registerBirdEntity(entityType, HBBirdEntity::canBirdSpawn)
     }
 
-    private fun <T : HybridBirdsRatiteEntity> registerRatite(entityType: EntityType<T>) {
-        registerBirdEntity(entityType, HybridBirdsRatiteEntity::canBirdSpawn)
+    private fun <T : HBRatiteEntity> registerRatite(entityType: EntityType<T>) {
+        registerBirdEntity(entityType, HBRatiteEntity::canRatiteSpawn)
     }
 
-    private fun <T : HybridBirdsBirdEntity> registerAquaticBird(entityType: EntityType<T>) {
-        registerAquaticBirdEntity(entityType, HybridBirdsBirdEntity::canAquaticBirdSpawn)
+    private fun <T : HBAquaticBirdEntity> registerAquaticBird(entityType: EntityType<T>) {
+        registerAquaticBirdEntity(entityType, HBAquaticBirdEntity::canAquaticBirdSpawn)
     }
 
     private fun <T : Animal> registerBirdEntity(entityType: EntityType<T>, predicate: SpawnPredicate<T>) {

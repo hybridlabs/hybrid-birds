@@ -20,9 +20,8 @@ import net.minecraft.world.entity.AgeableMob
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
-import net.minecraft.world.entity.ai.control.MoveControl
-import net.minecraft.world.entity.ai.goal.*
-import net.minecraft.world.entity.ai.navigation.PathNavigation
+import net.minecraft.world.entity.ai.goal.BreedGoal
+import net.minecraft.world.entity.ai.goal.TemptGoal
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
@@ -31,13 +30,10 @@ import net.minecraft.world.level.Level
 import net.minecraft.world.level.gameevent.GameEvent
 
 class TurkeyEntity(entityType: EntityType<out TurkeyEntity>, world: Level) :
-    HybridBirdsBirdEntity(entityType, world, false) {
-    private var turkeyNavigation: PathNavigation = createNavigation(world)
+    HBBirdEntity(entityType, world) {
     private var eggLayTime: Int = 0
 
     init {
-        moveControl = MoveControl(this)
-        navigation = turkeyNavigation
         this.eggLayTime = random.nextInt(6000) + 6000
     }
 

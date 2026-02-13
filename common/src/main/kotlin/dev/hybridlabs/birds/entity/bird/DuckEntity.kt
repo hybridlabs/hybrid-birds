@@ -23,7 +23,7 @@ import net.minecraft.world.level.gameevent.GameEvent
 
 
 class DuckEntity(entityType: EntityType<out DuckEntity>, world: Level) :
-    HybridBirdsBirdEntity(entityType, world, true) {
+    HBAquaticBirdEntity(entityType, world) {
     private var duckNavigation = AmphibiousPathNavigation(this, world)
     private var eggLayTime: Int = 0
 
@@ -35,7 +35,7 @@ class DuckEntity(entityType: EntityType<out DuckEntity>, world: Level) :
 
     override fun getWaterline(): Float {
         return if (this.isBaby)
-            0.15f
+            0.125f
         else
             return 0.2f
     }

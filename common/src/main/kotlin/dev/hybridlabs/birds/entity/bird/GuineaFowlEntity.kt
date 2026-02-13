@@ -11,9 +11,8 @@ import net.minecraft.world.entity.AgeableMob
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
-import net.minecraft.world.entity.ai.control.MoveControl
-import net.minecraft.world.entity.ai.goal.*
-import net.minecraft.world.entity.ai.navigation.PathNavigation
+import net.minecraft.world.entity.ai.goal.BreedGoal
+import net.minecraft.world.entity.ai.goal.TemptGoal
 import net.minecraft.world.entity.animal.Animal
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.crafting.Ingredient
@@ -21,13 +20,10 @@ import net.minecraft.world.level.Level
 import net.minecraft.world.level.gameevent.GameEvent
 
 class GuineaFowlEntity(entityType: EntityType<out GuineaFowlEntity>, world: Level) :
-    HybridBirdsBirdEntity(entityType, world, false) {
-    private var guineaFowlNavigation: PathNavigation = createNavigation(world)
+    HBBirdEntity(entityType, world) {
     private var eggLayTime: Int = 0
 
     init {
-        moveControl = MoveControl(this)
-        navigation = guineaFowlNavigation
         this.eggLayTime = random.nextInt(6000) + 6000
     }
 

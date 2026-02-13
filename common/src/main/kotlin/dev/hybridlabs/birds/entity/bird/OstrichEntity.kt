@@ -6,16 +6,22 @@ import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.entity.AgeableMob
+import net.minecraft.world.entity.EntityDimensions
 import net.minecraft.world.entity.EntityType
+import net.minecraft.world.entity.Pose
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
 
 class OstrichEntity(entityType: EntityType<out OstrichEntity>, world: Level) :
-    HybridBirdsRatiteEntity(entityType, world, true) {
+    HBRatiteEntity(entityType, world, true) {
 
     override fun getMaxSpawnClusterSize(): Int {
         return 2
+    }
+
+    override fun getStandingEyeHeight(pose: Pose, dimensions: EntityDimensions): Float {
+        return dimensions.height * 1.1f
     }
 
     override fun getBreedOffspring(serverLevel: ServerLevel, ageableMob: AgeableMob): AgeableMob? {

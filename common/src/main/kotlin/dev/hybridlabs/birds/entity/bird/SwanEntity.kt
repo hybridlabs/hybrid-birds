@@ -14,7 +14,6 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.entity.ai.goal.BreedGoal
 import net.minecraft.world.entity.ai.goal.TemptGoal
-import net.minecraft.world.entity.ai.navigation.AmphibiousPathNavigation
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
 import net.minecraft.world.item.crafting.Ingredient
@@ -22,13 +21,10 @@ import net.minecraft.world.level.Level
 import net.minecraft.world.level.gameevent.GameEvent
 
 class SwanEntity(entityType: EntityType<out SwanEntity>, world: Level) :
-    HybridBirdsBirdEntity(entityType, world, true) {
-    private var swanNavigation = AmphibiousPathNavigation(this, world)
+    HBAquaticBirdEntity(entityType, world) {
     private var eggLayTime: Int = 0
 
     init {
-        moveControl = BirdFloatControl(this)
-        navigation = swanNavigation
         this.eggLayTime = random.nextInt(6000) + 6000
     }
 

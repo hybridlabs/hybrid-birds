@@ -30,8 +30,8 @@ import software.bernie.geckolib.util.GeckoLibUtil
 
 
 @Suppress("LeakingThis")
-open class HybridBirdsParrotEntity(
-    type: EntityType<out HybridBirdsParrotEntity>,
+open class HBParrotEntity(
+    type: EntityType<out HBParrotEntity>,
     world: Level,
 ) :
     ShoulderRidingEntity(type, world),
@@ -61,7 +61,7 @@ open class HybridBirdsParrotEntity(
         controllerRegistrar.add(
             AnimationController(
                 this, "Walk/Fly/Idle", 4
-            ) { state: AnimationState<HybridBirdsParrotEntity> ->
+            ) { state: AnimationState<HBParrotEntity> ->
                 when {
                     state.isMoving && onGround() -> state.setAndContinue(DefaultAnimations.WALK)
                     !this.onGround() -> state.setAndContinue(DefaultAnimations.FLY)
@@ -110,7 +110,7 @@ open class HybridBirdsParrotEntity(
 
         @Suppress("UNUSED_PARAMETER")
         fun canBirdSpawn(
-            type: EntityType<out HybridBirdsParrotEntity>,
+            type: EntityType<out HBParrotEntity>,
             level: LevelAccessor,
             reason: MobSpawnType,
             pos: BlockPos,

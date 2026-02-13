@@ -1,14 +1,14 @@
 package dev.hybridlabs.birds.client.model.entity.bird
 
 import dev.hybridlabs.birds.Constants
-import dev.hybridlabs.birds.entity.bird.HybridBirdsRatiteEntity
+import dev.hybridlabs.birds.entity.bird.HBRatiteEntity
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.util.Mth
 import software.bernie.geckolib.constant.DataTickets
 import software.bernie.geckolib.core.animation.AnimationState
 import software.bernie.geckolib.model.GeoModel
 
-abstract class HybridBirdsRatiteEntityModel<T: HybridBirdsRatiteEntity> (private val id: String) : GeoModel<T>() {
+abstract class HybridBirdsRatiteEntityModel<T: HBRatiteEntity> (private val id: String) : GeoModel<T>() {
     override fun getModelResource(animatable: T): ResourceLocation {
         return ResourceLocation(Constants.MOD_ID, "geo/$id.geo.json")
     }

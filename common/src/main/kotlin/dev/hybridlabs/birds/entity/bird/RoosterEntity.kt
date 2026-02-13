@@ -16,11 +16,11 @@ import net.minecraft.world.entity.AgeableMob
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
-import net.minecraft.world.entity.ai.control.MoveControl
-import net.minecraft.world.entity.ai.goal.*
+import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal
+import net.minecraft.world.entity.ai.goal.MeleeAttackGoal
+import net.minecraft.world.entity.ai.goal.TemptGoal
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal
-import net.minecraft.world.entity.ai.navigation.PathNavigation
 import net.minecraft.world.entity.animal.Chicken
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
@@ -29,8 +29,7 @@ import net.minecraft.world.item.crafting.Ingredient
 import net.minecraft.world.level.Level
 
 class RoosterEntity(entityType: EntityType<out RoosterEntity>, world: Level) :
-    HybridBirdsBirdEntity(entityType, world, false) {
-    private var roosterNavigation: PathNavigation = createNavigation(world)
+    HBBirdEntity(entityType, world) {
     private var hasCalled: Boolean = false
     private var angerTicks = 0
 
@@ -40,11 +39,6 @@ class RoosterEntity(entityType: EntityType<out RoosterEntity>, world: Level) :
 
     override fun getMaxSpawnClusterSize(): Int {
         return 2
-    }
-
-    init {
-        moveControl = MoveControl(this)
-        navigation = roosterNavigation
     }
 
     override fun registerGoals() {

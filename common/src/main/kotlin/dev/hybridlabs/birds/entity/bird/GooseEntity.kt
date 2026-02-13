@@ -22,7 +22,7 @@ import net.minecraft.world.level.Level
 import net.minecraft.world.level.gameevent.GameEvent
 
 class GooseEntity(entityType: EntityType<out GooseEntity>, world: Level) :
-    HybridBirdsBirdEntity(entityType, world, true) {
+    HBAquaticBirdEntity(entityType, world) {
     private var gooseNavigation = AmphibiousPathNavigation(this, world)
     private var eggLayTime: Int = 0
 
