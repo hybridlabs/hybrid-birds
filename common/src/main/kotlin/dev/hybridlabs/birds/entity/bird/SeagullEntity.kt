@@ -10,15 +10,34 @@ import net.minecraft.world.entity.AgeableMob
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
+import net.minecraft.world.entity.ai.goal.FloatGoal
+import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal
+import net.minecraft.world.entity.ai.goal.PanicGoal
+import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomFlyingGoal
 import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation
+import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.Level
 
 class SeagullEntity(type: EntityType<out SeagullEntity>, world: Level) :
-    HBParrotEntity(type, world, false) {
+    HBAquaticBirdEntity(type, world) {
 
     init {
         moveControl = BirdFlyFloatControl(this, 10, false)
         navigation = FlyingPathNavigation(this, world)
+    }
+
+    override fun registerGoals() {
+        goalSelector.addGoal(0, PanicGoal(this, 1.1))
+        goalSelector.addGoal(0, FloatGoal(this))
+        goalSelector.addGoal(2, WaterAvoidingRandomFlyingGoal(this, 1.0))
+        goalSelector.addGoal(2, LookAtPlayerGoal(this, Player::class.java, 8.0f))
+    }
+
+    override fun getWaterline(): Float {
+        return if (this.isBaby)
+            0.125f
+        else
+            return 0.2f
     }
 
     override fun getMaxSpawnClusterSize(): Int {
@@ -30,15 +49,15 @@ class SeagullEntity(type: EntityType<out SeagullEntity>, world: Level) :
     }
 
     override fun getAmbientSound(): SoundEvent {
-        return HybridBirdsSoundEvents.DUCK_AMBIENT.get()
+        return HybridBirdsSoundEvents.SEAGULL_AMBIENT.get()
     }
 
     override fun getHurtSound(source: DamageSource): SoundEvent {
-        return HybridBirdsSoundEvents.DUCK_HURT.get()
+        return HybridBirdsSoundEvents.SEAGULL_HURT.get()
     }
 
     override fun getDeathSound(): SoundEvent {
-        return HybridBirdsSoundEvents.DUCK_DIE.get()
+        return HybridBirdsSoundEvents.SEAGULL_DIE.get()
     }
 
     companion object {

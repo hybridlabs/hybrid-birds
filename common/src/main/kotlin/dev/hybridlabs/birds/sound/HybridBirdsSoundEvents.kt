@@ -8,6 +8,10 @@ import net.minecraft.sounds.SoundEvent
 
 object HybridBirdsSoundEvents {
 
+    val SEAGULL_AMBIENT = register("seagull_ambient")
+    val SEAGULL_HURT = register("seagull_hurt")
+    val SEAGULL_DIE = register("seagull_die")
+
     val DUCK_AMBIENT = register("duck_ambient")
     val DUCK_HURT = register("duck_hurt")
     val DUCK_DIE = register("duck_die")

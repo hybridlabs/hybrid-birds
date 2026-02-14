@@ -59,6 +59,24 @@
       "hybrid_birds:duck_die"
     ]
   },
+  "seagull_ambient": {
+    "subtitle": "sounds.hybrid_birds.seagull_ambient",
+    "sounds": [
+      "hybrid_birds:seagull_ambient"
+    ]
+  },
+  "seagull_hurt": {
+    "subtitle": "sounds.hybrid_birds.seagull_hurt",
+    "sounds": [
+      "hybrid_birds:seagull_hurt"
+    ]
+  },
+  "seagull_die": {
+    "subtitle": "sounds.hybrid_birds.seagull_die",
+    "sounds": [
+      "hybrid_birds:seagull_die"
+    ]
+  },
   "goose_ambient": {
     "subtitle": "sounds.hybrid_birds.goose_ambient",
     "sounds": [

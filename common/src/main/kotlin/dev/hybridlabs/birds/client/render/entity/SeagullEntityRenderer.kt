@@ -5,7 +5,7 @@ import dev.hybridlabs.birds.entity.bird.SeagullEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class SeagullEntityRenderer(context: Context) :
-    HybridBirdsParrotEntityRenderer<SeagullEntity>(context,
+    BirdEntityRenderer<SeagullEntity>(context,
         SeagullEntityModel()
     ) {
 

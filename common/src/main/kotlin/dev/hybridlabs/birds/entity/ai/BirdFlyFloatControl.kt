@@ -1,6 +1,7 @@
 package dev.hybridlabs.birds.entity.ai
 
 import dev.hybridlabs.birds.entity.bird.HBBirdEntity
+import dev.hybridlabs.birds.entity.bird.HBParrotEntity
 import net.minecraft.world.entity.Mob
 import net.minecraft.world.entity.ai.control.FlyingMoveControl
 import kotlin.math.max
@@ -8,7 +9,7 @@ import kotlin.math.max
 // credit to fowl play for the code
 
 class BirdFlyFloatControl(
-    bird: Mob,
+    bird: HBBirdEntity,
     maxTurn: Int,
     hoversInPlace: Boolean
 ) : FlyingMoveControl(bird, maxTurn, hoversInPlace) {
