@@ -6,8 +6,8 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public enum HybridBirdsSpawnGroup {
-    HB_LAND_BIRD("HB_LAND_BIRD", 8, true, false, 128),
-    HB_WATER_BIRD("HB_WATER_BIRD", 8, true, false, 128);
+    HB_LAND_BIRD("HB_LAND_BIRD", 6, true, false, 128),
+    HB_WATER_BIRD("HB_WATER_BIRD", 6, true, false, 128);
 
     public MobCategory spawnGroup;
     public final String name;
