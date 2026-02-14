@@ -1,6 +1,7 @@
 package dev.hybridlabs.birds.entity.bird
 
 import net.minecraft.core.BlockPos
+import net.minecraft.core.Direction
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.sounds.SoundEvents
@@ -30,7 +31,7 @@ import software.bernie.geckolib.util.GeckoLibUtil
 @Suppress("LeakingThis")
 open class HBBirdEntity(
     type: EntityType<out HBBirdEntity>,
-    world: Level
+    world: Level,
 ) :
     Animal(type, world),
     GeoEntity {
@@ -106,7 +107,13 @@ open class HBBirdEntity(
         return SoundEvents.PARROT_AMBIENT
     }
 
-    override fun checkFallDamage(heightDifference: Double, onGround: Boolean, state: BlockState, landedPosition: BlockPos) {}
+    override fun checkFallDamage(
+        heightDifference: Double,
+        onGround: Boolean,
+        state: BlockState,
+        landedPosition: BlockPos
+    ) {
+    }
 
     override fun aiStep() {
         super.aiStep()
@@ -126,7 +133,9 @@ open class HBBirdEntity(
             random: RandomSource,
         ): Boolean {
             return isBrightEnoughToSpawn(level, pos) &&
-                    level.getBlockState(pos.below()).`is`(BlockTags.ANIMALS_SPAWNABLE_ON)
+                    level.getBlockState(pos.below()).isSolid &&
+                    level.isEmptyBlock(pos) &&
+                    level.canSeeSky(pos)
         }
     }
 }
