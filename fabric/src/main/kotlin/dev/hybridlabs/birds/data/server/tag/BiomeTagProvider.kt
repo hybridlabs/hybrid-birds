@@ -87,12 +87,9 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
 
         getOrCreateTagBuilder(HybridBirdsBiomeTags.SWAN_SPAWN_BIOMES)
             .add(Biomes.RIVER)
-            .add(Biomes.CHERRY_GROVE)
             .addOptional(ResourceLocation("hybrid-aquatic", "cold_river"))
             .addOptional(ResourceLocation("regions_unexplored", "cold_river"))
             .addOptional(ResourceLocation("riverredux", "gravelly_river"))
-            .addOptional(ResourceLocation("regions_unexplored", "mauve_hills"))
-            .addOptional(ResourceLocation("regions_unexplored", "magnolia_woodland"))
 
         getOrCreateTagBuilder(HybridBirdsBiomeTags.ROOSTER_SPAWN_BIOMES)
             .add(Biomes.PLAINS)

@@ -2,7 +2,6 @@
   "replace": false,
   "values": [
     "minecraft:river",
-    "minecraft:cherry_grove",
     {
       "id": "hybrid-aquatic:cold_river",
       "required": false
@@ -13,14 +12,6 @@
     },
     {
       "id": "riverredux:gravelly_river",
-      "required": false
-    },
-    {
-      "id": "regions_unexplored:mauve_hills",
-      "required": false
-    },
-    {
-      "id": "regions_unexplored:magnolia_woodland",
       "required": false
     }
   ]
