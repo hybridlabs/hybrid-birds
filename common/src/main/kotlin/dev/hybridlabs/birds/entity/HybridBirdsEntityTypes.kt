@@ -14,105 +14,105 @@ import java.util.concurrent.Callable
 
 object HybridBirdsEntityTypes {
 
-    val ROOSTER = registerBird(
+    val ROOSTER = registerLandBird(
         "rooster",
         ::RoosterEntity,
         EntityDimensions.fixed(0.5f, 0.7f),
         RoosterEntity::createMobAttributes
     )
 
-    val CHICK = registerBird(
+    val CHICK = registerLandBird(
         "chick",
         ::ChickEntity,
         EntityDimensions.fixed(0.5f, 0.5f),
         ChickEntity::createMobAttributes
     )
 
-    val TURKEY = registerBird(
+    val TURKEY = registerLandBird(
         "turkey",
         ::TurkeyEntity,
         EntityDimensions.fixed(0.65f, 0.75f),
         TurkeyEntity::createMobAttributes
     )
 
-    val PEACOCK = registerBird(
+    val PEACOCK = registerLandBird(
         "peacock",
         ::PeacockEntity,
         EntityDimensions.fixed(0.6f, 0.6f),
         PeacockEntity::createMobAttributes
     )
 
-    val GUINEA_FOWL = registerBird(
+    val GUINEA_FOWL = registerLandBird(
         "guinea_fowl",
         ::GuineaFowlEntity,
         EntityDimensions.fixed(0.6f, 0.6f),
         GuineaFowlEntity::createMobAttributes
     )
 
-    val DUCK = registerBird(
+    val DUCK = registerAquaticBird(
         "duck",
         ::DuckEntity,
         EntityDimensions.fixed(0.5f, 0.6f),
         DuckEntity::createMobAttributes
     )
 
-    val GOOSE = registerBird(
+    val GOOSE = registerAquaticBird(
         "goose",
         ::GooseEntity,
         EntityDimensions.fixed(0.6f, 1.0f),
         GooseEntity::createMobAttributes
     )
 
-    val SWAN = registerBird(
+    val SWAN = registerAquaticBird(
         "swan",
         ::SwanEntity,
         EntityDimensions.fixed(0.8f, 1.5f),
         SwanEntity::createMobAttributes
     )
 
-    val FLAMINGO = registerBird(
+    val FLAMINGO = registerAquaticBird(
         "flamingo",
         ::FlamingoEntity,
         EntityDimensions.fixed(0.8f, 1.8f),
         FlamingoEntity::createMobAttributes
     )
 
-    val JAY = registerBird(
+    val JAY = registerLandBird(
         "jay",
         ::JayEntity,
         EntityDimensions.fixed(0.25f, 0.3f),
         JayEntity::createMobAttributes
     )
 
-    val SEAGULL = registerBird(
+    val SEAGULL = registerAquaticBird(
         "seagull",
         ::SeagullEntity,
         EntityDimensions.fixed(0.5f, 0.6f),
         SeagullEntity::createMobAttributes
     )
 
-    val HUMMINGBIRD = registerBird(
+    val HUMMINGBIRD = registerLandBird(
         "hummingbird",
         ::HummingbirdEntity,
         EntityDimensions.fixed(0.25f, 0.3f),
         HummingbirdEntity::createMobAttributes
     )
 
-    val OSTRICH = registerBird(
+    val OSTRICH = registerLandBird(
         "ostrich",
         ::OstrichEntity,
         EntityDimensions.fixed(1.0f, 2.0f),
         OstrichEntity::createMobAttributes
     )
 
-    val KIWI = registerBird(
+    val KIWI = registerLandBird(
         "kiwi",
         ::KiwiEntity,
         EntityDimensions.fixed(0.5f, 0.5f),
         KiwiEntity::createMobAttributes
     )
 
-    private fun <T : LivingEntity> registerBird(
+    private fun <T : LivingEntity> registerLandBird(
         id: String,
         entityFactory: EntityType.EntityFactory<T>,
         dimensions: EntityDimensions,
@@ -123,7 +123,22 @@ object HybridBirdsEntityTypes {
             entityFactory,
             dimensions,
             attributeContainer,
-            Services.PLATFORM.getMobCategoryByName("BIRD"),
+            Services.PLATFORM.getMobCategoryByName("HB_LAND_BIRD"),
+        )
+    }
+
+    private fun <T : LivingEntity> registerAquaticBird(
+        id: String,
+        entityFactory: EntityType.EntityFactory<T>,
+        dimensions: EntityDimensions,
+        attributeContainer: Callable<AttributeSupplier.Builder>
+    ): RegistryObject<EntityType<T>> {
+        return registerCustomMobCategory(
+            id,
+            entityFactory,
+            dimensions,
+            attributeContainer,
+            Services.PLATFORM.getMobCategoryByName("HB_WATER_BIRD"),
         )
     }
 
