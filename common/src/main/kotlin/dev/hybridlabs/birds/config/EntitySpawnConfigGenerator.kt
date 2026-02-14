@@ -17,22 +17,22 @@ class EntitySpawnConfigGenerator {
     private val list: MutableList<EntitySpawnConfig> = mutableListOf()
 
     fun finalizeSpawn() {
-        addBird(HybridBirdsEntityTypes.ROOSTER.get(), listOf(HybridBirdsBiomeTags.ROOSTER_SPAWN_BIOMES), 5, 1, 2)
-        addBird(HybridBirdsEntityTypes.TURKEY.get(), listOf(HybridBirdsBiomeTags.TURKEY_SPAWN_BIOMES), 3, 1, 3)
-        addBird(HybridBirdsEntityTypes.DUCK.get(), listOf(HybridBirdsBiomeTags.DUCK_SPAWN_BIOMES), 5, 1, 3)
-        addBird(HybridBirdsEntityTypes.GOOSE.get(), listOf(HybridBirdsBiomeTags.GOOSE_SPAWN_BIOMES), 3, 1, 3)
-        addBird(HybridBirdsEntityTypes.SWAN.get(), listOf(HybridBirdsBiomeTags.SWAN_SPAWN_BIOMES), 1, 1, 2)
-        addBird(HybridBirdsEntityTypes.PEACOCK.get(), listOf(BiomeTags.IS_JUNGLE), 2, 1, 2)
-        addBird(HybridBirdsEntityTypes.GUINEA_FOWL.get(), listOf(BiomeTags.IS_SAVANNA), 3, 1, 3)
-        addBird(HybridBirdsEntityTypes.OSTRICH.get(), listOf(BiomeTags.IS_SAVANNA), 2, 1, 3)
-        addBird(HybridBirdsEntityTypes.KIWI.get(), listOf(HybridBirdsBiomeTags.KIWI_SPAWN_BIOMES), 2, 1, 1)
-        addBird(HybridBirdsEntityTypes.JAY.get(), listOf(BiomeTags.IS_FOREST, BiomeTags.IS_TAIGA), 3, 1, 3)
-        addBird(HybridBirdsEntityTypes.SEAGULL.get(), listOf(BiomeTags.IS_BEACH, BiomeTags.IS_OCEAN), 3, 2, 5)
-        addBird(HybridBirdsEntityTypes.FLAMINGO.get(), listOf(BiomeTags.IS_SAVANNA, BiomeTags.IS_JUNGLE), 3, 1, 3)
-        addBird(HybridBirdsEntityTypes.HUMMINGBIRD.get(), listOf(HybridBirdsBiomeTags.HUMMINGBIRD_SPAWN_BIOMES), 3, 1, 3)
+        addLandBird(HybridBirdsEntityTypes.ROOSTER.get(), listOf(HybridBirdsBiomeTags.ROOSTER_SPAWN_BIOMES), 5, 1, 2)
+        addLandBird(HybridBirdsEntityTypes.TURKEY.get(), listOf(HybridBirdsBiomeTags.TURKEY_SPAWN_BIOMES), 3, 1, 3)
+        addWaterBird(HybridBirdsEntityTypes.DUCK.get(), listOf(HybridBirdsBiomeTags.DUCK_SPAWN_BIOMES), 5, 1, 3)
+        addWaterBird(HybridBirdsEntityTypes.GOOSE.get(), listOf(HybridBirdsBiomeTags.GOOSE_SPAWN_BIOMES), 3, 1, 3)
+        addWaterBird(HybridBirdsEntityTypes.SWAN.get(), listOf(HybridBirdsBiomeTags.SWAN_SPAWN_BIOMES), 1, 1, 2)
+        addLandBird(HybridBirdsEntityTypes.PEACOCK.get(), listOf(BiomeTags.IS_JUNGLE), 2, 1, 2)
+        addLandBird(HybridBirdsEntityTypes.GUINEA_FOWL.get(), listOf(BiomeTags.IS_SAVANNA), 3, 1, 3)
+        addLandBird(HybridBirdsEntityTypes.OSTRICH.get(), listOf(BiomeTags.IS_SAVANNA), 2, 1, 3)
+        addLandBird(HybridBirdsEntityTypes.KIWI.get(), listOf(HybridBirdsBiomeTags.KIWI_SPAWN_BIOMES), 2, 1, 1)
+        addLandBird(HybridBirdsEntityTypes.JAY.get(), listOf(BiomeTags.IS_FOREST, BiomeTags.IS_TAIGA), 3, 1, 3)
+        addWaterBird(HybridBirdsEntityTypes.SEAGULL.get(), listOf(BiomeTags.IS_BEACH, BiomeTags.IS_OCEAN), 3, 2, 5)
+        addWaterBird(HybridBirdsEntityTypes.FLAMINGO.get(), listOf(BiomeTags.IS_SAVANNA, BiomeTags.IS_JUNGLE), 3, 1, 3)
+        addLandBird(HybridBirdsEntityTypes.HUMMINGBIRD.get(), listOf(HybridBirdsBiomeTags.HUMMINGBIRD_SPAWN_BIOMES), 3, 1, 3)
     }
 
-    private fun addBird(
+    private fun addLandBird(
         entityType: EntityType<*>,
         spawnTags: List<TagKey<Biome>>,
         weight: Int,
@@ -40,7 +40,19 @@ class EntitySpawnConfigGenerator {
         maxGroup: Int
     ) {
         add(entityType, spawnTags,
-            Services.PLATFORM.getMobCategoryByName("BIRD"),
+            Services.PLATFORM.getMobCategoryByName("HB_LAND_BIRD"),
+            weight, minGroup, maxGroup)
+    }
+
+    private fun addWaterBird(
+        entityType: EntityType<*>,
+        spawnTags: List<TagKey<Biome>>,
+        weight: Int,
+        minGroup: Int,
+        maxGroup: Int
+    ) {
+        add(entityType, spawnTags,
+            Services.PLATFORM.getMobCategoryByName("HB_WATER_BIRD"),
             weight, minGroup, maxGroup)
     }
 
