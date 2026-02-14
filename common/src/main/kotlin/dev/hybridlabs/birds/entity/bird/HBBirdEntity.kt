@@ -132,7 +132,6 @@ open class HBBirdEntity(
         ): Boolean {
             return isBrightEnoughToSpawn(level, pos) &&
                     level.getBlockState(pos.below()).isSolid &&
-                    level.isEmptyBlock(pos) &&
                     level.canSeeSky(pos)
         }
     }

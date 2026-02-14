@@ -2,7 +2,6 @@ package dev.hybridlabs.birds.entity.bird
 
 import net.minecraft.core.BlockPos
 import net.minecraft.sounds.SoundEvents
-import net.minecraft.tags.BlockTags
 import net.minecraft.tags.ItemTags
 import net.minecraft.util.RandomSource
 import net.minecraft.world.InteractionHand
@@ -167,7 +166,6 @@ open class HBRatiteEntity(
         ): Boolean {
             return isBrightEnoughToSpawn(level, pos) &&
                     level.getBlockState(pos.below()).isSolid &&
-                    level.isEmptyBlock(pos) &&
                     level.canSeeSky(pos)
         }
 
