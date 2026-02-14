@@ -172,7 +172,10 @@ open class HBParrotEntity(
             pos: BlockPos,
             random: RandomSource,
         ): Boolean {
-            return isBrightEnoughToSpawn(level, pos)
+            return isBrightEnoughToSpawn(level, pos) &&
+                    level.getBlockState(pos.below()).isSolid &&
+                    level.isEmptyBlock(pos) &&
+                    level.canSeeSky(pos)
         }
     }
 

@@ -94,11 +94,10 @@ open class HBWadingBirdEntity(
             pos: BlockPos,
             random: RandomSource,
         ): Boolean {
-            val mutable = pos.mutable()
-            do {
-                mutable.move(Direction.UP)
-            } while (level.getFluidState(mutable).`is`(FluidTags.WATER))
-            return level.getBlockState(mutable).isAir
+            return isBrightEnoughToSpawn(level, pos) &&
+                    level.getBlockState(pos.below()).isSolid &&
+                    level.isEmptyBlock(pos) &&
+                    level.canSeeSky(pos)
         }
     }
 }
