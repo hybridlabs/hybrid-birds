@@ -23,10 +23,6 @@ class ChickEntity(entityType: EntityType<out ChickEntity>, world: Level) :
     HBBirdEntity(entityType, world) {
     private var chickAge = 0
 
-    override fun getMaxSpawnClusterSize(): Int {
-        return 2
-    }
-
     override fun registerGoals() {
         super.registerGoals()
         goalSelector.addGoal(0, FollowMobGoal(this, 1.0, 1.0f, 6.0f))

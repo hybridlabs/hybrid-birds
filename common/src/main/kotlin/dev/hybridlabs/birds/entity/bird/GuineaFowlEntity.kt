@@ -27,10 +27,6 @@ class GuineaFowlEntity(entityType: EntityType<out GuineaFowlEntity>, world: Leve
         this.eggLayTime = random.nextInt(6000) + 6000
     }
 
-    override fun getMaxSpawnClusterSize(): Int {
-        return 2
-    }
-
     override fun registerGoals() {
         super.registerGoals()
         goalSelector.addGoal(1, TemptGoal(this, 1.0, BREEDING_INGREDIENT, false))

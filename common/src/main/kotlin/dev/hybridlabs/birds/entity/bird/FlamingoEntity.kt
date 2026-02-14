@@ -14,10 +14,6 @@ import net.minecraft.world.level.Level
 class FlamingoEntity(type: EntityType<out FlamingoEntity>, world: Level) :
     HBWadingBirdEntity(type, world) {
 
-    override fun getMaxSpawnClusterSize(): Int {
-        return 2
-    }
-
     override fun getBreedOffspring(serverLevel: ServerLevel, ageableMob: AgeableMob): FlamingoEntity? {
         return HybridBirdsEntityTypes.FLAMINGO.get().create(serverLevel)
     }

@@ -37,10 +37,6 @@ class TurkeyEntity(entityType: EntityType<out TurkeyEntity>, world: Level) :
         this.eggLayTime = random.nextInt(6000) + 6000
     }
 
-    override fun getMaxSpawnClusterSize(): Int {
-        return 2
-    }
-
     override fun getDefaultLootTable(): ResourceLocation {
         return when (getStuffingLevel()) {
             1 -> HybridBirdsLootTables.TURKEY_FAT

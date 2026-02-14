@@ -38,7 +38,7 @@ class RoosterEntity(entityType: EntityType<out RoosterEntity>, world: Level) :
     }
 
     override fun getMaxSpawnClusterSize(): Int {
-        return 2
+        return 1
     }
 
     override fun registerGoals() {

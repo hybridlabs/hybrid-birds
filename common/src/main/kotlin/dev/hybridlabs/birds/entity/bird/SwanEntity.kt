@@ -28,10 +28,6 @@ class SwanEntity(entityType: EntityType<out SwanEntity>, world: Level) :
         this.eggLayTime = random.nextInt(6000) + 6000
     }
 
-    override fun getMaxSpawnClusterSize(): Int {
-        return 2
-    }
-
     override fun getWaterline(): Float {
         return if (this.isBaby)
             0.2f

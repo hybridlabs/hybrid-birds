@@ -92,7 +92,7 @@ open class HBBirdEntity(
     }
 
     override fun getMaxSpawnClusterSize(): Int {
-        return 4
+        return 2
     }
 
     override fun getHurtSound(source: DamageSource): SoundEvent {

@@ -35,7 +35,7 @@ class PeacockEntity(entityType: EntityType<out PeacockEntity>, world: Level) :
     }
 
     override fun getMaxSpawnClusterSize(): Int {
-        return 2
+        return 1
     }
 
     override fun registerGoals() {

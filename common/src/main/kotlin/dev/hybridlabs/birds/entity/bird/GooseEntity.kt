@@ -39,10 +39,6 @@ class GooseEntity(entityType: EntityType<out GooseEntity>, world: Level) :
             return 0.3f
     }
 
-    override fun getMaxSpawnClusterSize(): Int {
-        return 2
-    }
-
     override fun registerGoals() {
         super.registerGoals()
         goalSelector.addGoal(1, TemptGoal(this, 1.0, BREEDING_INGREDIENT, false))

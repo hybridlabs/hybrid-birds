@@ -16,10 +16,6 @@ import net.minecraft.world.level.Level
 class OstrichEntity(entityType: EntityType<out OstrichEntity>, world: Level) :
     HBRatiteEntity(entityType, world, true) {
 
-    override fun getMaxSpawnClusterSize(): Int {
-        return 2
-    }
-
     override fun getStandingEyeHeight(pose: Pose, dimensions: EntityDimensions): Float {
         return dimensions.height * 1.1f
     }
