@@ -53,10 +53,6 @@ open class HBRatiteEntity(
     }
     //#endregion
 
-    override fun removeWhenFarAway(distanceSquared: Double): Boolean {
-        return false
-    }
-
     override fun aiStep() {
         super.aiStep()
         val vec3d = this.deltaMovement

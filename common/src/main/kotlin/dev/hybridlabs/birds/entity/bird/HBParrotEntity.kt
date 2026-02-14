@@ -131,7 +131,7 @@ open class HBParrotEntity(
     }
 
     override fun removeWhenFarAway(distanceSquared: Double): Boolean {
-        return false
+        return !this.hasCustomName()
     }
 
     override fun getMaxSpawnClusterSize(): Int {
