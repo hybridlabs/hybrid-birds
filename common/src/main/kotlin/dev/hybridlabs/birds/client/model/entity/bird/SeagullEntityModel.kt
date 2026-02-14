@@ -1,7 +1,6 @@
 package dev.hybridlabs.birds.client.model.entity.bird
 
 import dev.hybridlabs.birds.Constants
-import dev.hybridlabs.birds.entity.bird.ChickEntity
 import dev.hybridlabs.birds.entity.bird.SeagullEntity
 import net.minecraft.resources.ResourceLocation
 

@@ -2,7 +2,6 @@ package dev.hybridlabs.birds.entity.bird
 
 import dev.hybridlabs.birds.entity.ai.BirdFloatControl
 import net.minecraft.core.BlockPos
-import net.minecraft.core.Direction
 import net.minecraft.tags.BlockTags
 import net.minecraft.tags.FluidTags
 import net.minecraft.util.RandomSource
@@ -22,7 +21,7 @@ import software.bernie.geckolib.core.animation.AnimationController
 import software.bernie.geckolib.core.animation.AnimationState
 import software.bernie.geckolib.core.animation.RawAnimation
 
-@Suppress("LeakingThis")
+@Suppress("LeakingThis", "DEPRECATION")
 open class HBWadingBirdEntity(
     type: EntityType<out HBWadingBirdEntity>,
     world: Level

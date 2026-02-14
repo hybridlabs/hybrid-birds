@@ -30,7 +30,7 @@ import software.bernie.geckolib.core.animation.AnimationController
 import software.bernie.geckolib.core.animation.AnimationState
 import software.bernie.geckolib.util.GeckoLibUtil
 
-@Suppress("LeakingThis")
+@Suppress("LeakingThis", "DEPRECATION")
 open class HBParrotEntity(
     type: EntityType<out HBParrotEntity>,
     world: Level,
