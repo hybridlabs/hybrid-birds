@@ -3,6 +3,7 @@ package dev.hybridlabs.birds.entity.bird
 import dev.hybridlabs.birds.entity.ai.BirdFloatControl
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
+import net.minecraft.tags.BlockTags
 import net.minecraft.tags.FluidTags
 import net.minecraft.util.RandomSource
 import net.minecraft.world.entity.EntityDimensions
@@ -95,6 +96,7 @@ open class HBWadingBirdEntity(
             random: RandomSource,
         ): Boolean {
             return isBrightEnoughToSpawn(level, pos) &&
+                    level.getBlockState(pos.below()).`is`(BlockTags.ANIMALS_SPAWNABLE_ON) &&
                     level.getBlockState(pos.below()).isSolid &&
                     level.isEmptyBlock(pos) &&
                     level.canSeeSky(pos)

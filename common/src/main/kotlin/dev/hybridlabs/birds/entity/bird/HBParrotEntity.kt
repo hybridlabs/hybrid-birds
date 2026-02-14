@@ -4,6 +4,7 @@ import net.minecraft.core.BlockPos
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.sounds.SoundEvents
+import net.minecraft.tags.BlockTags
 import net.minecraft.util.RandomSource
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResult
@@ -173,6 +174,7 @@ open class HBParrotEntity(
             random: RandomSource,
         ): Boolean {
             return isBrightEnoughToSpawn(level, pos) &&
+                    level.getBlockState(pos.below()).`is`(BlockTags.ANIMALS_SPAWNABLE_ON) &&
                     level.getBlockState(pos.below()).isSolid &&
                     level.isEmptyBlock(pos) &&
                     level.canSeeSky(pos)

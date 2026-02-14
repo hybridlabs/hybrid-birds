@@ -166,6 +166,7 @@ open class HBRatiteEntity(
             random: RandomSource,
         ): Boolean {
             return isBrightEnoughToSpawn(level, pos) &&
+                    level.getBlockState(pos.below()).`is`(BlockTags.ANIMALS_SPAWNABLE_ON) &&
                     level.getBlockState(pos.below()).isSolid &&
                     level.isEmptyBlock(pos) &&
                     level.canSeeSky(pos)
