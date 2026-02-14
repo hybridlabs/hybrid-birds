@@ -4,6 +4,10 @@
     "minecraft:river",
     "minecraft:cherry_grove",
     {
+      "id": "hybrid-aquatic:cold_river",
+      "required": false
+    },
+    {
       "id": "regions_unexplored:cold_river",
       "required": false
     },

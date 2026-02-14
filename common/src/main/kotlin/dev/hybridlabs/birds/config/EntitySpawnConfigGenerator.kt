@@ -28,7 +28,8 @@ class EntitySpawnConfigGenerator {
         addLandBird(HybridBirdsEntityTypes.KIWI.get(), listOf(HybridBirdsBiomeTags.KIWI_SPAWN_BIOMES), 2, 1, 1)
         addLandBird(HybridBirdsEntityTypes.JAY.get(), listOf(BiomeTags.IS_FOREST, BiomeTags.IS_TAIGA), 3, 1, 3)
         addWaterBird(HybridBirdsEntityTypes.SEAGULL.get(), listOf(BiomeTags.IS_BEACH, BiomeTags.IS_OCEAN), 3, 2, 5)
-        addWaterBird(HybridBirdsEntityTypes.FLAMINGO.get(), listOf(BiomeTags.IS_SAVANNA, BiomeTags.IS_JUNGLE), 3, 1, 3)
+        addWaterBird(HybridBirdsEntityTypes.PELICAN.get(), listOf(BiomeTags.IS_BEACH, BiomeTags.IS_OCEAN), 1, 1, 2)
+        addWaterBird(HybridBirdsEntityTypes.FLAMINGO.get(), listOf(BiomeTags.HAS_SWAMP_HUT, BiomeTags.IS_JUNGLE), 3, 1, 3)
         addLandBird(HybridBirdsEntityTypes.HUMMINGBIRD.get(), listOf(HybridBirdsBiomeTags.HUMMINGBIRD_SPAWN_BIOMES), 3, 1, 3)
     }
 

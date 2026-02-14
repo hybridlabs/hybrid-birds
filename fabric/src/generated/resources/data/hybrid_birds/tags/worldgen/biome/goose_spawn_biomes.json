@@ -4,6 +4,18 @@
     "minecraft:river",
     "minecraft:taiga",
     {
+      "id": "hybrid-aquatic:tropical_river",
+      "required": false
+    },
+    {
+      "id": "hybrid-aquatic:placer_river",
+      "required": false
+    },
+    {
+      "id": "hybrid-aquatic:cold_river",
+      "required": false
+    },
+    {
       "id": "regions_unexplored:cold_river",
       "required": false
     },
