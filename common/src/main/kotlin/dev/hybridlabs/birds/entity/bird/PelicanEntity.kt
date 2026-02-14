@@ -2,9 +2,11 @@ package dev.hybridlabs.birds.entity.bird
 
 import dev.hybridlabs.birds.entity.HybridBirdsEntityTypes
 import dev.hybridlabs.birds.entity.ai.BirdFlyFloatControl
+import dev.hybridlabs.birds.entity.bird.SeagullEntity.Companion.BREEDING_INGREDIENT
 import dev.hybridlabs.birds.sound.HybridBirdsSoundEvents
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvent
+import net.minecraft.tags.ItemTags
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.entity.AgeableMob
 import net.minecraft.world.entity.EntityType
@@ -13,9 +15,11 @@ import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.entity.ai.goal.FloatGoal
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal
 import net.minecraft.world.entity.ai.goal.PanicGoal
+import net.minecraft.world.entity.ai.goal.TemptGoal
 import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomFlyingGoal
 import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation
 import net.minecraft.world.entity.player.Player
+import net.minecraft.world.item.crafting.Ingredient
 import net.minecraft.world.level.Level
 
 class PelicanEntity(type: EntityType<out PelicanEntity>, world: Level) :
@@ -29,6 +33,7 @@ class PelicanEntity(type: EntityType<out PelicanEntity>, world: Level) :
     override fun registerGoals() {
         goalSelector.addGoal(0, PanicGoal(this, 1.1))
         goalSelector.addGoal(0, FloatGoal(this))
+        goalSelector.addGoal(1, TemptGoal(this, 1.0, BREEDING_INGREDIENT, false))
         goalSelector.addGoal(2, WaterAvoidingRandomFlyingGoal(this, 1.0))
         goalSelector.addGoal(2, LookAtPlayerGoal(this, Player::class.java, 8.0f))
     }
@@ -69,5 +74,9 @@ class PelicanEntity(type: EntityType<out PelicanEntity>, world: Level) :
                 .add(Attributes.ATTACK_DAMAGE, 1.0)
                 .add(Attributes.FOLLOW_RANGE, 12.0)
         }
+
+        val BREEDING_INGREDIENT: Ingredient = Ingredient.of(
+            ItemTags.FISHES
+        )
     }
 }
