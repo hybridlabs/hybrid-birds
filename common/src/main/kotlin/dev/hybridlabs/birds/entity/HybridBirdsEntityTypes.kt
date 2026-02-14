@@ -84,6 +84,13 @@ object HybridBirdsEntityTypes {
         JayEntity::createMobAttributes
     )
 
+    val SEAGULL = registerBird(
+        "seagull",
+        ::SeagullEntity,
+        EntityDimensions.fixed(0.3f, 0.3f),
+        SeagullEntity::createMobAttributes
+    )
+
     val HUMMINGBIRD = registerBird(
         "hummingbird",
         ::HummingbirdEntity,

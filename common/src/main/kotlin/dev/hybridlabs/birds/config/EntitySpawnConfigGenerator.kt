@@ -27,6 +27,7 @@ class EntitySpawnConfigGenerator {
         addBird(HybridBirdsEntityTypes.OSTRICH.get(), listOf(BiomeTags.IS_SAVANNA), 2, 1, 3)
         addBird(HybridBirdsEntityTypes.KIWI.get(), listOf(HybridBirdsBiomeTags.KIWI_SPAWN_BIOMES), 2, 1, 1)
         addBird(HybridBirdsEntityTypes.JAY.get(), listOf(BiomeTags.IS_FOREST, BiomeTags.IS_TAIGA), 3, 1, 3)
+        addBird(HybridBirdsEntityTypes.SEAGULL.get(), listOf(BiomeTags.IS_BEACH, BiomeTags.IS_OCEAN), 3, 2, 5)
         addBird(HybridBirdsEntityTypes.FLAMINGO.get(), listOf(BiomeTags.IS_SAVANNA, BiomeTags.IS_JUNGLE), 3, 1, 3)
         addBird(HybridBirdsEntityTypes.HUMMINGBIRD.get(), listOf(HybridBirdsBiomeTags.HUMMINGBIRD_SPAWN_BIOMES), 3, 1, 3)
     }

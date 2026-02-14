@@ -1,6 +1,7 @@
 package dev.hybridlabs.birds.client.render.entity
 
 import dev.hybridlabs.birds.entity.HybridBirdsEntityTypes
+import dev.hybridlabs.birds.entity.bird.SeagullEntity
 import dev.hybridlabs.birds.platform.ClientServices
 
 object HybridBirdsEntityRenderers {
@@ -14,6 +15,7 @@ object HybridBirdsEntityRenderers {
     val GOOSE = ClientServices.RENDERER.registerEntityRenderer(HybridBirdsEntityTypes.GOOSE, ::GooseEntityRenderer)
     val SWAN = ClientServices.RENDERER.registerEntityRenderer(HybridBirdsEntityTypes.SWAN, ::SwanEntityRenderer)
     val JAY = ClientServices.RENDERER.registerEntityRenderer(HybridBirdsEntityTypes.JAY, ::JayEntityRenderer)
+    val SEAGULL = ClientServices.RENDERER.registerEntityRenderer(HybridBirdsEntityTypes.SEAGULL, ::SeagullEntityRenderer)
     val OSTRICH = ClientServices.RENDERER.registerEntityRenderer(HybridBirdsEntityTypes.OSTRICH, ::OstrichEntityRenderer)
     val KIWI = ClientServices.RENDERER.registerEntityRenderer(HybridBirdsEntityTypes.KIWI, ::KiwiEntityRenderer)
     val HUMMINGBIRD = ClientServices.RENDERER.registerEntityRenderer(HybridBirdsEntityTypes.HUMMINGBIRD, ::HummingbirdEntityRenderer)

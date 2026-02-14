@@ -1,6 +1,5 @@
 package dev.hybridlabs.birds.entity.ai
 
-import dev.hybridlabs.birds.entity.bird.HBAquaticBirdEntity
 import dev.hybridlabs.birds.entity.bird.HBBirdEntity
 import net.minecraft.world.entity.ai.control.MoveControl
 import net.minecraft.world.phys.Vec3
