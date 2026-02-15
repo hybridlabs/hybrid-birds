@@ -154,10 +154,17 @@ open class HBParrotEntity(
         heightDifference: Double,
         onGround: Boolean,
         state: BlockState,
-        landedPosition: BlockPos,
+        landedPosition: BlockPos
     ) {
     }
 
+    override fun aiStep() {
+        super.aiStep()
+        val vec3d = this.deltaMovement
+        if (!this.onGround() && vec3d.y < 0.0) {
+            this.deltaMovement = vec3d.multiply(1.0, 0.6, 1.0)
+        }
+    }
 
     override fun isFlying(): Boolean {
         return !this.onGround()
