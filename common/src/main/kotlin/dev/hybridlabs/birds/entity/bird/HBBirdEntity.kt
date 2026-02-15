@@ -58,6 +58,14 @@ open class HBBirdEntity(
         return 0.4f
     }
 
+    override fun getMaxHeadXRot(): Int {
+        return 90
+    }
+
+    override fun getMaxHeadYRot(): Int {
+        return 90
+    }
+
     @Nullable
     override fun getBreedOffspring(serverLevel: ServerLevel, ageableMob: AgeableMob): AgeableMob? {
         throw NotImplementedError("Breeding is not implemented")
