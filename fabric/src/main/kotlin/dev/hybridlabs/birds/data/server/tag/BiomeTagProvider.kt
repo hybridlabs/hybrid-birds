@@ -91,6 +91,10 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .addOptional(ResourceLocation("regions_unexplored", "cold_river"))
             .addOptional(ResourceLocation("riverredux", "gravelly_river"))
 
+        getOrCreateTagBuilder(HybridBirdsBiomeTags.FLAMINGO_SPAWN_BIOMES)
+            .addOptional(ResourceLocation("hybrid-aquatic", "seasonal_river"))
+            .forceAddTag(BiomeTags.IS_SAVANNA)
+
         getOrCreateTagBuilder(HybridBirdsBiomeTags.ROOSTER_SPAWN_BIOMES)
             .add(Biomes.PLAINS)
             .add(Biomes.SUNFLOWER_PLAINS)
