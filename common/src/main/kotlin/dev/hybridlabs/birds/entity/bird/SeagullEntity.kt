@@ -2,7 +2,6 @@ package dev.hybridlabs.birds.entity.bird
 
 import dev.hybridlabs.birds.entity.HybridBirdsEntityTypes
 import dev.hybridlabs.birds.entity.ai.BirdFlyFloatControl
-import dev.hybridlabs.birds.entity.bird.DuckEntity.Companion.BREEDING_INGREDIENT
 import dev.hybridlabs.birds.sound.HybridBirdsSoundEvents
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvent
@@ -12,14 +11,11 @@ import net.minecraft.world.entity.AgeableMob
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
-import net.minecraft.world.entity.ai.goal.FloatGoal
-import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal
-import net.minecraft.world.entity.ai.goal.PanicGoal
-import net.minecraft.world.entity.ai.goal.TemptGoal
-import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomFlyingGoal
+import net.minecraft.world.entity.ai.goal.*
+import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal
 import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation
+import net.minecraft.world.entity.animal.Turtle
 import net.minecraft.world.entity.player.Player
-import net.minecraft.world.item.Items
 import net.minecraft.world.item.crafting.Ingredient
 import net.minecraft.world.level.Level
 
@@ -37,6 +33,9 @@ class SeagullEntity(type: EntityType<out SeagullEntity>, world: Level) :
         goalSelector.addGoal(1, TemptGoal(this, 1.0, BREEDING_INGREDIENT, false))
         goalSelector.addGoal(2, WaterAvoidingRandomFlyingGoal(this, 1.0))
         goalSelector.addGoal(2, LookAtPlayerGoal(this, Player::class.java, 8.0f))
+        goalSelector.addGoal(5, MeleeAttackGoal(this, 1.0, true))
+        targetSelector.addGoal(6, NearestAttackableTargetGoal(this, Turtle::class.java, false, Turtle.BABY_ON_LAND_SELECTOR)
+        )
     }
 
     override fun getWaterline(): Float {
@@ -73,6 +72,7 @@ class SeagullEntity(type: EntityType<out SeagullEntity>, world: Level) :
                 .add(Attributes.MOVEMENT_SPEED, 0.25)
                 .add(Attributes.FLYING_SPEED, 0.5)
                 .add(Attributes.ATTACK_DAMAGE, 1.0)
+                .add(Attributes.ATTACK_KNOCKBACK, 0.1)
                 .add(Attributes.FOLLOW_RANGE, 12.0)
         }
 

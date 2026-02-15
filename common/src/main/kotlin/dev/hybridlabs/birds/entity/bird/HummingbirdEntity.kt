@@ -24,6 +24,7 @@ class HummingbirdEntity(entityType: EntityType<out HummingbirdEntity>, world: Le
                 .add(Attributes.MOVEMENT_SPEED, 0.25)
                 .add(Attributes.FLYING_SPEED, 0.4)
                 .add(Attributes.ATTACK_DAMAGE, 1.0)
+                .add(Attributes.ATTACK_KNOCKBACK, 0.1)
                 .add(Attributes.FOLLOW_RANGE, 12.0)
         }
     }
