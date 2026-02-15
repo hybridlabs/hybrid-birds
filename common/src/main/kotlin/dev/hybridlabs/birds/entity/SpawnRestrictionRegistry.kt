@@ -91,6 +91,6 @@ object SpawnRestrictionRegistry {
         location: Type,
         predicate: SpawnPredicate<T>,
     ) {
-        SpawnPlacements.register(entityType, location, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, predicate)
+        SpawnPlacements.register(entityType, location, Heightmap.Types.WORLD_SURFACE, predicate)
     }
 }
