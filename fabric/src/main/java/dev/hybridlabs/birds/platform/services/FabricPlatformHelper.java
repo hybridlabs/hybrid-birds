@@ -84,7 +84,7 @@ public class FabricPlatformHelper implements PlatformHelper {
     }
 
     @Override
-    public @Nullable MobCategory getMobCategoryByName(String name) {
+    public @Nullable MobCategory getHybridMobCategoryByName(String name) {
         return HBSpawnGroup.byName(name);
     }
 

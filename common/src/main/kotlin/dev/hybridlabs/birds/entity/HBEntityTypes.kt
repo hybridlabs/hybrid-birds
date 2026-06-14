@@ -130,7 +130,7 @@ object HBEntityTypes {
             entityFactory,
             dimensions,
             attributeContainer,
-            Services.PLATFORM.getMobCategoryByName("HB_LAND_BIRD"),
+            Services.PLATFORM.getHybridMobCategoryByName("terrestrial_bird"),
         )
     }
 
@@ -145,7 +145,7 @@ object HBEntityTypes {
             entityFactory,
             dimensions,
             attributeContainer,
-            Services.PLATFORM.getMobCategoryByName("HB_WATER_BIRD"),
+            Services.PLATFORM.getHybridMobCategoryByName("aquatic_bird"),
         )
     }
 

@@ -41,7 +41,7 @@ class EntitySpawnConfigGenerator {
         maxGroup: Int
     ) {
         add(entityType, spawnTags,
-            Services.PLATFORM.getMobCategoryByName("HB_LAND_BIRD"),
+            Services.PLATFORM.getHybridMobCategoryByName("terrestrial_bird"),
             weight, minGroup, maxGroup)
     }
 
@@ -53,7 +53,7 @@ class EntitySpawnConfigGenerator {
         maxGroup: Int
     ) {
         add(entityType, spawnTags,
-            Services.PLATFORM.getMobCategoryByName("HB_WATER_BIRD"),
+            Services.PLATFORM.getHybridMobCategoryByName("aquatic_bird"),
             weight, minGroup, maxGroup)
     }
 
