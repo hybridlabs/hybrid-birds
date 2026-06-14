@@ -5,7 +5,7 @@ import dev.hybridlabs.birds.client.model.entity.bird.JayEntityModel
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class JayEntityRenderer(context: Context) :
-    HybridBirdsParrotEntityRenderer<JayEntity>(context,
+    HBParrotEntityRenderer<JayEntity>(context,
         JayEntityModel()
     ) {
 

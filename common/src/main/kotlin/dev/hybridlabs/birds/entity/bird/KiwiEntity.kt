@@ -1,6 +1,6 @@
 package dev.hybridlabs.birds.entity.bird
 
-import dev.hybridlabs.birds.entity.HybridBirdsEntityTypes
+import dev.hybridlabs.birds.entity.HBEntityTypes
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.sounds.SoundEvents
@@ -25,7 +25,7 @@ class KiwiEntity(entityType: EntityType<out KiwiEntity>, world: Level) :
     }
 
     override fun getBreedOffspring(serverLevel: ServerLevel, ageableMob: AgeableMob): AgeableMob? {
-        return HybridBirdsEntityTypes.KIWI.get().create(serverLevel)
+        return HBEntityTypes.KIWI.get().create(serverLevel)
     }
 
     override fun getAmbientSound(): SoundEvent {

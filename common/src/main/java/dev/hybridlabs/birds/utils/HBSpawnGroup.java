@@ -5,7 +5,7 @@ import net.minecraft.world.entity.MobCategory;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-public enum HybridBirdsSpawnGroup {
+public enum HBSpawnGroup {
     HB_LAND_BIRD("HB_LAND_BIRD", 6, true, false, 128),
     HB_WATER_BIRD("HB_WATER_BIRD", 6, true, false, 128);
 
@@ -16,7 +16,7 @@ public enum HybridBirdsSpawnGroup {
     public final boolean rare;
     public final int immediateDespawnRange;
 
-    HybridBirdsSpawnGroup(String name, int spawnCap, boolean peaceful, boolean rare, int immediateDespawnRange) {
+    HBSpawnGroup(String name, int spawnCap, boolean peaceful, boolean rare, int immediateDespawnRange) {
         this.name = name;
         this.spawnCap = spawnCap;
         this.peaceful = peaceful;

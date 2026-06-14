@@ -1,6 +1,6 @@
 package dev.hybridlabs.birds
 
-import dev.hybridlabs.birds.client.render.entity.HybridBirdsEntityRenderers
+import dev.hybridlabs.birds.client.render.entity.HBEntityRenderers
 import net.fabricmc.api.ClientModInitializer
 
 object HybridBirdsClient : ClientModInitializer {
@@ -9,6 +9,6 @@ object HybridBirdsClient : ClientModInitializer {
 	}
 
 	private fun registerEntityRenderers() {
-        HybridBirdsEntityRenderers
+        HBEntityRenderers
 	}
 }

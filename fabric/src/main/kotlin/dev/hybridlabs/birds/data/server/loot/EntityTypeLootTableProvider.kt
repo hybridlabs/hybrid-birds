@@ -1,7 +1,7 @@
 package dev.hybridlabs.birds.data.server.loot
 
-import dev.hybridlabs.birds.entity.HybridBirdsEntityTypes
-import dev.hybridlabs.birds.item.HybridBirdsItems
+import dev.hybridlabs.birds.entity.HBEntityTypes
+import dev.hybridlabs.birds.item.HBItems
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.SimpleFabricLootTableProvider
 import net.minecraft.resources.ResourceLocation
@@ -18,7 +18,7 @@ import java.util.function.BiConsumer
 class EntityTypeLootTableProvider(output: FabricDataOutput) :
     SimpleFabricLootTableProvider(output, LootContextParamSets.ENTITY) {
     override fun generate(exporter: BiConsumer<ResourceLocation, LootTable.Builder>) {
-        export(exporter, HybridBirdsEntityTypes.ROOSTER!!.get()) {
+        export(exporter, HBEntityTypes.ROOSTER!!.get()) {
             pool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(Items.CHICKEN))
@@ -32,7 +32,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridBirdsEntityTypes.GUINEA_FOWL!!.get()) {
+        export(exporter, HBEntityTypes.GUINEA_FOWL!!.get()) {
             pool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(Items.CHICKEN))
@@ -46,10 +46,10 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridBirdsEntityTypes.DUCK!!.get()) {
+        export(exporter, HBEntityTypes.DUCK!!.get()) {
             pool(
                 LootPool.lootPool()
-                    .add(LootItem.lootTableItem(HybridBirdsItems.DUCK.get()))
+                    .add(LootItem.lootTableItem(HBItems.DUCK.get()))
                     .build()
             )
             pool(
@@ -60,11 +60,11 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridBirdsEntityTypes.GOOSE!!.get()) {
+        export(exporter, HBEntityTypes.GOOSE!!.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
-                        LootItem.lootTableItem(HybridBirdsItems.GOOSE.get()))
+                        LootItem.lootTableItem(HBItems.GOOSE.get()))
                     .build()
             )
             pool(
@@ -75,10 +75,10 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridBirdsEntityTypes.TURKEY!!.get()) {
+        export(exporter, HBEntityTypes.TURKEY!!.get()) {
             pool(
                 LootPool.lootPool()
-                    .add(LootItem.lootTableItem(HybridBirdsItems.TURKEY.get()))
+                    .add(LootItem.lootTableItem(HBItems.TURKEY.get()))
                     .build()
             )
             pool(
@@ -89,7 +89,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridBirdsEntityTypes.SWAN!!.get()) {
+        export(exporter, HBEntityTypes.SWAN!!.get()) {
             pool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(Items.FEATHER)
@@ -98,7 +98,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridBirdsEntityTypes.PEACOCK!!.get()) {
+        export(exporter, HBEntityTypes.PEACOCK!!.get()) {
             pool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(Items.FEATHER)

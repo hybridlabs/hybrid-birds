@@ -1,11 +1,11 @@
 package dev.hybridlabs.birds.data.client
 
-import dev.hybridlabs.birds.block.HybridBirdsBlocks
-import dev.hybridlabs.birds.data.HybridBirdsDataGenerator.filterHybridBirds
-import dev.hybridlabs.birds.effect.HybridBirdsStatusEffects
-import dev.hybridlabs.birds.entity.HybridBirdsEntityTypes
-import dev.hybridlabs.birds.item.HybridBirdsItemGroups
-import dev.hybridlabs.birds.item.HybridBirdsItems
+import dev.hybridlabs.birds.block.HBBlocks
+import dev.hybridlabs.birds.data.HBDataGenerator.filterHybridBirds
+import dev.hybridlabs.birds.effect.HBStatusEffects
+import dev.hybridlabs.birds.entity.HBEntityTypes
+import dev.hybridlabs.birds.item.HBItemGroups
+import dev.hybridlabs.birds.item.HBItems
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider
 import net.minecraft.core.registries.BuiltInRegistries
@@ -15,37 +15,37 @@ import net.minecraft.world.entity.Mob
 class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output) {
     override fun generateTranslations(builder: TranslationBuilder) {
         builder.add(
-            BuiltInRegistries.CREATIVE_MODE_TAB.getResourceKey(HybridBirdsItemGroups.HYBRID_BIRDS.get())
+            BuiltInRegistries.CREATIVE_MODE_TAB.getResourceKey(HBItemGroups.HYBRID_BIRDS.get())
                 .orElseThrow { IllegalStateException("Item group not registered") }, "Hybrid Birds"
         )
 
         generateEntities(builder)
 
         mapOf(
-            HybridBirdsItems.COOKED_EGG.get() to "Cooked Egg",
-            HybridBirdsItems.TURKEY_EGG.get() to "Turkey Egg",
-            HybridBirdsItems.PEACOCK_EGG.get() to "Peacock Egg",
-            HybridBirdsItems.GUINEA_FOWL_EGG.get() to "Guinea Fowl Egg",
-            HybridBirdsItems.DUCK_EGG.get() to "Duck Egg",
-            HybridBirdsItems.GOOSE_EGG.get() to "Goose Egg",
-            HybridBirdsItems.SWAN_EGG.get() to "Swan Egg",
-            HybridBirdsItems.DUCK.get() to "Raw Duck",
-            HybridBirdsItems.GOOSE.get() to "Raw Goose",
-            HybridBirdsItems.TURKEY.get() to "Raw Turkey",
-            HybridBirdsItems.TURDUCKEN.get() to "Raw Turducken",
-            HybridBirdsItems.COOKED_DUCK.get() to "Cooked Duck",
-            HybridBirdsItems.COOKED_GOOSE.get() to "Cooked Goose",
-            HybridBirdsItems.COOKED_TURKEY.get() to "Cooked Turkey",
+            HBItems.COOKED_EGG.get() to "Cooked Egg",
+            HBItems.TURKEY_EGG.get() to "Turkey Egg",
+            HBItems.PEACOCK_EGG.get() to "Peacock Egg",
+            HBItems.GUINEA_FOWL_EGG.get() to "Guinea Fowl Egg",
+            HBItems.DUCK_EGG.get() to "Duck Egg",
+            HBItems.GOOSE_EGG.get() to "Goose Egg",
+            HBItems.SWAN_EGG.get() to "Swan Egg",
+            HBItems.DUCK.get() to "Raw Duck",
+            HBItems.GOOSE.get() to "Raw Goose",
+            HBItems.TURKEY.get() to "Raw Turkey",
+            HBItems.TURDUCKEN.get() to "Raw Turducken",
+            HBItems.COOKED_DUCK.get() to "Cooked Duck",
+            HBItems.COOKED_GOOSE.get() to "Cooked Goose",
+            HBItems.COOKED_TURKEY.get() to "Cooked Turkey",
         ).forEach(builder::add)
 
         mapOf(
-            HybridBirdsBlocks.TURDUCKEN to "Cooked Turducken"
+            HBBlocks.TURDUCKEN to "Cooked Turducken"
         ).forEach { (block, translation) ->
             builder.add(block.get(), translation)
         }
 
         mapOf(
-            HybridBirdsStatusEffects.ROOSTERS_CALLING.get() to "Roosters Calling"
+            HBStatusEffects.ROOSTERS_CALLING.get() to "Roosters Calling"
         ).forEach { (effect, translation) ->
             val identifier = BuiltInRegistries.MOB_EFFECT.getKey(effect)
             builder.add("effect.${identifier?.namespace}.${identifier?.path}", translation)
@@ -55,21 +55,21 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
 
     private fun generateEntities(builder: TranslationBuilder) {
         val entityNameMap = mapOf<EntityType<*>, String>(
-            HybridBirdsEntityTypes.DUCK.get() to "Duck",
-            HybridBirdsEntityTypes.GOOSE.get() to "Goose",
-            HybridBirdsEntityTypes.SWAN.get() to "Swan",
-            HybridBirdsEntityTypes.ROOSTER.get() to "Rooster",
-            HybridBirdsEntityTypes.CHICK.get() to "Chick",
-            HybridBirdsEntityTypes.TURKEY.get() to "Turkey",
-            HybridBirdsEntityTypes.PEACOCK.get() to "Peacock",
-            HybridBirdsEntityTypes.GUINEA_FOWL.get() to "Guinea Fowl",
-            HybridBirdsEntityTypes.JAY.get() to "Jay",
-            HybridBirdsEntityTypes.OSTRICH.get() to "Ostrich",
-            HybridBirdsEntityTypes.KIWI.get() to "Kiwi",
-            HybridBirdsEntityTypes.HUMMINGBIRD.get() to "Hummingbird",
-            HybridBirdsEntityTypes.FLAMINGO.get() to "Flamingo",
-            HybridBirdsEntityTypes.SEAGULL.get() to "Seagull",
-            HybridBirdsEntityTypes.PELICAN.get() to "Pelican",
+            HBEntityTypes.DUCK.get() to "Duck",
+            HBEntityTypes.GOOSE.get() to "Goose",
+            HBEntityTypes.SWAN.get() to "Swan",
+            HBEntityTypes.ROOSTER.get() to "Rooster",
+            HBEntityTypes.CHICK.get() to "Chick",
+            HBEntityTypes.TURKEY.get() to "Turkey",
+            HBEntityTypes.PEACOCK.get() to "Peacock",
+            HBEntityTypes.GUINEA_FOWL.get() to "Guinea Fowl",
+            HBEntityTypes.JAY.get() to "Jay",
+            HBEntityTypes.OSTRICH.get() to "Ostrich",
+            HBEntityTypes.KIWI.get() to "Kiwi",
+            HBEntityTypes.HUMMINGBIRD.get() to "Hummingbird",
+            HBEntityTypes.FLAMINGO.get() to "Flamingo",
+            HBEntityTypes.SEAGULL.get() to "Seagull",
+            HBEntityTypes.PELICAN.get() to "Pelican",
         )
 
         val nonPresentEntityNames = mutableListOf<EntityType<*>>()

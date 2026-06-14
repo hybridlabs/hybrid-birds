@@ -1,6 +1,6 @@
 package dev.hybridlabs.birds.data.server.tag
 
-import dev.hybridlabs.birds.tag.HybridBirdsBiomeTags
+import dev.hybridlabs.birds.tag.HBBiomeTags
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider
 import net.minecraft.core.HolderLookup
@@ -17,7 +17,7 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
     override fun addTags(arg: HolderLookup.Provider) {
         // spawn biomes
 
-        getOrCreateTagBuilder(HybridBirdsBiomeTags.DUCK_SPAWN_BIOMES)
+        getOrCreateTagBuilder(HBBiomeTags.DUCK_SPAWN_BIOMES)
             .add(Biomes.RIVER)
             .add(Biomes.SWAMP)
             .addOptional(ResourceLocation("hybrid-aquatic", "tropical_river"))
@@ -61,7 +61,7 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .addOptional(ResourceLocation("still_life", "mediterranean_marsh"))
             .addOptional(ResourceLocation("still_life", "temperate_marsh"))
 
-        getOrCreateTagBuilder(HybridBirdsBiomeTags.GOOSE_SPAWN_BIOMES)
+        getOrCreateTagBuilder(HBBiomeTags.GOOSE_SPAWN_BIOMES)
             .add(Biomes.RIVER)
             .add(Biomes.TAIGA)
             .addOptional(ResourceLocation("hybrid-aquatic", "tropical_river"))
@@ -85,24 +85,24 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .addOptional(ResourceLocation("still_life", "mediterranean_marsh"))
             .addOptional(ResourceLocation("still_life", "temperate_marsh"))
 
-        getOrCreateTagBuilder(HybridBirdsBiomeTags.SWAN_SPAWN_BIOMES)
+        getOrCreateTagBuilder(HBBiomeTags.SWAN_SPAWN_BIOMES)
             .add(Biomes.RIVER)
             .addOptional(ResourceLocation("hybrid-aquatic", "cold_river"))
             .addOptional(ResourceLocation("regions_unexplored", "cold_river"))
             .addOptional(ResourceLocation("riverredux", "gravelly_river"))
 
-        getOrCreateTagBuilder(HybridBirdsBiomeTags.FLAMINGO_SPAWN_BIOMES)
+        getOrCreateTagBuilder(HBBiomeTags.FLAMINGO_SPAWN_BIOMES)
             .addOptional(ResourceLocation("hybrid-aquatic", "seasonal_river"))
             .forceAddTag(BiomeTags.IS_SAVANNA)
 
-        getOrCreateTagBuilder(HybridBirdsBiomeTags.ROOSTER_SPAWN_BIOMES)
+        getOrCreateTagBuilder(HBBiomeTags.ROOSTER_SPAWN_BIOMES)
             .add(Biomes.PLAINS)
             .add(Biomes.SUNFLOWER_PLAINS)
             .add(Biomes.FOREST)
             .add(Biomes.FLOWER_FOREST)
             .add(Biomes.BIRCH_FOREST)
 
-        getOrCreateTagBuilder(HybridBirdsBiomeTags.TURKEY_SPAWN_BIOMES)
+        getOrCreateTagBuilder(HBBiomeTags.TURKEY_SPAWN_BIOMES)
             .forceAddTag(BiomeTags.IS_FOREST)
             .forceAddTag(BiomeTags.IS_TAIGA)
             .add(Biomes.PLAINS)
@@ -113,12 +113,12 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .add(Biomes.OLD_GROWTH_PINE_TAIGA)
             .add(Biomes.OLD_GROWTH_SPRUCE_TAIGA)
 
-        getOrCreateTagBuilder(HybridBirdsBiomeTags.KIWI_SPAWN_BIOMES)
+        getOrCreateTagBuilder(HBBiomeTags.KIWI_SPAWN_BIOMES)
             .add(Biomes.OLD_GROWTH_PINE_TAIGA)
             .add(Biomes.OLD_GROWTH_SPRUCE_TAIGA)
             .add(Biomes.DARK_FOREST)
 
-        getOrCreateTagBuilder(HybridBirdsBiomeTags.HUMMINGBIRD_SPAWN_BIOMES)
+        getOrCreateTagBuilder(HBBiomeTags.HUMMINGBIRD_SPAWN_BIOMES)
             .add(Biomes.FLOWER_FOREST)
             .add(Biomes.SUNFLOWER_PLAINS)
     }

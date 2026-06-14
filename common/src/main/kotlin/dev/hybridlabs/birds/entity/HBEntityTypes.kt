@@ -1,6 +1,6 @@
 package dev.hybridlabs.birds.entity
 
-import dev.hybridlabs.birds.HybridBirdsCommon
+import dev.hybridlabs.birds.CommonClass
 import dev.hybridlabs.birds.entity.bird.*
 import dev.hybridlabs.birds.platform.Services
 import dev.hybridlabs.birds.platform.registration.RegistryObject
@@ -12,7 +12,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import java.util.concurrent.Callable
 
 
-object HybridBirdsEntityTypes {
+object HBEntityTypes {
 
     val ROOSTER = registerLandBird(
         "rooster",
@@ -182,7 +182,7 @@ object HybridBirdsEntityTypes {
         entity: EntityType.Builder<T>,
         attributeContainer: Callable<AttributeSupplier.Builder>,
     ): RegistryObject<EntityType<T>> {
-        return HybridBirdsCommon.ENTITY_TYPES.register(id) {
+        return CommonClass.ENTITY_TYPES.register(id) {
             val entityType = entity.build(id)
             Services.PLATFORM.registerAttributes(id, entityType, attributeContainer)
             entityType

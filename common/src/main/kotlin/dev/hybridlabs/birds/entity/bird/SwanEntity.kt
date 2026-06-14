@@ -1,8 +1,8 @@
 package dev.hybridlabs.birds.entity.bird
 
-import dev.hybridlabs.birds.entity.HybridBirdsEntityTypes
-import dev.hybridlabs.birds.item.HybridBirdsItems
-import dev.hybridlabs.birds.sound.HybridBirdsSoundEvents
+import dev.hybridlabs.birds.entity.HBEntityTypes
+import dev.hybridlabs.birds.item.HBItems
+import dev.hybridlabs.birds.sound.HBSoundEvents
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.sounds.SoundEvents
@@ -48,22 +48,22 @@ class SwanEntity(entityType: EntityType<out SwanEntity>, world: Level) :
                 1.0f,
                 (random.nextFloat() - random.nextFloat()) * 0.2f + 1.0f
             )
-            this.spawnAtLocation(HybridBirdsItems.SWAN_EGG.get())
+            this.spawnAtLocation(HBItems.SWAN_EGG.get())
             this.gameEvent(GameEvent.ENTITY_PLACE)
             this.eggLayTime = random.nextInt(6000) + 6000
         }
     }
 
     override fun getAmbientSound(): SoundEvent {
-        return HybridBirdsSoundEvents.SWAN_AMBIENT.get()
+        return HBSoundEvents.SWAN_AMBIENT.get()
     }
 
     override fun getHurtSound(source: DamageSource): SoundEvent {
-        return HybridBirdsSoundEvents.SWAN_HURT.get()
+        return HBSoundEvents.SWAN_HURT.get()
     }
 
     override fun getDeathSound(): SoundEvent {
-        return HybridBirdsSoundEvents.SWAN_DIE.get()
+        return HBSoundEvents.SWAN_DIE.get()
     }
 
     override fun isFood(stack: ItemStack): Boolean {
@@ -71,7 +71,7 @@ class SwanEntity(entityType: EntityType<out SwanEntity>, world: Level) :
     }
 
     override fun getBreedOffspring(serverLevel: ServerLevel, ageableMob: AgeableMob): AgeableMob? {
-        return HybridBirdsEntityTypes.SWAN.get().create(serverLevel)
+        return HBEntityTypes.SWAN.get().create(serverLevel)
     }
 
     companion object {

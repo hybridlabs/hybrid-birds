@@ -1,7 +1,7 @@
 package dev.hybridlabs.birds.platform;
 
 import dev.hybridlabs.birds.Constants;
-import dev.hybridlabs.birds.HybridBirdsCommon;
+import dev.hybridlabs.birds.CommonClass;
 import dev.hybridlabs.birds.platform.registration.RegistryObject;
 import dev.hybridlabs.birds.platform.services.PlatformHelper;
 import net.minecraft.world.entity.EntityType;
@@ -69,7 +69,7 @@ public class ForgePlatformHelper implements PlatformHelper {
             Supplier<EntityType<T>> entityType,
             int backgroundColor,
             int highlightColor) {
-        return HybridBirdsCommon.ITEMS.register(
+        return CommonClass.ITEMS.register(
                 name,
                 () ->
                         new ForgeSpawnEggItem(

@@ -1,7 +1,7 @@
 package dev.hybridlabs.birds.entity.bird
 
-import dev.hybridlabs.birds.entity.HybridBirdsEntityTypes
-import dev.hybridlabs.birds.sound.HybridBirdsSoundEvents
+import dev.hybridlabs.birds.entity.HBEntityTypes
+import dev.hybridlabs.birds.sound.HBSoundEvents
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.world.damagesource.DamageSource
@@ -21,19 +21,19 @@ class OstrichEntity(entityType: EntityType<out OstrichEntity>, world: Level) :
     }
 
     override fun getBreedOffspring(serverLevel: ServerLevel, ageableMob: AgeableMob): AgeableMob? {
-        return HybridBirdsEntityTypes.OSTRICH.get().create(serverLevel)
+        return HBEntityTypes.OSTRICH.get().create(serverLevel)
     }
 
     override fun getAmbientSound(): SoundEvent {
-        return HybridBirdsSoundEvents.OSTRICH_AMBIENT.get()
+        return HBSoundEvents.OSTRICH_AMBIENT.get()
     }
 
     override fun getHurtSound(source: DamageSource): SoundEvent {
-        return HybridBirdsSoundEvents.OSTRICH_HURT.get()
+        return HBSoundEvents.OSTRICH_HURT.get()
     }
 
     override fun getDeathSound(): SoundEvent {
-        return HybridBirdsSoundEvents.PEACOCK_DIE.get()
+        return HBSoundEvents.PEACOCK_DIE.get()
     }
 
     companion object {

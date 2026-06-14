@@ -20,33 +20,33 @@ import net.minecraft.world.level.levelgen.Heightmap
 object SpawnRestrictionRegistry {
     fun registerSpawnRestrictions() {
         setOf(
-            HybridBirdsEntityTypes.ROOSTER.get(),
-            HybridBirdsEntityTypes.CHICK.get(),
-            HybridBirdsEntityTypes.TURKEY.get(),
-            HybridBirdsEntityTypes.PEACOCK.get(),
-            HybridBirdsEntityTypes.GUINEA_FOWL.get(),
+            HBEntityTypes.ROOSTER.get(),
+            HBEntityTypes.CHICK.get(),
+            HBEntityTypes.TURKEY.get(),
+            HBEntityTypes.PEACOCK.get(),
+            HBEntityTypes.GUINEA_FOWL.get(),
         ).forEach { registerTerrestrialBird(it) }
 
         setOf(
-            HybridBirdsEntityTypes.OSTRICH.get(),
-            HybridBirdsEntityTypes.KIWI.get(),
+            HBEntityTypes.OSTRICH.get(),
+            HBEntityTypes.KIWI.get(),
         ).forEach { registerRatite(it) }
 
         setOf(
-            HybridBirdsEntityTypes.DUCK.get(),
-            HybridBirdsEntityTypes.GOOSE.get(),
-            HybridBirdsEntityTypes.SWAN.get(),
-            HybridBirdsEntityTypes.SEAGULL.get(),
-            HybridBirdsEntityTypes.PELICAN.get(),
+            HBEntityTypes.DUCK.get(),
+            HBEntityTypes.GOOSE.get(),
+            HBEntityTypes.SWAN.get(),
+            HBEntityTypes.SEAGULL.get(),
+            HBEntityTypes.PELICAN.get(),
         ).forEach { registerAquaticBird(it) }
 
         setOf(
-            HybridBirdsEntityTypes.FLAMINGO.get(),
+            HBEntityTypes.FLAMINGO.get(),
         ).forEach { registerWadingBird(it) }
 
         setOf(
-            HybridBirdsEntityTypes.JAY.get(),
-            HybridBirdsEntityTypes.HUMMINGBIRD.get(),
+            HBEntityTypes.JAY.get(),
+            HBEntityTypes.HUMMINGBIRD.get(),
         ).forEach { registerParrot(it) }
     }
 

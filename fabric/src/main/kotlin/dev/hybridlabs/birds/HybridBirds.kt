@@ -1,17 +1,17 @@
 package dev.hybridlabs.birds
 
 import dev.hybridlabs.birds.Constants.MOD_NAME
-import dev.hybridlabs.birds.block.HybridBirdsBlocks
-import dev.hybridlabs.birds.config.HybridBirdsConfig
-import dev.hybridlabs.birds.config.HybridBirdsConfigHandler
-import dev.hybridlabs.birds.effect.HybridBirdsStatusEffects
-import dev.hybridlabs.birds.entity.HybridBirdsEntityTypes
+import dev.hybridlabs.birds.block.HBBlocks
+import dev.hybridlabs.birds.config.HBConfig
+import dev.hybridlabs.birds.config.HBConfigHandler
+import dev.hybridlabs.birds.effect.HBStatusEffects
+import dev.hybridlabs.birds.entity.HBEntityTypes
 import dev.hybridlabs.birds.entity.SpawnRestrictionRegistry
-import dev.hybridlabs.birds.item.HybridBirdsItemGroups
-import dev.hybridlabs.birds.item.HybridBirdsItems
-import dev.hybridlabs.birds.sound.HybridBirdsSoundEvents
-import dev.hybridlabs.birds.tag.HybridBirdsBiomeTags
-import dev.hybridlabs.birds.tag.HybridBirdsItemTags
+import dev.hybridlabs.birds.item.HBItemGroups
+import dev.hybridlabs.birds.item.HBItems
+import dev.hybridlabs.birds.sound.HBSoundEvents
+import dev.hybridlabs.birds.tag.HBBiomeTags
+import dev.hybridlabs.birds.tag.HBItemTags
 import net.fabricmc.api.ModInitializer
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors
@@ -27,20 +27,20 @@ object HybridBirds : ModInitializer {
 
 		logger.info("Initializing $MOD_NAME")
         val configFile = Constants.CONFIG_FILE
-        val configHandler = HybridBirdsConfigHandler(configFile.toFile())
+        val configHandler = HBConfigHandler(configFile.toFile())
 
 
-        HybridBirdsSoundEvents
-        HybridBirdsEntityTypes
+        HBSoundEvents
+        HBEntityTypes
 
-        HybridBirdsBlocks
-        HybridBirdsItems
-        HybridBirdsItemGroups
+        HBBlocks
+        HBItems
+        HBItemGroups
 
-        HybridBirdsBiomeTags
-        HybridBirdsItemTags
+        HBBiomeTags
+        HBItemTags
 
-        HybridBirdsStatusEffects
+        HBStatusEffects
 
         SpawnRestrictionRegistry
 
@@ -49,7 +49,7 @@ object HybridBirds : ModInitializer {
 	}
 
 
-    private fun registerBiomeModifications(config: HybridBirdsConfig) {
+    private fun registerBiomeModifications(config: HBConfig) {
         config.entitySpawnConfig.forEach { config ->
             BiomeModifications.addSpawn(BiomeSelectors.tag(config.biomes), config.group, config.type, config.weight, config.minGroupSize, config.maxGroupSize)
         }

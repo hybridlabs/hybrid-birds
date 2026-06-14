@@ -1,7 +1,7 @@
 package dev.hybridlabs.birds.entity.bird
 
-import dev.hybridlabs.birds.entity.HybridBirdsEntityTypes
-import dev.hybridlabs.birds.sound.HybridBirdsSoundEvents
+import dev.hybridlabs.birds.entity.HBEntityTypes
+import dev.hybridlabs.birds.sound.HBSoundEvents
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvent
@@ -57,7 +57,7 @@ class ChickEntity(entityType: EntityType<out ChickEntity>, world: Level) :
         val var2 = this.level()
         if (var2 is ServerLevel) {
             val isRooster = Random.nextFloat() < 0.5
-            val grownEntityType = if (isRooster) HybridBirdsEntityTypes.ROOSTER!!.get() else EntityType.CHICKEN
+            val grownEntityType = if (isRooster) HBEntityTypes.ROOSTER!!.get() else EntityType.CHICKEN
             val grownEntity = grownEntityType.create(this.level())
 
             if (grownEntity != null) {
@@ -83,15 +83,15 @@ class ChickEntity(entityType: EntityType<out ChickEntity>, world: Level) :
     }
 
     override fun getAmbientSound(): SoundEvent {
-        return HybridBirdsSoundEvents.CHICK_AMBIENT.get()
+        return HBSoundEvents.CHICK_AMBIENT.get()
     }
 
     override fun getHurtSound(source: DamageSource): SoundEvent {
-        return HybridBirdsSoundEvents.CHICK_HURT.get()
+        return HBSoundEvents.CHICK_HURT.get()
     }
 
     override fun getDeathSound(): SoundEvent {
-        return HybridBirdsSoundEvents.CHICK_DIE.get()
+        return HBSoundEvents.CHICK_DIE.get()
     }
 
     companion object {

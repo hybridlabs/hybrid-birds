@@ -1,0 +1,164 @@
+{
+  "entity.chick.ambient": {
+    "sounds": [
+      "hybrid_birds:entity.chick.ambient"
+    ],
+    "subtitle": "subtitles.hybrid_birds.entity.chick.ambient"
+  },
+  "entity.chick.die": {
+    "sounds": [
+      "hybrid_birds:entity.chick.die"
+    ],
+    "subtitle": "subtitles.hybrid_birds.entity.chick.die"
+  },
+  "entity.chick.hurt": {
+    "sounds": [
+      "hybrid_birds:entity.chick.hurt"
+    ],
+    "subtitle": "subtitles.hybrid_birds.entity.chick.hurt"
+  },
+  "entity.duck.ambient": {
+    "sounds": [
+      "hybrid_birds:entity.duck.ambient"
+    ],
+    "subtitle": "subtitles.hybrid_birds.entity.duck.ambient"
+  },
+  "entity.duck.die": {
+    "sounds": [
+      "hybrid_birds:entity.duck.die"
+    ],
+    "subtitle": "subtitles.hybrid_birds.entity.duck.die"
+  },
+  "entity.duck.hurt": {
+    "sounds": [
+      "hybrid_birds:entity.duck.hurt"
+    ],
+    "subtitle": "subtitles.hybrid_birds.entity.duck.hurt"
+  },
+  "entity.goose.ambient": {
+    "sounds": [
+      "hybrid_birds:entity.goose.ambient"
+    ],
+    "subtitle": "subtitles.hybrid_birds.entity.goose.ambient"
+  },
+  "entity.goose.die": {
+    "sounds": [
+      "hybrid_birds:entity.goose.die"
+    ],
+    "subtitle": "subtitles.hybrid_birds.entity.goose.die"
+  },
+  "entity.goose.hurt": {
+    "sounds": [
+      "hybrid_birds:entity.goose.hurt"
+    ],
+    "subtitle": "subtitles.hybrid_birds.entity.goose.hurt"
+  },
+  "entity.ostrich.ambient": {
+    "sounds": [
+      "hybrid_birds:entity.ostrich.ambient"
+    ],
+    "subtitle": "subtitles.hybrid_birds.entity.ostrich.ambient"
+  },
+  "entity.ostrich.hurt": {
+    "sounds": [
+      "hybrid_birds:entity.ostrich.hurt"
+    ],
+    "subtitle": "subtitles.hybrid_birds.entity.ostrich.hurt"
+  },
+  "entity.peacock.ambient": {
+    "sounds": [
+      "hybrid_birds:entity.peacock.ambient"
+    ],
+    "subtitle": "subtitles.hybrid_birds.entity.peacock.ambient"
+  },
+  "entity.peacock.die": {
+    "sounds": [
+      "hybrid_birds:entity.peacock.die"
+    ],
+    "subtitle": "subtitles.hybrid_birds.entity.peacock.die"
+  },
+  "entity.peacock.hurt": {
+    "sounds": [
+      "hybrid_birds:entity.peacock.hurt"
+    ],
+    "subtitle": "subtitles.hybrid_birds.entity.peacock.hurt"
+  },
+  "entity.rooster.ambient": {
+    "sounds": [
+      "hybrid_birds:entity.rooster.ambient"
+    ],
+    "subtitle": "subtitles.hybrid_birds.entity.rooster.ambient"
+  },
+  "entity.rooster.call": {
+    "sounds": [
+      "hybrid_birds:entity.rooster.call"
+    ],
+    "subtitle": "subtitles.hybrid_birds.entity.rooster.call"
+  },
+  "entity.rooster.die": {
+    "sounds": [
+      "hybrid_birds:entity.rooster.die"
+    ],
+    "subtitle": "subtitles.hybrid_birds.entity.rooster.die"
+  },
+  "entity.rooster.hurt": {
+    "sounds": [
+      "hybrid_birds:entity.rooster.hurt"
+    ],
+    "subtitle": "subtitles.hybrid_birds.entity.rooster.hurt"
+  },
+  "entity.seagull.ambient": {
+    "sounds": [
+      "hybrid_birds:entity.seagull.ambient"
+    ],
+    "subtitle": "subtitles.hybrid_birds.entity.seagull.ambient"
+  },
+  "entity.seagull.die": {
+    "sounds": [
+      "hybrid_birds:entity.seagull.die"
+    ],
+    "subtitle": "subtitles.hybrid_birds.entity.seagull.die"
+  },
+  "entity.seagull.hurt": {
+    "sounds": [
+      "hybrid_birds:entity.seagull.hurt"
+    ],
+    "subtitle": "subtitles.hybrid_birds.entity.seagull.hurt"
+  },
+  "entity.swan.ambient": {
+    "sounds": [
+      "hybrid_birds:entity.swan.ambient"
+    ],
+    "subtitle": "subtitles.hybrid_birds.entity.swan.ambient"
+  },
+  "entity.swan.die": {
+    "sounds": [
+      "hybrid_birds:entity.swan.die"
+    ],
+    "subtitle": "subtitles.hybrid_birds.entity.swan.die"
+  },
+  "entity.swan.hurt": {
+    "sounds": [
+      "hybrid_birds:entity.swan.hurt"
+    ],
+    "subtitle": "subtitles.hybrid_birds.entity.swan.hurt"
+  },
+  "entity.turkey.ambient": {
+    "sounds": [
+      "hybrid_birds:entity.turkey.ambient"
+    ],
+    "subtitle": "subtitles.hybrid_birds.entity.turkey.ambient"
+  },
+  "entity.turkey.die": {
+    "sounds": [
+      "hybrid_birds:entity.turkey.die"
+    ],
+    "subtitle": "subtitles.hybrid_birds.entity.turkey.die"
+  },
+  "entity.turkey.hurt": {
+    "sounds": [
+      "hybrid_birds:entity.turkey.hurt"
+    ],
+    "subtitle": "subtitles.hybrid_birds.entity.turkey.hurt"
+  }
+}

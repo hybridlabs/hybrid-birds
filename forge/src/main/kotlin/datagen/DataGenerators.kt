@@ -1,8 +1,8 @@
 package datagen
 
 import dev.hybridlabs.birds.Constants
-import dev.hybridlabs.birds.HybridBirdsCommon
-import dev.hybridlabs.birds.config.HybridBirdsConfigHandler
+import dev.hybridlabs.birds.CommonClass
+import dev.hybridlabs.birds.config.HBConfigHandler
 import dev.hybridlabs.birds.initializeConfig
 import net.minecraft.core.RegistrySetBuilder
 import net.minecraft.core.registries.Registries
@@ -26,7 +26,7 @@ object DataGenerators {
         val lookupProvider = event.lookupProvider
 
         val configFile = Constants.CONFIG_FILE
-        val configHandler = HybridBirdsConfigHandler(configFile.toFile())
+        val configHandler = HBConfigHandler(configFile.toFile())
         initializeConfig(configFile, configHandler)
 
         val builder: RegistrySetBuilder = RegistrySetBuilder().add(
@@ -35,7 +35,7 @@ object DataGenerators {
             val biomeRegistry = context.lookup(Registries.BIOME)
             configHandler.config.entitySpawnConfig.forEach {
                 val location = "${it.type.toShortString()}_${it.biomes.location.path}"
-                val key = ResourceKey.create(ForgeRegistries.Keys.BIOME_MODIFIERS, HybridBirdsCommon.locate(location))
+                val key = ResourceKey.create(ForgeRegistries.Keys.BIOME_MODIFIERS, CommonClass.locate(location))
                 context.register(
                     key, ForgeBiomeModifiers.AddSpawnsBiomeModifier(
                         biomeRegistry.get(it.biomes).get(),

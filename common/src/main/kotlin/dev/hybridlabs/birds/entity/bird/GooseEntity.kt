@@ -1,9 +1,9 @@
 package dev.hybridlabs.birds.entity.bird
 
-import dev.hybridlabs.birds.entity.HybridBirdsEntityTypes
+import dev.hybridlabs.birds.entity.HBEntityTypes
 import dev.hybridlabs.birds.entity.ai.BirdFloatControl
-import dev.hybridlabs.birds.item.HybridBirdsItems
-import dev.hybridlabs.birds.sound.HybridBirdsSoundEvents
+import dev.hybridlabs.birds.item.HBItems
+import dev.hybridlabs.birds.sound.HBSoundEvents
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.sounds.SoundEvents
@@ -53,22 +53,22 @@ class GooseEntity(entityType: EntityType<out GooseEntity>, world: Level) :
                 1.0f,
                 (random.nextFloat() - random.nextFloat()) * 0.2f + 1.0f
             )
-            this.spawnAtLocation(HybridBirdsItems.GOOSE_EGG.get())
+            this.spawnAtLocation(HBItems.GOOSE_EGG.get())
             this.gameEvent(GameEvent.ENTITY_PLACE)
             this.eggLayTime = random.nextInt(6000) + 6000
         }
     }
 
     override fun getAmbientSound(): SoundEvent {
-        return HybridBirdsSoundEvents.GOOSE_AMBIENT.get()
+        return HBSoundEvents.GOOSE_AMBIENT.get()
     }
 
     override fun getHurtSound(source: DamageSource): SoundEvent {
-        return HybridBirdsSoundEvents.GOOSE_HURT.get()
+        return HBSoundEvents.GOOSE_HURT.get()
     }
 
     override fun getDeathSound(): SoundEvent {
-        return HybridBirdsSoundEvents.GOOSE_DIE.get()
+        return HBSoundEvents.GOOSE_DIE.get()
     }
 
     override fun isFood(stack: ItemStack): Boolean {
@@ -76,7 +76,7 @@ class GooseEntity(entityType: EntityType<out GooseEntity>, world: Level) :
     }
 
     override fun getBreedOffspring(serverLevel: ServerLevel, ageableMob: AgeableMob): AgeableMob? {
-        return HybridBirdsEntityTypes.GOOSE.get().create(serverLevel)
+        return HBEntityTypes.GOOSE.get().create(serverLevel)
     }
 
     companion object {

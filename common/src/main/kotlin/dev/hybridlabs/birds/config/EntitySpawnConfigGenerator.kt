@@ -1,8 +1,8 @@
 package dev.hybridlabs.birds.config
 
-import dev.hybridlabs.birds.entity.HybridBirdsEntityTypes
+import dev.hybridlabs.birds.entity.HBEntityTypes
 import dev.hybridlabs.birds.platform.Services
-import dev.hybridlabs.birds.tag.HybridBirdsBiomeTags
+import dev.hybridlabs.birds.tag.HBBiomeTags
 import net.minecraft.tags.BiomeTags
 import net.minecraft.tags.TagKey
 import net.minecraft.world.entity.EntityType
@@ -17,20 +17,20 @@ class EntitySpawnConfigGenerator {
     private val list: MutableList<EntitySpawnConfig> = mutableListOf()
 
     fun finalizeSpawn() {
-        addLandBird(HybridBirdsEntityTypes.ROOSTER.get(), listOf(HybridBirdsBiomeTags.ROOSTER_SPAWN_BIOMES), 5, 1, 2)
-        addLandBird(HybridBirdsEntityTypes.TURKEY.get(), listOf(HybridBirdsBiomeTags.TURKEY_SPAWN_BIOMES), 3, 1, 3)
-        addLandBird(HybridBirdsEntityTypes.PEACOCK.get(), listOf(BiomeTags.IS_JUNGLE), 2, 1, 2)
-        addLandBird(HybridBirdsEntityTypes.GUINEA_FOWL.get(), listOf(BiomeTags.IS_SAVANNA), 3, 1, 3)
-        addLandBird(HybridBirdsEntityTypes.HUMMINGBIRD.get(), listOf(HybridBirdsBiomeTags.HUMMINGBIRD_SPAWN_BIOMES), 3, 1, 3)
-        addLandBird(HybridBirdsEntityTypes.OSTRICH.get(), listOf(BiomeTags.IS_SAVANNA), 2, 1, 3)
-        addLandBird(HybridBirdsEntityTypes.KIWI.get(), listOf(HybridBirdsBiomeTags.KIWI_SPAWN_BIOMES), 2, 1, 1)
-        addLandBird(HybridBirdsEntityTypes.JAY.get(), listOf(BiomeTags.IS_FOREST, BiomeTags.IS_TAIGA), 3, 1, 3)
-        addWaterBird(HybridBirdsEntityTypes.SEAGULL.get(), listOf(BiomeTags.IS_BEACH, BiomeTags.IS_OCEAN), 3, 2, 5)
-        addWaterBird(HybridBirdsEntityTypes.PELICAN.get(), listOf(BiomeTags.IS_BEACH, BiomeTags.IS_OCEAN), 1, 1, 2)
-        addWaterBird(HybridBirdsEntityTypes.FLAMINGO.get(), listOf(HybridBirdsBiomeTags.FLAMINGO_SPAWN_BIOMES), 2, 1, 3)
-        addWaterBird(HybridBirdsEntityTypes.DUCK.get(), listOf(HybridBirdsBiomeTags.DUCK_SPAWN_BIOMES), 5, 1, 3)
-        addWaterBird(HybridBirdsEntityTypes.GOOSE.get(), listOf(HybridBirdsBiomeTags.GOOSE_SPAWN_BIOMES), 3, 1, 3)
-        addWaterBird(HybridBirdsEntityTypes.SWAN.get(), listOf(HybridBirdsBiomeTags.SWAN_SPAWN_BIOMES), 1, 1, 2)
+        addLandBird(HBEntityTypes.ROOSTER.get(), listOf(HBBiomeTags.ROOSTER_SPAWN_BIOMES), 5, 1, 2)
+        addLandBird(HBEntityTypes.TURKEY.get(), listOf(HBBiomeTags.TURKEY_SPAWN_BIOMES), 3, 1, 3)
+        addLandBird(HBEntityTypes.PEACOCK.get(), listOf(BiomeTags.IS_JUNGLE), 2, 1, 2)
+        addLandBird(HBEntityTypes.GUINEA_FOWL.get(), listOf(BiomeTags.IS_SAVANNA), 3, 1, 3)
+        addLandBird(HBEntityTypes.HUMMINGBIRD.get(), listOf(HBBiomeTags.HUMMINGBIRD_SPAWN_BIOMES), 3, 1, 3)
+        addLandBird(HBEntityTypes.OSTRICH.get(), listOf(BiomeTags.IS_SAVANNA), 2, 1, 3)
+        addLandBird(HBEntityTypes.KIWI.get(), listOf(HBBiomeTags.KIWI_SPAWN_BIOMES), 2, 1, 1)
+        addLandBird(HBEntityTypes.JAY.get(), listOf(BiomeTags.IS_FOREST, BiomeTags.IS_TAIGA), 3, 1, 3)
+        addWaterBird(HBEntityTypes.SEAGULL.get(), listOf(BiomeTags.IS_BEACH, BiomeTags.IS_OCEAN), 3, 2, 5)
+        addWaterBird(HBEntityTypes.PELICAN.get(), listOf(BiomeTags.IS_BEACH, BiomeTags.IS_OCEAN), 1, 1, 2)
+        addWaterBird(HBEntityTypes.FLAMINGO.get(), listOf(HBBiomeTags.FLAMINGO_SPAWN_BIOMES), 2, 1, 3)
+        addWaterBird(HBEntityTypes.DUCK.get(), listOf(HBBiomeTags.DUCK_SPAWN_BIOMES), 5, 1, 3)
+        addWaterBird(HBEntityTypes.GOOSE.get(), listOf(HBBiomeTags.GOOSE_SPAWN_BIOMES), 3, 1, 3)
+        addWaterBird(HBEntityTypes.SWAN.get(), listOf(HBBiomeTags.SWAN_SPAWN_BIOMES), 1, 1, 2)
     }
 
     private fun addLandBird(

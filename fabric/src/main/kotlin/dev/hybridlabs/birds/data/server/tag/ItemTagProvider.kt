@@ -1,7 +1,7 @@
 package dev.hybridlabs.birds.data.server.tag
 
-import dev.hybridlabs.birds.item.HybridBirdsItems
-import dev.hybridlabs.birds.tag.HybridBirdsItemTags
+import dev.hybridlabs.birds.item.HBItems
+import dev.hybridlabs.birds.tag.HBItemTags
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider
 import net.minecraft.core.HolderLookup
@@ -11,23 +11,23 @@ import java.util.concurrent.CompletableFuture
 class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFuture<HolderLookup.Provider>) : FabricTagProvider.ItemTagProvider(output, registriesFuture) {
     override fun addTags(arg: HolderLookup.Provider) {
         setOf(
-            HybridBirdsItems.DUCK.get(),
-            HybridBirdsItems.TURKEY.get(),
+            HBItems.DUCK.get(),
+            HBItems.TURKEY.get(),
             Items.CHICKEN,
         ).forEach { item ->
-            getOrCreateTagBuilder(HybridBirdsItemTags.TURDUCKEN_INGREDIENTS).add(item)
+            getOrCreateTagBuilder(HBItemTags.TURDUCKEN_INGREDIENTS).add(item)
         }
 
         setOf(
-            HybridBirdsItems.DUCK_EGG.get(),
-            HybridBirdsItems.GOOSE_EGG.get(),
-            HybridBirdsItems.SWAN_EGG.get(),
-            HybridBirdsItems.TURKEY_EGG.get(),
-            HybridBirdsItems.PEACOCK_EGG.get(),
-            HybridBirdsItems.GUINEA_FOWL_EGG.get(),
+            HBItems.DUCK_EGG.get(),
+            HBItems.GOOSE_EGG.get(),
+            HBItems.SWAN_EGG.get(),
+            HBItems.TURKEY_EGG.get(),
+            HBItems.PEACOCK_EGG.get(),
+            HBItems.GUINEA_FOWL_EGG.get(),
             Items.EGG,
         ).forEach { item ->
-            getOrCreateTagBuilder(HybridBirdsItemTags.EGGS  ).add(item)
+            getOrCreateTagBuilder(HBItemTags.EGGS  ).add(item)
         }
     }
 }

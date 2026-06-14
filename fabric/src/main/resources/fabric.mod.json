@@ -37,7 +37,7 @@
         ],
         "fabric-datagen": [
             {
-                "value": "dev.hybridlabs.birds.data.HybridBirdsDataGenerator",
+                "value": "dev.hybridlabs.birds.data.HBDataGenerator",
                 "adapter": "kotlin"
             }
         ],

@@ -1,7 +1,7 @@
 package dev.hybridlabs.birds.entity.bird
 
-import dev.hybridlabs.birds.entity.HybridBirdsEntityTypes
-import dev.hybridlabs.birds.item.HybridBirdsItems
+import dev.hybridlabs.birds.entity.HBEntityTypes
+import dev.hybridlabs.birds.item.HBItems
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.sounds.SoundEvents
@@ -41,7 +41,7 @@ class GuineaFowlEntity(entityType: EntityType<out GuineaFowlEntity>, world: Leve
                 1.0f,
                 (random.nextFloat() - random.nextFloat()) * 0.2f + 1.0f
             )
-            this.spawnAtLocation(HybridBirdsItems.GUINEA_FOWL_EGG.get())
+            this.spawnAtLocation(HBItems.GUINEA_FOWL_EGG.get())
             this.gameEvent(GameEvent.ENTITY_PLACE)
             this.eggLayTime = random.nextInt(6000) + 6000
         }
@@ -60,7 +60,7 @@ class GuineaFowlEntity(entityType: EntityType<out GuineaFowlEntity>, world: Leve
     }
 
     override fun getBreedOffspring(serverLevel: ServerLevel, ageableMob: AgeableMob): AgeableMob? {
-        return HybridBirdsEntityTypes.GUINEA_FOWL.get().create(serverLevel)
+        return HBEntityTypes.GUINEA_FOWL.get().create(serverLevel)
     }
 
     override fun spawnChildFromBreeding(world: ServerLevel, other: Animal) {

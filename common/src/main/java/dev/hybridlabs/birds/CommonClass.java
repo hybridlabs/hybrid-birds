@@ -19,7 +19,7 @@ import net.minecraft.world.level.block.Block;
 // optionally third party  libraries that provide  common compatible binaries. This means common
 // code can not directly use loader specific concepts  such as Forge events however it will be
 // compatible with all supported mod loaders.
-public class HybridBirdsCommon {
+public class CommonClass {
 
     // Create some static RegistrationProviders for reuse elsewhere.
     public static final RegistrationProvider<Block> BLOCKS =

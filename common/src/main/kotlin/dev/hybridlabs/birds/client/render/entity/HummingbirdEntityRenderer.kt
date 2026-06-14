@@ -5,7 +5,7 @@ import dev.hybridlabs.birds.entity.bird.HummingbirdEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class HummingbirdEntityRenderer(context: Context) :
-    HybridBirdsParrotEntityRenderer<HummingbirdEntity>(context,
+    HBParrotEntityRenderer<HummingbirdEntity>(context,
         HummingbirdEntityModel()
     ) {
 

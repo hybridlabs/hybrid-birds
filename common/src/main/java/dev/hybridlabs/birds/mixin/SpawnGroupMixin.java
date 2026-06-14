@@ -1,6 +1,6 @@
 package dev.hybridlabs.birds.mixin;
 
-import dev.hybridlabs.birds.utils.HybridBirdsSpawnGroup;
+import dev.hybridlabs.birds.utils.HBSpawnGroup;
 import net.minecraft.world.entity.MobCategory;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.At;
@@ -25,7 +25,7 @@ public class SpawnGroupMixin {
 
     @Unique
     private static MobCategory createHybridBirdsSpawnGroups(String enumname, int ordinal,
-                                                              HybridBirdsSpawnGroup spawnGroup) {
+                                                              HBSpawnGroup spawnGroup) {
         return ((MobCategory) (Object) new SpawnGroupMixin(spawnGroup.name, ordinal, spawnGroup.name,
                 spawnGroup.spawnCap, spawnGroup.peaceful, spawnGroup.rare, spawnGroup.immediateDespawnRange));
     }
@@ -35,18 +35,18 @@ public class SpawnGroupMixin {
     private static void injectEnum(CallbackInfo ci) {
         int vanillaSpawnGroupsLength = $VALUES.length;
         for (MobCategory category : $VALUES) {
-            HybridBirdsSpawnGroup.BY_NAME.put(category.name(), category);
+            HBSpawnGroup.BY_NAME.put(category.name(), category);
         }
-        HybridBirdsSpawnGroup[] haSpawnGroups = HybridBirdsSpawnGroup.values();
+        HBSpawnGroup[] haSpawnGroups = HBSpawnGroup.values();
         $VALUES = Arrays.copyOf($VALUES, vanillaSpawnGroupsLength + haSpawnGroups.length);
 
         for (int i = 0; i < haSpawnGroups.length; i++) {
             int pos = vanillaSpawnGroupsLength + i;
-            HybridBirdsSpawnGroup haSpawnGroup = haSpawnGroups[i];
+            HBSpawnGroup haSpawnGroup = haSpawnGroups[i];
             haSpawnGroup.spawnGroup = $VALUES[pos] = createHybridBirdsSpawnGroups(haSpawnGroup.name(), pos,
                     haSpawnGroup);
 
-            HybridBirdsSpawnGroup.BY_NAME.put(haSpawnGroup.name(), haSpawnGroup.spawnGroup);
+            HBSpawnGroup.BY_NAME.put(haSpawnGroup.name(), haSpawnGroup.spawnGroup);
         }
     }
 }

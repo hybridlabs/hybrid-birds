@@ -1,7 +1,7 @@
 package dev.hybridlabs.birds.data.server.loot
 
-import dev.hybridlabs.birds.item.HybridBirdsItems
-import dev.hybridlabs.birds.loot.HybridBirdsLootTables
+import dev.hybridlabs.birds.item.HBItems
+import dev.hybridlabs.birds.loot.HBLootTables
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.SimpleFabricLootTableProvider
 import net.minecraft.resources.ResourceLocation
@@ -18,10 +18,10 @@ class GenericLootTableProvider(output: FabricDataOutput) :
     SimpleFabricLootTableProvider(output, LootContextParamSets.ALL_PARAMS) {
     override fun generate(exporter: BiConsumer<ResourceLocation, LootTable.Builder>) {
         exporter.accept(
-            HybridBirdsLootTables.TURKEY_FAT,
+            HBLootTables.TURKEY_FAT,
             LootTable.lootTable()
                 .pool(LootPool.lootPool()
-                        .add(lootTableItem(HybridBirdsItems.TURKEY.get())
+                        .add(lootTableItem(HBItems.TURKEY.get())
                             .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 2.0f))))
                         .build()
                 )
@@ -32,10 +32,10 @@ class GenericLootTableProvider(output: FabricDataOutput) :
                 )
         )
         exporter.accept(
-            HybridBirdsLootTables.TURKEY_STUFFED,
+            HBLootTables.TURKEY_STUFFED,
             LootTable.lootTable()
                 .pool(LootPool.lootPool()
-                    .add(lootTableItem(HybridBirdsItems.TURKEY.get())
+                    .add(lootTableItem(HBItems.TURKEY.get())
                         .apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0f, 3.0f))))
                     .build()
                 )

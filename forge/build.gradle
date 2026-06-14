@@ -48,7 +48,9 @@ legacyForge {
             data()
             programArguments.addAll '--mod', mod_id, '--all',
                     '--output', file('src/generated/resources/').getAbsolutePath(),
-                    '--existing', file('src/main/resources/').getAbsolutePath()
+                    '--existing', file('../common/src/main/resources/').getAbsolutePath(),
+                    '--existing', file('src/main/resources/').getAbsolutePath(),
+                    '--existing', file("../fabric/src/generated/resources").getAbsolutePath()
         }
         server {
             server()

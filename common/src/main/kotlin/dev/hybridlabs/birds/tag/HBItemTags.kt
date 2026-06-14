@@ -9,7 +9,7 @@ import net.minecraft.tags.TagKey
 import net.minecraft.world.item.Item
 
 
-object HybridBirdsItemTags {
+object HBItemTags {
     val TURDUCKEN_INGREDIENTS = create("turducken_ingredients")
     val EGGS = create("eggs")
 

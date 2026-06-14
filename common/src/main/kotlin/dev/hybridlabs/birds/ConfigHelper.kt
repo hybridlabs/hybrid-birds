@@ -1,10 +1,10 @@
 package dev.hybridlabs.birds
 
-import dev.hybridlabs.birds.config.HybridBirdsConfigHandler
+import dev.hybridlabs.birds.config.HBConfigHandler
 import java.nio.file.Path
 import kotlin.io.path.notExists
 
-fun initializeConfig(configFile: Path = Constants.CONFIG_FILE, configHandler: HybridBirdsConfigHandler) {
+fun initializeConfig(configFile: Path = Constants.CONFIG_FILE, configHandler: HBConfigHandler) {
     val logger = Constants.LOG
     if (configFile.notExists()) {
         logger.info("${Constants.MOD_NAME} config file did not exist, creating one")

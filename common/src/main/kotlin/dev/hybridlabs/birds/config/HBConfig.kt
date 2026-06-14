@@ -3,7 +3,7 @@ package dev.hybridlabs.birds.config
 import com.mojang.serialization.Codec
 import com.mojang.serialization.codecs.RecordCodecBuilder
 
-data class HybridBirdsConfig(
+data class HBConfig(
     /**
      * The version of the data stored.
      * Increase when the config needs to be reset, i.e. when new entity spawn configs are added.
@@ -13,12 +13,12 @@ data class HybridBirdsConfig(
     val entitySpawnConfig: List<EntitySpawnConfig> = EntitySpawnConfigGenerator.generate(),
 ) {
     companion object {
-        val CODEC: Codec<HybridBirdsConfig> = RecordCodecBuilder.create { instance ->
+        val CODEC: Codec<HBConfig> = RecordCodecBuilder.create { instance ->
             instance.group(
-                Codec.INT.fieldOf("data_version").forGetter(HybridBirdsConfig::dataVersion),
+                Codec.INT.fieldOf("data_version").forGetter(HBConfig::dataVersion),
                 EntitySpawnConfig.CODEC.listOf().fieldOf("spawn_configuration").forGetter(
-                    HybridBirdsConfig::entitySpawnConfig),
-            ).apply(instance, ::HybridBirdsConfig)
+                    HBConfig::entitySpawnConfig),
+            ).apply(instance, ::HBConfig)
         }
     }
 }

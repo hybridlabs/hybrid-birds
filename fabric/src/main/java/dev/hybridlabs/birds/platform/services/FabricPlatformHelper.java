@@ -1,9 +1,9 @@
 package dev.hybridlabs.birds.platform.services;
 
-import dev.hybridlabs.birds.HybridBirdsCommon;
+import dev.hybridlabs.birds.CommonClass;
 import dev.hybridlabs.birds.platform.registration.RegistryObject;
 
-import dev.hybridlabs.birds.utils.HybridBirdsSpawnGroup;
+import dev.hybridlabs.birds.utils.HBSpawnGroup;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.loader.api.FabricLoader;
@@ -46,7 +46,7 @@ public class FabricPlatformHelper implements PlatformHelper {
             Supplier<EntityType<T>> entityType,
             int backgroundColor,
             int highlightColor) {
-        return HybridBirdsCommon.ITEMS.register(
+        return CommonClass.ITEMS.register(
                 name,
                 () ->
                         new SpawnEggItem(
@@ -85,7 +85,7 @@ public class FabricPlatformHelper implements PlatformHelper {
 
     @Override
     public @Nullable MobCategory getMobCategoryByName(String name) {
-        return HybridBirdsSpawnGroup.byName(name);
+        return HBSpawnGroup.byName(name);
     }
 
     public BlockBehaviour.Properties getBlockSettings() {

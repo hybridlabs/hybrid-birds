@@ -1,8 +1,8 @@
 package dev.hybridlabs.birds.entity.bird
 
-import dev.hybridlabs.birds.entity.HybridBirdsEntityTypes
-import dev.hybridlabs.birds.item.HybridBirdsItems
-import dev.hybridlabs.birds.sound.HybridBirdsSoundEvents
+import dev.hybridlabs.birds.entity.HBEntityTypes
+import dev.hybridlabs.birds.item.HBItems
+import dev.hybridlabs.birds.sound.HBSoundEvents
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.sounds.SoundEvents
@@ -52,7 +52,7 @@ class PeacockEntity(entityType: EntityType<out PeacockEntity>, world: Level) :
                 1.0f,
                 (random.nextFloat() - random.nextFloat()) * 0.2f + 1.0f
             )
-            this.spawnAtLocation(HybridBirdsItems.PEACOCK_EGG.get())
+            this.spawnAtLocation(HBItems.PEACOCK_EGG.get())
             this.gameEvent(GameEvent.ENTITY_PLACE)
             this.eggLayTime = random.nextInt(6000) + 6000
         }
@@ -94,19 +94,19 @@ class PeacockEntity(entityType: EntityType<out PeacockEntity>, world: Level) :
     }
 
     override fun getBreedOffspring(serverLevel: ServerLevel, ageableMob: AgeableMob): AgeableMob? {
-        return HybridBirdsEntityTypes.PEACOCK.get().create(serverLevel)
+        return HBEntityTypes.PEACOCK.get().create(serverLevel)
     }
 
     override fun getAmbientSound(): SoundEvent {
-        return HybridBirdsSoundEvents.PEACOCK_AMBIENT.get()
+        return HBSoundEvents.PEACOCK_AMBIENT.get()
     }
 
     override fun getHurtSound(source: DamageSource): SoundEvent {
-        return HybridBirdsSoundEvents.PEACOCK_HURT.get()
+        return HBSoundEvents.PEACOCK_HURT.get()
     }
 
     override fun getDeathSound(): SoundEvent {
-        return HybridBirdsSoundEvents.PEACOCK_DIE.get()
+        return HBSoundEvents.PEACOCK_DIE.get()
     }
 
     override fun isFood(stack: ItemStack): Boolean {

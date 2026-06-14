@@ -9,18 +9,18 @@ import com.mojang.serialization.DataResult
 import com.mojang.serialization.JsonOps
 import java.io.File
 
-class HybridBirdsConfigHandler(val file: File, val defaultConfig: HybridBirdsConfig = HybridBirdsConfig()) {
+class HBConfigHandler(val file: File, val defaultConfig: HBConfig = HBConfig()) {
     val backupFile = file.parentFile.resolve("${file.name}-backup")
 
-    var config: HybridBirdsConfig = defaultConfig
+    var config: HBConfig = defaultConfig
 
     /**
      * Reads the config from the config file.
      * @return a data result of the config
      */
-    fun read(): DataResult<Pair<HybridBirdsConfig, JsonElement>> {
+    fun read(): DataResult<Pair<HBConfig, JsonElement>> {
         val json = file.reader().use(JsonParser::parseReader)
-        return HybridBirdsConfig.CODEC.decode(JsonOps.INSTANCE, json)
+        return HBConfig.CODEC.decode(JsonOps.INSTANCE, json)
     }
 
     /**
@@ -40,7 +40,7 @@ class HybridBirdsConfigHandler(val file: File, val defaultConfig: HybridBirdsCon
     }
 
     fun save(): Boolean {
-        val dataResult = HybridBirdsConfig.CODEC.encodeStart(JsonOps.INSTANCE, config)
+        val dataResult = HBConfig.CODEC.encodeStart(JsonOps.INSTANCE, config)
         val result = dataResult.result()
 
         if (!result.isPresent) {

@@ -1,8 +1,8 @@
 package dev.hybridlabs.birds.entity.bird
 
-import dev.hybridlabs.birds.entity.HybridBirdsEntityTypes
+import dev.hybridlabs.birds.entity.HBEntityTypes
 import dev.hybridlabs.birds.entity.ai.BirdFlyFloatControl
-import dev.hybridlabs.birds.sound.HybridBirdsSoundEvents
+import dev.hybridlabs.birds.sound.HBSoundEvents
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.tags.ItemTags
@@ -50,19 +50,19 @@ class SeagullEntity(type: EntityType<out SeagullEntity>, world: Level) :
     }
 
     override fun getBreedOffspring(serverLevel: ServerLevel, ageableMob: AgeableMob): SeagullEntity? {
-        return HybridBirdsEntityTypes.SEAGULL.get().create(serverLevel)
+        return HBEntityTypes.SEAGULL.get().create(serverLevel)
     }
 
     override fun getAmbientSound(): SoundEvent {
-        return HybridBirdsSoundEvents.SEAGULL_AMBIENT.get()
+        return HBSoundEvents.SEAGULL_AMBIENT.get()
     }
 
     override fun getHurtSound(source: DamageSource): SoundEvent {
-        return HybridBirdsSoundEvents.SEAGULL_HURT.get()
+        return HBSoundEvents.SEAGULL_HURT.get()
     }
 
     override fun getDeathSound(): SoundEvent {
-        return HybridBirdsSoundEvents.SEAGULL_DIE.get()
+        return HBSoundEvents.SEAGULL_DIE.get()
     }
 
     companion object {

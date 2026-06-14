@@ -1,7 +1,7 @@
 package dev.hybridlabs.birds.entity.bird
 
-import dev.hybridlabs.birds.entity.HybridBirdsEntityTypes
-import dev.hybridlabs.birds.sound.HybridBirdsSoundEvents
+import dev.hybridlabs.birds.entity.HBEntityTypes
+import dev.hybridlabs.birds.sound.HBSoundEvents
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.world.damagesource.DamageSource
@@ -15,19 +15,19 @@ class FlamingoEntity(type: EntityType<out FlamingoEntity>, world: Level) :
     HBWadingBirdEntity(type, world) {
 
     override fun getBreedOffspring(serverLevel: ServerLevel, ageableMob: AgeableMob): FlamingoEntity? {
-        return HybridBirdsEntityTypes.FLAMINGO.get().create(serverLevel)
+        return HBEntityTypes.FLAMINGO.get().create(serverLevel)
     }
 
     override fun getAmbientSound(): SoundEvent {
-        return HybridBirdsSoundEvents.DUCK_AMBIENT.get()
+        return HBSoundEvents.DUCK_AMBIENT.get()
     }
 
     override fun getHurtSound(source: DamageSource): SoundEvent {
-        return HybridBirdsSoundEvents.DUCK_HURT.get()
+        return HBSoundEvents.DUCK_HURT.get()
     }
 
     override fun getDeathSound(): SoundEvent {
-        return HybridBirdsSoundEvents.DUCK_DIE.get()
+        return HBSoundEvents.DUCK_DIE.get()
     }
 
     companion object {

@@ -1,15 +1,15 @@
 package dev.hybridlabs.birds
-import dev.hybridlabs.birds.block.HybridBirdsBlocks
-import dev.hybridlabs.birds.client.render.entity.HybridBirdsEntityRenderers
-import dev.hybridlabs.birds.effect.HybridBirdsStatusEffects
-import dev.hybridlabs.birds.entity.HybridBirdsEntityTypes
+import dev.hybridlabs.birds.block.HBBlocks
+import dev.hybridlabs.birds.client.render.entity.HBEntityRenderers
+import dev.hybridlabs.birds.effect.HBStatusEffects
+import dev.hybridlabs.birds.entity.HBEntityTypes
 import dev.hybridlabs.birds.entity.SpawnRestrictionRegistry
-import dev.hybridlabs.birds.item.HybridBirdsItemGroups
-import dev.hybridlabs.birds.item.HybridBirdsItems
-import dev.hybridlabs.birds.sound.HybridBirdsSoundEvents
-import dev.hybridlabs.birds.tag.HybridBirdsBiomeTags
-import dev.hybridlabs.birds.tag.HybridBirdsItemTags
-import dev.hybridlabs.birds.utils.HybridBirdsSpawnGroup
+import dev.hybridlabs.birds.item.HBItemGroups
+import dev.hybridlabs.birds.item.HBItems
+import dev.hybridlabs.birds.sound.HBSoundEvents
+import dev.hybridlabs.birds.tag.HBBiomeTags
+import dev.hybridlabs.birds.tag.HBItemTags
+import dev.hybridlabs.birds.utils.HBSpawnGroup
 import net.minecraft.world.entity.MobCategory
 import net.minecraftforge.event.entity.SpawnPlacementRegisterEvent
 import net.minecraftforge.fml.common.Mod
@@ -31,26 +31,26 @@ object HybridBirdsForge {
     private val LOGGER = Constants.LOG
 
     init {
-        HybridBirdsCommon.init()
+        CommonClass.init()
 
         createSpawnGroups()
-        HybridBirdsSoundEvents
-        HybridBirdsEntityTypes
+        HBSoundEvents
+        HBEntityTypes
 
-        HybridBirdsBlocks
-        HybridBirdsItems
-        HybridBirdsItemGroups
+        HBBlocks
+        HBItems
+        HBItemGroups
 
-        HybridBirdsBiomeTags
-        HybridBirdsItemTags
+        HBBiomeTags
+        HBItemTags
 
-        HybridBirdsStatusEffects
+        HBStatusEffects
 
         MOD_BUS.addListener(::registerSpawnPlacements)
 
         runForDist(
             clientTarget = {
-                HybridBirdsEntityRenderers
+                HBEntityRenderers
                 MOD_BUS.addListener(HybridBirdsForge::onClientSetup)
             },
             serverTarget = {
@@ -61,7 +61,7 @@ object HybridBirdsForge {
 
     private fun createSpawnGroups() {
         // Extend the MobCategory enum with our spawn groups
-        HybridBirdsSpawnGroup.entries.toTypedArray().forEach {
+        HBSpawnGroup.entries.toTypedArray().forEach {
             MobCategory.create(
                 it.name,
                 it.name,

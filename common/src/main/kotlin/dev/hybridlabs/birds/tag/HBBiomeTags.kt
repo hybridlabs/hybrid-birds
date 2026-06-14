@@ -6,7 +6,7 @@ import net.minecraft.resources.ResourceLocation
 import net.minecraft.tags.TagKey
 import net.minecraft.world.level.biome.Biome
 
-object HybridBirdsBiomeTags {
+object HBBiomeTags {
 
     val DUCK_SPAWN_BIOMES = create("duck_spawn_biomes")
     val GOOSE_SPAWN_BIOMES = create("goose_spawn_biomes")

@@ -1,7 +1,7 @@
 package dev.hybridlabs.birds.data.server
 
-import dev.hybridlabs.birds.item.HybridBirdsItems
-import dev.hybridlabs.birds.tag.HybridBirdsItemTags
+import dev.hybridlabs.birds.item.HBItems
+import dev.hybridlabs.birds.tag.HBItemTags
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider
 import net.minecraft.advancements.critereon.InventoryChangeTrigger
@@ -21,21 +21,21 @@ import java.util.function.Consumer
 class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
     override fun buildRecipes(exporter: Consumer<FinishedRecipe>) {
         // misc recipes
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, HybridBirdsItems.TURDUCKEN.get(), 1)
-            .requires(HybridBirdsItems.TURKEY.get())
-            .requires(HybridBirdsItems.DUCK.get())
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, HBItems.TURDUCKEN.get(), 1)
+            .requires(HBItems.TURKEY.get())
+            .requires(HBItems.DUCK.get())
             .requires(Items.CHICKEN)
             .unlockedBy("has_turducken_ingredient", InventoryChangeTrigger.TriggerInstance.hasItems(
-                ItemPredicate.Builder.item().of(HybridBirdsItemTags.TURDUCKEN_INGREDIENTS).build()))
+                ItemPredicate.Builder.item().of(HBItemTags.TURDUCKEN_INGREDIENTS).build()))
             .save(exporter)
 
         // cooking recipes
         // offerEggCookingRecipes(exporter, HybridBirdsItemTags.EGGS, HybridBirdsItems.COOKED_EGG.get(), 0.15f)
 
-        offerCookingRecipes(exporter, HybridBirdsItems.DUCK.get(), HybridBirdsItems.COOKED_DUCK.get(), 0.15f)
-        offerCookingRecipes(exporter, HybridBirdsItems.GOOSE.get(), HybridBirdsItems.COOKED_GOOSE.get(), 0.15f)
-        offerCookingRecipes(exporter, HybridBirdsItems.TURKEY.get(), HybridBirdsItems.COOKED_TURKEY.get(), 0.15f)
-        offerCookingRecipes(exporter, HybridBirdsItems.TURDUCKEN.get(), HybridBirdsItems.COOKED_TURDUCKEN.get(), 0.15f)
+        offerCookingRecipes(exporter, HBItems.DUCK.get(), HBItems.COOKED_DUCK.get(), 0.15f)
+        offerCookingRecipes(exporter, HBItems.GOOSE.get(), HBItems.COOKED_GOOSE.get(), 0.15f)
+        offerCookingRecipes(exporter, HBItems.TURKEY.get(), HBItems.COOKED_TURKEY.get(), 0.15f)
+        offerCookingRecipes(exporter, HBItems.TURDUCKEN.get(), HBItems.COOKED_TURDUCKEN.get(), 0.15f)
     }
 
     private fun offerCookingRecipes(

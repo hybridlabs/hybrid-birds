@@ -1,6 +1,6 @@
 package dev.hybridlabs.birds.block
 
-import dev.hybridlabs.birds.HybridBirdsCommon
+import dev.hybridlabs.birds.CommonClass
 import dev.hybridlabs.birds.platform.registration.RegistryObject
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.SoundType
@@ -11,7 +11,7 @@ import java.util.function.Supplier
 /**
  * The registry of all blocks in Hybrid Aquatic.
  */
-object HybridBirdsBlocks {
+object HBBlocks {
 
     val TURDUCKEN = register(
         "turducken"
@@ -26,6 +26,6 @@ object HybridBirdsBlocks {
     }
 
     private fun register(id: String, block: Supplier<Block>): RegistryObject<Block> {
-        return HybridBirdsCommon.BLOCKS.register(id, block)
+        return CommonClass.BLOCKS.register(id, block)
     }
 }

@@ -1,9 +1,9 @@
 package dev.hybridlabs.birds.entity.bird
 
-import dev.hybridlabs.birds.entity.HybridBirdsEntityTypes
-import dev.hybridlabs.birds.item.HybridBirdsItems
-import dev.hybridlabs.birds.loot.HybridBirdsLootTables
-import dev.hybridlabs.birds.sound.HybridBirdsSoundEvents
+import dev.hybridlabs.birds.entity.HBEntityTypes
+import dev.hybridlabs.birds.item.HBItems
+import dev.hybridlabs.birds.loot.HBLootTables
+import dev.hybridlabs.birds.sound.HBSoundEvents
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
@@ -39,8 +39,8 @@ class TurkeyEntity(entityType: EntityType<out TurkeyEntity>, world: Level) :
 
     override fun getDefaultLootTable(): ResourceLocation {
         return when (getStuffingLevel()) {
-            1 -> HybridBirdsLootTables.TURKEY_FAT
-            2 -> HybridBirdsLootTables.TURKEY_STUFFED
+            1 -> HBLootTables.TURKEY_FAT
+            2 -> HBLootTables.TURKEY_STUFFED
             else ->
                 return super.defaultLootTable
         }
@@ -60,7 +60,7 @@ class TurkeyEntity(entityType: EntityType<out TurkeyEntity>, world: Level) :
                 1.0f,
                 (random.nextFloat() - random.nextFloat()) * 0.2f + 1.0f
             )
-            this.spawnAtLocation(HybridBirdsItems.TURKEY_EGG.get())
+            this.spawnAtLocation(HBItems.TURKEY_EGG.get())
             this.gameEvent(GameEvent.ENTITY_PLACE)
             this.eggLayTime = random.nextInt(6000) + 6000
         }
@@ -126,15 +126,15 @@ class TurkeyEntity(entityType: EntityType<out TurkeyEntity>, world: Level) :
     // region SFX
 
     override fun getAmbientSound(): SoundEvent {
-        return HybridBirdsSoundEvents.TURKEY_AMBIENT.get()
+        return HBSoundEvents.TURKEY_AMBIENT.get()
     }
 
     override fun getHurtSound(source: DamageSource): SoundEvent {
-        return HybridBirdsSoundEvents.TURKEY_HURT.get()
+        return HBSoundEvents.TURKEY_HURT.get()
     }
 
     override fun getDeathSound(): SoundEvent {
-        return HybridBirdsSoundEvents.TURKEY_DIE.get()
+        return HBSoundEvents.TURKEY_DIE.get()
     }
 
     // endregion
@@ -144,7 +144,7 @@ class TurkeyEntity(entityType: EntityType<out TurkeyEntity>, world: Level) :
     }
 
     override fun getBreedOffspring(serverLevel: ServerLevel, ageableMob: AgeableMob): AgeableMob? {
-        return HybridBirdsEntityTypes.TURKEY.get().create(serverLevel)
+        return HBEntityTypes.TURKEY.get().create(serverLevel)
     }
 
     companion object {

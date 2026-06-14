@@ -2,7 +2,7 @@ package dev.hybridlabs.birds.mixin;
 
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
-import dev.hybridlabs.birds.entity.HybridBirdsEntityTypes;
+import dev.hybridlabs.birds.entity.HBEntityTypes;
 import dev.hybridlabs.birds.item.CustomEggItem;
 import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.Entity;
@@ -57,6 +57,6 @@ public abstract class EggEntityMixin extends ThrowableItemProjectile {
         if (stack.getItem() instanceof CustomEggItem eggItem) {
             return (EntityType<?>) Objects.requireNonNull(eggItem.getType()).get();
         }
-        return Objects.requireNonNull(HybridBirdsEntityTypes.INSTANCE.getCHICK()).get();
+        return Objects.requireNonNull(HBEntityTypes.INSTANCE.getCHICK()).get();
     }
 }

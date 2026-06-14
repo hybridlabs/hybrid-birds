@@ -26,7 +26,6 @@ import net.minecraft.world.phys.shapes.VoxelShape
 @Suppress("OVERRIDE_DEPRECATION", "DEPRECATION")
 class TurduckenBlock(settings: Properties?) : Block(settings!!) {
 
-
     override fun getShape(
         state: BlockState,
         world: BlockGetter,
