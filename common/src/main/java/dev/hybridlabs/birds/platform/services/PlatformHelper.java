@@ -69,5 +69,5 @@ public interface PlatformHelper {
             EntityType<T> entityType,
             Callable<AttributeSupplier.Builder> attributeContainer);
 
-    MobCategory getMobCategoryByName(String name);
+    MobCategory getHybridMobCategoryByName(String name);
 }

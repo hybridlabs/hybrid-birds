@@ -2,7 +2,6 @@ package dev.hybridlabs.birds.mixin;
 
 import dev.hybridlabs.birds.utils.HBSpawnGroup;
 import net.minecraft.world.entity.MobCategory;
-import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -34,7 +33,7 @@ public class SpawnGroupMixin {
     }
 
     @Inject(method = "<clinit>", at = @At(value = "FIELD", target = "Lnet/minecraft/world/entity/MobCategory;" +
-            "$VALUES:[Lnet/minecraft/world/entity/MobCategory;", shift = At.Shift.AFTER, opcode = Opcodes.PUTSTATIC))
+            "$VALUES:[Lnet/minecraft/world/entity/MobCategory;", shift = At.Shift.AFTER))
     private static void injectEnum(CallbackInfo ci) {
         int vanillaSpawnGroupsLength = $VALUES.length;
 
