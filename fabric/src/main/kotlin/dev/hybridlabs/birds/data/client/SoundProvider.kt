@@ -21,41 +21,41 @@ class SoundProvider(
     override fun configure(exporter: SoundExporter) {
         mapOf(
             
-            HBSoundEvents.DUCK_AMBIENT to CommonClass.locate("entity.duck.ambient"),
-            HBSoundEvents.DUCK_HURT to CommonClass.locate("entity.duck.hurt"),
-            HBSoundEvents.DUCK_DIE to CommonClass.locate("entity.duck.die"),
+            HBSoundEvents.DUCK_AMBIENT to CommonClass.locate("entity.duck_ambient"),
+            HBSoundEvents.DUCK_HURT to CommonClass.locate("entity.duck_hurt"),
+            HBSoundEvents.DUCK_DIE to CommonClass.locate("entity.duck_die"),
             
-            HBSoundEvents.GOOSE_AMBIENT to CommonClass.locate("entity.goose.ambient"),
-            HBSoundEvents.GOOSE_HURT to CommonClass.locate("entity.goose.hurt"),
-            HBSoundEvents.GOOSE_DIE to CommonClass.locate("entity.goose.die"),
+            HBSoundEvents.GOOSE_AMBIENT to CommonClass.locate("entity.goose_ambient"),
+            HBSoundEvents.GOOSE_HURT to CommonClass.locate("entity.goose_hurt"),
+            HBSoundEvents.GOOSE_DIE to CommonClass.locate("entity.goose_die"),
 
-            HBSoundEvents.SWAN_AMBIENT to CommonClass.locate("entity.swan.ambient"),
-            HBSoundEvents.SWAN_HURT to CommonClass.locate("entity.swan.hurt"),
-            HBSoundEvents.SWAN_DIE to CommonClass.locate("entity.swan.die"),
+            HBSoundEvents.SWAN_AMBIENT to CommonClass.locate("entity.swan_ambient"),
+            HBSoundEvents.SWAN_HURT to CommonClass.locate("entity.swan_hurt"),
+            HBSoundEvents.SWAN_DIE to CommonClass.locate("entity.swan_die"),
 
-            HBSoundEvents.TURKEY_AMBIENT to CommonClass.locate("entity.turkey.ambient"),
-            HBSoundEvents.TURKEY_HURT to CommonClass.locate("entity.turkey.hurt"),
-            HBSoundEvents.TURKEY_DIE to CommonClass.locate("entity.turkey.die"),
+            HBSoundEvents.TURKEY_AMBIENT to CommonClass.locate("entity.turkey_ambient"),
+            HBSoundEvents.TURKEY_HURT to CommonClass.locate("entity.turkey_hurt"),
+            HBSoundEvents.TURKEY_DIE to CommonClass.locate("entity.turkey_die"),
 
-            HBSoundEvents.PEACOCK_AMBIENT to CommonClass.locate("entity.peacock.ambient"),
-            HBSoundEvents.PEACOCK_HURT to CommonClass.locate("entity.peacock.hurt"),
-            HBSoundEvents.PEACOCK_DIE to CommonClass.locate("entity.peacock.die"),
+            HBSoundEvents.PEACOCK_AMBIENT to CommonClass.locate("entity.peacock_ambient"),
+            HBSoundEvents.PEACOCK_HURT to CommonClass.locate("entity.peacock_hurt"),
+            HBSoundEvents.PEACOCK_DIE to CommonClass.locate("entity.peacock_die"),
 
-            HBSoundEvents.CHICK_AMBIENT to CommonClass.locate("entity.chick.ambient"),
-            HBSoundEvents.CHICK_HURT to CommonClass.locate("entity.chick.hurt"),
-            HBSoundEvents.CHICK_DIE to CommonClass.locate("entity.chick.die"),
+            HBSoundEvents.CHICK_AMBIENT to CommonClass.locate("entity.chick_ambient"),
+            HBSoundEvents.CHICK_HURT to CommonClass.locate("entity.chick_hurt"),
+            HBSoundEvents.CHICK_DIE to CommonClass.locate("entity.chick_die"),
 
-            HBSoundEvents.ROOSTER_CALL to CommonClass.locate("entity.rooster.call"),
-            HBSoundEvents.ROOSTER_AMBIENT to CommonClass.locate("entity.rooster.ambient"),
-            HBSoundEvents.ROOSTER_HURT to CommonClass.locate("entity.rooster.hurt"),
-            HBSoundEvents.ROOSTER_DIE to CommonClass.locate("entity.rooster.die"),
+            HBSoundEvents.ROOSTER_CALL to CommonClass.locate("entity.rooster_call"),
+            HBSoundEvents.ROOSTER_AMBIENT to CommonClass.locate("entity.rooster_ambient"),
+            HBSoundEvents.ROOSTER_HURT to CommonClass.locate("entity.rooster_hurt"),
+            HBSoundEvents.ROOSTER_DIE to CommonClass.locate("entity.rooster_die"),
 
-            HBSoundEvents.SEAGULL_AMBIENT to CommonClass.locate("entity.seagull.ambient"),
-            HBSoundEvents.SEAGULL_HURT to CommonClass.locate("entity.seagull.hurt"),
-            HBSoundEvents.SEAGULL_DIE to CommonClass.locate("entity.seagull.die"),
+            HBSoundEvents.SEAGULL_AMBIENT to CommonClass.locate("entity.seagull_ambient"),
+            HBSoundEvents.SEAGULL_HURT to CommonClass.locate("entity.seagull_hurt"),
+            HBSoundEvents.SEAGULL_DIE to CommonClass.locate("entity.seagull_die"),
 
-            HBSoundEvents.OSTRICH_AMBIENT to CommonClass.locate("entity.ostrich.ambient"),
-            HBSoundEvents.OSTRICH_HURT to CommonClass.locate("entity.ostrich.hurt"),
+            HBSoundEvents.OSTRICH_AMBIENT to CommonClass.locate("entity.ostrich_ambient"),
+            HBSoundEvents.OSTRICH_HURT to CommonClass.locate("entity.ostrich_hurt"),
             
             ).forEach { (soundEvent, soundPath) ->
             exporter.add(soundEvent.get(), SoundTypeBuilder.of(soundEvent.get())
