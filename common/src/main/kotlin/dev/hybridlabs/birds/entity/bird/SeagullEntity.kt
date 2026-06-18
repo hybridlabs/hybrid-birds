@@ -1,5 +1,6 @@
 package dev.hybridlabs.birds.entity.bird
 
+import dev.hybridlabs.aquatic.entity.ai.goal.boids.BoidGoal
 import dev.hybridlabs.birds.entity.HBEntityTypes
 import dev.hybridlabs.birds.entity.ai.BirdFlyFloatControl
 import dev.hybridlabs.birds.sound.HBSoundEvents
@@ -20,7 +21,7 @@ import net.minecraft.world.item.crafting.Ingredient
 import net.minecraft.world.level.Level
 
 class SeagullEntity(type: EntityType<out SeagullEntity>, world: Level) :
-    HBAquaticBirdEntity(type, world) {
+    HBFlockingBirdEntity(type, world) {
 
     init {
         moveControl = BirdFlyFloatControl(this, 10, false)
@@ -28,6 +29,7 @@ class SeagullEntity(type: EntityType<out SeagullEntity>, world: Level) :
     }
 
     override fun registerGoals() {
+        goalSelector.addGoal(0, BoidGoal(this, 0.25f, 0.5f, 8 / 20f, 1 / 20f))
         goalSelector.addGoal(0, PanicGoal(this, 1.1))
         goalSelector.addGoal(0, FloatGoal(this))
         goalSelector.addGoal(1, TemptGoal(this, 1.0, BREEDING_INGREDIENT, false))

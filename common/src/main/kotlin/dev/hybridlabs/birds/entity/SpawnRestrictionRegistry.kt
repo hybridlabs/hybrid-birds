@@ -36,7 +36,6 @@ object SpawnRestrictionRegistry {
             HBEntityTypes.DUCK.get(),
             HBEntityTypes.GOOSE.get(),
             HBEntityTypes.SWAN.get(),
-            HBEntityTypes.SEAGULL.get(),
             HBEntityTypes.PELICAN.get(),
         ).forEach { registerAquaticBird(it) }
 
@@ -48,6 +47,14 @@ object SpawnRestrictionRegistry {
             HBEntityTypes.JAY.get(),
             HBEntityTypes.HUMMINGBIRD.get(),
         ).forEach { registerParrot(it) }
+
+        setOf(
+            HBEntityTypes.SEAGULL.get(),
+        ).forEach { registerFlockingBird(it) }
+    }
+
+    private fun <T : HBBirdEntity> registerFlockingBird(entityType: EntityType<T>) {
+        registerBirdEntity(entityType, HBBirdEntity::canBirdSpawn)
     }
 
     private fun <T : HBParrotEntity> registerParrot(entityType: EntityType<T>) {
