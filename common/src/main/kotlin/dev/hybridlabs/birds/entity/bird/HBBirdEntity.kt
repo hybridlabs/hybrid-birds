@@ -6,6 +6,8 @@ import net.minecraft.sounds.SoundEvent
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.tags.FluidTags
 import net.minecraft.util.RandomSource
+import net.minecraft.world.InteractionHand
+import net.minecraft.world.InteractionResult
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.entity.*
 import net.minecraft.world.entity.ai.control.MoveControl
@@ -13,9 +15,12 @@ import net.minecraft.world.entity.ai.goal.*
 import net.minecraft.world.entity.ai.navigation.GroundPathNavigation
 import net.minecraft.world.entity.animal.Animal
 import net.minecraft.world.entity.player.Player
+import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.Items
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.LevelAccessor
 import net.minecraft.world.level.block.state.BlockState
+import net.minecraft.world.level.gameevent.GameEvent
 import net.minecraft.world.level.pathfinder.BlockPathTypes
 import org.jetbrains.annotations.Nullable
 import software.bernie.geckolib.animatable.GeoEntity
@@ -34,6 +39,7 @@ open class HBBirdEntity(
     Animal(type, world),
     GeoEntity {
     private val factory = GeckoLibUtil.createInstanceCache(this)
+    private var isClipped: Boolean = false
 
     init {
         moveControl = MoveControl(this)
@@ -48,6 +54,22 @@ open class HBBirdEntity(
         goalSelector.addGoal(2, RandomLookAroundGoal(this))
         goalSelector.addGoal(5, FollowParentGoal(this, 1.1))
         goalSelector.addGoal(11, LookAtPlayerGoal(this, Player::class.java, 10.0f))
+    }
+
+    override fun mobInteract(player: Player, hand: InteractionHand): InteractionResult {
+        val itemStack = player.getItemInHand(hand)
+        if (!itemStack.isEmpty && itemStack.`is`(Items.SHEARS) && !isClipped) {
+            if (!level().isClientSide) {
+                this.isClipped = true
+                this.playSound(SoundEvents.SHEEP_SHEAR, 1.0f, 1.0f)
+                this.gameEvent(GameEvent.SHEAR, player)
+                itemStack.hurtAndBreak(1, player) { it.broadcastBreakEvent(hand) }
+                spawnAtLocation(ItemStack(Items.FEATHER))
+                return InteractionResult.SUCCESS
+            }
+            return InteractionResult.CONSUME
+        }
+        return super.mobInteract(player, hand)
     }
 
     fun isBelowWaterline(): Boolean {
