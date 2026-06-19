@@ -10,9 +10,11 @@ import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.entity.*
+import net.minecraft.world.entity.ai.control.LookControl
 import net.minecraft.world.entity.ai.control.MoveControl
 import net.minecraft.world.entity.ai.goal.*
 import net.minecraft.world.entity.ai.navigation.GroundPathNavigation
+import net.minecraft.world.entity.ai.navigation.PathNavigation
 import net.minecraft.world.entity.animal.Animal
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
@@ -41,10 +43,16 @@ open class HBBirdEntity(
     private val factory = GeckoLibUtil.createInstanceCache(this)
     private var isClipped: Boolean = false
 
-    init {
+     override fun createNavigation(level: Level): PathNavigation {
+        setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
+        setPathfindingMalus(BlockPathTypes.DANGER_FIRE, 16.0f)
+        setPathfindingMalus(BlockPathTypes.DAMAGE_FIRE, -1.0f)
+
         moveControl = MoveControl(this)
-        navigation = GroundPathNavigation(this, world)
-        this.setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
+        navigation = GroundPathNavigation(this, level)
+        lookControl = LookControl(this)
+
+        return GroundPathNavigation(this, level)
     }
 
     override fun registerGoals() {
@@ -94,6 +102,11 @@ open class HBBirdEntity(
     }
 
     override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
+
+        controllerRegistrar.add(
+            DefaultAnimations.genericLivingController(this)
+        )
+
         controllerRegistrar.add(
             AnimationController(
                 this, "Walk/Swim/Fly/Idle", 4
