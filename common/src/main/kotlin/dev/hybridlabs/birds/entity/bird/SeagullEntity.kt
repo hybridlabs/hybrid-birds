@@ -1,6 +1,6 @@
 package dev.hybridlabs.birds.entity.bird
 
-import dev.hybridlabs.aquatic.entity.ai.goal.boids.BoidGoal
+import dev.hybridlabs.birds.entity.ai.goal.boids.BoidGoal
 import dev.hybridlabs.birds.entity.HBEntityTypes
 import dev.hybridlabs.birds.entity.ai.BirdFlyFloatControl
 import dev.hybridlabs.birds.sound.HBSoundEvents
@@ -71,8 +71,8 @@ class SeagullEntity(type: EntityType<out SeagullEntity>, world: Level) :
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 6.0)
-                .add(Attributes.MOVEMENT_SPEED, 0.25)
-                .add(Attributes.FLYING_SPEED, 0.5)
+                .add(Attributes.MOVEMENT_SPEED, 0.6)
+                .add(Attributes.FLYING_SPEED, 0.8)
                 .add(Attributes.ATTACK_DAMAGE, 1.0)
                 .add(Attributes.ATTACK_KNOCKBACK, 0.1)
                 .add(Attributes.FOLLOW_RANGE, 12.0)

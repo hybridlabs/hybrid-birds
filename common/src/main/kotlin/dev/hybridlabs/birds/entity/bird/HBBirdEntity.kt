@@ -103,9 +103,7 @@ open class HBBirdEntity(
 
     override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
 
-        controllerRegistrar.add(
-            DefaultAnimations.genericLivingController(this)
-        )
+        controllerRegistrar.add(DefaultAnimations.genericLivingController(this))
 
         controllerRegistrar.add(
             AnimationController(

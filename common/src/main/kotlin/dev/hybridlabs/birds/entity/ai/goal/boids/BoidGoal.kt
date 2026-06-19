@@ -1,4 +1,4 @@
-package dev.hybridlabs.aquatic.entity.ai.goal.boids
+package dev.hybridlabs.birds.entity.ai.goal.boids
 
 import dev.hybridlabs.birds.entity.bird.HBFlockingBirdEntity
 import net.minecraft.commands.arguments.EntityAnchorArgument
@@ -23,15 +23,7 @@ class BoidGoal(
     private val maxSpeed: Float = bird.getAttributeValue(MOVEMENT_SPEED).toFloat()
 
     override fun canUse(): Boolean {
-        if (bird.isUnderWater) {
-            return false
-        }
-
-        if (bird.onGround()) {
-            return false
-        }
-
-        if (!bird.isFallFlying) {
+        if (!bird.isFlying) {
             return false
         }
 
@@ -49,11 +41,7 @@ class BoidGoal(
     }
 
     override fun canContinueToUse(): Boolean {
-        if (!bird.isUnderWater) {
-            return false
-        }
-
-        if (bird.onGround()) {
+        if (!bird.isFlying) {
             return false
         }
 

@@ -2,11 +2,14 @@ package dev.hybridlabs.birds.client.model.entity.bird
 
 import dev.hybridlabs.birds.Constants
 import dev.hybridlabs.birds.entity.bird.HBBirdEntity
+import net.minecraft.client.model.geom.PartNames
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.util.Mth
 import software.bernie.geckolib.constant.DataTickets
 import software.bernie.geckolib.core.animation.AnimationState
 import software.bernie.geckolib.model.GeoModel
+import kotlin.math.abs
+import kotlin.times
 
 abstract class HBBirdEntityModel<T: HBBirdEntity> (private val id: String) : GeoModel<T>() {
 
@@ -36,12 +39,25 @@ abstract class HBBirdEntityModel<T: HBBirdEntity> (private val id: String) : Geo
 
     override fun setCustomAnimations(animatable: T, instanceId: Long, animationState: AnimationState<T>) {
         val head = animationProcessor.getBone("head")
+        val body = animationProcessor.getBone(PartNames.BODY)
+        val deltaTime = animationState.partialTick
 
-        if (head != null) {
-            val entityData = animationState.getData(DataTickets.ENTITY_MODEL_DATA)
+        val tilt = Mth.clamp(
+            Mth.lerp(deltaTime, animatable.xRotO, animatable.xRot),
+            -35f, 35f
+        )
 
-            head.rotX = entityData.headPitch() * Mth.DEG_TO_RAD
-            head.rotY = entityData.netHeadYaw() * Mth.DEG_TO_RAD
+        if (!animatable.onGround() && !animatable.isInWater) {
+            body?.rotX = tilt * -Mth.DEG_TO_RAD
+        }
+
+        if (animatable.onGround() || animatable.isInWater) {
+            if (head != null) {
+                val entityData = animationState.getData(DataTickets.ENTITY_MODEL_DATA)
+
+                head.rotX = entityData.headPitch() * Mth.DEG_TO_RAD
+                head.rotY = entityData.netHeadYaw() * Mth.DEG_TO_RAD
+            }
         }
     }
 }
