@@ -1,6 +1,6 @@
 package dev.hybridlabs.birds.mixin;
 
-import dev.hybridlabs.birds.entity.ai.FollowRoosterGoal;
+import dev.hybridlabs.birds.entity.ai.goal.FollowRoosterGoal;
 import dev.hybridlabs.birds.entity.bird.ChickEntity;
 import dev.hybridlabs.birds.entity.bird.RoosterEntity;
 import net.minecraft.world.entity.EntityType;

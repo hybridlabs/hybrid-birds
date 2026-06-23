@@ -1,5 +1,6 @@
 package dev.hybridlabs.birds.entity.ai.goal.boids
 
+import dev.hybridlabs.birds.entity.bird.HBBirdEntity
 import dev.hybridlabs.birds.entity.bird.HBFlockingBirdEntity
 import net.minecraft.commands.arguments.EntityAnchorArgument
 import net.minecraft.world.entity.LivingEntity
@@ -27,6 +28,10 @@ class BoidGoal(
             return false
         }
 
+        if (bird.isClipped) {
+            return false
+        }
+
         if (--this.timeToFindNearbyEntities <= 0) {
             this.timeToFindNearbyEntities = this.adjustedTickDelay(40)
             nearbyMobs = getNearbyEntitiesOfSameClass(bird)
@@ -42,6 +47,10 @@ class BoidGoal(
 
     override fun canContinueToUse(): Boolean {
         if (!bird.isFlying) {
+            return false
+        }
+
+        if (bird.isClipped) {
             return false
         }
 
@@ -139,6 +148,7 @@ class BoidGoal(
         fun getNearbyEntitiesOfSameClass(mob: Mob): MutableList<out Mob> {
             val predicate = Predicate<Mob> { other ->
                 if (other == mob) return@Predicate false
+                if (other is HBBirdEntity && other.isClipped) return@Predicate false
 
                 if (mob is VariantHolder<*> && other is VariantHolder<*>) {
                     return@Predicate mob.variant == other.variant

@@ -1,6 +1,6 @@
 package dev.hybridlabs.birds.entity.bird
 
-import dev.hybridlabs.birds.entity.ai.BirdFloatControl
+import dev.hybridlabs.birds.entity.ai.control.BirdFloatControl
 import net.minecraft.core.BlockPos
 import net.minecraft.tags.FluidTags
 import net.minecraft.util.RandomSource

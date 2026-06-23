@@ -1,4 +1,4 @@
-package dev.hybridlabs.birds.entity.ai
+package dev.hybridlabs.birds.entity.ai.control
 
 import dev.hybridlabs.birds.entity.bird.HBBirdEntity
 import net.minecraft.world.entity.ai.control.FlyingMoveControl

@@ -1,6 +1,9 @@
 package dev.hybridlabs.birds.entity.bird
 
 import net.minecraft.core.BlockPos
+import net.minecraft.network.syncher.EntityDataAccessor
+import net.minecraft.network.syncher.EntityDataSerializers
+import net.minecraft.network.syncher.SynchedEntityData
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.sounds.SoundEvents
@@ -41,7 +44,7 @@ open class HBBirdEntity(
     Animal(type, world),
     GeoEntity {
     private val factory = GeckoLibUtil.createInstanceCache(this)
-    private var isClipped: Boolean = false
+    var isClipped: Boolean = false
 
      override fun createNavigation(level: Level): PathNavigation {
         setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
@@ -161,9 +164,50 @@ open class HBBirdEntity(
             this.deltaMovement = vec3d.multiply(1.0, 0.6, 1.0)
         }
     }
+    
+    // movement
+
+    fun isWalking(): Boolean {
+        return entityData.get(WALKING)
+    }
+
+    private fun setWalking(walking: Boolean) {
+        entityData.set(WALKING, walking)
+    }
+
+    fun startWalking() {
+        setWalking(true)
+    }
+
+    fun stopWalking() {
+        setWalking(false)
+    }
+
+    open fun isFlying(): Boolean {
+        return entityData.get(FLYING)
+    }
+
+    private fun setFlying(flying: Boolean) {
+        entityData.set(FLYING, flying)
+    }
+
+    fun startFlying() {
+        setFlying(true)
+    }
+
+    fun stopFlying() {
+        setFlying(false)
+    }
+    
+    //endregion
 
     companion object {
         @Suppress("UNUSED_PARAMETER")
+        val WALKING: EntityDataAccessor<Boolean> =
+            SynchedEntityData.defineId(HBBirdEntity::class.java, EntityDataSerializers.BOOLEAN)
+        val FLYING: EntityDataAccessor<Boolean> =
+            SynchedEntityData.defineId(HBBirdEntity::class.java, EntityDataSerializers.BOOLEAN)
+
         fun canBirdSpawn(
             type: EntityType<out HBBirdEntity>,
             level: LevelAccessor,

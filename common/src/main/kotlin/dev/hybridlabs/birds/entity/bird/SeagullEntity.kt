@@ -2,7 +2,8 @@ package dev.hybridlabs.birds.entity.bird
 
 import dev.hybridlabs.birds.entity.ai.goal.boids.BoidGoal
 import dev.hybridlabs.birds.entity.HBEntityTypes
-import dev.hybridlabs.birds.entity.ai.BirdFlyFloatControl
+import dev.hybridlabs.birds.entity.ai.control.BirdFlyFloatControl
+import dev.hybridlabs.birds.entity.ai.goal.HBRandomFlyingGoal
 import dev.hybridlabs.birds.sound.HBSoundEvents
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvent
@@ -33,7 +34,7 @@ class SeagullEntity(type: EntityType<out SeagullEntity>, world: Level) :
         goalSelector.addGoal(0, PanicGoal(this, 1.1))
         goalSelector.addGoal(0, FloatGoal(this))
         goalSelector.addGoal(1, TemptGoal(this, 1.0, BREEDING_INGREDIENT, false))
-        goalSelector.addGoal(2, WaterAvoidingRandomFlyingGoal(this, 1.0))
+        goalSelector.addGoal(2, HBRandomFlyingGoal(this))
         goalSelector.addGoal(2, LookAtPlayerGoal(this, Player::class.java, 8.0f))
         goalSelector.addGoal(5, MeleeAttackGoal(this, 1.0, true))
         targetSelector.addGoal(6, NearestAttackableTargetGoal(this, Turtle::class.java, false, Turtle.BABY_ON_LAND_SELECTOR)

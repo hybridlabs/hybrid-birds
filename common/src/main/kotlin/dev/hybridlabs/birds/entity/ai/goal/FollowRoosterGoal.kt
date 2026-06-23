@@ -1,10 +1,10 @@
-package dev.hybridlabs.birds.entity.ai
+package dev.hybridlabs.birds.entity.ai.goal
 
 import dev.hybridlabs.birds.entity.bird.RoosterEntity
 import net.minecraft.world.entity.ai.goal.Goal
 import net.minecraft.world.entity.ai.targeting.TargetingConditions
 import net.minecraft.world.entity.animal.Chicken
-import java.util.*
+import java.util.EnumSet
 
 class FollowRoosterGoal(
     private val chicken: Chicken,

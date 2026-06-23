@@ -1,4 +1,4 @@
-package dev.hybridlabs.birds.entity.ai.goal
+package dev.hybridlabs.birds.entity.ai.control
 
 import net.minecraft.util.Mth
 import net.minecraft.world.entity.Mob

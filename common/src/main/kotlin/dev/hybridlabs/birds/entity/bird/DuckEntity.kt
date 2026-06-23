@@ -1,7 +1,7 @@
 package dev.hybridlabs.birds.entity.bird
 
 import dev.hybridlabs.birds.entity.HBEntityTypes
-import dev.hybridlabs.birds.entity.ai.BirdFloatControl
+import dev.hybridlabs.birds.entity.ai.control.BirdFloatControl
 import dev.hybridlabs.birds.item.HBItems
 import dev.hybridlabs.birds.sound.HBSoundEvents
 import net.minecraft.server.level.ServerLevel

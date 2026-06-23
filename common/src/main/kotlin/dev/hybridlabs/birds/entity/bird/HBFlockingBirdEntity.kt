@@ -1,6 +1,6 @@
 package dev.hybridlabs.birds.entity.bird
 
-import dev.hybridlabs.birds.entity.ai.goal.SmoothFlyingMoveControl
+import dev.hybridlabs.birds.entity.ai.control.SmoothFlyingMoveControl
 import net.minecraft.core.BlockPos
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.MoverType
@@ -41,6 +41,11 @@ open class HBFlockingBirdEntity(
     }
 
     override fun travel(travelVector: Vec3) {
+        if (this.isClipped) {
+            super.travel(travelVector)
+            return
+        }
+
         if (this.isControlledByLocalInstance) {
             if (this.isInWater) {
                 this.moveRelative(0.02f, travelVector)
