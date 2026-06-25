@@ -67,22 +67,6 @@ open class HBBirdEntity(
         goalSelector.addGoal(11, LookAtPlayerGoal(this, Player::class.java, 10.0f))
     }
 
-    override fun mobInteract(player: Player, hand: InteractionHand): InteractionResult {
-        val itemStack = player.getItemInHand(hand)
-        if (!itemStack.isEmpty && itemStack.`is`(Items.SHEARS) && !isClipped) {
-            if (!level().isClientSide) {
-                this.isClipped = true
-                this.playSound(SoundEvents.SHEEP_SHEAR, 1.0f, 1.0f)
-                this.gameEvent(GameEvent.SHEAR, player)
-                itemStack.hurtAndBreak(1, player) { it.broadcastBreakEvent(hand) }
-                spawnAtLocation(ItemStack(Items.FEATHER))
-                return InteractionResult.SUCCESS
-            }
-            return InteractionResult.CONSUME
-        }
-        return super.mobInteract(player, hand)
-    }
-
     fun isBelowWaterline(): Boolean {
         return this.isUnderWater || this.getFluidHeight(FluidTags.WATER) > this.getWaterline()
     }
@@ -164,50 +148,9 @@ open class HBBirdEntity(
             this.deltaMovement = vec3d.multiply(1.0, 0.6, 1.0)
         }
     }
-    
-    // movement
-
-    fun isWalking(): Boolean {
-        return entityData.get(WALKING)
-    }
-
-    private fun setWalking(walking: Boolean) {
-        entityData.set(WALKING, walking)
-    }
-
-    fun startWalking() {
-        setWalking(true)
-    }
-
-    fun stopWalking() {
-        setWalking(false)
-    }
-
-    open fun isFlying(): Boolean {
-        return entityData.get(FLYING)
-    }
-
-    private fun setFlying(flying: Boolean) {
-        entityData.set(FLYING, flying)
-    }
-
-    fun startFlying() {
-        setFlying(true)
-    }
-
-    fun stopFlying() {
-        setFlying(false)
-    }
-    
-    //endregion
 
     companion object {
         @Suppress("UNUSED_PARAMETER")
-        val WALKING: EntityDataAccessor<Boolean> =
-            SynchedEntityData.defineId(HBBirdEntity::class.java, EntityDataSerializers.BOOLEAN)
-        val FLYING: EntityDataAccessor<Boolean> =
-            SynchedEntityData.defineId(HBBirdEntity::class.java, EntityDataSerializers.BOOLEAN)
-
         fun canBirdSpawn(
             type: EntityType<out HBBirdEntity>,
             level: LevelAccessor,

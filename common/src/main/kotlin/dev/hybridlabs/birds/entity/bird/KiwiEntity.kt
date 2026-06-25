@@ -24,9 +24,9 @@ class KiwiEntity(entityType: EntityType<out KiwiEntity>, world: Level) :
         return dimensions.height * 0.5f
     }
 
-    override fun getBreedOffspring(serverLevel: ServerLevel, ageableMob: AgeableMob): AgeableMob? {
-        return HBEntityTypes.KIWI.get().create(serverLevel)
-    }
+    //override fun getBreedOffspring(serverLevel: ServerLevel, ageableMob: AgeableMob): AgeableMob? {
+    //    return HBEntityTypes.KIWI.get().create(serverLevel)
+    //}
 
     override fun getAmbientSound(): SoundEvent {
         return SoundEvents.PARROT_AMBIENT

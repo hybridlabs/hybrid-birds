@@ -70,19 +70,19 @@ object HBEntityTypes {
         SwanEntity::createMobAttributes
     )
 
-    val FLAMINGO = registerAquaticBird(
-        "flamingo",
-        ::FlamingoEntity,
-        EntityDimensions.fixed(0.8f, 1.8f),
-        FlamingoEntity::createMobAttributes
-    )
+    //val FLAMINGO = registerAquaticBird(
+    //    "flamingo",
+    //    ::FlamingoEntity,
+    //    EntityDimensions.fixed(0.8f, 1.8f),
+    //    FlamingoEntity::createMobAttributes
+    //)
 
-    val JAY = registerLandBird(
-        "jay",
-        ::JayEntity,
-        EntityDimensions.fixed(0.25f, 0.3f),
-        JayEntity::createMobAttributes
-    )
+    //val JAY = registerLandBird(
+    //    "jay",
+    //    ::JayEntity,
+    //    EntityDimensions.fixed(0.25f, 0.3f),
+    //    JayEntity::createMobAttributes
+    //)
 
     val SEAGULL = registerAquaticBird(
         "seagull",
@@ -98,26 +98,26 @@ object HBEntityTypes {
         PelicanEntity::createMobAttributes
     )
 
-    val HUMMINGBIRD = registerLandBird(
-        "hummingbird",
-        ::HummingbirdEntity,
-        EntityDimensions.fixed(0.25f, 0.3f),
-        HummingbirdEntity::createMobAttributes
-    )
+    //val HUMMINGBIRD = registerLandBird(
+    //    "hummingbird",
+    //    ::HummingbirdEntity,
+    //    EntityDimensions.fixed(0.25f, 0.3f),
+    //    HummingbirdEntity::createMobAttributes
+    //)
 
-    val OSTRICH = registerLandBird(
-        "ostrich",
-        ::OstrichEntity,
-        EntityDimensions.fixed(1.0f, 2.0f),
-        OstrichEntity::createMobAttributes
-    )
+    //val OSTRICH = registerLandBird(
+    //    "ostrich",
+    //    ::OstrichEntity,
+    //    EntityDimensions.fixed(1.0f, 2.0f),
+    //    OstrichEntity::createMobAttributes
+    //)
 
-    val KIWI = registerLandBird(
-        "kiwi",
-        ::KiwiEntity,
-        EntityDimensions.fixed(0.5f, 0.5f),
-        KiwiEntity::createMobAttributes
-    )
+    //val KIWI = registerLandBird(
+    //    "kiwi",
+    //    ::KiwiEntity,
+    //    EntityDimensions.fixed(0.5f, 0.5f),
+    //    KiwiEntity::createMobAttributes
+    //)
 
     private fun <T : LivingEntity> registerLandBird(
         id: String,

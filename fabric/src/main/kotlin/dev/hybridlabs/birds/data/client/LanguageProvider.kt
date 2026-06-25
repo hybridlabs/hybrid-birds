@@ -63,11 +63,6 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HBEntityTypes.TURKEY.get() to "Turkey",
             HBEntityTypes.PEACOCK.get() to "Peacock",
             HBEntityTypes.GUINEA_FOWL.get() to "Guinea Fowl",
-            HBEntityTypes.JAY.get() to "Jay",
-            HBEntityTypes.OSTRICH.get() to "Ostrich",
-            HBEntityTypes.KIWI.get() to "Kiwi",
-            HBEntityTypes.HUMMINGBIRD.get() to "Hummingbird",
-            HBEntityTypes.FLAMINGO.get() to "Flamingo",
             HBEntityTypes.SEAGULL.get() to "Seagull",
             HBEntityTypes.PELICAN.get() to "Pelican",
         )

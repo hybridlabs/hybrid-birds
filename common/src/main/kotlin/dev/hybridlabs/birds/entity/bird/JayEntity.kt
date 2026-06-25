@@ -24,9 +24,9 @@ class JayEntity(type: EntityType<out JayEntity>, world: Level) :
         return 2
     }
 
-    override fun getBreedOffspring(serverLevel: ServerLevel, ageableMob: AgeableMob): JayEntity? {
-        return HBEntityTypes.JAY.get().create(serverLevel)
-    }
+    //override fun getBreedOffspring(serverLevel: ServerLevel, ageableMob: AgeableMob): JayEntity? {
+    //    return HBEntityTypes.JAY.get().create(serverLevel)
+    //}
 
     override fun getAmbientSound(): SoundEvent {
         return HBSoundEvents.DUCK_AMBIENT.get()

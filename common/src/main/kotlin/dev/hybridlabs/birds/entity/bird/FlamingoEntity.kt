@@ -14,9 +14,9 @@ import net.minecraft.world.level.Level
 class FlamingoEntity(type: EntityType<out FlamingoEntity>, world: Level) :
     HBWadingBirdEntity(type, world) {
 
-    override fun getBreedOffspring(serverLevel: ServerLevel, ageableMob: AgeableMob): FlamingoEntity? {
-        return HBEntityTypes.FLAMINGO.get().create(serverLevel)
-    }
+    //override fun getBreedOffspring(serverLevel: ServerLevel, ageableMob: AgeableMob): FlamingoEntity? {
+    //    return HBEntityTypes.FLAMINGO.get().create(serverLevel)
+    //}
 
     override fun getAmbientSound(): SoundEvent {
         return HBSoundEvents.DUCK_AMBIENT.get()

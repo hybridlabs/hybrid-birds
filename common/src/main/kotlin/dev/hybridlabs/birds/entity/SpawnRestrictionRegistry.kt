@@ -27,30 +27,27 @@ object SpawnRestrictionRegistry {
             HBEntityTypes.GUINEA_FOWL.get(),
         ).forEach { registerTerrestrialBird(it) }
 
-        setOf(
-            HBEntityTypes.OSTRICH.get(),
-            HBEntityTypes.KIWI.get(),
-        ).forEach { registerRatite(it) }
+        //setOf(
+        //    HBEntityTypes.OSTRICH.get(),
+        //    HBEntityTypes.KIWI.get(),
+        //).forEach { registerRatite(it) }
 
         setOf(
             HBEntityTypes.DUCK.get(),
             HBEntityTypes.GOOSE.get(),
             HBEntityTypes.SWAN.get(),
+            HBEntityTypes.SEAGULL.get(),
             HBEntityTypes.PELICAN.get(),
         ).forEach { registerAquaticBird(it) }
 
-        setOf(
-            HBEntityTypes.FLAMINGO.get(),
-        ).forEach { registerWadingBird(it) }
+        //setOf(
+        //    HBEntityTypes.FLAMINGO.get(),
+        //).forEach { registerWadingBird(it) }
 
-        setOf(
-            HBEntityTypes.JAY.get(),
-            HBEntityTypes.HUMMINGBIRD.get(),
-        ).forEach { registerParrot(it) }
-
-        setOf(
-            HBEntityTypes.SEAGULL.get(),
-        ).forEach { registerFlockingBird(it) }
+        //setOf(
+        //    HBEntityTypes.JAY.get(),
+        //    HBEntityTypes.HUMMINGBIRD.get(),
+        //).forEach { registerParrot(it) }
     }
 
     private fun <T : HBBirdEntity> registerFlockingBird(entityType: EntityType<T>) {

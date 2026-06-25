@@ -20,9 +20,9 @@ class OstrichEntity(entityType: EntityType<out OstrichEntity>, world: Level) :
         return dimensions.height * 1.1f
     }
 
-    override fun getBreedOffspring(serverLevel: ServerLevel, ageableMob: AgeableMob): AgeableMob? {
-        return HBEntityTypes.OSTRICH.get().create(serverLevel)
-    }
+    //override fun getBreedOffspring(serverLevel: ServerLevel, ageableMob: AgeableMob): AgeableMob? {
+    //    return HBEntityTypes.OSTRICH.get().create(serverLevel)
+    //}
 
     override fun getAmbientSound(): SoundEvent {
         return HBSoundEvents.OSTRICH_AMBIENT.get()
