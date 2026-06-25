@@ -11,22 +11,32 @@ import net.minecraft.world.entity.AgeableMob
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
+import net.minecraft.world.entity.ai.control.LookControl
 import net.minecraft.world.entity.ai.goal.FloatGoal
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal
 import net.minecraft.world.entity.ai.goal.PanicGoal
 import net.minecraft.world.entity.ai.goal.TemptGoal
 import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomFlyingGoal
 import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation
+import net.minecraft.world.entity.ai.navigation.PathNavigation
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.crafting.Ingredient
 import net.minecraft.world.level.Level
+import net.minecraft.world.level.pathfinder.BlockPathTypes
 
 class PelicanEntity(type: EntityType<out PelicanEntity>, world: Level) :
     HBAquaticBirdEntity(type, world) {
 
-    init {
+    override fun createNavigation(level: Level): PathNavigation {
+        setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
+        setPathfindingMalus(BlockPathTypes.DANGER_FIRE, 16.0f)
+        setPathfindingMalus(BlockPathTypes.DAMAGE_FIRE, -1.0f)
+
         moveControl = BirdFlyFloatControl(this, 10, false)
-        navigation = FlyingPathNavigation(this, world)
+        navigation = FlyingPathNavigation(this, level)
+        lookControl = LookControl(this)
+
+        return FlyingPathNavigation(this, level)
     }
 
     override fun registerGoals() {
