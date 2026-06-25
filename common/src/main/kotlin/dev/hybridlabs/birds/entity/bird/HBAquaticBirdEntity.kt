@@ -1,6 +1,7 @@
 package dev.hybridlabs.birds.entity.bird
 
 import dev.hybridlabs.birds.entity.ai.control.BirdFloatControl
+import dev.hybridlabs.birds.entity.ai.control.BirdFlyFloatControl
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.tags.FluidTags
@@ -9,11 +10,15 @@ import net.minecraft.world.entity.EntityDimensions
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.MobSpawnType
 import net.minecraft.world.entity.Pose
+import net.minecraft.world.entity.ai.control.LookControl
 import net.minecraft.world.entity.ai.goal.*
 import net.minecraft.world.entity.ai.navigation.AmphibiousPathNavigation
+import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation
+import net.minecraft.world.entity.ai.navigation.PathNavigation
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.LevelAccessor
+import net.minecraft.world.level.pathfinder.BlockPathTypes
 import software.bernie.geckolib.animatable.GeoEntity
 import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.core.animation.AnimatableManager
@@ -29,9 +34,16 @@ open class HBAquaticBirdEntity(
     HBBirdEntity(type, world),
     GeoEntity {
 
-    init {
+    override fun createNavigation(level: Level): PathNavigation {
+        setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
+        setPathfindingMalus(BlockPathTypes.DANGER_FIRE, 16.0f)
+        setPathfindingMalus(BlockPathTypes.DAMAGE_FIRE, -1.0f)
+
         moveControl = BirdFloatControl(this)
-        navigation = AmphibiousPathNavigation(this, world)
+        navigation = AmphibiousPathNavigation(this, level)
+        lookControl = LookControl(this)
+
+        return AmphibiousPathNavigation(this, level)
     }
 
     override fun registerGoals() {

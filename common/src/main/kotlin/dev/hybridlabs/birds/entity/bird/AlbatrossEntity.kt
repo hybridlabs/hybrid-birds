@@ -23,7 +23,7 @@ import net.minecraft.world.item.crafting.Ingredient
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.pathfinder.BlockPathTypes
 
-class SeagullEntity(type: EntityType<out SeagullEntity>, world: Level) :
+class AlbatrossEntity(type: EntityType<out AlbatrossEntity>, world: Level) :
     HBAquaticBirdEntity(type, world) {
 
     override fun createNavigation(level: Level): PathNavigation {
@@ -31,7 +31,7 @@ class SeagullEntity(type: EntityType<out SeagullEntity>, world: Level) :
         setPathfindingMalus(BlockPathTypes.DANGER_FIRE, 16.0f)
         setPathfindingMalus(BlockPathTypes.DAMAGE_FIRE, -1.0f)
 
-        moveControl = BirdFlyFloatControl(this, 10, true)
+        moveControl = BirdFlyFloatControl(this, 10, false)
         navigation = FlyingPathNavigation(this, level)
         lookControl = LookControl(this)
 
@@ -60,8 +60,8 @@ class SeagullEntity(type: EntityType<out SeagullEntity>, world: Level) :
         return 3
     }
 
-    override fun getBreedOffspring(serverLevel: ServerLevel, ageableMob: AgeableMob): SeagullEntity? {
-        return HBEntityTypes.SEAGULL.get().create(serverLevel)
+    override fun getBreedOffspring(serverLevel: ServerLevel, ageableMob: AgeableMob): AlbatrossEntity? {
+        return HBEntityTypes.ALBATROSS.get().create(serverLevel)
     }
 
     override fun getAmbientSound(): SoundEvent {

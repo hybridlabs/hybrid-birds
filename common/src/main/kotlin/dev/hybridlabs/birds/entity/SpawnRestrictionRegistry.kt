@@ -37,6 +37,7 @@ object SpawnRestrictionRegistry {
             HBEntityTypes.GOOSE.get(),
             HBEntityTypes.SWAN.get(),
             HBEntityTypes.SEAGULL.get(),
+            HBEntityTypes.ALBATROSS.get(),
             HBEntityTypes.PELICAN.get(),
         ).forEach { registerAquaticBird(it) }
 

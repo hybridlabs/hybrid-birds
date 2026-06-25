@@ -24,9 +24,11 @@ object HBItems {
     val TURKEY_SPAWN_EGG = registerSpawnEgg("turkey_spawn_egg", HBEntityTypes.TURKEY, 0x383551, 0xcc4468)
     val PEACOCK_SPAWN_EGG = registerSpawnEgg("peacock_spawn_egg", HBEntityTypes.PEACOCK, 0x3faa73, 0x010c86)
     val GUINEA_FOWL_SPAWN_EGG = registerSpawnEgg("guinea_fowl_spawn_egg", HBEntityTypes.GUINEA_FOWL, 0x356b97, 0x252533)
-    //val JAY_SPAWN_EGG = registerSpawnEgg("jay_spawn_egg", HBEntityTypes.JAY, 0x436fce, 0xdfe6e9)
     val SEAGULL_SPAWN_EGG = registerSpawnEgg("seagull_spawn_egg", HBEntityTypes.SEAGULL, 0xf1edf6, 0xf59a21)
+    val ALBATROSS_SPAWN_EGG = registerSpawnEgg("albatross_spawn_egg", HBEntityTypes.ALBATROSS, 0xe6e2dc, 0x624a3e)
     val PELICAN_SPAWN_EGG = registerSpawnEgg("pelican_spawn_egg", HBEntityTypes.PELICAN, 0xdcdced, 0xf06668)
+
+    //val JAY_SPAWN_EGG = registerSpawnEgg("jay_spawn_egg", HBEntityTypes.JAY, 0x436fce, 0xdfe6e9)
     //val OSTRICH_SPAWN_EGG = registerSpawnEgg("ostrich_spawn_egg", HBEntityTypes.OSTRICH, 0x483937, 0xcfceda)
     //val KIWI_SPAWN_EGG = registerSpawnEgg("kiwi_spawn_egg", HBEntityTypes.KIWI, 0x4c392f, 0xb69f8c)
     //val HUMMINGBIRD_SPAWN_EGG = registerSpawnEgg("hummingbird_spawn_egg", HBEntityTypes.HUMMINGBIRD, 0x6bc96c, 0xcc425e)

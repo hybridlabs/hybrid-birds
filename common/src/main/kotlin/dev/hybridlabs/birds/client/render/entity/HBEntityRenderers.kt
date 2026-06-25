@@ -17,6 +17,7 @@ object HBEntityRenderers {
     val SWAN = ClientServices.RENDERER.registerEntityRenderer(HBEntityTypes.SWAN, ::SwanEntityRenderer)
     //val JAY = ClientServices.RENDERER.registerEntityRenderer(HBEntityTypes.JAY, ::JayEntityRenderer)
     val SEAGULL = ClientServices.RENDERER.registerEntityRenderer(HBEntityTypes.SEAGULL, ::SeagullEntityRenderer)
+    val ALBATROSS = ClientServices.RENDERER.registerEntityRenderer(HBEntityTypes.ALBATROSS, ::AlbatrossEntityRenderer)
     val PELICAN = ClientServices.RENDERER.registerEntityRenderer(HBEntityTypes.PELICAN, ::PelicanEntityRenderer)
     //val OSTRICH = ClientServices.RENDERER.registerEntityRenderer(HBEntityTypes.OSTRICH, ::OstrichEntityRenderer)
     //val KIWI = ClientServices.RENDERER.registerEntityRenderer(HBEntityTypes.KIWI, ::KiwiEntityRenderer)
