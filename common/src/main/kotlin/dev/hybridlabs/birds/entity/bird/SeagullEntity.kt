@@ -31,7 +31,7 @@ class SeagullEntity(type: EntityType<out SeagullEntity>, world: Level) :
         setPathfindingMalus(BlockPathTypes.DANGER_FIRE, 16.0f)
         setPathfindingMalus(BlockPathTypes.DAMAGE_FIRE, -1.0f)
 
-        moveControl = BirdFlyFloatControl(this, 10, true)
+        moveControl = BirdFlyFloatControl(this, 10, false)
         navigation = FlyingPathNavigation(this, level)
         lookControl = LookControl(this)
 
