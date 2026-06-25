@@ -101,7 +101,7 @@ object HBEntityTypes {
     val PELICAN = registerAquaticBird(
         "pelican",
         ::PelicanEntity,
-        EntityDimensions.fixed(0.6f, 0.8f),
+        EntityDimensions.fixed(0.75f, 0.8f),
         PelicanEntity::createMobAttributes
     )
 
