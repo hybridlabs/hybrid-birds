@@ -18,7 +18,51 @@ import java.util.function.BiConsumer
 class EntityTypeLootTableProvider(output: FabricDataOutput) :
     SimpleFabricLootTableProvider(output, LootContextParamSets.ENTITY) {
     override fun generate(exporter: BiConsumer<ResourceLocation, LootTable.Builder>) {
-        export(exporter, HBEntityTypes.ROOSTER!!.get()) {
+        export(exporter, HBEntityTypes.SEAGULL.get()) {
+            pool(
+                LootPool.lootPool()
+                    .add(LootItem.lootTableItem(Items.COD)
+                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0f, 2.0f))))
+                    .build()
+            )
+            pool(
+                LootPool.lootPool()
+                    .add(LootItem.lootTableItem(Items.FEATHER)
+                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0f, 2.0f))))
+                    .build()
+            )
+        }
+        export(exporter, HBEntityTypes.ALBATROSS.get()) {
+            pool(
+                LootPool.lootPool()
+                    .add(LootItem.lootTableItem(Items.COD)
+                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0f, 2.0f))))
+                    .build()
+            )
+            pool(
+                LootPool.lootPool()
+                    .add(LootItem.lootTableItem(Items.FEATHER)
+                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0f, 2.0f))))
+                    .build()
+            )
+        }
+
+        export(exporter, HBEntityTypes.PELICAN.get()) {
+            pool(
+                LootPool.lootPool()
+                    .add(LootItem.lootTableItem(Items.COD)
+                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0f, 2.0f))))
+                    .build()
+            )
+            pool(
+                LootPool.lootPool()
+                    .add(LootItem.lootTableItem(Items.FEATHER)
+                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0f, 2.0f))))
+                    .build()
+            )
+        }
+
+        export(exporter, HBEntityTypes.ROOSTER.get()) {
             pool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(Items.CHICKEN))
@@ -32,7 +76,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HBEntityTypes.GUINEA_FOWL!!.get()) {
+        export(exporter, HBEntityTypes.GUINEA_FOWL.get()) {
             pool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(Items.CHICKEN))
@@ -46,7 +90,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HBEntityTypes.DUCK!!.get()) {
+        export(exporter, HBEntityTypes.DUCK.get()) {
             pool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(HBItems.DUCK.get()))
@@ -60,7 +104,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HBEntityTypes.GOOSE!!.get()) {
+        export(exporter, HBEntityTypes.GOOSE.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -75,7 +119,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HBEntityTypes.TURKEY!!.get()) {
+        export(exporter, HBEntityTypes.TURKEY.get()) {
             pool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(HBItems.TURKEY.get()))
@@ -89,7 +133,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HBEntityTypes.SWAN!!.get()) {
+        export(exporter, HBEntityTypes.SWAN.get()) {
             pool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(Items.FEATHER)
@@ -98,7 +142,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HBEntityTypes.PEACOCK!!.get()) {
+        export(exporter, HBEntityTypes.PEACOCK.get()) {
             pool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(Items.FEATHER)
