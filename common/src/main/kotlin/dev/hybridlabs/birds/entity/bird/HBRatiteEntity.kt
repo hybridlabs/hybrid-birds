@@ -157,17 +157,6 @@ open class HBRatiteEntity(
 
     companion object {
         @Suppress("UNUSED_PARAMETER")
-        fun canRatiteSpawn(
-            type: EntityType<out HBRatiteEntity>,
-            level: LevelAccessor,
-            reason: MobSpawnType,
-            pos: BlockPos,
-            random: RandomSource,
-        ): Boolean {
-            return isBrightEnoughToSpawn(level, pos) &&
-                    level.getBlockState(pos.below()).isSolid &&
-                    level.canSeeSky(pos)
-        }
 
         val BREEDING_INGREDIENT: Ingredient = Ingredient.of(ItemTags.VILLAGER_PLANTABLE_SEEDS)
     }

@@ -1,13 +1,16 @@
 package dev.hybridlabs.birds.entity.bird
 
+import dev.hybridlabs.birds.entity.ai.goal.BirdFollowParentGoal
 import net.minecraft.core.BlockPos
+import net.minecraft.core.particles.ParticleTypes
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.tags.FluidTags
 import net.minecraft.util.RandomSource
-import net.minecraft.world.DifficultyInstance
+import net.minecraft.world.InteractionHand
+import net.minecraft.world.InteractionResult
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.entity.*
 import net.minecraft.world.entity.ai.control.LookControl
@@ -15,12 +18,13 @@ import net.minecraft.world.entity.ai.control.MoveControl
 import net.minecraft.world.entity.ai.goal.*
 import net.minecraft.world.entity.ai.navigation.GroundPathNavigation
 import net.minecraft.world.entity.ai.navigation.PathNavigation
-import net.minecraft.world.entity.animal.Animal
 import net.minecraft.world.entity.player.Player
+import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.Items
+import net.minecraft.world.level.BlockAndTintGetter
 import net.minecraft.world.level.GameRules
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.LevelAccessor
-import net.minecraft.world.level.ServerLevelAccessor
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.pathfinder.BlockPathTypes
 import org.jetbrains.annotations.Nullable
@@ -31,14 +35,17 @@ import software.bernie.geckolib.core.animation.AnimatableManager
 import software.bernie.geckolib.core.animation.AnimationController
 import software.bernie.geckolib.core.animation.AnimationState
 import software.bernie.geckolib.util.GeckoLibUtil
+import java.util.*
 
 @Suppress("LeakingThis")
 open class HBBirdEntity(
     type: EntityType<out HBBirdEntity>,
     world: Level,
 ) :
-    Animal(type, world),
+    AgeableMob(type, world),
     GeoEntity {
+    var inLove = 0
+    private var loveCause: UUID? = null
     private val factory = GeckoLibUtil.createInstanceCache(this)
     var isClipped: Boolean = false
 
@@ -54,12 +61,62 @@ open class HBBirdEntity(
         return GroundPathNavigation(this, level)
     }
 
+    override fun customServerAiStep() {
+        if (this.getAge() != 0) {
+            this.inLove = 0
+        }
+
+        super.customServerAiStep()
+    }
+
+    override fun aiStep() {
+        super.aiStep()
+
+        this.updateSwingTime()
+
+        val vec3d = this.deltaMovement
+        if (!this.onGround() && vec3d.y < 0.0) {
+            this.deltaMovement = vec3d.multiply(1.0, 0.6, 1.0)
+        }
+
+        if (this.getAge() != 0) {
+            this.inLove = 0
+        }
+
+        if (this.inLove > 0) {
+            --this.inLove
+            if (this.inLove % 10 == 0) {
+                val d0 = this.random.nextGaussian() * 0.02
+                val d1 = this.random.nextGaussian() * 0.02
+                val d2 = this.random.nextGaussian() * 0.02
+                this.level().addParticle(
+                    ParticleTypes.HEART,
+                    this.getRandomX(1.0),
+                    this.randomY + 0.5,
+                    this.getRandomZ(1.0),
+                    d0,
+                    d1,
+                    d2
+                )
+            }
+        }
+    }
+
+    override fun hurt(source: DamageSource, amount: Float): Boolean {
+        if (this.isInvulnerableTo(source)) {
+            return false
+        }
+
+        this.inLove = 0
+        return super.hurt(source, amount)
+    }
+
     override fun registerGoals() {
         goalSelector.addGoal(0, FloatGoal(this))
         goalSelector.addGoal(0, PanicGoal(this, 1.2))
         goalSelector.addGoal(2, WaterAvoidingRandomStrollGoal(this, 1.0))
         goalSelector.addGoal(2, RandomLookAroundGoal(this))
-        goalSelector.addGoal(5, FollowParentGoal(this, 1.1))
+        goalSelector.addGoal(5, BirdFollowParentGoal(this, 1.1))
         goalSelector.addGoal(11, LookAtPlayerGoal(this, Player::class.java, 10.0f))
     }
 
@@ -79,10 +136,92 @@ open class HBBirdEntity(
         return 90
     }
 
+    override fun addAdditionalSaveData(compound: CompoundTag) {
+        super.addAdditionalSaveData(compound)
+        compound.putInt("InLove", this.inLove)
+
+        if (this.loveCause != null) {
+            compound.putUUID("LoveCause", this.loveCause)
+        }
+    }
+
+    override fun readAdditionalSaveData(compound: CompoundTag) {
+        super.readAdditionalSaveData(compound)
+        this.inLove = compound.getInt("InLove")
+        this.loveCause = if (compound.hasUUID("LoveCause")) compound.getUUID("LoveCause") else null
+    }
+    //#endregion
+
+    open fun isFood(stack: ItemStack): Boolean {
+        return stack.`is`(Items.WHEAT_SEEDS)
+    }
+
+    public override fun mobInteract(player: Player, hand: InteractionHand): InteractionResult {
+        val itemstack = player.getItemInHand(hand)
+        if (this.isFood(itemstack)) {
+            val i = this.getAge()
+            if (!this.level().isClientSide && i == 0 && this.canFallInLove()) {
+                this.usePlayerItem(player, hand, itemstack)
+                this.setInLove(player)
+                return InteractionResult.SUCCESS
+            }
+
+            if (this.isBaby) {
+                this.usePlayerItem(player, hand, itemstack)
+                this.ageUp(getSpeedUpSecondsWhenFeeding(-i), true)
+                return InteractionResult.sidedSuccess(this.level().isClientSide)
+            }
+
+            if (this.level().isClientSide) {
+                return InteractionResult.CONSUME
+            }
+        }
+
+        return super.mobInteract(player, hand)
+    }
+
+    protected open fun usePlayerItem(player: Player, hand: InteractionHand?, stack: ItemStack) {
+        if (!player.abilities.instabuild) {
+            stack.shrink(1)
+        }
+    }
+
+    open fun canFallInLove(): Boolean {
+        return this.inLove <= 0
+    }
+
+    fun setInLove(player: Player?) {
+        this.inLove = 600
+        if (player != null) {
+            this.loveCause = player.getUUID()
+        }
+
+        this.level().broadcastEntityEvent(this, 18.toByte())
+    }
+
+    fun isInLove(): Boolean {
+        return this.inLove > 0
+    }
+
+    fun resetLove() {
+        this.inLove = 0
+    }
+
+    fun canMate(otherWaterAnimal: HBBirdEntity): Boolean {
+        return if (otherWaterAnimal === this) {
+            false
+        } else if (otherWaterAnimal.javaClass != this.javaClass) {
+            false
+        } else {
+            this.isInLove() && otherWaterAnimal.isInLove()
+        }
+    }
+
     open fun spawnChildFromBreeding(level: ServerLevel, mate: HBBirdEntity) {
         val baby = this.getBreedOffspring(level, mate) ?: return
 
         this.setPersistenceRequired()
+        mate.setPersistenceRequired()
         baby.setPersistenceRequired()
         baby.isBaby = true
         baby.moveTo(this.x, this.y, this.z, 0.0f, 0.0f)
@@ -162,20 +301,16 @@ open class HBBirdEntity(
         heightDifference: Double,
         onGround: Boolean,
         state: BlockState,
-        landedPosition: BlockPos
+        landedPosition: BlockPos,
     ) {
-    }
-
-    override fun aiStep() {
-        super.aiStep()
-        val vec3d = this.deltaMovement
-        if (!this.onGround() && vec3d.y < 0.0) {
-            this.deltaMovement = vec3d.multiply(1.0, 0.6, 1.0)
-        }
     }
 
     companion object {
         @Suppress("UNUSED_PARAMETER")
+        private fun isBrightEnoughToSpawn(level: BlockAndTintGetter, pos: BlockPos): Boolean {
+            return level.getRawBrightness(pos, 0) > 8
+        }
+
         fun canBirdSpawn(
             type: EntityType<out HBBirdEntity>,
             level: LevelAccessor,

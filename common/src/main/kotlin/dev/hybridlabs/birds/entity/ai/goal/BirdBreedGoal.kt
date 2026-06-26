@@ -4,17 +4,16 @@ import dev.hybridlabs.birds.entity.bird.HBBirdEntity
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.world.entity.ai.goal.Goal
 import net.minecraft.world.entity.ai.targeting.TargetingConditions
-import net.minecraft.world.entity.animal.Animal
 import net.minecraft.world.level.Level
 import java.util.*
 
 open class BirdBreedGoal @JvmOverloads constructor(
     protected val bird: HBBirdEntity,
     private val speedModifier: Double,
-    private val partnerClass: Class<out Animal> = bird.javaClass,
+    private val partnerClass: Class<out HBBirdEntity> = bird.javaClass,
 ) : Goal() {
     protected val level: Level = bird.level()
-    protected var partner: Animal? = null
+    protected var partner: HBBirdEntity? = null
     private var loveTime = 0
 
     init {
@@ -22,7 +21,7 @@ open class BirdBreedGoal @JvmOverloads constructor(
     }
 
     override fun canUse(): Boolean {
-        if (!this.bird.isInLove) {
+        if (!this.bird.isInLove()) {
             return false
         } else {
             this.partner = this.freePartner
@@ -31,7 +30,7 @@ open class BirdBreedGoal @JvmOverloads constructor(
     }
 
     override fun canContinueToUse(): Boolean {
-        return this.partner!!.isAlive && this.partner!!.isInLove && this.loveTime < 60
+        return this.partner!!.isAlive && this.partner!!.isInLove() && this.loveTime < 60
     }
 
     override fun stop() {
@@ -48,29 +47,30 @@ open class BirdBreedGoal @JvmOverloads constructor(
         }
     }
 
-    private val freePartner: Animal?
+    private val freePartner: HBBirdEntity?
         get() {
-            val list: MutableList<out Animal> = this.level.getNearbyEntities(
+            val list: MutableList<out HBBirdEntity> = this.level.getNearbyEntities(
                 this.partnerClass,
                 PARTNER_TARGETING,
                 this.bird,
                 this.bird.boundingBox.inflate(8.0)
             )
             var d0 = Double.MAX_VALUE
-            var animal: Animal? = null
+            var bird: HBBirdEntity? = null
 
-            for (animal1 in list) {
-                if (this.bird.canMate(animal1) && this.bird.distanceToSqr(animal1) < d0) {
-                    animal = animal1
-                    d0 = this.bird.distanceToSqr(animal1)
+            for (bird1 in list) {
+                if (this.bird.canMate(bird1) && this.bird.distanceToSqr(bird1) < d0) {
+                    bird = bird1
+                    d0 = this.bird.distanceToSqr(bird1)
                 }
             }
 
-            return animal
+            return bird
         }
 
     protected open fun breed() {
-        this.bird.spawnChildFromBreeding(this.level as ServerLevel, this.partner)
+        val mate = this.partner ?: return
+        this.bird.spawnChildFromBreeding(this.level as ServerLevel, mate)
     }
 
     companion object {

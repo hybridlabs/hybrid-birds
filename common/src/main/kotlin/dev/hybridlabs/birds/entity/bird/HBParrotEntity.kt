@@ -173,7 +173,7 @@ open class HBParrotEntity(
     companion object {
         @Suppress("UNUSED_PARAMETER")
         fun canBirdSpawn(
-            type: EntityType<out HBParrotEntity>,
+            type: EntityType<out HBBirdEntity>,
             level: LevelAccessor,
             reason: MobSpawnType,
             pos: BlockPos,

@@ -5,6 +5,7 @@ import dev.hybridlabs.birds.entity.ai.control.BirdFloatControl
 import dev.hybridlabs.birds.entity.ai.goal.BirdBreedGoal
 import dev.hybridlabs.birds.item.HBItems
 import dev.hybridlabs.birds.sound.HBSoundEvents
+import net.minecraft.core.particles.ParticleTypes
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.sounds.SoundEvents
@@ -48,6 +49,28 @@ class GooseEntity(entityType: EntityType<out GooseEntity>, world: Level) :
 
     override fun aiStep() {
         super.aiStep()
+        if (this.getAge() != 0) {
+            this.inLove = 0
+        }
+
+        if (this.inLove > 0) {
+            --this.inLove
+            if (this.inLove % 10 == 0) {
+                val d0 = this.random.nextGaussian() * 0.02
+                val d1 = this.random.nextGaussian() * 0.02
+                val d2 = this.random.nextGaussian() * 0.02
+                this.level().addParticle(
+                    ParticleTypes.HEART,
+                    this.getRandomX(1.0),
+                    this.randomY + 0.5,
+                    this.getRandomZ(1.0),
+                    d0,
+                    d1,
+                    d2
+                )
+            }
+        }
+
         if ((!level().isClientSide && this.isAlive && !this.isBaby && --this.eggLayTime <= 0)) {
             this.playSound(
                 SoundEvents.CHICKEN_EGG,

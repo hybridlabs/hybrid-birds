@@ -75,7 +75,7 @@ class RoosterEntity(entityType: EntityType<out RoosterEntity>, world: Level) :
         return super.mobInteract(player, hand)
     }
 
-    override fun usePlayerItem(player: Player, hand: InteractionHand, stack: ItemStack) {
+    override fun usePlayerItem(player: Player, hand: InteractionHand?, stack: ItemStack) {
         if (!player.abilities.instabuild) {
             stack.shrink(1)
         }

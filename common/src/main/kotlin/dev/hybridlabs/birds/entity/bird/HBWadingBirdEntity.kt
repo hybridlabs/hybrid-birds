@@ -1,6 +1,7 @@
 package dev.hybridlabs.birds.entity.bird
 
 import dev.hybridlabs.birds.entity.ai.control.BirdFloatControl
+import dev.hybridlabs.birds.entity.ai.goal.BirdFollowParentGoal
 import net.minecraft.core.BlockPos
 import net.minecraft.tags.FluidTags
 import net.minecraft.util.RandomSource
@@ -37,7 +38,7 @@ open class HBWadingBirdEntity(
         goalSelector.addGoal(0, PanicGoal(this, 1.2))
         goalSelector.addGoal(1, RandomStrollGoal(this, 1.0))
         goalSelector.addGoal(2, RandomLookAroundGoal(this))
-        goalSelector.addGoal(5, FollowParentGoal(this, 1.1))
+        goalSelector.addGoal(5, BirdFollowParentGoal(this, 1.1))
         goalSelector.addGoal(11, LookAtPlayerGoal(this, Player::class.java, 10.0f))
     }
 
@@ -84,18 +85,5 @@ open class HBWadingBirdEntity(
 
     companion object {
         val WATER_IDLE: RawAnimation = RawAnimation.begin().thenPlay("misc.water_idle")
-
-        @Suppress("UNUSED_PARAMETER")
-        fun canWadingBirdSpawn(
-            type: EntityType<out HBWadingBirdEntity>,
-            level: LevelAccessor,
-            spawnReason: MobSpawnType,
-            pos: BlockPos,
-            random: RandomSource,
-        ): Boolean {
-            return isBrightEnoughToSpawn(level, pos) &&
-                    level.getBlockState(pos.below()).isSolid &&
-                    level.canSeeSky(pos)
-        }
     }
 }

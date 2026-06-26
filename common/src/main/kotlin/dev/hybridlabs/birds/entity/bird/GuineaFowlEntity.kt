@@ -12,9 +12,7 @@ import net.minecraft.world.entity.AgeableMob
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
-import net.minecraft.world.entity.ai.goal.BreedGoal
 import net.minecraft.world.entity.ai.goal.TemptGoal
-import net.minecraft.world.entity.animal.Animal
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.crafting.Ingredient
 import net.minecraft.world.level.Level
@@ -64,16 +62,16 @@ class GuineaFowlEntity(entityType: EntityType<out GuineaFowlEntity>, world: Leve
         return HBEntityTypes.GUINEA_FOWL.get().create(serverLevel)
     }
 
-    override fun spawnChildFromBreeding(world: ServerLevel, other: Animal) {
+    override fun spawnChildFromBreeding(level: ServerLevel, mate: HBBirdEntity) {
         val babyCount = 1 + random.nextInt(4)
 
         repeat(babyCount) {
-            val passiveEntity = this.getBreedOffspring(world, other)
+            val passiveEntity = this.getBreedOffspring(level, mate)
             if (passiveEntity != null) {
                 passiveEntity.isBaby = true
                 passiveEntity.moveTo(this.x, this.y, this.z, 0.0f, 0.0f)
-                this.finalizeSpawnChildFromBreeding(world, other, passiveEntity)
-                world.addFreshEntityWithPassengers(passiveEntity)
+                this.finalizeSpawnChildFromBreeding(level, mate)
+                level.addFreshEntityWithPassengers(passiveEntity)
             }
         }
     }

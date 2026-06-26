@@ -3,6 +3,7 @@ package dev.hybridlabs.birds.entity
 import dev.hybridlabs.birds.entity.bird.HBAquaticBirdEntity
 import dev.hybridlabs.birds.entity.bird.HBBirdEntity
 import dev.hybridlabs.birds.entity.bird.HBParrotEntity
+import dev.hybridlabs.birds.entity.bird.HBParrotEntity.Companion.canBirdSpawn
 import dev.hybridlabs.birds.entity.bird.HBRatiteEntity
 import dev.hybridlabs.birds.entity.bird.HBWadingBirdEntity
 import net.minecraft.world.entity.EntityType
@@ -55,7 +56,7 @@ object SpawnRestrictionRegistry {
         registerBirdEntity(entityType, HBBirdEntity::canBirdSpawn)
     }
 
-    private fun <T : HBParrotEntity> registerParrot(entityType: EntityType<T>) {
+    private fun <T : HBBirdEntity> registerParrot(entityType: EntityType<T>) {
         registerBirdEntity(entityType, HBParrotEntity::canBirdSpawn)
     }
 
@@ -64,7 +65,7 @@ object SpawnRestrictionRegistry {
     }
 
     private fun <T : HBRatiteEntity> registerRatite(entityType: EntityType<T>) {
-        registerBirdEntity(entityType, HBRatiteEntity::canRatiteSpawn)
+        registerBirdEntity(entityType, HBBirdEntity::canBirdSpawn)
     }
 
     private fun <T : HBAquaticBirdEntity> registerAquaticBird(entityType: EntityType<T>) {
@@ -72,10 +73,10 @@ object SpawnRestrictionRegistry {
     }
 
     private fun <T : HBWadingBirdEntity> registerWadingBird(entityType: EntityType<T>) {
-        registerAquaticBirdEntity(entityType, HBWadingBirdEntity::canWadingBirdSpawn)
+        registerAquaticBirdEntity(entityType, HBBirdEntity::canBirdSpawn)
     }
 
-    private fun <T : Animal> registerBirdEntity(entityType: EntityType<T>, predicate: SpawnPredicate<T>) {
+    private fun <T : HBBirdEntity> registerBirdEntity(entityType: EntityType<T>, predicate: SpawnPredicate<T>) {
         register(
             entityType,
             Type.ON_GROUND,
@@ -83,7 +84,7 @@ object SpawnRestrictionRegistry {
         )
     }
 
-    private fun <T : Animal> registerAquaticBirdEntity(entityType: EntityType<T>, predicate: SpawnPredicate<T>) {
+    private fun <T : HBBirdEntity> registerAquaticBirdEntity(entityType: EntityType<T>, predicate: SpawnPredicate<T>) {
         register(
             entityType,
             Type.NO_RESTRICTIONS,

@@ -1,6 +1,7 @@
 package dev.hybridlabs.birds.entity.bird
 
 import dev.hybridlabs.birds.entity.ai.control.BirdFloatControl
+import dev.hybridlabs.birds.entity.ai.goal.BirdFollowParentGoal
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.tags.FluidTags
@@ -48,7 +49,7 @@ open class HBAquaticBirdEntity(
         goalSelector.addGoal(0, PanicGoal(this, 1.2))
         goalSelector.addGoal(1, RandomStrollGoal(this, 1.0))
         goalSelector.addGoal(2, RandomLookAroundGoal(this))
-        goalSelector.addGoal(5, FollowParentGoal(this, 1.1))
+        goalSelector.addGoal(5, BirdFollowParentGoal(this, 1.1))
         goalSelector.addGoal(11, LookAtPlayerGoal(this, Player::class.java, 10.0f))
     }
 
