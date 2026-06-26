@@ -2,6 +2,7 @@ package dev.hybridlabs.birds
 import dev.hybridlabs.birds.block.HBBlocks
 import dev.hybridlabs.birds.client.render.entity.HBEntityRenderers
 import dev.hybridlabs.birds.effect.HBStatusEffects
+import dev.hybridlabs.birds.entity.ForgeSpawnGroupRegistry
 import dev.hybridlabs.birds.entity.HBEntityTypes
 import dev.hybridlabs.birds.entity.SpawnRestrictionRegistry
 import dev.hybridlabs.birds.item.HBItemGroups
@@ -33,6 +34,7 @@ object HybridBirdsForge {
     init {
         CommonClass.init()
 
+        ForgeSpawnGroupRegistry.createHybridAquaticSpawnGroups()
         createSpawnGroups()
         HBSoundEvents
         HBEntityTypes
