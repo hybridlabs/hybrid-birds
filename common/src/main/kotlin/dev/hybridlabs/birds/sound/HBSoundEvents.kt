@@ -12,6 +12,14 @@ object HBSoundEvents {
     val SEAGULL_HURT = register("entity.seagull.hurt")
     val SEAGULL_DIE = register("entity.seagull.die")
 
+    val PELICAN_AMBIENT = register("entity.pelican.ambient")
+    val PELICAN_HURT = register("entity.pelican.hurt")
+    val PELICAN_DIE = register("entity.pelican.die")
+
+    val ALBATROSS_AMBIENT = register("entity.albatross.ambient")
+    val ALBATROSS_HURT = register("entity.albatross.hurt")
+    val ALBATROSS_DIE = register("entity.albatross.die")
+
     val DUCK_AMBIENT = register("entity.duck.ambient")
     val DUCK_HURT = register("entity.duck.hurt")
     val DUCK_DIE = register("entity.duck.die")

@@ -54,6 +54,14 @@ class SoundProvider(
             HBSoundEvents.SEAGULL_HURT to CommonClass.locate("entity/seagull_hurt"),
             HBSoundEvents.SEAGULL_DIE to CommonClass.locate("entity/seagull_die"),
 
+            HBSoundEvents.PELICAN_AMBIENT to CommonClass.locate("entity/pelican_ambient"),
+            HBSoundEvents.PELICAN_HURT to CommonClass.locate("entity/pelican_hurt"),
+            HBSoundEvents.PELICAN_DIE to CommonClass.locate("entity/pelican_die"),
+
+            HBSoundEvents.ALBATROSS_AMBIENT to CommonClass.locate("entity/albatross_ambient"),
+            HBSoundEvents.ALBATROSS_HURT to CommonClass.locate("entity/albatross_hurt"),
+            HBSoundEvents.ALBATROSS_DIE to CommonClass.locate("entity/albatross_die"),
+
             HBSoundEvents.OSTRICH_AMBIENT to CommonClass.locate("entity/ostrich_ambient"),
             HBSoundEvents.OSTRICH_HURT to CommonClass.locate("entity/ostrich_hurt"),
             

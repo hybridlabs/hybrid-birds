@@ -63,15 +63,15 @@ class PelicanEntity(type: EntityType<out PelicanEntity>, world: Level) :
     }
 
     override fun getAmbientSound(): SoundEvent {
-        return HBSoundEvents.SEAGULL_AMBIENT.get()
+        return HBSoundEvents.PELICAN_AMBIENT.get()
     }
 
     override fun getHurtSound(source: DamageSource): SoundEvent {
-        return HBSoundEvents.SEAGULL_HURT.get()
+        return HBSoundEvents.PELICAN_HURT.get()
     }
 
     override fun getDeathSound(): SoundEvent {
-        return HBSoundEvents.SEAGULL_DIE.get()
+        return HBSoundEvents.PELICAN_DIE.get()
     }
 
     companion object {

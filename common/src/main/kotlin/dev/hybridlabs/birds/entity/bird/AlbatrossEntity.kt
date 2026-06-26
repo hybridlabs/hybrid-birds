@@ -65,15 +65,15 @@ class AlbatrossEntity(type: EntityType<out AlbatrossEntity>, world: Level) :
     }
 
     override fun getAmbientSound(): SoundEvent {
-        return HBSoundEvents.SEAGULL_AMBIENT.get()
+        return HBSoundEvents.ALBATROSS_AMBIENT.get()
     }
 
     override fun getHurtSound(source: DamageSource): SoundEvent {
-        return HBSoundEvents.SEAGULL_HURT.get()
+        return HBSoundEvents.ALBATROSS_HURT.get()
     }
 
     override fun getDeathSound(): SoundEvent {
-        return HBSoundEvents.SEAGULL_DIE.get()
+        return HBSoundEvents.ALBATROSS_DIE.get()
     }
 
     companion object {

@@ -1,4 +1,22 @@
 {
+  "entity.albatross.ambient": {
+    "sounds": [
+      "hybrid_birds:entity/albatross_ambient"
+    ],
+    "subtitle": "subtitles.hybrid_birds.entity.albatross.ambient"
+  },
+  "entity.albatross.die": {
+    "sounds": [
+      "hybrid_birds:entity/albatross_die"
+    ],
+    "subtitle": "subtitles.hybrid_birds.entity.albatross.die"
+  },
+  "entity.albatross.hurt": {
+    "sounds": [
+      "hybrid_birds:entity/albatross_hurt"
+    ],
+    "subtitle": "subtitles.hybrid_birds.entity.albatross.hurt"
+  },
   "entity.chick.ambient": {
     "sounds": [
       "hybrid_birds:entity/chick_ambient"
@@ -82,6 +100,24 @@
       "hybrid_birds:entity/peacock_hurt"
     ],
     "subtitle": "subtitles.hybrid_birds.entity.peacock.hurt"
+  },
+  "entity.pelican.ambient": {
+    "sounds": [
+      "hybrid_birds:entity/pelican_ambient"
+    ],
+    "subtitle": "subtitles.hybrid_birds.entity.pelican.ambient"
+  },
+  "entity.pelican.die": {
+    "sounds": [
+      "hybrid_birds:entity/pelican_die"
+    ],
+    "subtitle": "subtitles.hybrid_birds.entity.pelican.die"
+  },
+  "entity.pelican.hurt": {
+    "sounds": [
+      "hybrid_birds:entity/pelican_hurt"
+    ],
+    "subtitle": "subtitles.hybrid_birds.entity.pelican.hurt"
   },
   "entity.rooster.ambient": {
     "sounds": [
