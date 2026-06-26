@@ -1,11 +1,13 @@
 package dev.hybridlabs.birds.entity.bird
 
 import net.minecraft.core.BlockPos
+import net.minecraft.nbt.CompoundTag
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.tags.FluidTags
 import net.minecraft.util.RandomSource
+import net.minecraft.world.DifficultyInstance
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.entity.*
 import net.minecraft.world.entity.ai.control.LookControl
@@ -15,8 +17,10 @@ import net.minecraft.world.entity.ai.navigation.GroundPathNavigation
 import net.minecraft.world.entity.ai.navigation.PathNavigation
 import net.minecraft.world.entity.animal.Animal
 import net.minecraft.world.entity.player.Player
+import net.minecraft.world.level.GameRules
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.LevelAccessor
+import net.minecraft.world.level.ServerLevelAccessor
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.pathfinder.BlockPathTypes
 import org.jetbrains.annotations.Nullable
@@ -73,6 +77,37 @@ open class HBBirdEntity(
 
     override fun getMaxHeadYRot(): Int {
         return 90
+    }
+
+    open fun spawnChildFromBreeding(level: ServerLevel, mate: HBBirdEntity) {
+        val baby = this.getBreedOffspring(level, mate) ?: return
+
+        this.setPersistenceRequired()
+        baby.setPersistenceRequired()
+        baby.isBaby = true
+        baby.moveTo(this.x, this.y, this.z, 0.0f, 0.0f)
+
+        this.finalizeSpawnChildFromBreeding(level, mate)
+        level.addFreshEntityWithPassengers(baby)
+    }
+
+    fun finalizeSpawnChildFromBreeding(level: ServerLevel, bird: HBBirdEntity) {
+        this.setAge(6000)
+        bird.setAge(6000)
+        this.resetLove()
+        bird.resetLove()
+        level.broadcastEntityEvent(this, 18.toByte())
+        if (level.gameRules.getBoolean(GameRules.RULE_DOMOBLOOT)) {
+            level.addFreshEntity(
+                ExperienceOrb(
+                    level,
+                    this.x,
+                    this.y,
+                    this.z,
+                    this.getRandom().nextInt(7) + 1
+                )
+            )
+        }
     }
 
     @Nullable

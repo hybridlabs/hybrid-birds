@@ -1,6 +1,7 @@
 package dev.hybridlabs.birds.entity.bird
 
 import dev.hybridlabs.birds.entity.HBEntityTypes
+import dev.hybridlabs.birds.entity.ai.goal.BirdBreedGoal
 import dev.hybridlabs.birds.item.HBItems
 import dev.hybridlabs.birds.loot.HBLootTables
 import dev.hybridlabs.birds.sound.HBSoundEvents
@@ -48,8 +49,8 @@ class TurkeyEntity(entityType: EntityType<out TurkeyEntity>, world: Level) :
 
     override fun registerGoals() {
         super.registerGoals()
-        goalSelector.addGoal(1, TemptGoal(this, 1.0, Ingredient.of(ItemTags.VILLAGER_PLANTABLE_SEEDS), false))
-        goalSelector.addGoal(2, BreedGoal(this, 1.1))
+        goalSelector.addGoal(1, BirdBreedGoal(this, 1.1))
+        goalSelector.addGoal(2, TemptGoal(this, 1.0, BREEDING_INGREDIENT, false))
     }
 
     override fun aiStep() {
