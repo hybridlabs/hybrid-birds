@@ -2,6 +2,7 @@ package dev.hybridlabs.birds.entity.bird
 
 import dev.hybridlabs.birds.entity.ai.goal.BirdFollowParentGoal
 import net.minecraft.core.BlockPos
+import net.minecraft.core.particles.ItemParticleOption
 import net.minecraft.core.particles.ParticleTypes
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.server.level.ServerLevel
@@ -27,6 +28,7 @@ import net.minecraft.world.level.Level
 import net.minecraft.world.level.LevelAccessor
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.pathfinder.BlockPathTypes
+import net.minecraft.world.phys.Vec3
 import org.jetbrains.annotations.Nullable
 import software.bernie.geckolib.animatable.GeoEntity
 import software.bernie.geckolib.constant.DefaultAnimations
@@ -99,6 +101,50 @@ open class HBBirdEntity(
                     d2
                 )
             }
+        }
+    }
+
+    override fun handleEntityEvent(id: Byte) {
+        if (id.toInt() == 45) {
+            val itemstack = this.getItemBySlot(EquipmentSlot.MAINHAND)
+            if (!itemstack.isEmpty) {
+                for (i in 0..7) {
+                    val vec3 = (Vec3(
+                        (this.random.nextFloat().toDouble() - 0.5) * 0.1,
+                        Math.random() * 0.1 + 0.1,
+                        0.0
+                    )).xRot(-this.xRot * (Math.PI.toFloat() / 180f))
+                        .yRot(-this.yRot * (Math.PI.toFloat() / 180f))
+                    this.level().addParticle(
+                        ItemParticleOption(ParticleTypes.ITEM, itemstack),
+                        this.x + this.lookAngle.x / 2.0,
+                        this.y,
+                        this.z + this.lookAngle.z / 2.0,
+                        vec3.x,
+                        vec3.y + 0.05,
+                        vec3.z
+                    )
+                }
+            }
+        }
+
+        if (id.toInt() == 18) {
+            for (i in 0..6) {
+                val d0 = this.random.nextGaussian() * 0.02
+                val d1 = this.random.nextGaussian() * 0.02
+                val d2 = this.random.nextGaussian() * 0.02
+                this.level().addParticle(
+                    ParticleTypes.HEART,
+                    this.getRandomX(1.0),
+                    this.randomY + 0.5,
+                    this.getRandomZ(1.0),
+                    d0,
+                    d1,
+                    d2
+                )
+            }
+        } else {
+            super.handleEntityEvent(id)
         }
     }
 
