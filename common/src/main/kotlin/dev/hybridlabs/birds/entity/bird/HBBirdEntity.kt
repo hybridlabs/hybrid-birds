@@ -1,16 +1,11 @@
 package dev.hybridlabs.birds.entity.bird
 
 import net.minecraft.core.BlockPos
-import net.minecraft.network.syncher.EntityDataAccessor
-import net.minecraft.network.syncher.EntityDataSerializers
-import net.minecraft.network.syncher.SynchedEntityData
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.tags.FluidTags
 import net.minecraft.util.RandomSource
-import net.minecraft.world.InteractionHand
-import net.minecraft.world.InteractionResult
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.entity.*
 import net.minecraft.world.entity.ai.control.LookControl
@@ -20,12 +15,9 @@ import net.minecraft.world.entity.ai.navigation.GroundPathNavigation
 import net.minecraft.world.entity.ai.navigation.PathNavigation
 import net.minecraft.world.entity.animal.Animal
 import net.minecraft.world.entity.player.Player
-import net.minecraft.world.item.ItemStack
-import net.minecraft.world.item.Items
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.LevelAccessor
 import net.minecraft.world.level.block.state.BlockState
-import net.minecraft.world.level.gameevent.GameEvent
 import net.minecraft.world.level.pathfinder.BlockPathTypes
 import org.jetbrains.annotations.Nullable
 import software.bernie.geckolib.animatable.GeoEntity
@@ -111,7 +103,8 @@ open class HBBirdEntity(
     }
 
     override fun removeWhenFarAway(distanceSquared: Double): Boolean {
-        return !this.hasCustomName()
+        return !isPersistenceRequired &&
+                !this.hasCustomName()
     }
 
     override fun getMaxSpawnClusterSize(): Int {
