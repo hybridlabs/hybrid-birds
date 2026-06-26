@@ -1,0 +1,34 @@
+{
+  "replace": false,
+  "values": [
+    "#minecraft:is_beach",
+    {
+      "id": "hybrid_aquatic:seagrass_bed",
+      "required": false
+    },
+    {
+      "id": "hybrid_aquatic:red_meadow",
+      "required": false
+    },
+    {
+      "id": "hybrid_aquatic:coral_reef",
+      "required": false
+    },
+    {
+      "id": "still_life:cold_shallow_ocean",
+      "required": false
+    },
+    {
+      "id": "still_life:temperate_shallow_ocean",
+      "required": false
+    },
+    {
+      "id": "still_life:subtropical_shallow_ocean",
+      "required": false
+    },
+    {
+      "id": "still_life:tropical_shallow_ocean",
+      "required": false
+    }
+  ]
+}

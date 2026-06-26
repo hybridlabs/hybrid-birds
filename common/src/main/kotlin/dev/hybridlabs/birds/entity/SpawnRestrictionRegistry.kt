@@ -37,6 +37,7 @@ object SpawnRestrictionRegistry {
             HBEntityTypes.DUCK.get(),
             HBEntityTypes.GOOSE.get(),
             HBEntityTypes.SWAN.get(),
+            HBEntityTypes.PUFFIN.get(),
             HBEntityTypes.SEAGULL.get(),
             HBEntityTypes.ALBATROSS.get(),
             HBEntityTypes.PELICAN.get(),

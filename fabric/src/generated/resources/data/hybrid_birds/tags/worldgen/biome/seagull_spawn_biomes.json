@@ -1,0 +1,70 @@
+{
+  "replace": false,
+  "values": [
+    "#minecraft:is_beach",
+    {
+      "id": "hybrid_aquatic:deep_warm_ocean",
+      "required": false
+    },
+    {
+      "id": "hybrid_aquatic:seagrass_bed",
+      "required": false
+    },
+    {
+      "id": "hybrid_aquatic:red_meadow",
+      "required": false
+    },
+    {
+      "id": "hybrid_aquatic:coral_reef",
+      "required": false
+    },
+    {
+      "id": "still_life:cold_shallow_ocean",
+      "required": false
+    },
+    {
+      "id": "still_life:cold_deep_ocean",
+      "required": false
+    },
+    {
+      "id": "still_life:temperate_shallow_ocean",
+      "required": false
+    },
+    {
+      "id": "still_life:temperate_deep_ocean",
+      "required": false
+    },
+    {
+      "id": "still_life:subtropical_shallow_ocean",
+      "required": false
+    },
+    {
+      "id": "still_life:subtropical_deep_ocean",
+      "required": false
+    },
+    {
+      "id": "still_life:tropical_deep_ocean",
+      "required": false
+    },
+    {
+      "id": "still_life:tropical_shallow_ocean",
+      "required": false
+    },
+    {
+      "id": "spawn:deep_warm_ocean",
+      "required": false
+    },
+    {
+      "id": "spawn:seagrass_meadow",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:rocky_reef",
+      "required": false
+    },
+    {
+      "id": "biomeswevegone:lush_stacks",
+      "required": false
+    }
+  ]
+}

@@ -119,6 +119,24 @@
     ],
     "subtitle": "subtitles.hybrid_birds.entity.pelican.hurt"
   },
+  "entity.puffin.ambient": {
+    "sounds": [
+      "hybrid_birds:entity/puffin_ambient"
+    ],
+    "subtitle": "subtitles.hybrid_birds.entity.puffin.ambient"
+  },
+  "entity.puffin.die": {
+    "sounds": [
+      "hybrid_birds:entity/puffin_die"
+    ],
+    "subtitle": "subtitles.hybrid_birds.entity.puffin.die"
+  },
+  "entity.puffin.hurt": {
+    "sounds": [
+      "hybrid_birds:entity/puffin_hurt"
+    ],
+    "subtitle": "subtitles.hybrid_birds.entity.puffin.hurt"
+  },
   "entity.rooster.ambient": {
     "sounds": [
       "hybrid_birds:entity/rooster_ambient"

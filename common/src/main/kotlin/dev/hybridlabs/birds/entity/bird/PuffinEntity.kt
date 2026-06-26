@@ -13,16 +13,14 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.entity.ai.control.LookControl
 import net.minecraft.world.entity.ai.goal.*
-import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal
 import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation
 import net.minecraft.world.entity.ai.navigation.PathNavigation
-import net.minecraft.world.entity.animal.Turtle
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.crafting.Ingredient
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.pathfinder.BlockPathTypes
 
-class SeagullEntity(type: EntityType<out SeagullEntity>, world: Level) :
+class PuffinEntity(type: EntityType<out PuffinEntity>, world: Level) :
     HBAquaticBirdEntity(type, world) {
 
     override fun createNavigation(level: Level): PathNavigation {
@@ -43,9 +41,6 @@ class SeagullEntity(type: EntityType<out SeagullEntity>, world: Level) :
         goalSelector.addGoal(1, TemptGoal(this, 1.0, BREEDING_INGREDIENT, false))
         goalSelector.addGoal(2, WaterAvoidingRandomFlyingGoal(this, 1.0))
         goalSelector.addGoal(2, LookAtPlayerGoal(this, Player::class.java, 8.0f))
-        goalSelector.addGoal(5, MeleeAttackGoal(this, 1.0, true))
-        targetSelector.addGoal(6, NearestAttackableTargetGoal(this, Turtle::class.java, false, Turtle.BABY_ON_LAND_SELECTOR)
-        )
     }
 
     override fun getWaterline(): Float {
@@ -59,20 +54,20 @@ class SeagullEntity(type: EntityType<out SeagullEntity>, world: Level) :
         return 3
     }
 
-    override fun getBreedOffspring(serverLevel: ServerLevel, ageableMob: AgeableMob): SeagullEntity? {
-        return HBEntityTypes.SEAGULL.get().create(serverLevel)
+    override fun getBreedOffspring(serverLevel: ServerLevel, ageableMob: AgeableMob): PuffinEntity? {
+        return HBEntityTypes.PUFFIN.get().create(serverLevel)
     }
 
     override fun getAmbientSound(): SoundEvent {
-        return HBSoundEvents.SEAGULL_AMBIENT.get()
+        return HBSoundEvents.PUFFIN_AMBIENT.get()
     }
 
     override fun getHurtSound(source: DamageSource): SoundEvent {
-        return HBSoundEvents.SEAGULL_HURT.get()
+        return HBSoundEvents.PUFFIN_HURT.get()
     }
 
     override fun getDeathSound(): SoundEvent {
-        return HBSoundEvents.SEAGULL_DIE.get()
+        return HBSoundEvents.PUFFIN_DIE.get()
     }
 
     companion object {

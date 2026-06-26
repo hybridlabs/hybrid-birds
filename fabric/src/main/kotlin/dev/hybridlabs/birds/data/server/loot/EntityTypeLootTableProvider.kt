@@ -18,6 +18,21 @@ import java.util.function.BiConsumer
 class EntityTypeLootTableProvider(output: FabricDataOutput) :
     SimpleFabricLootTableProvider(output, LootContextParamSets.ENTITY) {
     override fun generate(exporter: BiConsumer<ResourceLocation, LootTable.Builder>) {
+        export(exporter, HBEntityTypes.PUFFIN.get()) {
+            pool(
+                LootPool.lootPool()
+                    .add(LootItem.lootTableItem(Items.COD)
+                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0f, 2.0f))))
+                    .build()
+            )
+            pool(
+                LootPool.lootPool()
+                    .add(LootItem.lootTableItem(Items.FEATHER)
+                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0f, 2.0f))))
+                    .build()
+            )
+        }
+
         export(exporter, HBEntityTypes.SEAGULL.get()) {
             pool(
                 LootPool.lootPool()
@@ -32,6 +47,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
                     .build()
             )
         }
+
         export(exporter, HBEntityTypes.ALBATROSS.get()) {
             pool(
                 LootPool.lootPool()

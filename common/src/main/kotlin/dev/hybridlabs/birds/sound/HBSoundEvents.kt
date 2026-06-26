@@ -8,6 +8,10 @@ import net.minecraft.sounds.SoundEvent
 
 object HBSoundEvents {
 
+    val PUFFIN_AMBIENT = register("entity.puffin.ambient")
+    val PUFFIN_HURT = register("entity.puffin.hurt")
+    val PUFFIN_DIE = register("entity.puffin.die")
+    
     val SEAGULL_AMBIENT = register("entity.seagull.ambient")
     val SEAGULL_HURT = register("entity.seagull.hurt")
     val SEAGULL_DIE = register("entity.seagull.die")

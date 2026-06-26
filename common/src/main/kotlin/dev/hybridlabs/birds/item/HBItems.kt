@@ -24,6 +24,7 @@ object HBItems {
     val TURKEY_SPAWN_EGG = registerSpawnEgg("turkey_spawn_egg", HBEntityTypes.TURKEY, 0x383551, 0xcc4468)
     val PEACOCK_SPAWN_EGG = registerSpawnEgg("peacock_spawn_egg", HBEntityTypes.PEACOCK, 0x3faa73, 0x010c86)
     val GUINEA_FOWL_SPAWN_EGG = registerSpawnEgg("guinea_fowl_spawn_egg", HBEntityTypes.GUINEA_FOWL, 0x356b97, 0x252533)
+    val PUFFIN_SPAWN_EGG = registerSpawnEgg("puffin_spawn_egg", HBEntityTypes.PUFFIN, 0x252633, 0xd08566)
     val SEAGULL_SPAWN_EGG = registerSpawnEgg("seagull_spawn_egg", HBEntityTypes.SEAGULL, 0xf1edf6, 0xf59a21)
     val ALBATROSS_SPAWN_EGG = registerSpawnEgg("albatross_spawn_egg", HBEntityTypes.ALBATROSS, 0xe6e2dc, 0x624a3e)
     val PELICAN_SPAWN_EGG = registerSpawnEgg("pelican_spawn_egg", HBEntityTypes.PELICAN, 0xdcdced, 0xf06668)
