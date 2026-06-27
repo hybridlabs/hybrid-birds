@@ -2,6 +2,9 @@
   "replace": false,
   "values": [
     "#minecraft:is_beach",
+    "minecraft:ocean",
+    "minecraft:lukewarm_ocean",
+    "minecraft:warm_ocean",
     {
       "id": "hybrid_aquatic:seagrass_bed",
       "required": false
