@@ -2,6 +2,7 @@ package dev.hybridlabs.birds.platform.services;
 
 
 import dev.hybridlabs.birds.CommonClass;
+import dev.hybridlabs.birds.Constants;
 import dev.hybridlabs.birds.platform.registration.RegistryObject;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -94,7 +95,7 @@ public class ForgePlatformHelper implements PlatformHelper {
 
     @Override
     public MobCategory getHybridMobCategoryByName(String name) {
-        return MobCategory.valueOf(name);
+        return MobCategory.valueOf((Constants.MOD_ID + '_' + name).toUpperCase());
     }
 
     private record SpawnPlacementRegistrationHandler<T extends LivingEntity>(
