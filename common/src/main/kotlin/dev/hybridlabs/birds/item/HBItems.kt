@@ -49,8 +49,7 @@ object HBItems {
             itemSettings().food(
                 FoodProperties.Builder()
                     .nutrition(4)
-                    .saturationMod(0.4F)
-                    .meat()
+                    .saturationModifier(0.4F)
                     .fast()
                     .build()
             )
@@ -62,8 +61,8 @@ object HBItems {
             itemSettings().food(
                 FoodProperties.Builder()
                     .nutrition(2)
-                    .saturationMod(0.3F)
-                    .meat().build()
+                    .saturationModifier(0.3F)
+                    .build()
             )
         )
     }
@@ -73,8 +72,7 @@ object HBItems {
             itemSettings().food(
                 FoodProperties.Builder()
                     .nutrition(3)
-                    .saturationMod(0.4F)
-                    .meat()
+                    .saturationModifier(0.4F)
                     .build()
             )
         )
@@ -87,8 +85,7 @@ object HBItems {
             itemSettings().food(
                 FoodProperties.Builder()
                     .nutrition(4)
-                    .saturationMod(0.4F)
-                    .meat()
+                    .saturationModifier(0.4F)
                     .build()
             )
         )
@@ -99,8 +96,7 @@ object HBItems {
             itemSettings().food(
                 FoodProperties.Builder()
                     .nutrition(5)
-                    .saturationMod(0.6F)
-                    .meat()
+                    .saturationModifier(0.6F)
                     .build()
             )
         )
@@ -113,8 +109,7 @@ object HBItems {
             itemSettings().food(
                 FoodProperties.Builder()
                     .nutrition(6)
-                    .saturationMod(0.6F)
-                    .meat()
+                    .saturationModifier(0.6F)
                     .build()
             )
         )
@@ -127,8 +122,7 @@ object HBItems {
             itemSettings().food(
                 FoodProperties.Builder()
                     .nutrition(7)
-                    .saturationMod(0.6F)
-                    .meat()
+                    .saturationModifier(0.6F)
                     .build()
             )
         )
@@ -141,8 +135,7 @@ object HBItems {
             itemSettings().food(
                 FoodProperties.Builder()
                     .nutrition(8)
-                    .saturationMod(0.8F)
-                    .meat()
+                    .saturationModifier(0.8F)
                     .build()
             )
         )
@@ -157,8 +150,7 @@ object HBItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(12)
-                        .saturationMod(1.0F)
-                        .meat()
+                        .saturationModifier(1.0F)
                         .build()
                 )
         )

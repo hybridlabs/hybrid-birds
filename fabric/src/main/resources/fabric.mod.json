@@ -4,19 +4,23 @@
     "version": "${version}",
 
     "name": "Hybrid Birds",
-    "description": "A mod that adds new birds and improves upon existing ones",
+  "description": "${description}",
 
     "authors": [
-        "MysticKoko",
-        "Aqua",
-        "Andante",
-        "Eggo"
+      "MysticKoko",
+      "Aqua",
+      "Andante",
+      "Eggo",
+      "Ragno",
+      "murphy slaw",
+      "AyaanDB"
     ],
 
-    "contact": {
-        "sources": "https://github.com/hybridlabs/hybrid-birds",
-        "issues": "https://github.com/hybridlabs/hybrid-birds/issues"
-    },
+  "contact": {
+    "homepage": "https://github.com/hybridlabs/hybrid_birds",
+    "sources": "https://github.com/hybridlabs/hybrid_birds",
+    "issues": "https://github.com/hybridlabs/hybrid_birds/issues"
+  },
 
     "license": "ARR",
     "icon": "assets/hybrid_birds/icon.png",
@@ -53,10 +57,10 @@
     "accessWidener": "hybrid_birds.accesswidener",
 
     "depends": {
-        "minecraft": "~1.20.1",
-        "java": ">=17",
-        "fabric-language-kotlin": "*",
-        "fabric-api": ">=0.92",
-        "geckolib": ">=4.4"
+      "minecraft": "~1.21.1",
+      "java": ">=21",
+      "fabric-language-kotlin": "*",
+      "fabric-api": ">=0.116",
+      "geckolib": ">=4.8"
     }
 }

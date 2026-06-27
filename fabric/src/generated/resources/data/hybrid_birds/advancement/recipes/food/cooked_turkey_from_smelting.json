@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "hybrid_birds:cooked_turkey_from_smelting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_turkey": {
+      "conditions": {
+        "items": [
+          {
+            "items": "hybrid_birds:turkey"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_turkey"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "hybrid_birds:cooked_turkey_from_smelting"
+    ]
+  }
+}

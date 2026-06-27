@@ -22,6 +22,6 @@ object HBBiomeTags {
     val HUMMINGBIRD_SPAWN_BIOMES = create("hummingbird_spawn_biomes")
 
     private fun create(id: String): TagKey<Biome> {
-        return TagKey.create(Registries.BIOME, ResourceLocation(Constants.MOD_ID, id))
+        return TagKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, id))
     }
 }

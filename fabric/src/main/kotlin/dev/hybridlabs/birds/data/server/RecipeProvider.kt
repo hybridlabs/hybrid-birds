@@ -6,27 +6,36 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider
 import net.minecraft.advancements.critereon.InventoryChangeTrigger
 import net.minecraft.advancements.critereon.ItemPredicate
-import net.minecraft.data.recipes.FinishedRecipe
+import net.minecraft.core.HolderLookup
 import net.minecraft.data.recipes.RecipeCategory
+import net.minecraft.data.recipes.RecipeOutput
 import net.minecraft.data.recipes.ShapelessRecipeBuilder
 import net.minecraft.data.recipes.SimpleCookingRecipeBuilder
 import net.minecraft.tags.TagKey
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.Items
 import net.minecraft.world.item.crafting.AbstractCookingRecipe
+import net.minecraft.world.item.crafting.CampfireCookingRecipe
 import net.minecraft.world.item.crafting.Ingredient
 import net.minecraft.world.item.crafting.RecipeSerializer
+import net.minecraft.world.item.crafting.SmeltingRecipe
+import net.minecraft.world.item.crafting.SmokingRecipe
+import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
-class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
-    override fun buildRecipes(exporter: Consumer<FinishedRecipe>) {
+class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture<HolderLookup.Provider>) :
+    FabricRecipeProvider(output, lookupProvider) {
+    override fun buildRecipes(exporter: RecipeOutput) {
         // misc recipes
         ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, HBItems.TURDUCKEN.get(), 1)
             .requires(HBItems.TURKEY.get())
             .requires(HBItems.DUCK.get())
             .requires(Items.CHICKEN)
-            .unlockedBy("has_turducken_ingredient", InventoryChangeTrigger.TriggerInstance.hasItems(
-                ItemPredicate.Builder.item().of(HBItemTags.TURDUCKEN_INGREDIENTS).build()))
+            .unlockedBy(
+                "has_turducken_ingredient", InventoryChangeTrigger.TriggerInstance.hasItems(
+                    ItemPredicate.Builder.item().of(HBItemTags.TURDUCKEN_INGREDIENTS).build()
+                )
+            )
             .save(exporter)
 
         // cooking recipes
@@ -39,39 +48,100 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
     }
 
     private fun offerCookingRecipes(
-        exporter: Consumer<FinishedRecipe>,
+        exporter: RecipeOutput,
         input: Item,
         output: Item,
-        experience: Float
+        experience: Float,
     ) {
-        simpleCookingRecipe(exporter, "smelting", RecipeSerializer.SMELTING_RECIPE, 200, input, output, experience)
-        simpleCookingRecipe(exporter, "smoking", RecipeSerializer.SMOKING_RECIPE, 100, input, output, experience)
-        simpleCookingRecipe(exporter, "campfire_cooking", RecipeSerializer.CAMPFIRE_COOKING_RECIPE, 600, input, output, experience)
+        simpleCookingRecipe(
+            exporter,
+            "smelting",
+            RecipeSerializer.SMELTING_RECIPE,
+            ::SmeltingRecipe,
+            200,
+            input,
+            output,
+            experience
+        )
+        simpleCookingRecipe(
+            exporter,
+            "smoking",
+            RecipeSerializer.SMOKING_RECIPE,
+            ::SmokingRecipe,
+            100,
+            input,
+            output,
+            experience
+        )
+        simpleCookingRecipe(
+            exporter,
+            "campfire_cooking",
+            RecipeSerializer.CAMPFIRE_COOKING_RECIPE,
+            ::CampfireCookingRecipe,
+            600,
+            input,
+            output,
+            experience
+        )
     }
 
     private fun offerEggCookingRecipes(
-        exporter: Consumer<FinishedRecipe>,
+        exporter: RecipeOutput,
         inputTag: TagKey<Item>,
         output: Item,
-        experience: Float
+        experience: Float,
     ) {
-        offerEggCookingRecipe(exporter, "smelting", RecipeSerializer.SMELTING_RECIPE, 200, inputTag, output, experience)
-        offerEggCookingRecipe(exporter, "smoking", RecipeSerializer.SMOKING_RECIPE, 100, inputTag, output, experience)
-        offerEggCookingRecipe(exporter, "campfire_cooking", RecipeSerializer.CAMPFIRE_COOKING_RECIPE, 600, inputTag, output, experience)
+        offerEggCookingRecipe(
+            exporter,
+            "smelting",
+            RecipeSerializer.SMELTING_RECIPE,
+            ::SmeltingRecipe,
+            200,
+            inputTag,
+            output,
+            experience
+        )
+        offerEggCookingRecipe(
+            exporter,
+            "smoking",
+            RecipeSerializer.SMOKING_RECIPE,
+            ::SmokingRecipe,
+            100,
+            inputTag,
+            output,
+            experience
+        )
+        offerEggCookingRecipe(
+            exporter,
+            "campfire_cooking",
+            RecipeSerializer.CAMPFIRE_COOKING_RECIPE,
+            ::CampfireCookingRecipe,
+            600,
+            inputTag,
+            output,
+            experience
+        )
     }
 
-    private fun offerEggCookingRecipe(
-        exporter: Consumer<FinishedRecipe>,
+    private fun <T : AbstractCookingRecipe> offerEggCookingRecipe(
+        exporter: RecipeOutput,
         cooker: String,
-        serializer: RecipeSerializer<out AbstractCookingRecipe>,
+        serializer: RecipeSerializer<T>,
+        recipeFactory: AbstractCookingRecipe.Factory<T>,
         cookingTime: Int,
         inputTag: TagKey<Item>,
         output: Item,
-        experience: Float
+        experience: Float,
     ) {
-        val builder = SimpleCookingRecipeBuilder
-            .generic(Ingredient.of(inputTag), RecipeCategory.FOOD, output, experience, cookingTime, serializer)
-            .unlockedBy("has_egg", has(inputTag))
+        val builder = SimpleCookingRecipeBuilder.generic(
+            Ingredient.of(inputTag),
+            RecipeCategory.FOOD,
+            output,
+            experience,
+            cookingTime,
+            serializer,
+            recipeFactory
+        ).unlockedBy("has_egg", has(inputTag))
 
         val recipeId = getItemName(output) + "_from_" + cooker
         builder.save(exporter, recipeId)

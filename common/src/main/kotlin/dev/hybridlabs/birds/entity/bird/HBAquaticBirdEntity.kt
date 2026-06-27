@@ -6,24 +6,25 @@ import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.tags.FluidTags
 import net.minecraft.util.RandomSource
-import net.minecraft.world.entity.EntityDimensions
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.MobSpawnType
-import net.minecraft.world.entity.Pose
 import net.minecraft.world.entity.ai.control.LookControl
-import net.minecraft.world.entity.ai.goal.*
+import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal
+import net.minecraft.world.entity.ai.goal.PanicGoal
+import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal
+import net.minecraft.world.entity.ai.goal.RandomStrollGoal
 import net.minecraft.world.entity.ai.navigation.AmphibiousPathNavigation
 import net.minecraft.world.entity.ai.navigation.PathNavigation
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.LevelAccessor
-import net.minecraft.world.level.pathfinder.BlockPathTypes
+import net.minecraft.world.level.pathfinder.PathType
 import software.bernie.geckolib.animatable.GeoEntity
+import software.bernie.geckolib.animation.AnimatableManager
+import software.bernie.geckolib.animation.AnimationController
+import software.bernie.geckolib.animation.AnimationState
+import software.bernie.geckolib.animation.RawAnimation
 import software.bernie.geckolib.constant.DefaultAnimations
-import software.bernie.geckolib.core.animation.AnimatableManager
-import software.bernie.geckolib.core.animation.AnimationController
-import software.bernie.geckolib.core.animation.AnimationState
-import software.bernie.geckolib.core.animation.RawAnimation
 
 @Suppress("LeakingThis")
 open class HBAquaticBirdEntity(
@@ -34,9 +35,9 @@ open class HBAquaticBirdEntity(
     GeoEntity {
 
     override fun createNavigation(level: Level): PathNavigation {
-        setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
-        setPathfindingMalus(BlockPathTypes.DANGER_FIRE, 16.0f)
-        setPathfindingMalus(BlockPathTypes.DAMAGE_FIRE, -1.0f)
+        setPathfindingMalus(PathType.WATER, 0.0f)
+        setPathfindingMalus(PathType.DANGER_FIRE, 16.0f)
+        setPathfindingMalus(PathType.DAMAGE_FIRE, -1.0f)
 
         moveControl = BirdFloatControl(this)
         navigation = AmphibiousPathNavigation(this, level)
@@ -67,10 +68,6 @@ open class HBAquaticBirdEntity(
                 }
             }
         )
-    }
-
-    override fun getStandingEyeHeight(pose: Pose, dimensions: EntityDimensions): Float {
-        return dimensions.height * 0.85f
     }
 
     companion object {

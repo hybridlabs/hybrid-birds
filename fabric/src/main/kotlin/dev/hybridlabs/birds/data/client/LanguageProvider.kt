@@ -2,18 +2,20 @@ package dev.hybridlabs.birds.data.client
 
 import dev.hybridlabs.birds.block.HBBlocks
 import dev.hybridlabs.birds.data.HBDataGenerator.filterHybridBirds
-import dev.hybridlabs.birds.effect.HBStatusEffects
+import dev.hybridlabs.birds.effect.HBMobEffects
 import dev.hybridlabs.birds.entity.HBEntityTypes
 import dev.hybridlabs.birds.item.HBItemGroups
 import dev.hybridlabs.birds.item.HBItems
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider
+import net.minecraft.core.HolderLookup
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.Mob
+import java.util.concurrent.CompletableFuture
 
-class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output) {
-    override fun generateTranslations(builder: TranslationBuilder) {
+class LanguageProvider( output: FabricDataOutput, lookupProvider: CompletableFuture<HolderLookup.Provider>) : FabricLanguageProvider(output,lookupProvider) {
+    override fun generateTranslations(lookupProvider: HolderLookup.Provider, builder: TranslationBuilder) {
         builder.add(
             BuiltInRegistries.CREATIVE_MODE_TAB.getResourceKey(HBItemGroups.HYBRID_BIRDS.get())
                 .orElseThrow { IllegalStateException("Item group not registered") }, "Hybrid Birds"
@@ -45,7 +47,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
         }
 
         mapOf(
-            HBStatusEffects.ROOSTERS_CALLING.get() to "Roosters Calling"
+            HBMobEffects.ROOSTERS_CALLING.get() to "Roosters Calling"
         ).forEach { (effect, translation) ->
             val identifier = BuiltInRegistries.MOB_EFFECT.getKey(effect)
             builder.add("effect.${identifier?.namespace}.${identifier?.path}", translation)

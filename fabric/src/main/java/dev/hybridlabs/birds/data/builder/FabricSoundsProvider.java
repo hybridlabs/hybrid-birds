@@ -4,6 +4,7 @@ import com.google.gson.JsonElement;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DynamicOps;
 import com.mojang.serialization.JsonOps;
+import dev.hybridlabs.birds.data.builder.SoundTypeBuilderImpl;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.CachedOutput;
@@ -90,7 +91,7 @@ public abstract class FabricSoundsProvider implements DataProvider {
             final T value,
             final Path path
     ) {
-        JsonElement json = codec.encodeStart(ops, value).getOrThrow(false, a -> a = "fuck you");
+        JsonElement json = codec.encodeStart(ops, value).getOrThrow();
         return DataProvider.saveStable(cache, json, path);
     }
 }

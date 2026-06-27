@@ -1,6 +1,7 @@
 package dev.hybridlabs.birds;
 
 import static dev.hybridlabs.birds.Constants.MOD_ID;
+import static dev.hybridlabs.birds.Constants.MOD_NAME;
 
 import dev.hybridlabs.birds.platform.Services;
 import dev.hybridlabs.birds.platform.registration.RegistrationProvider;
@@ -36,18 +37,12 @@ public class CommonClass {
             RegistrationProvider.get(BuiltInRegistries.CREATIVE_MODE_TAB, MOD_ID);
 
     public static void init() {
-
-        Constants.LOG.info(
-                "Hello from Common init on {}! we are currently in a {} environment!",
-                Services.PLATFORM.getPlatformName(),
-                Services.PLATFORM.getEnvironmentName());
-
         if (Services.PLATFORM.isModLoaded(MOD_ID)) {
-            Constants.LOG.info("Hybrid Birds loaded.");
+            Constants.LOGGER.info("{} loaded.", MOD_NAME);
         }
     }
 
     public static ResourceLocation locate(String path) {
-        return new ResourceLocation(MOD_ID, path);
+        return ResourceLocation.fromNamespaceAndPath(MOD_ID, path);
     }
 }

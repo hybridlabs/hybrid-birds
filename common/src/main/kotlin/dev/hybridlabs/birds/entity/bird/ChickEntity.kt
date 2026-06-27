@@ -36,14 +36,14 @@ class ChickEntity(entityType: EntityType<out ChickEntity>, world: Level) :
         }
     }
 
-    override fun addAdditionalSaveData(nbt: CompoundTag) {
-        super.addAdditionalSaveData(nbt)
-        nbt.putInt("Age", this.chickAge)
+    override fun addAdditionalSaveData(compound: CompoundTag) {
+        super.addAdditionalSaveData(compound)
+        compound.putInt("Age", this.chickAge)
     }
 
-    override fun readAdditionalSaveData(nbt: CompoundTag) {
-        super.readAdditionalSaveData(nbt)
-        this.setChickAge(nbt.getInt("Age"))
+    override fun readAdditionalSaveData(compound: CompoundTag) {
+        super.readAdditionalSaveData(compound)
+        this.setChickAge(compound.getInt("Age"))
     }
 
     private fun setChickAge(chickAge: Int) {
@@ -66,8 +66,7 @@ class ChickEntity(entityType: EntityType<out ChickEntity>, world: Level) :
                     var2,
                     level().getCurrentDifficultyAt(grownEntity.blockPosition()),
                     MobSpawnType.CONVERSION,
-                    null as SpawnGroupData?,
-                    null as CompoundTag?
+                    null as SpawnGroupData?
                 )
                 grownEntity.isNoAi = this.isNoAi
                 if (this.hasCustomName()) {

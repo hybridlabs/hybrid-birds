@@ -5,7 +5,7 @@ import java.nio.file.Path
 import kotlin.io.path.notExists
 
 fun initializeConfig(configFile: Path = Constants.CONFIG_FILE, configHandler: HBConfigHandler) {
-    val logger = Constants.LOG
+    val logger = Constants.LOGGER
     if (configFile.notExists()) {
         logger.info("${Constants.MOD_NAME} config file did not exist, creating one")
         configHandler.save()

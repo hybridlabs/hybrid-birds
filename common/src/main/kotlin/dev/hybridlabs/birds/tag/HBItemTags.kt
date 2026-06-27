@@ -14,6 +14,6 @@ object HBItemTags {
     val EGGS = create("eggs")
 
     private fun create(id: String): TagKey<Item> {
-        return TagKey.create(Registries.ITEM, ResourceLocation(Constants.MOD_ID, id))
+        return TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, id))
     }
 }

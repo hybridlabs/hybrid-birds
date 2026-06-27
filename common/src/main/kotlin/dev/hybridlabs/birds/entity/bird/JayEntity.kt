@@ -1,11 +1,8 @@
 package dev.hybridlabs.birds.entity.bird
 
-import dev.hybridlabs.birds.entity.HBEntityTypes
 import dev.hybridlabs.birds.sound.HBSoundEvents
-import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.world.damagesource.DamageSource
-import net.minecraft.world.entity.AgeableMob
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes

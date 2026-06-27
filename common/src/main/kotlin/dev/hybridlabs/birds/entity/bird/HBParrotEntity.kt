@@ -1,5 +1,6 @@
 package dev.hybridlabs.birds.entity.bird
 
+import dev.hybridlabs.birds.entity.bird.HBRatiteEntity.Companion.BREEDING_INGREDIENT
 import net.minecraft.core.BlockPos
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvent
@@ -16,17 +17,18 @@ import net.minecraft.world.entity.animal.FlyingAnimal
 import net.minecraft.world.entity.animal.ShoulderRidingEntity
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.Item
+import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.LevelAccessor
 import net.minecraft.world.level.block.state.BlockState
 import org.jetbrains.annotations.Nullable
 import software.bernie.geckolib.animatable.GeoEntity
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache
+import software.bernie.geckolib.animation.AnimatableManager
+import software.bernie.geckolib.animation.AnimationController
+import software.bernie.geckolib.animation.AnimationState
 import software.bernie.geckolib.constant.DefaultAnimations
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.core.animation.AnimatableManager
-import software.bernie.geckolib.core.animation.AnimationController
-import software.bernie.geckolib.core.animation.AnimationState
 import software.bernie.geckolib.util.GeckoLibUtil
 
 @Suppress("LeakingThis", "DEPRECATION")
@@ -49,7 +51,7 @@ open class HBParrotEntity(
         goalSelector.addGoal(0, PanicGoal(this, 1.1))
         goalSelector.addGoal(0, FloatGoal(this))
         goalSelector.addGoal(1, SitWhenOrderedToGoal(this))
-        goalSelector.addGoal(2, FollowOwnerGoal(this, 1.0, 5.0f, 1.0f, true))
+        goalSelector.addGoal(2, FollowOwnerGoal(this, 1.0, 5.0f, 1.0f))
         goalSelector.addGoal(2, WaterAvoidingRandomFlyingGoal(this, 1.0))
         goalSelector.addGoal(2, LookAtPlayerGoal(this, Player::class.java, 8.0f))
     }
@@ -58,6 +60,10 @@ open class HBParrotEntity(
         if (entity !is Player) {
             super.doPush(entity)
         }
+    }
+
+    override fun isFood(stack: ItemStack): Boolean {
+        return BREEDING_INGREDIENT.test(stack)
     }
 
     override fun mobInteract(player: Player, hand: InteractionHand): InteractionResult {
@@ -124,10 +130,6 @@ open class HBParrotEntity(
 
     override fun getAnimatableInstanceCache(): AnimatableInstanceCache {
         return factory
-    }
-
-    override fun getStandingEyeHeight(pose: Pose, dimensions: EntityDimensions): Float {
-        return dimensions.height * 0.85f
     }
 
     override fun removeWhenFarAway(distanceSquared: Double): Boolean {

@@ -15,11 +15,11 @@ import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.LevelAccessor
 import software.bernie.geckolib.animatable.GeoEntity
+import software.bernie.geckolib.animation.AnimatableManager
+import software.bernie.geckolib.animation.AnimationController
+import software.bernie.geckolib.animation.AnimationState
+import software.bernie.geckolib.animation.RawAnimation
 import software.bernie.geckolib.constant.DefaultAnimations
-import software.bernie.geckolib.core.animation.AnimatableManager
-import software.bernie.geckolib.core.animation.AnimationController
-import software.bernie.geckolib.core.animation.AnimationState
-import software.bernie.geckolib.core.animation.RawAnimation
 
 @Suppress("LeakingThis", "DEPRECATION")
 open class HBWadingBirdEntity(
@@ -56,10 +56,6 @@ open class HBWadingBirdEntity(
                 }
             }
         )
-    }
-
-    override fun getStandingEyeHeight(pose: Pose, dimensions: EntityDimensions): Float {
-        return dimensions.height * 1.0f
     }
 
     override fun isAffectedByFluids(): Boolean {

@@ -12,6 +12,7 @@ import net.minecraft.resources.ResourceLocation
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.sounds.SoundEvents
 import java.util.concurrent.CompletableFuture
+import kotlin.text.get
 
 class SoundProvider(
     output: FabricDataOutput,
@@ -68,17 +69,17 @@ class SoundProvider(
 
             HBSoundEvents.OSTRICH_AMBIENT to CommonClass.locate("entity/ostrich_ambient"),
             HBSoundEvents.OSTRICH_HURT to CommonClass.locate("entity/ostrich_hurt"),
-            
+
             ).forEach { (soundEvent, soundPath) ->
             exporter.add(soundEvent.get(), SoundTypeBuilder.of(soundEvent.get())
                 .subtitle("subtitles.${soundEvent.get().location.namespace}.${soundEvent.get().location.path}")
                 .sound(when (soundPath) {
-                        is SoundEvent -> SoundTypeBuilder.RegistrationBuilder.ofEvent(soundPath)
-                        is ResourceLocation -> SoundTypeBuilder.RegistrationBuilder.ofFile(soundPath)
-                        is Holder<*> -> SoundTypeBuilder.RegistrationBuilder.ofEvent(soundPath.value() as SoundEvent)
-                        is RegistryObject<*> -> SoundTypeBuilder.RegistrationBuilder.ofEvent(soundPath.get() as SoundEvent)
-                        else -> SoundTypeBuilder.RegistrationBuilder.ofEvent(SoundEvents.EMPTY)
-                    }
+                    is SoundEvent -> SoundTypeBuilder.RegistrationBuilder.ofEvent(soundPath)
+                    is ResourceLocation -> SoundTypeBuilder.RegistrationBuilder.ofFile(soundPath)
+                    is Holder<*> -> SoundTypeBuilder.RegistrationBuilder.ofEvent(soundPath.value() as SoundEvent)
+                    is RegistryObject<*> -> SoundTypeBuilder.RegistrationBuilder.ofEvent(soundPath.get() as SoundEvent)
+                    else -> SoundTypeBuilder.RegistrationBuilder.ofEvent(SoundEvents.EMPTY)
+                }
                 )
             )
         }

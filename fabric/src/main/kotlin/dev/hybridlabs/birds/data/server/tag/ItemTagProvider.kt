@@ -8,7 +8,8 @@ import net.minecraft.core.HolderLookup
 import net.minecraft.world.item.Items
 import java.util.concurrent.CompletableFuture
 
-class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFuture<HolderLookup.Provider>) : FabricTagProvider.ItemTagProvider(output, registriesFuture) {
+class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFuture<HolderLookup.Provider>) :
+    FabricTagProvider.ItemTagProvider(output, registriesFuture) {
     override fun addTags(arg: HolderLookup.Provider) {
         setOf(
             HBItems.DUCK.get(),
@@ -27,7 +28,7 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
             HBItems.GUINEA_FOWL_EGG.get(),
             Items.EGG,
         ).forEach { item ->
-            getOrCreateTagBuilder(HBItemTags.EGGS  ).add(item)
+            getOrCreateTagBuilder(HBItemTags.EGGS).add(item)
         }
     }
 }

@@ -58,7 +58,7 @@ public interface PlatformHelper {
 
     <T extends Mob> void registerSpawnPlacement(
             RegistryObject<EntityType<T>> entityType,
-            SpawnPlacements.Type decoratorType,
+            SpawnPlacementType decoratorType,
             Heightmap.Types heightMapType,
             SpawnPlacements.SpawnPredicate<T> decoratorPredicate);
 

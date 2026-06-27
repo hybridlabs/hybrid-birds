@@ -20,15 +20,15 @@ import net.minecraft.world.entity.animal.Turtle
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.crafting.Ingredient
 import net.minecraft.world.level.Level
-import net.minecraft.world.level.pathfinder.BlockPathTypes
+import net.minecraft.world.level.pathfinder.PathType
 
 class AlbatrossEntity(type: EntityType<out AlbatrossEntity>, world: Level) :
     HBAquaticBirdEntity(type, world) {
 
     override fun createNavigation(level: Level): PathNavigation {
-        setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
-        setPathfindingMalus(BlockPathTypes.DANGER_FIRE, 16.0f)
-        setPathfindingMalus(BlockPathTypes.DAMAGE_FIRE, -1.0f)
+        setPathfindingMalus(PathType.WATER, 0.0f)
+        setPathfindingMalus(PathType.DANGER_FIRE, 16.0f)
+        setPathfindingMalus(PathType.DAMAGE_FIRE, -1.0f)
 
         moveControl = BirdFlyFloatControl(this, 10, false)
         navigation = FlyingPathNavigation(this, level)

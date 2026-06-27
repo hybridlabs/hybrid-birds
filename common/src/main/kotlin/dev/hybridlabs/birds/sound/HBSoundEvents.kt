@@ -57,7 +57,7 @@ object HBSoundEvents {
     val OSTRICH_HURT = register("entity.ostrich.hurt")
 
     private fun register(id: String, range: Float = -1.0f): RegistryObject<SoundEvent> {
-        val identifier = ResourceLocation(Constants.MOD_ID, id)
+        val identifier = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, id)
         return if (range < 0)
             CommonClass.SOUND_EVENTS.register(id) { SoundEvent.createVariableRangeEvent(identifier) }
         else

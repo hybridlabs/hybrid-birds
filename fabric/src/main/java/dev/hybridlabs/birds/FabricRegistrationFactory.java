@@ -54,37 +54,32 @@ public class FabricRegistrationFactory implements RegistrationProvider.Factory {
 
         @Override
         @SuppressWarnings("unchecked")
-        public <I extends T> RegistryObject<I> register(
-                String name, Supplier<? extends I> supplier) {
-            final var rl = new ResourceLocation(modId, name);
+        public <I extends T> RegistryObject<I> register(String name, Supplier<? extends I> supplier) {
+            final var rl = CommonClass.locate(name);
             final var obj = Registry.register(registry, rl, supplier.get());
-            final var ro =
-                    new RegistryObject<I>() {
-                        final ResourceKey<I> key =
-                                ResourceKey.create(
-                                        (ResourceKey<? extends Registry<I>>) registry.key(), rl);
+            final var ro = new RegistryObject<I>() {
+                final ResourceKey<I> key = ResourceKey.create((ResourceKey<? extends Registry<I>>) registry.key(), rl);
 
-                        @Override
-                        public ResourceKey<I> getResourceKey() {
-                            return key;
-                        }
+                @Override
+                public ResourceKey<I> getResourceKey() {
+                    return key;
+                }
 
-                        @Override
-                        public ResourceLocation getId() {
-                            return rl;
-                        }
+                @Override
+                public ResourceLocation getId() {
+                    return rl;
+                }
 
-                        @Override
-                        public I get() {
-                            return obj;
-                        }
+                @Override
+                public I get() {
+                    return obj;
+                }
 
-                        @Override
-                        public Holder<I> asHolder() {
-                            return (Holder<I>)
-                                    registry.getHolder((ResourceKey<T>) this.key).orElseThrow();
-                        }
-                    };
+                @Override
+                public Holder<I> asHolder() {
+                    return (Holder<I>) registry.getHolder((ResourceKey<T>) this.key).orElseThrow();
+                }
+            };
             entries.add((RegistryObject<T>) ro);
             return ro;
         }

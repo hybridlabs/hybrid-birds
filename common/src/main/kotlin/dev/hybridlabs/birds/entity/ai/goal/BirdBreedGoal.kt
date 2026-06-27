@@ -7,6 +7,7 @@ import net.minecraft.world.entity.ai.targeting.TargetingConditions
 import net.minecraft.world.level.Level
 import java.util.*
 
+@Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 open class BirdBreedGoal @JvmOverloads constructor(
     protected val bird: HBBirdEntity,
     private val speedModifier: Double,

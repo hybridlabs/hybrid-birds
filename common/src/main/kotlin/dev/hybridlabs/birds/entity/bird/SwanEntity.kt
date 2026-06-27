@@ -13,7 +13,6 @@ import net.minecraft.world.entity.AgeableMob
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
-import net.minecraft.world.entity.ai.goal.BreedGoal
 import net.minecraft.world.entity.ai.goal.TemptGoal
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items

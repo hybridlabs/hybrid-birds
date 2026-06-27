@@ -7,14 +7,14 @@ import net.minecraft.resources.ResourceLocation
 class ChickEntityModel : HBBirdEntityModel<ChickEntity>("chick") {
 
     override fun getModelResource(animatable: ChickEntity): ResourceLocation {
-        return ResourceLocation(Constants.MOD_ID, "geo/chick.geo.json")
+        return ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "geo/chick.geo.json")
     }
 
     override fun getTextureResource(animatable: ChickEntity): ResourceLocation {
-        return ResourceLocation(Constants.MOD_ID, "textures/entity/chick.png")
+        return ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "textures/entity/chick.png")
     }
 
     override fun getAnimationResource(animatable: ChickEntity): ResourceLocation {
-        return ResourceLocation(Constants.MOD_ID, "animations/chick.animation.json")
+        return ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "animations/chick.animation.json")
     }
 }

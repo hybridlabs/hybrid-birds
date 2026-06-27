@@ -7,14 +7,14 @@ import net.minecraft.resources.ResourceLocation
 class AlbatrossEntityModel : HBBirdEntityModel<AlbatrossEntity>("albatross") {
 
     override fun getModelResource(animatable: AlbatrossEntity): ResourceLocation {
-        return ResourceLocation(Constants.MOD_ID, "geo/albatross.geo.json")
+        return ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "geo/albatross.geo.json")
     }
 
     override fun getTextureResource(animatable: AlbatrossEntity): ResourceLocation {
-        return ResourceLocation(Constants.MOD_ID, "textures/entity/albatross.png")
+        return ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "textures/entity/albatross.png")
     }
 
     override fun getAnimationResource(animatable: AlbatrossEntity): ResourceLocation {
-        return ResourceLocation(Constants.MOD_ID, "animations/albatross.animation.json")
+        return ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "animations/albatross.animation.json")
     }
 }

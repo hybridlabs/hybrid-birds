@@ -3,6 +3,7 @@ package dev.hybridlabs.birds.entity.ai.goal
 import dev.hybridlabs.birds.entity.bird.HBBirdEntity
 import net.minecraft.world.entity.ai.goal.Goal
 
+@Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 open class BirdFollowParentGoal(
     private val bird: HBBirdEntity,
     private val speedModifier: Double,

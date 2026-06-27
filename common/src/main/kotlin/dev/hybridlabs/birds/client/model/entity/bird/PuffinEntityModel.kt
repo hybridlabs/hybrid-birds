@@ -7,14 +7,14 @@ import net.minecraft.resources.ResourceLocation
 class PuffinEntityModel : HBBirdEntityModel<PuffinEntity>("puffin") {
 
     override fun getModelResource(animatable: PuffinEntity): ResourceLocation {
-        return ResourceLocation(Constants.MOD_ID, "geo/puffin.geo.json")
+        return ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "geo/puffin.geo.json")
     }
 
     override fun getTextureResource(animatable: PuffinEntity): ResourceLocation {
-        return ResourceLocation(Constants.MOD_ID, "textures/entity/puffin.png")
+        return ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "textures/entity/puffin.png")
     }
 
     override fun getAnimationResource(animatable: PuffinEntity): ResourceLocation {
-        return ResourceLocation(Constants.MOD_ID, "animations/puffin.animation.json")
+        return ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "animations/puffin.animation.json")
     }
 }

@@ -1,17 +1,12 @@
 package dev.hybridlabs.birds.entity
 
-import dev.hybridlabs.birds.entity.bird.HBAquaticBirdEntity
-import dev.hybridlabs.birds.entity.bird.HBBirdEntity
-import dev.hybridlabs.birds.entity.bird.HBParrotEntity
-import dev.hybridlabs.birds.entity.bird.HBParrotEntity.Companion.canBirdSpawn
-import dev.hybridlabs.birds.entity.bird.HBRatiteEntity
-import dev.hybridlabs.birds.entity.bird.HBWadingBirdEntity
+import dev.hybridlabs.birds.entity.bird.*
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.Mob
+import net.minecraft.world.entity.SpawnPlacementType
+import net.minecraft.world.entity.SpawnPlacementTypes
 import net.minecraft.world.entity.SpawnPlacements
 import net.minecraft.world.entity.SpawnPlacements.SpawnPredicate
-import net.minecraft.world.entity.SpawnPlacements.Type
-import net.minecraft.world.entity.animal.Animal
 import net.minecraft.world.level.levelgen.Heightmap
 
 /**
@@ -80,7 +75,7 @@ object SpawnRestrictionRegistry {
     private fun <T : HBBirdEntity> registerBirdEntity(entityType: EntityType<T>, predicate: SpawnPredicate<T>) {
         register(
             entityType,
-            Type.ON_GROUND,
+            SpawnPlacementTypes.ON_GROUND,
             predicate
         )
     }
@@ -88,16 +83,16 @@ object SpawnRestrictionRegistry {
     private fun <T : HBBirdEntity> registerAquaticBirdEntity(entityType: EntityType<T>, predicate: SpawnPredicate<T>) {
         register(
             entityType,
-            Type.NO_RESTRICTIONS,
+            SpawnPlacementTypes.NO_RESTRICTIONS,
             predicate
         )
     }
 
     private fun <T : Mob> register(
         entityType: EntityType<T>,
-        location: Type,
-        predicate: SpawnPredicate<T>,
+        location: SpawnPlacementType,
+        predicate: SpawnPlacements.SpawnPredicate<T>,
     ) {
-        SpawnPlacements.register(entityType, location, Heightmap.Types.WORLD_SURFACE, predicate)
+        SpawnPlacements.register(entityType, location, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, predicate)
     }
 }

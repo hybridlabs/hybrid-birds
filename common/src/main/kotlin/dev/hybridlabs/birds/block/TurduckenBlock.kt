@@ -4,6 +4,7 @@ import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.sounds.SoundSource
+import net.minecraft.stats.Stats
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.entity.player.Player
@@ -30,32 +31,29 @@ class TurduckenBlock(settings: Properties?) : Block(settings!!) {
         state: BlockState,
         world: BlockGetter,
         pos: BlockPos,
-        context: CollisionContext
+        context: CollisionContext,
     ): VoxelShape {
         return BITES_TO_SHAPE[(state.getValue(BITES) as Int)]
     }
 
-    override fun use(
+    override fun useWithoutItem(
         state: BlockState,
-        world: Level,
+        level: Level,
         pos: BlockPos,
         player: Player,
-        hand: InteractionHand,
-        hit: BlockHitResult
+        hitResult: BlockHitResult,
     ): InteractionResult {
-        val itemStack = player.getItemInHand(hand)
-        itemStack.item
-        if (world.isClientSide) {
-            if (tryEat(world, pos, state, player).consumesAction()) {
+        if (level.isClientSide) {
+            if (tryEat(level, pos, state, player).consumesAction()) {
                 return InteractionResult.SUCCESS
             }
 
-            if (itemStack.isEmpty) {
+            if (player.getItemInHand(InteractionHand.MAIN_HAND).isEmpty) {
                 return InteractionResult.CONSUME
             }
         }
 
-        return tryEat(world, pos, state, player)
+        return tryEat(level, pos, state, player)
     }
 
     override fun updateShape(
@@ -64,7 +62,7 @@ class TurduckenBlock(settings: Properties?) : Block(settings!!) {
         neighborState: BlockState,
         world: LevelAccessor,
         pos: BlockPos,
-        neighborPos: BlockPos
+        neighborPos: BlockPos,
     ): BlockState {
         return if (direction == Direction.DOWN && !state.canSurvive(
                 world,
@@ -96,7 +94,7 @@ class TurduckenBlock(settings: Properties?) : Block(settings!!) {
         return true
     }
 
-    override fun isPathfindable(state: BlockState, world: BlockGetter, pos: BlockPos, type: PathComputationType): Boolean {
+    override fun isPathfindable(state: BlockState, type: PathComputationType): Boolean {
         return false
     }
 
@@ -113,7 +111,7 @@ class TurduckenBlock(settings: Properties?) : Block(settings!!) {
             world: LevelAccessor,
             pos: BlockPos,
             state: BlockState,
-            player: Player
+            player: Player,
         ): InteractionResult {
             if (!player.canEat(false)) {
                 return InteractionResult.PASS

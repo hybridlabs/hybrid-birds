@@ -4,7 +4,7 @@ import dev.hybridlabs.birds.Constants.MOD_NAME
 import dev.hybridlabs.birds.block.HBBlocks
 import dev.hybridlabs.birds.config.HBConfig
 import dev.hybridlabs.birds.config.HBConfigHandler
-import dev.hybridlabs.birds.effect.HBStatusEffects
+import dev.hybridlabs.birds.effect.HBMobEffects
 import dev.hybridlabs.birds.entity.HBEntityTypes
 import dev.hybridlabs.birds.entity.SpawnRestrictionRegistry
 import dev.hybridlabs.birds.item.HBItemGroups
@@ -20,7 +20,7 @@ import org.slf4j.Logger
 @Suppress("UnusedExpression")
 object HybridBirds : ModInitializer {
 
-    private val logger: Logger = Constants.LOG
+    private val logger: Logger = Constants.LOGGER
 
 
 	override fun onInitialize() {
@@ -40,9 +40,9 @@ object HybridBirds : ModInitializer {
         HBBiomeTags
         HBItemTags
 
-        HBStatusEffects
+        HBMobEffects
 
-        SpawnRestrictionRegistry
+        SpawnRestrictionRegistry.registerSpawnRestrictions()
 
         initializeConfig(configFile, configHandler)
         registerBiomeModifications(configHandler.config)

@@ -7,14 +7,14 @@ import net.minecraft.resources.ResourceLocation
 class RoosterEntityModel : HBBirdEntityModel<RoosterEntity>("rooster") {
 
     override fun getModelResource(animatable: RoosterEntity): ResourceLocation {
-        return ResourceLocation(Constants.MOD_ID, "geo/rooster.geo.json")
+        return ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "geo/rooster.geo.json")
     }
 
     override fun getTextureResource(animatable: RoosterEntity): ResourceLocation {
-        return ResourceLocation(Constants.MOD_ID, "textures/entity/rooster.png")
+        return ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "textures/entity/rooster.png")
     }
 
     override fun getAnimationResource(animatable: RoosterEntity): ResourceLocation {
-        return ResourceLocation(Constants.MOD_ID, "animations/rooster.animation.json")
+        return ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "animations/rooster.animation.json")
     }
 }

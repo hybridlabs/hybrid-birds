@@ -1,6 +1,6 @@
 package dev.hybridlabs.birds.entity.bird
 
-import dev.hybridlabs.birds.effect.HBStatusEffects
+import dev.hybridlabs.birds.effect.HBMobEffects
 import dev.hybridlabs.birds.entity.HBEntityTypes
 import dev.hybridlabs.birds.sound.HBSoundEvents
 import net.minecraft.nbt.CompoundTag
@@ -104,7 +104,7 @@ class RoosterEntity(entityType: EntityType<out RoosterEntity>, world: Level) :
 
     private fun applySpeedEffectToNearbyPlayers() {
         val effectRadius = 32.0
-        val speedEffect = MobEffectInstance(HBStatusEffects.ROOSTERS_CALLING.get(), 6000, 0, true, false)
+        val speedEffect = MobEffectInstance(HBMobEffects.ROOSTERS_CALLING.asHolder(), 6000, 0, true, false)
 
         val players = level().players()
         for (player in players) {

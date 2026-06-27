@@ -4,6 +4,9 @@ import dev.hybridlabs.birds.item.HBItems
 import dev.hybridlabs.birds.loot.HBLootTables
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.SimpleFabricLootTableProvider
+import net.minecraft.core.HolderLookup
+import net.minecraft.core.registries.Registries
+import net.minecraft.resources.ResourceKey
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.item.Items
 import net.minecraft.world.level.storage.loot.LootPool
@@ -12,13 +15,17 @@ import net.minecraft.world.level.storage.loot.entries.LootItem.lootTableItem
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator
+import java.util.concurrent.CompletableFuture
 import java.util.function.BiConsumer
 
-class GenericLootTableProvider(output: FabricDataOutput) :
-    SimpleFabricLootTableProvider(output, LootContextParamSets.ALL_PARAMS) {
-    override fun generate(exporter: BiConsumer<ResourceLocation, LootTable.Builder>) {
+class GenericLootTableProvider(output: FabricDataOutput,lookupProvider: CompletableFuture<HolderLookup.Provider>) :
+    SimpleFabricLootTableProvider(output, lookupProvider,LootContextParamSets.ALL_PARAMS) {
+    override fun generate(exporter: BiConsumer<ResourceKey<LootTable>, LootTable.Builder>) {
+
         exporter.accept(
-            HBLootTables.TURKEY_FAT,
+            ResourceKey.create(
+                Registries.LOOT_TABLE,
+            HBLootTables.TURKEY_FAT),
             LootTable.lootTable()
                 .pool(LootPool.lootPool()
                         .add(lootTableItem(HBItems.TURKEY.get())
@@ -31,8 +38,10 @@ class GenericLootTableProvider(output: FabricDataOutput) :
                         .build()
                 )
         )
+
         exporter.accept(
-            HBLootTables.TURKEY_STUFFED,
+            ResourceKey.create(Registries.LOOT_TABLE,
+            HBLootTables.TURKEY_STUFFED),
             LootTable.lootTable()
                 .pool(LootPool.lootPool()
                     .add(lootTableItem(HBItems.TURKEY.get())
