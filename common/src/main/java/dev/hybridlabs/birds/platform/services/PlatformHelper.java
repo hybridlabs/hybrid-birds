@@ -5,7 +5,6 @@ import dev.hybridlabs.birds.platform.registration.RegistryObject;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.item.SpawnEggItem;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.levelgen.Heightmap;
 
 import org.jetbrains.annotations.NotNull;
@@ -61,8 +60,6 @@ public interface PlatformHelper {
             SpawnPlacementType decoratorType,
             Heightmap.Types heightMapType,
             SpawnPlacements.SpawnPredicate<T> decoratorPredicate);
-
-    BlockBehaviour.Properties getBlockSettings();
 
     <T extends LivingEntity> void registerAttributes(
             @NotNull String id,

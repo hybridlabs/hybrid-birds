@@ -25,7 +25,7 @@ object DataGenerators {
         val packOutput = generator.packOutput
         val lookupProvider = event.lookupProvider
 
-        val configFile = Constants.CONFIG_FILE
+        val configFile = CommonClass.CONFIG_FILE
         val configHandler = HBConfigHandler(configFile.toFile())
         initializeConfig(configFile, configHandler)
 

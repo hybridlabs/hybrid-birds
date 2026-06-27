@@ -15,6 +15,8 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 
+import java.nio.file.Path;
+
 // This class is part of the common project meaning it is shared between all supported loaders. Code
 //  written here can only  import and access the vanilla codebase, libraries used by vanilla, and
 // optionally third party  libraries that provide  common compatible binaries. This means common
@@ -36,13 +38,15 @@ public class CommonClass {
     public static final RegistrationProvider<CreativeModeTab> CREATIVE_MODE_TABS =
             RegistrationProvider.get(BuiltInRegistries.CREATIVE_MODE_TAB, MOD_ID);
 
+    public static final Path CONFIG_FILE = Services.PLATFORM.getConfigDir().resolve(MOD_ID + ".json");
+
+    public static ResourceLocation locate(String path) {
+        return ResourceLocation.fromNamespaceAndPath(MOD_ID, path);
+    }
+
     public static void init() {
         if (Services.PLATFORM.isModLoaded(MOD_ID)) {
             Constants.LOGGER.info("{} loaded.", MOD_NAME);
         }
-    }
-
-    public static ResourceLocation locate(String path) {
-        return ResourceLocation.fromNamespaceAndPath(MOD_ID, path);
     }
 }
