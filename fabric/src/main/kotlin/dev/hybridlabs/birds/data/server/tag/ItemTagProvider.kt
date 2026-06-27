@@ -26,7 +26,6 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
             HBItems.TURKEY_EGG.get(),
             HBItems.PEACOCK_EGG.get(),
             HBItems.GUINEA_FOWL_EGG.get(),
-            Items.EGG,
         ).forEach { item ->
             getOrCreateTagBuilder(HBItemTags.EGGS).add(item)
         }

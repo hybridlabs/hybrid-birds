@@ -39,8 +39,9 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
             .save(exporter)
 
         // cooking recipes
-        // offerEggCookingRecipes(exporter, HybridBirdsItemTags.EGGS, HybridBirdsItems.COOKED_EGG.get(), 0.15f)
+        offerEggCookingRecipes(exporter, HBItemTags.EGGS, HBItems.COOKED_EGG.get(), 0.15f)
 
+        offerCookingRecipes(exporter, HBItems.PUFFIN.get(), HBItems.COOKED_PUFFIN.get(), 0.15f)
         offerCookingRecipes(exporter, HBItems.DUCK.get(), HBItems.COOKED_DUCK.get(), 0.15f)
         offerCookingRecipes(exporter, HBItems.GOOSE.get(), HBItems.COOKED_GOOSE.get(), 0.15f)
         offerCookingRecipes(exporter, HBItems.TURKEY.get(), HBItems.COOKED_TURKEY.get(), 0.15f)

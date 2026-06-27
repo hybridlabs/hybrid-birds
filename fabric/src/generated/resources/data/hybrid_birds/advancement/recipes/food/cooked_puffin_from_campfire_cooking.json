@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_puffin": {
+      "conditions": {
+        "items": [
+          {
+            "items": "hybrid_birds:puffin"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "hybrid_birds:cooked_puffin_from_campfire_cooking"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_puffin"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "hybrid_birds:cooked_puffin_from_campfire_cooking"
+    ]
+  }
+}

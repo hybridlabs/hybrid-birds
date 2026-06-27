@@ -28,8 +28,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
         export(exporter, HBEntityTypes.PUFFIN.get().defaultLootTable) {
             pool(
                 LootPool.lootPool()
-                    .add(LootItem.lootTableItem(Items.COD)
-                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0f, 2.0f))))
+                    .add(LootItem.lootTableItem(HBItems.PUFFIN.get()))
                     .build()
             )
             pool(

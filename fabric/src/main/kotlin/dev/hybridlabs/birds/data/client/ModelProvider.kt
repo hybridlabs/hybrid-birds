@@ -33,11 +33,13 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
 
         generator.generateFlatItem(HBItems.COOKED_EGG.get(), ModelTemplates.FLAT_ITEM)
 
+        generator.generateFlatItem(HBItems.PUFFIN.get(), ModelTemplates.FLAT_ITEM)
         generator.generateFlatItem(HBItems.DUCK.get(), ModelTemplates.FLAT_ITEM)
         generator.generateFlatItem(HBItems.GOOSE.get(), ModelTemplates.FLAT_ITEM)
         generator.generateFlatItem(HBItems.TURKEY.get(), ModelTemplates.FLAT_ITEM)
         generator.generateFlatItem(HBItems.TURDUCKEN.get(), ModelTemplates.FLAT_ITEM)
 
+        generator.generateFlatItem(HBItems.COOKED_PUFFIN.get(), ModelTemplates.FLAT_ITEM)
         generator.generateFlatItem(HBItems.COOKED_DUCK.get(), ModelTemplates.FLAT_ITEM)
         generator.generateFlatItem(HBItems.COOKED_GOOSE.get(), ModelTemplates.FLAT_ITEM)
         generator.generateFlatItem(HBItems.COOKED_TURKEY.get(), ModelTemplates.FLAT_ITEM)

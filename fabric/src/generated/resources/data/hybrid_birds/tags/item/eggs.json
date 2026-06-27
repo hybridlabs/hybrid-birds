@@ -5,7 +5,6 @@
     "hybrid_birds:swan_egg",
     "hybrid_birds:turkey_egg",
     "hybrid_birds:peacock_egg",
-    "hybrid_birds:guinea_fowl_egg",
-    "minecraft:egg"
+    "hybrid_birds:guinea_fowl_egg"
   ]
 }
