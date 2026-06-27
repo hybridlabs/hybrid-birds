@@ -18,6 +18,7 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
 
         getOrCreateTagBuilder(HBBiomeTags.PUFFIN_SPAWN_BIOMES)
             .add(Biomes.SNOWY_BEACH)
+            .add(Biomes.STONY_SHORE)
             .add(Biomes.COLD_OCEAN)
             .add(Biomes.DEEP_COLD_OCEAN)
             .add(Biomes.FROZEN_OCEAN)
@@ -28,14 +29,13 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .addOptional(ResourceLocation.fromNamespaceAndPath("still_life", "cold_deep_ocean"))
             .addOptional(ResourceLocation.fromNamespaceAndPath("regions_unexplored", "rocky_reef"))
             .addOptional(ResourceLocation.fromNamespaceAndPath("biomeswevegone", "lush_stacks"))
-        // spawn biomes
 
         getOrCreateTagBuilder(HBBiomeTags.SEAGULL_SPAWN_BIOMES)
             .forceAddTag(BiomeTags.IS_BEACH)
             .add(Biomes.OCEAN)
+            .add(Biomes.COLD_OCEAN)
             .add(Biomes.LUKEWARM_OCEAN)
             .add(Biomes.WARM_OCEAN)
-            .add(Biomes.COLD_OCEAN)
             .addOptional(ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "deep_warm_ocean"))
             .addOptional(ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "seagrass_bed"))
             .addOptional(ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "red_meadow"))
@@ -62,7 +62,6 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .add(Biomes.OCEAN)
             .add(Biomes.LUKEWARM_OCEAN)
             .add(Biomes.WARM_OCEAN)
-            .add(Biomes.COLD_OCEAN)
             .addOptional(ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "seagrass_bed"))
             .addOptional(ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "red_meadow"))
             .addOptional(ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "coral_reef"))

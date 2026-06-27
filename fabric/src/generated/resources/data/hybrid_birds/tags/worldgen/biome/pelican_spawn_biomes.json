@@ -4,7 +4,6 @@
     "minecraft:ocean",
     "minecraft:lukewarm_ocean",
     "minecraft:warm_ocean",
-    "minecraft:cold_ocean",
     {
       "id": "hybrid_aquatic:seagrass_bed",
       "required": false
