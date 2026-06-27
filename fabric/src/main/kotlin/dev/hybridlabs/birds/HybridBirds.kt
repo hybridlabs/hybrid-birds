@@ -1,5 +1,6 @@
 package dev.hybridlabs.birds
 
+import dev.hybridlabs.birds.ConfigHelper.initializeConfig
 import dev.hybridlabs.birds.Constants.MOD_NAME
 import dev.hybridlabs.birds.block.HBBlocks
 import dev.hybridlabs.birds.config.HBConfig
@@ -21,11 +22,10 @@ object HybridBirds : ModInitializer {
 
     private val logger: Logger = Constants.LOGGER
 
-	override fun onInitialize() {
+    override fun onInitialize() {
         val configHandler = ConfigHelper.initializeConfig(CommonClass.CONFIG_FILE)
-        logger.info("Initializing ${MOD_NAME}")
+        logger.info("Initializing ${Constants.MOD_NAME}")
         CommonClass.init()
-
 
         HBSoundEvents
         HBEntityTypes
@@ -40,12 +40,20 @@ object HybridBirds : ModInitializer {
         HBMobEffects
 
         SpawnRestrictionRegistry.registerSpawnRestrictions()
-	}
 
+        registerBiomeModifications(configHandler.config)
+	}
 
     private fun registerBiomeModifications(config: HBConfig) {
         config.entitySpawnConfig.forEach { config ->
-            BiomeModifications.addSpawn(BiomeSelectors.tag(config.biomes), config.group, config.type, config.weight, config.minGroupSize, config.maxGroupSize)
+            BiomeModifications.addSpawn(
+                BiomeSelectors.tag(config.biomes),
+                config.group,
+                config.type,
+                config.weight,
+                config.minGroupSize,
+                config.maxGroupSize
+            )
         }
     }
 }
