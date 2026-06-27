@@ -3,6 +3,7 @@ package dev.hybridlabs.birds
 import dev.hybridlabs.birds.block.HBBlocks
 import dev.hybridlabs.birds.effect.HBMobEffects
 import dev.hybridlabs.birds.entity.HBEntityTypes
+import dev.hybridlabs.birds.forge.HybridBirdsModBusEvents
 import dev.hybridlabs.birds.item.HBItemGroups
 import dev.hybridlabs.birds.item.HBItems
 import dev.hybridlabs.birds.sound.HBSoundEvents
@@ -35,5 +36,7 @@ object HybridBirdsForge {
         HBItemTags
 
         HBMobEffects
+
+        HybridBirdsModBusEvents
     }
 }
