@@ -32,10 +32,10 @@ object  HBItemGroups {
             entries.accept(HBItems.TURKEY_EGG.get())
             entries.accept(HBItems.TURKEY.get())
             entries.accept(HBItems.COOKED_TURKEY.get())
-            entries.accept(HBItems.PUFFIN.get())
-            entries.accept(HBItems.COOKED_PUFFIN.get())
             entries.accept(HBItems.TURDUCKEN.get())
             entries.accept(HBItems.COOKED_TURDUCKEN.get())
+            entries.accept(HBItems.PUFFIN.get())
+            entries.accept(HBItems.COOKED_PUFFIN.get())
 
             BuiltInRegistries.ITEM.forEach { item ->
                 val id = BuiltInRegistries.ITEM.getKey(item)
