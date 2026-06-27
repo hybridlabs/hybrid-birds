@@ -104,7 +104,7 @@ class RoosterEntity(entityType: EntityType<out RoosterEntity>, world: Level) :
 
     private fun applySpeedEffectToNearbyPlayers() {
         val effectRadius = 32.0
-        val speedEffect = MobEffectInstance(HBStatusEffects.ROOSTERS_CALLING.get(), 6000, 0)
+        val speedEffect = MobEffectInstance(HBStatusEffects.ROOSTERS_CALLING.get(), 6000, 0, true, false)
 
         val players = level().players()
         for (player in players) {
@@ -116,14 +116,14 @@ class RoosterEntity(entityType: EntityType<out RoosterEntity>, world: Level) :
 
     // region NBT
 
-    override fun addAdditionalSaveData(compoundTag: CompoundTag) {
-        super.addAdditionalSaveData(compoundTag)
-        compoundTag.putInt("IsAngry", this.angerTicks)
+    override fun addAdditionalSaveData(compound: CompoundTag) {
+        super.addAdditionalSaveData(compound)
+        compound.putInt("IsAngry", this.angerTicks)
     }
 
-    override fun readAdditionalSaveData(compoundTag: CompoundTag) {
-        super.readAdditionalSaveData(compoundTag)
-        this.angerTicks = compoundTag.getInt("IsAngry")
+    override fun readAdditionalSaveData(compound: CompoundTag) {
+        super.readAdditionalSaveData(compound)
+        this.angerTicks = compound.getInt("IsAngry")
     }
 
     // endregion
