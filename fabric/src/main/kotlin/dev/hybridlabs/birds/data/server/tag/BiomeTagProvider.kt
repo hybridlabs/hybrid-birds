@@ -30,7 +30,6 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .addOptional(ResourceLocation("still_life", "cold_deep_ocean"))
             .addOptional(ResourceLocation("regions_unexplored", "rocky_reef"))
             .addOptional(ResourceLocation("biomeswevegone", "lush_stacks"))
-        // spawn biomes
 
         getOrCreateTagBuilder(HBBiomeTags.SEAGULL_SPAWN_BIOMES)
             .forceAddTag(BiomeTags.IS_BEACH)
