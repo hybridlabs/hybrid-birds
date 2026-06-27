@@ -21,7 +21,6 @@ object HybridBirdsModBusEvents {
             })
     }
 
-
     private fun registerSpawnPlacements(event: RegisterSpawnPlacementsEvent) {
         SpawnRestrictionRegistry.registerSpawnRestrictions()
     }
