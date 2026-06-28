@@ -1,7 +1,7 @@
 package dev.hybridlabs.birds
 import dev.hybridlabs.birds.block.HBBlocks
 import dev.hybridlabs.birds.client.render.entity.HBEntityRenderers
-import dev.hybridlabs.birds.effect.HBStatusEffects
+import dev.hybridlabs.birds.effect.HBMobEffects
 import dev.hybridlabs.birds.entity.ForgeSpawnGroupRegistry
 import dev.hybridlabs.birds.entity.HBEntityTypes
 import dev.hybridlabs.birds.entity.SpawnRestrictionRegistry
@@ -46,7 +46,7 @@ object HybridBirdsForge {
         HBBiomeTags
         HBItemTags
 
-        HBStatusEffects
+        HBMobEffects
 
         MOD_BUS.addListener(::registerSpawnPlacements)
 

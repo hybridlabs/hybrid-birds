@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#hybrid_birds:seagull_spawn_biomes",
+  "spawners": {
+    "type": "hybrid_birds:seagull",
+    "maxCount": 5,
+    "minCount": 2,
+    "weight": 3
+  }
+}
