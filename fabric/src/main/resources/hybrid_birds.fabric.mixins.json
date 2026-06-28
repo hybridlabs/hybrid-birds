@@ -5,6 +5,7 @@
     "mixins": [
         "ChickenEntityMixin",
         "OcelotEntityMixin",
+        "EggEntityMixin",
         "ResourceLocationMixin",
         "SpawnGroupMixin"
     ],

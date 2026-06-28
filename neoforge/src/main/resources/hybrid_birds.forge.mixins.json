@@ -7,7 +7,9 @@
     "mixins": [
         "ChickenEntityMixin",
         "OcelotEntityMixin",
-        "ResourceLocationMixin"
+        "EggEntityMixin",
+        "ResourceLocationMixin",
+        "SpawnGroupMixin"
     ],
     "client": [
     ],
