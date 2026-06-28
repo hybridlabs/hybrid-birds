@@ -32,7 +32,7 @@ neoForge {
         }
         data {
             data()
-            programArguments.addAll '--mod', 'hybrid_aquatic', '--all',
+            programArguments.addAll '--mod', 'hybrid_birds', '--all',
                     '--output', file('src/generated/resources/').getAbsolutePath(),
                     '--existing', file('src/main/resources/').getAbsolutePath(),
                     '--existing', file("../fabric/src/generated/resources").getAbsolutePath()

@@ -1,0 +1,10 @@
+{
+  "type": "neoforge:add_spawns",
+  "biomes": "#hybrid_birds:pelican_spawn_biomes",
+  "spawners": {
+    "type": "hybrid_birds:pelican",
+    "maxCount": 2,
+    "minCount": 1,
+    "weight": 3
+  }
+}

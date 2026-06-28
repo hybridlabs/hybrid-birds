@@ -1,0 +1,10 @@
+{
+  "type": "neoforge:add_spawns",
+  "biomes": "#hybrid_birds:duck_spawn_biomes",
+  "spawners": {
+    "type": "hybrid_birds:duck",
+    "maxCount": 3,
+    "minCount": 1,
+    "weight": 5
+  }
+}
