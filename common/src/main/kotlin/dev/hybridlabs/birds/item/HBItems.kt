@@ -57,6 +57,17 @@ object HBItems {
         )
     }
 
+    val PUFFIN = register("puffin") {
+        Item(
+            itemSettings().food(
+                FoodProperties.Builder()
+                    .nutrition(2)
+                    .saturationMod(0.3F)
+                    .meat().build()
+            )
+        )
+    }
+
     val DUCK = register("duck") {
         Item(
             itemSettings().food(
@@ -100,6 +111,20 @@ object HBItems {
                 FoodProperties.Builder()
                     .nutrition(5)
                     .saturationMod(0.6F)
+                    .meat()
+                    .build()
+            )
+        )
+    }
+
+    val COOKED_PUFFIN = register(
+        "cooked_puffin"
+    ) {
+        Item(
+            itemSettings().food(
+                FoodProperties.Builder()
+                    .nutrition(5)
+                    .saturationMod(0.5F)
                     .meat()
                     .build()
             )

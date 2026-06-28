@@ -8,7 +8,6 @@ import dev.hybridlabs.birds.platform.ClientServices
 object HBEntityRenderers {
 
     val ROOSTER = ClientServices.RENDERER.registerEntityRenderer(HBEntityTypes.ROOSTER, ::RoosterEntityRenderer)
-    val CHICK = ClientServices.RENDERER.registerEntityRenderer(HBEntityTypes.CHICK, ::ChickEntityRenderer)
     val TURKEY = ClientServices.RENDERER.registerEntityRenderer(HBEntityTypes.TURKEY, ::TurkeyEntityRenderer)
     val PEACOCK = ClientServices.RENDERER.registerEntityRenderer(HBEntityTypes.PEACOCK, ::PeacockEntityRenderer)
     val GUINEA_FOWL = ClientServices.RENDERER.registerEntityRenderer(HBEntityTypes.GUINEA_FOWL, ::GuineaFowlEntityRenderer)

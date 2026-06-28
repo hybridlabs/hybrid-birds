@@ -22,7 +22,6 @@ object SpawnRestrictionRegistry {
     fun registerSpawnRestrictions() {
         setOf(
             HBEntityTypes.ROOSTER.get(),
-            HBEntityTypes.CHICK.get(),
             HBEntityTypes.TURKEY.get(),
             HBEntityTypes.PEACOCK.get(),
             HBEntityTypes.GUINEA_FOWL.get(),

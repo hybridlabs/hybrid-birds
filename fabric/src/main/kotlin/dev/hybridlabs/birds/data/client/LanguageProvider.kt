@@ -2,6 +2,7 @@ package dev.hybridlabs.birds.data.client
 
 import dev.hybridlabs.birds.block.HBBlocks
 import dev.hybridlabs.birds.data.HBDataGenerator.filterHybridBirds
+import dev.hybridlabs.birds.effect.HBMobEffects
 import dev.hybridlabs.birds.entity.HBEntityTypes
 import dev.hybridlabs.birds.item.HBItemGroups
 import dev.hybridlabs.birds.item.HBItems
@@ -109,7 +110,6 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HBEntityTypes.GOOSE.get() to "Goose",
             HBEntityTypes.SWAN.get() to "Swan",
             HBEntityTypes.ROOSTER.get() to "Rooster",
-            HBEntityTypes.CHICK.get() to "Chick",
             HBEntityTypes.TURKEY.get() to "Turkey",
             HBEntityTypes.PEACOCK.get() to "Peacock",
             HBEntityTypes.GUINEA_FOWL.get() to "Guinea Fowl",
