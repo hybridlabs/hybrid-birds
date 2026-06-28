@@ -63,7 +63,6 @@ class LanguageProvider( output: FabricDataOutput, lookupProvider: CompletableFut
             HBEntityTypes.GOOSE.get() to "Goose",
             HBEntityTypes.SWAN.get() to "Swan",
             HBEntityTypes.ROOSTER.get() to "Rooster",
-            HBEntityTypes.CHICK.get() to "Chick",
             HBEntityTypes.TURKEY.get() to "Turkey",
             HBEntityTypes.PEACOCK.get() to "Peacock",
             HBEntityTypes.GUINEA_FOWL.get() to "Guinea Fowl",

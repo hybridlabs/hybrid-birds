@@ -46,7 +46,6 @@ class RoosterEntity(entityType: EntityType<out RoosterEntity>, world: Level) :
         goalSelector.addGoal(3, TemptGoal(this, 1.0,Ingredient.of(ItemTags.VILLAGER_PLANTABLE_SEEDS), false))
         goalSelector.addGoal(6, LookAtPlayerGoal(this, RoosterEntity::class.java, 8.0f))
         goalSelector.addGoal(6, LookAtPlayerGoal(this, Chicken::class.java, 8.0f))
-        goalSelector.addGoal(5, LookAtPlayerGoal(this, ChickEntity::class.java, 8.0f))
         goalSelector.addGoal(1, MeleeAttackGoal(this, 1.0, false))
         targetSelector.addGoal(1, HurtByTargetGoal(this))
         targetSelector.addGoal(2, NearestAttackableTargetGoal(this, RoosterEntity::class.java, true) { other ->
@@ -143,10 +142,6 @@ class RoosterEntity(entityType: EntityType<out RoosterEntity>, world: Level) :
     }
 
     // endregion
-
-    override fun getBreedOffspring(serverLevel: ServerLevel, ageableMob: AgeableMob): AgeableMob? {
-        return HBEntityTypes.CHICK.get().create(serverLevel)
-    }
 
     companion object {
         fun createMobAttributes(): AttributeSupplier.Builder {
