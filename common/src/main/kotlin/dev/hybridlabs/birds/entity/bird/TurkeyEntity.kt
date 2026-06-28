@@ -106,10 +106,10 @@ class TurkeyEntity(entityType: EntityType<out TurkeyEntity>, world: Level) :
         entityData.set(STUFFING_LEVEL, newSpeed)
 
         val speed = when (newSpeed) {
-            0 -> 0.5
-            1 -> 0.45
-            2 -> 0.4
-            else -> 0.5
+            0 -> 0.25
+            1 -> 0.225
+            2 -> 0.2
+            else -> 0.25
         }
 
         getAttribute(Attributes.MOVEMENT_SPEED)?.baseValue = speed
