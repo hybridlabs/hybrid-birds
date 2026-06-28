@@ -27,6 +27,7 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
 import net.minecraft.world.item.crafting.Ingredient
 import net.minecraft.world.level.Level
+import org.jetbrains.annotations.Nullable
 
 class RoosterEntity(entityType: EntityType<out RoosterEntity>, world: Level) :
     HBBirdEntity(entityType, world) {
@@ -55,6 +56,10 @@ class RoosterEntity(entityType: EntityType<out RoosterEntity>, world: Level) :
 
     private fun isAngeringItem(stack: ItemStack): Boolean {
         return stack.`is`(Items.GLOW_BERRIES)
+    }
+
+    override fun getBreedOffspring(serverLevel: ServerLevel, ageableMob: AgeableMob): AgeableMob? {
+        return EntityType.CHICKEN.create(serverLevel)
     }
 
     override fun mobInteract(player: Player, hand: InteractionHand): InteractionResult {
