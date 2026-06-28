@@ -2,12 +2,13 @@ package dev.hybridlabs.birds.data.client
 
 import dev.hybridlabs.birds.block.HBBlocks
 import dev.hybridlabs.birds.data.HBDataGenerator.filterHybridBirds
-import dev.hybridlabs.birds.effect.HBStatusEffects
 import dev.hybridlabs.birds.entity.HBEntityTypes
 import dev.hybridlabs.birds.item.HBItemGroups
 import dev.hybridlabs.birds.item.HBItems
+import dev.hybridlabs.birds.sound.HBSoundEvents
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider
+import net.minecraft.Util
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.Mob
@@ -29,10 +30,12 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HBItems.DUCK_EGG.get() to "Duck Egg",
             HBItems.GOOSE_EGG.get() to "Goose Egg",
             HBItems.SWAN_EGG.get() to "Swan Egg",
+            HBItems.PUFFIN.get() to "Raw Puffin",
             HBItems.DUCK.get() to "Raw Duck",
             HBItems.GOOSE.get() to "Raw Goose",
             HBItems.TURKEY.get() to "Raw Turkey",
             HBItems.TURDUCKEN.get() to "Raw Turducken",
+            HBItems.COOKED_PUFFIN.get() to "Cooked Puffin",
             HBItems.COOKED_DUCK.get() to "Cooked Duck",
             HBItems.COOKED_GOOSE.get() to "Cooked Goose",
             HBItems.COOKED_TURKEY.get() to "Cooked Turkey",
@@ -45,10 +48,57 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
         }
 
         mapOf(
-            HBStatusEffects.ROOSTERS_CALLING.get() to "Roosters Calling"
+            HBMobEffects.ROOSTERS_CALLING.get() to "Roosters Calling"
         ).forEach { (effect, translation) ->
             val identifier = BuiltInRegistries.MOB_EFFECT.getKey(effect)
             builder.add("effect.${identifier?.namespace}.${identifier?.path}", translation)
+        }
+
+        //Sound Events
+        mapOf(
+            HBSoundEvents.ALBATROSS_AMBIENT to "Albatross squawks",
+            HBSoundEvents.ALBATROSS_HURT to "Albatross hurts",
+            HBSoundEvents.ALBATROSS_DIE to "Albatross dies",
+
+            HBSoundEvents.SEAGULL_AMBIENT to "Seagull squawks",
+            HBSoundEvents.SEAGULL_HURT to "Seagull hurts",
+            HBSoundEvents.SEAGULL_DIE to "Seagull dies",
+
+            HBSoundEvents.PELICAN_AMBIENT to "Pelican grunts",
+            HBSoundEvents.PELICAN_HURT to "Pelican hurts",
+            HBSoundEvents.PELICAN_DIE to "Pelican dies",
+
+            HBSoundEvents.PUFFIN_AMBIENT to "Puffin puffs",
+            HBSoundEvents.PUFFIN_HURT to "Puffin hurts",
+            HBSoundEvents.PUFFIN_DIE to "Puffin dies",
+
+            HBSoundEvents.DUCK_AMBIENT to "Duck quacks",
+            HBSoundEvents.DUCK_HURT to "Duck hurts",
+            HBSoundEvents.DUCK_DIE to "Duck dies",
+
+            HBSoundEvents.GOOSE_AMBIENT to "Goose honks",
+            HBSoundEvents.GOOSE_HURT to "Goose hurts",
+            HBSoundEvents.GOOSE_DIE to "Goose dies",
+
+            HBSoundEvents.SWAN_AMBIENT to "Swan trumpets",
+            HBSoundEvents.SWAN_HURT to "Swan hurts",
+            HBSoundEvents.SWAN_DIE to "Swan dies",
+
+            HBSoundEvents.TURKEY_AMBIENT to "Turkey gobbles",
+            HBSoundEvents.TURKEY_HURT to "Turkey hurts",
+            HBSoundEvents.TURKEY_DIE to "Turkey dies",
+
+            HBSoundEvents.ROOSTER_AMBIENT to "Rooster clucks",
+            HBSoundEvents.ROOSTER_HURT to "Rooster hurts",
+            HBSoundEvents.ROOSTER_DIE to "Rooster dies",
+            HBSoundEvents.ROOSTER_CALL to "Rooster calls",
+
+            HBSoundEvents.PEACOCK_AMBIENT to "Peacock calls",
+            HBSoundEvents.PEACOCK_HURT to "Peacock hurts",
+            HBSoundEvents.PEACOCK_DIE to "Peacock dies",
+
+        ).forEach { (soundEvent, translation) ->
+            builder.add(Util.makeDescriptionId("subtitles", soundEvent.get().location), translation)
         }
 
     }
