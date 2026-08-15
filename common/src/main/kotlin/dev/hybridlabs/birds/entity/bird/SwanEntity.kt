@@ -1,9 +1,10 @@
 package dev.hybridlabs.birds.entity.bird
 
 import dev.hybridlabs.birds.entity.HBEntityTypes
-import dev.hybridlabs.birds.entity.ai.goal.BirdBreedGoal
+import dev.hybridlabs.birds.entity.ai.goal.FlyingAnimalBreedGoal
 import dev.hybridlabs.birds.item.HBItems
 import dev.hybridlabs.birds.sound.HBSoundEvents
+import dev.hybridlabs.hapi.entity.base.flying.BaseAquaticBirdEntity
 import net.minecraft.core.particles.ParticleTypes
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvent
@@ -21,7 +22,7 @@ import net.minecraft.world.level.Level
 import net.minecraft.world.level.gameevent.GameEvent
 
 class SwanEntity(entityType: EntityType<out SwanEntity>, world: Level) :
-    HBAquaticBirdEntity(entityType, world) {
+    BaseAquaticBirdEntity(entityType, world) {
     private var eggLayTime: Int = 0
 
     init {
@@ -37,7 +38,7 @@ class SwanEntity(entityType: EntityType<out SwanEntity>, world: Level) :
 
     override fun registerGoals() {
         super.registerGoals()
-        goalSelector.addGoal(1, BirdBreedGoal(this, 1.1))
+        goalSelector.addGoal(1, FlyingAnimalBreedGoal(this, 1.1))
         goalSelector.addGoal(2, TemptGoal(this, 1.0, BREEDING_INGREDIENT, false))
     }
 

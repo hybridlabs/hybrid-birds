@@ -1,6 +1,7 @@
 package dev.hybridlabs.birds.entity.bird
 
 import dev.hybridlabs.birds.sound.HBSoundEvents
+import dev.hybridlabs.hapi.entity.base.flying.BaseRatiteEntity
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.entity.EntityType
@@ -9,7 +10,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
 
 class OstrichEntity(entityType: EntityType<out OstrichEntity>, world: Level) :
-    HBRatiteEntity(entityType, world, true) {
+    BaseRatiteEntity(entityType, world, true) {
 
     //override fun getBreedOffspring(serverLevel: ServerLevel, ageableMob: AgeableMob): AgeableMob? {
     //    return HBEntityTypes.OSTRICH.get().create(serverLevel)

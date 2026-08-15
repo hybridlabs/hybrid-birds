@@ -1,9 +1,10 @@
 package dev.hybridlabs.birds.entity.bird
 
 import dev.hybridlabs.birds.entity.HBEntityTypes
-import dev.hybridlabs.birds.entity.ai.goal.BirdBreedGoal
+import dev.hybridlabs.birds.entity.ai.goal.FlyingAnimalBreedGoal
 import dev.hybridlabs.birds.item.HBItems
 import dev.hybridlabs.birds.sound.HBSoundEvents
+import dev.hybridlabs.hapi.entity.base.flying.BaseFlyingAnimal
 import net.minecraft.core.particles.ParticleTypes
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvent
@@ -26,7 +27,7 @@ import software.bernie.geckolib.animation.RawAnimation
 import software.bernie.geckolib.constant.DefaultAnimations
 
 class PeacockEntity(entityType: EntityType<out PeacockEntity>, world: Level) :
-    HBBirdEntity(entityType, world) {
+    BaseFlyingAnimal(entityType, world) {
     private var eggLayTime: Int = 0
     private var tailUp = false
     private var tailUpTimer = 0
@@ -41,7 +42,7 @@ class PeacockEntity(entityType: EntityType<out PeacockEntity>, world: Level) :
 
     override fun registerGoals() {
         super.registerGoals()
-        goalSelector.addGoal(1, BirdBreedGoal(this, 1.1))
+        goalSelector.addGoal(1, FlyingAnimalBreedGoal(this, 1.1))
         goalSelector.addGoal(2, TemptGoal(this, 1.0, BREEDING_INGREDIENT, false))
     }
 
@@ -99,7 +100,7 @@ class PeacockEntity(entityType: EntityType<out PeacockEntity>, world: Level) :
         controllerRegistrar.add(
             AnimationController(
                 this, "Walk/Fly/Idle", 4
-            ) { state: AnimationState<HBBirdEntity> ->
+            ) { state: AnimationState<BaseFlyingAnimal> ->
                 when {
                     state.isMoving && onGround() -> state.setAndContinue(DefaultAnimations.WALK)
                     !this.onGround() && !isInWater -> state.setAndContinue(DefaultAnimations.FLY)

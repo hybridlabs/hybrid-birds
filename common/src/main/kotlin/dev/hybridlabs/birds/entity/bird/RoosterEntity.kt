@@ -1,8 +1,8 @@
 package dev.hybridlabs.birds.entity.bird
 
 import dev.hybridlabs.birds.effect.HBMobEffects
-import dev.hybridlabs.birds.entity.HBEntityTypes
 import dev.hybridlabs.birds.sound.HBSoundEvents
+import dev.hybridlabs.hapi.entity.base.flying.BaseFlyingAnimal
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvent
@@ -27,10 +27,9 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
 import net.minecraft.world.item.crafting.Ingredient
 import net.minecraft.world.level.Level
-import org.jetbrains.annotations.Nullable
 
 class RoosterEntity(entityType: EntityType<out RoosterEntity>, world: Level) :
-    HBBirdEntity(entityType, world) {
+    BaseFlyingAnimal(entityType, world) {
     private var hasCalled: Boolean = false
     private var angerTicks = 0
 

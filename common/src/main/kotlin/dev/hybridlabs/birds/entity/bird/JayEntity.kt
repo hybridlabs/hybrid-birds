@@ -1,6 +1,7 @@
 package dev.hybridlabs.birds.entity.bird
 
 import dev.hybridlabs.birds.sound.HBSoundEvents
+import dev.hybridlabs.hapi.entity.base.flying.BaseParrotEntity
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.entity.EntityType
@@ -10,7 +11,7 @@ import net.minecraft.world.entity.ai.goal.LandOnOwnersShoulderGoal
 import net.minecraft.world.level.Level
 
 class JayEntity(type: EntityType<out JayEntity>, world: Level) :
-    HBParrotEntity(type, world, true) {
+    BaseParrotEntity(type, world, true) {
 
     override fun registerGoals() {
         super.registerGoals()

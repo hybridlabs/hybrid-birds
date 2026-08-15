@@ -1,6 +1,7 @@
 package dev.hybridlabs.birds.entity.bird
 
 import dev.hybridlabs.birds.entity.bird.GuineaFowlEntity.Companion.BREEDING_INGREDIENT
+import dev.hybridlabs.hapi.entity.base.flying.BaseParrotEntity
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
@@ -9,7 +10,7 @@ import net.minecraft.world.entity.ai.goal.TemptGoal
 import net.minecraft.world.level.Level
 
 class HummingbirdEntity(entityType: EntityType<out HummingbirdEntity>, world: Level) :
-    HBParrotEntity(entityType, world, false) {
+    BaseParrotEntity(entityType, world, false) {
 
     override fun registerGoals() {
         super.registerGoals()

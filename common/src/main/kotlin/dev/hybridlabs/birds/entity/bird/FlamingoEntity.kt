@@ -2,6 +2,7 @@ package dev.hybridlabs.birds.entity.bird
 
 import dev.hybridlabs.birds.entity.HBEntityTypes
 import dev.hybridlabs.birds.sound.HBSoundEvents
+import dev.hybridlabs.hapi.entity.base.flying.BaseWadingBirdEntity
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.world.damagesource.DamageSource
@@ -12,7 +13,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
 
 class FlamingoEntity(type: EntityType<out FlamingoEntity>, world: Level) :
-    HBWadingBirdEntity(type, world) {
+    BaseWadingBirdEntity(type, world) {
 
     //override fun getBreedOffspring(serverLevel: ServerLevel, ageableMob: AgeableMob): FlamingoEntity? {
     //    return HBEntityTypes.FLAMINGO.get().create(serverLevel)

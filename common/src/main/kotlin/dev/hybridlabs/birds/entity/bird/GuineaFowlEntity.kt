@@ -1,8 +1,9 @@
 package dev.hybridlabs.birds.entity.bird
 
 import dev.hybridlabs.birds.entity.HBEntityTypes
-import dev.hybridlabs.birds.entity.ai.goal.BirdBreedGoal
+import dev.hybridlabs.birds.entity.ai.goal.FlyingAnimalBreedGoal
 import dev.hybridlabs.birds.item.HBItems
+import dev.hybridlabs.hapi.entity.base.flying.BaseFlyingAnimal
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.sounds.SoundEvents
@@ -19,7 +20,7 @@ import net.minecraft.world.level.Level
 import net.minecraft.world.level.gameevent.GameEvent
 
 class GuineaFowlEntity(entityType: EntityType<out GuineaFowlEntity>, world: Level) :
-    HBBirdEntity(entityType, world) {
+    BaseFlyingAnimal(entityType, world) {
     private var eggLayTime: Int = 0
 
     init {
@@ -28,7 +29,7 @@ class GuineaFowlEntity(entityType: EntityType<out GuineaFowlEntity>, world: Leve
 
     override fun registerGoals() {
         super.registerGoals()
-        goalSelector.addGoal(1, BirdBreedGoal(this, 1.1))
+        goalSelector.addGoal(1, FlyingAnimalBreedGoal(this, 1.1))
         goalSelector.addGoal(2, TemptGoal(this, 1.0, BREEDING_INGREDIENT, false))
     }
 
@@ -62,7 +63,7 @@ class GuineaFowlEntity(entityType: EntityType<out GuineaFowlEntity>, world: Leve
         return HBEntityTypes.GUINEA_FOWL.get().create(serverLevel)
     }
 
-    override fun spawnChildFromBreeding(level: ServerLevel, mate: HBBirdEntity) {
+    override fun spawnChildFromBreeding(level: ServerLevel, mate: BaseFlyingAnimal) {
         val babyCount = 1 + random.nextInt(4)
 
         repeat(babyCount) {

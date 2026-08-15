@@ -1,10 +1,11 @@
 package dev.hybridlabs.birds.entity.bird
 
 import dev.hybridlabs.birds.entity.HBEntityTypes
-import dev.hybridlabs.birds.entity.ai.goal.BirdBreedGoal
+import dev.hybridlabs.birds.entity.ai.goal.FlyingAnimalBreedGoal
 import dev.hybridlabs.birds.item.HBItems
 import dev.hybridlabs.birds.loot.HBLootTables
 import dev.hybridlabs.birds.sound.HBSoundEvents
+import dev.hybridlabs.hapi.entity.base.flying.BaseFlyingAnimal
 import net.minecraft.core.particles.ParticleTypes
 import net.minecraft.core.registries.Registries
 import net.minecraft.nbt.CompoundTag
@@ -33,7 +34,7 @@ import net.minecraft.world.level.gameevent.GameEvent
 import net.minecraft.world.level.storage.loot.LootTable
 
 class TurkeyEntity(entityType: EntityType<out TurkeyEntity>, world: Level) :
-    HBBirdEntity(entityType, world) {
+    BaseFlyingAnimal(entityType, world) {
     private var eggLayTime: Int = 0
 
     init {
@@ -53,7 +54,7 @@ class TurkeyEntity(entityType: EntityType<out TurkeyEntity>, world: Level) :
 
     override fun registerGoals() {
         super.registerGoals()
-        goalSelector.addGoal(1, BirdBreedGoal(this, 1.1))
+        goalSelector.addGoal(1, FlyingAnimalBreedGoal(this, 1.1))
         goalSelector.addGoal(2, TemptGoal(this, 1.0, BREEDING_INGREDIENT, false))
     }
 
