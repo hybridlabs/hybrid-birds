@@ -1,7 +1,6 @@
 package dev.hybridlabs.birds.utils;
 
 import dev.hybridlabs.birds.Constants;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.MobCategory;
 
 import java.util.Map;
