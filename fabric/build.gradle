@@ -67,7 +67,6 @@ fabricApi {
     }
 }
 
-
 loom {
     dependencies {
         //commonKotlinOut project(path: ':common', configuration: 'commonKotlinOut')
@@ -79,7 +78,6 @@ loom {
     mixin {
         defaultRefmapName.set("${mod_id}.refmap.json")
     }
-
 
     compileKotlin {
         source(project(":common").sourceSets.main.allSource)
