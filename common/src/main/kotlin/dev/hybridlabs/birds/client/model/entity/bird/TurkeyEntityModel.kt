@@ -2,9 +2,10 @@ package dev.hybridlabs.birds.client.model.entity.bird
 
 import dev.hybridlabs.birds.Constants
 import dev.hybridlabs.birds.entity.bird.TurkeyEntity
+import dev.hybridlabs.hapi.client.model.entity.flying.BaseFlyingAnimalEntityModel
 import net.minecraft.resources.ResourceLocation
 
-class TurkeyEntityModel : HBBirdEntityModel<TurkeyEntity>("turkey") {
+class TurkeyEntityModel : BaseFlyingAnimalEntityModel<TurkeyEntity>("hybrid_birds", "turkey") {
 
     private val BABY_MODEL = ResourceLocation(Constants.MOD_ID, "geo/baby_turkey.geo.json")
     private val NORMAL_MODEL = ResourceLocation(Constants.MOD_ID, "geo/turkey.geo.json")

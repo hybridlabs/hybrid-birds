@@ -2,9 +2,10 @@ package dev.hybridlabs.birds.client.model.entity.bird
 
 import dev.hybridlabs.birds.Constants
 import dev.hybridlabs.birds.entity.bird.PelicanEntity
+import dev.hybridlabs.hapi.client.model.entity.flying.BaseFlyingAnimalEntityModel
 import net.minecraft.resources.ResourceLocation
 
-class PelicanEntityModel : HBBirdEntityModel<PelicanEntity>("pelican") {
+class PelicanEntityModel : BaseFlyingAnimalEntityModel<PelicanEntity>("hybrid_birds", "pelican") {
 
     override fun getModelResource(animatable: PelicanEntity): ResourceLocation {
         return ResourceLocation(Constants.MOD_ID, "geo/pelican.geo.json")

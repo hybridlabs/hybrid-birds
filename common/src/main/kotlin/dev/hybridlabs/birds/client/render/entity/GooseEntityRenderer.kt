@@ -2,10 +2,11 @@ package dev.hybridlabs.birds.client.render.entity
 
 import dev.hybridlabs.birds.entity.bird.GooseEntity
 import dev.hybridlabs.birds.client.model.entity.bird.GooseEntityModel
+import dev.hybridlabs.hapi.client.render.entity.flying.BaseBirdEntityRenderer
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class GooseEntityRenderer(context: Context) :
-    BirdEntityRenderer<GooseEntity>(context,
+    BaseBirdEntityRenderer<GooseEntity>(context,
         GooseEntityModel()
     ) {
 

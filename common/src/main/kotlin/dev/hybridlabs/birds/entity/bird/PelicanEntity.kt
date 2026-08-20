@@ -1,8 +1,9 @@
 package dev.hybridlabs.birds.entity.bird
 
 import dev.hybridlabs.birds.entity.HBEntityTypes
-import dev.hybridlabs.birds.entity.ai.control.BirdFlyFloatControl
 import dev.hybridlabs.birds.sound.HBSoundEvents
+import dev.hybridlabs.hapi.entity.ai.control.flying.FlyingAnimalFlyFloatControl
+import dev.hybridlabs.hapi.entity.base.flying.BaseAquaticBirdEntity
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.tags.ItemTags
@@ -25,14 +26,14 @@ import net.minecraft.world.level.Level
 import net.minecraft.world.level.pathfinder.BlockPathTypes
 
 class PelicanEntity(type: EntityType<out PelicanEntity>, world: Level) :
-    HBAquaticBirdEntity(type, world) {
+    BaseAquaticBirdEntity(type, world) {
 
     override fun createNavigation(level: Level): PathNavigation {
         setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
         setPathfindingMalus(BlockPathTypes.DANGER_FIRE, 16.0f)
         setPathfindingMalus(BlockPathTypes.DAMAGE_FIRE, -1.0f)
 
-        moveControl = BirdFlyFloatControl(this, 10, false)
+        moveControl = FlyingAnimalFlyFloatControl(this, 10, false)
         navigation = FlyingPathNavigation(this, level)
         lookControl = LookControl(this)
 

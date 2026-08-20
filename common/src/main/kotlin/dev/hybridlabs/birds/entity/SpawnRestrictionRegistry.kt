@@ -1,11 +1,10 @@
 package dev.hybridlabs.birds.entity
 
-import dev.hybridlabs.birds.entity.bird.HBAquaticBirdEntity
-import dev.hybridlabs.birds.entity.bird.HBBirdEntity
-import dev.hybridlabs.birds.entity.bird.HBParrotEntity
-import dev.hybridlabs.birds.entity.bird.HBParrotEntity.Companion.canBirdSpawn
-import dev.hybridlabs.birds.entity.bird.HBRatiteEntity
-import dev.hybridlabs.birds.entity.bird.HBWadingBirdEntity
+import dev.hybridlabs.hapi.entity.base.flying.BaseAquaticBirdEntity
+import dev.hybridlabs.hapi.entity.base.flying.BaseFlyingAnimal
+import dev.hybridlabs.hapi.entity.base.flying.BaseParrotEntity
+import dev.hybridlabs.hapi.entity.base.flying.BaseRatiteEntity
+import dev.hybridlabs.hapi.entity.base.flying.BaseWadingBirdEntity
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.Mob
 import net.minecraft.world.entity.SpawnPlacements
@@ -52,31 +51,31 @@ object SpawnRestrictionRegistry {
         //).forEach { registerParrot(it) }
     }
 
-    private fun <T : HBBirdEntity> registerFlockingBird(entityType: EntityType<T>) {
-        registerBirdEntity(entityType, HBBirdEntity::canBirdSpawn)
+    private fun <T : BaseFlyingAnimal> registerFlockingBird(entityType: EntityType<T>) {
+        registerBirdEntity(entityType, BaseFlyingAnimal::canBirdSpawn)
     }
 
-    private fun <T : HBBirdEntity> registerParrot(entityType: EntityType<T>) {
-        registerBirdEntity(entityType, HBParrotEntity::canBirdSpawn)
+    private fun <T : BaseFlyingAnimal> registerParrot(entityType: EntityType<T>) {
+        registerBirdEntity(entityType, BaseParrotEntity::canBirdSpawn)
     }
 
-    private fun <T : HBBirdEntity> registerTerrestrialBird(entityType: EntityType<T>) {
-        registerBirdEntity(entityType, HBBirdEntity::canBirdSpawn)
+    private fun <T : BaseFlyingAnimal> registerTerrestrialBird(entityType: EntityType<T>) {
+        registerBirdEntity(entityType, BaseFlyingAnimal::canBirdSpawn)
     }
 
-    private fun <T : HBRatiteEntity> registerRatite(entityType: EntityType<T>) {
-        registerBirdEntity(entityType, HBBirdEntity::canBirdSpawn)
+    private fun <T : BaseRatiteEntity> registerRatite(entityType: EntityType<T>) {
+        registerBirdEntity(entityType, BaseFlyingAnimal::canBirdSpawn)
     }
 
-    private fun <T : HBAquaticBirdEntity> registerAquaticBird(entityType: EntityType<T>) {
-        registerAquaticBirdEntity(entityType, HBAquaticBirdEntity::canAquaticBirdSpawn)
+    private fun <T : BaseAquaticBirdEntity> registerAquaticBird(entityType: EntityType<T>) {
+        registerAquaticBirdEntity(entityType, BaseAquaticBirdEntity::canAquaticBirdSpawn)
     }
 
-    private fun <T : HBWadingBirdEntity> registerWadingBird(entityType: EntityType<T>) {
-        registerAquaticBirdEntity(entityType, HBBirdEntity::canBirdSpawn)
+    private fun <T : BaseWadingBirdEntity> registerWadingBird(entityType: EntityType<T>) {
+        registerAquaticBirdEntity(entityType, BaseFlyingAnimal::canBirdSpawn)
     }
 
-    private fun <T : HBBirdEntity> registerBirdEntity(entityType: EntityType<T>, predicate: SpawnPredicate<T>) {
+    private fun <T : BaseFlyingAnimal> registerBirdEntity(entityType: EntityType<T>, predicate: SpawnPredicate<T>) {
         register(
             entityType,
             Type.ON_GROUND,
@@ -84,7 +83,7 @@ object SpawnRestrictionRegistry {
         )
     }
 
-    private fun <T : HBBirdEntity> registerAquaticBirdEntity(entityType: EntityType<T>, predicate: SpawnPredicate<T>) {
+    private fun <T : BaseFlyingAnimal> registerAquaticBirdEntity(entityType: EntityType<T>, predicate: SpawnPredicate<T>) {
         register(
             entityType,
             Type.NO_RESTRICTIONS,

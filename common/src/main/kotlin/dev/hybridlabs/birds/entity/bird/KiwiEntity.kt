@@ -1,11 +1,9 @@
 package dev.hybridlabs.birds.entity.bird
 
-import dev.hybridlabs.birds.entity.HBEntityTypes
-import net.minecraft.server.level.ServerLevel
+import dev.hybridlabs.hapi.entity.base.flying.BaseRatiteEntity
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.world.damagesource.DamageSource
-import net.minecraft.world.entity.AgeableMob
 import net.minecraft.world.entity.EntityDimensions
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.Pose
@@ -14,7 +12,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
 
 class KiwiEntity(entityType: EntityType<out KiwiEntity>, world: Level) :
-    HBRatiteEntity(entityType, world, false) {
+    BaseRatiteEntity(entityType, world, false) {
 
     override fun getMaxSpawnClusterSize(): Int {
         return 2

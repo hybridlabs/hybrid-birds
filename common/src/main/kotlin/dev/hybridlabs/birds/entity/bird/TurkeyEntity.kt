@@ -1,10 +1,11 @@
 package dev.hybridlabs.birds.entity.bird
 
 import dev.hybridlabs.birds.entity.HBEntityTypes
-import dev.hybridlabs.birds.entity.ai.goal.BirdBreedGoal
+import dev.hybridlabs.birds.entity.ai.goal.FlyingAnimalBreedGoal
 import dev.hybridlabs.birds.item.HBItems
 import dev.hybridlabs.birds.loot.HBLootTables
 import dev.hybridlabs.birds.sound.HBSoundEvents
+import dev.hybridlabs.hapi.entity.base.flying.BaseFlyingAnimal
 import net.minecraft.core.particles.ParticleTypes
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
@@ -22,7 +23,6 @@ import net.minecraft.world.entity.AgeableMob
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
-import net.minecraft.world.entity.ai.goal.BreedGoal
 import net.minecraft.world.entity.ai.goal.TemptGoal
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
@@ -32,7 +32,7 @@ import net.minecraft.world.level.Level
 import net.minecraft.world.level.gameevent.GameEvent
 
 class TurkeyEntity(entityType: EntityType<out TurkeyEntity>, world: Level) :
-    HBBirdEntity(entityType, world) {
+    BaseFlyingAnimal(entityType, world) {
     private var eggLayTime: Int = 0
 
     init {
@@ -50,7 +50,7 @@ class TurkeyEntity(entityType: EntityType<out TurkeyEntity>, world: Level) :
 
     override fun registerGoals() {
         super.registerGoals()
-        goalSelector.addGoal(1, BirdBreedGoal(this, 1.1))
+        goalSelector.addGoal(1, FlyingAnimalBreedGoal(this, 1.1))
         goalSelector.addGoal(2, TemptGoal(this, 1.0, BREEDING_INGREDIENT, false))
     }
 

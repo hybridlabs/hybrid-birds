@@ -1,11 +1,9 @@
 package dev.hybridlabs.birds.entity.bird
 
-import dev.hybridlabs.birds.entity.HBEntityTypes
 import dev.hybridlabs.birds.sound.HBSoundEvents
-import net.minecraft.server.level.ServerLevel
+import dev.hybridlabs.hapi.entity.base.flying.BaseRatiteEntity
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.world.damagesource.DamageSource
-import net.minecraft.world.entity.AgeableMob
 import net.minecraft.world.entity.EntityDimensions
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.Pose
@@ -14,7 +12,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
 
 class OstrichEntity(entityType: EntityType<out OstrichEntity>, world: Level) :
-    HBRatiteEntity(entityType, world, true) {
+    BaseRatiteEntity(entityType, world, true) {
 
     override fun getStandingEyeHeight(pose: Pose, dimensions: EntityDimensions): Float {
         return dimensions.height * 1.1f

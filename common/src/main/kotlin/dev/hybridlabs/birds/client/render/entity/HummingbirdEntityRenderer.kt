@@ -2,10 +2,11 @@ package dev.hybridlabs.birds.client.render.entity
 
 import dev.hybridlabs.birds.client.model.entity.bird.HummingbirdEntityModel
 import dev.hybridlabs.birds.entity.bird.HummingbirdEntity
+import dev.hybridlabs.hapi.client.render.entity.flying.BaseParrotEntityRenderer
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class HummingbirdEntityRenderer(context: Context) :
-    HBParrotEntityRenderer<HummingbirdEntity>(context,
+    BaseParrotEntityRenderer<HummingbirdEntity>(context,
         HummingbirdEntityModel()
     ) {
 
