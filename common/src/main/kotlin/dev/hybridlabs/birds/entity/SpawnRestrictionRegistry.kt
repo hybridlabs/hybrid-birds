@@ -1,16 +1,11 @@
 package dev.hybridlabs.birds.entity
 
-import dev.hybridlabs.hapi.entity.base.flying.BaseAquaticBirdEntity
-import dev.hybridlabs.hapi.entity.base.flying.BaseFlyingAnimal
-import dev.hybridlabs.hapi.entity.base.flying.BaseParrotEntity
-import dev.hybridlabs.hapi.entity.base.flying.BaseRatiteEntity
-import dev.hybridlabs.hapi.entity.base.flying.BaseWadingBirdEntity
+import dev.hybridlabs.hapi.entity.base.flying.*
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.Mob
 import net.minecraft.world.entity.SpawnPlacements
 import net.minecraft.world.entity.SpawnPlacements.SpawnPredicate
 import net.minecraft.world.entity.SpawnPlacements.Type
-import net.minecraft.world.entity.animal.Animal
 import net.minecraft.world.level.levelgen.Heightmap
 
 /**
