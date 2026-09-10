@@ -1,9 +1,9 @@
 package datagen
 
-import dev.hybridlabs.birds.Constants
-import dev.hybridlabs.birds.CommonClass
-import dev.hybridlabs.birds.config.HBConfigHandler
-import dev.hybridlabs.birds.initializeConfig
+import dev.hybridlabs.skies.Constants
+import dev.hybridlabs.skies.CommonClass
+import dev.hybridlabs.skies.config.HSConfigHandler
+import dev.hybridlabs.skies.initializeConfig
 import net.minecraft.core.RegistrySetBuilder
 import net.minecraft.core.registries.Registries
 import net.minecraft.resources.ResourceKey
@@ -26,7 +26,7 @@ object DataGenerators {
         val lookupProvider = event.lookupProvider
 
         val configFile = Constants.CONFIG_FILE
-        val configHandler = HBConfigHandler(configFile.toFile())
+        val configHandler = HSConfigHandler(configFile.toFile())
         initializeConfig(configFile, configHandler)
 
         val builder: RegistrySetBuilder = RegistrySetBuilder().add(

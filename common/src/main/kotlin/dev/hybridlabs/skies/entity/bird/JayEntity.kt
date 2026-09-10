@@ -1,0 +1,52 @@
+package dev.hybridlabs.skies.entity.bird
+
+import dev.hybridlabs.skies.sound.HSSoundEvents
+import dev.hybridlabs.hapi.entity.base.flying.BaseParrotEntity
+import net.minecraft.sounds.SoundEvent
+import net.minecraft.world.damagesource.DamageSource
+import net.minecraft.world.entity.EntityType
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier
+import net.minecraft.world.entity.ai.attributes.Attributes
+import net.minecraft.world.entity.ai.goal.LandOnOwnersShoulderGoal
+import net.minecraft.world.level.Level
+
+class JayEntity(type: EntityType<out JayEntity>, world: Level) :
+    BaseParrotEntity(type, world, true) {
+
+    override fun registerGoals() {
+        super.registerGoals()
+        this.goalSelector.addGoal(3, LandOnOwnersShoulderGoal(this))
+    }
+
+    override fun getMaxSpawnClusterSize(): Int {
+        return 2
+    }
+
+    //override fun getBreedOffspring(serverLevel: ServerLevel, ageableMob: AgeableMob): JayEntity? {
+    //    return HBEntityTypes.JAY.get().create(serverLevel)
+    //}
+
+    override fun getAmbientSound(): SoundEvent {
+        return HSSoundEvents.DUCK_AMBIENT.get()
+    }
+
+    override fun getHurtSound(source: DamageSource): SoundEvent {
+        return HSSoundEvents.DUCK_HURT.get()
+    }
+
+    override fun getDeathSound(): SoundEvent {
+        return HSSoundEvents.DUCK_DIE.get()
+    }
+
+    companion object {
+        fun createMobAttributes(): AttributeSupplier.Builder {
+            return createLivingAttributes()
+                .add(Attributes.MAX_HEALTH, 6.0)
+                .add(Attributes.MOVEMENT_SPEED, 0.25)
+                .add(Attributes.FLYING_SPEED, 0.5)
+                .add(Attributes.ATTACK_DAMAGE, 1.0)
+                .add(Attributes.ATTACK_KNOCKBACK, 0.1)
+                .add(Attributes.FOLLOW_RANGE, 12.0)
+        }
+    }
+}
