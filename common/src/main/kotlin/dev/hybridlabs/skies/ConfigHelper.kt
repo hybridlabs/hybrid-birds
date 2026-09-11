@@ -1,15 +1,13 @@
 package dev.hybridlabs.skies
 
-import dev.hybridlabs.skies.CommonClass
-import dev.hybridlabs.skies.Constants
-import dev.hybridlabs.skies.config.HBConfigHandler
+import dev.hybridlabs.skies.config.HSConfigHandler
 import java.nio.file.Path
 import kotlin.io.path.notExists
 
 object ConfigHelper {
-    fun initializeConfig(configFile: Path = CommonClass.CONFIG_FILE): HBConfigHandler {
+    fun initializeConfig(configFile: Path = CommonClass.CONFIG_FILE): HSConfigHandler {
         val logger = Constants.LOGGER
-        val configHandler = HBConfigHandler(configFile.toFile())
+        val configHandler = HSConfigHandler(configFile.toFile())
         if (configFile.notExists()) {
             logger.info("${Constants.MOD_NAME} config file did not exist, creating one")
             configHandler.save()

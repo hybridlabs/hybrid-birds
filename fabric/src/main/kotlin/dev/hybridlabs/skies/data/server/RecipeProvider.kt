@@ -1,7 +1,7 @@
 package dev.hybridlabs.skies.data.server
 
 import dev.hybridlabs.skies.item.HSItems
-import dev.hybridlabs.skies.tag.HBItemTags
+import dev.hybridlabs.skies.tag.HSItemTags
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider
 import net.minecraft.advancements.critereon.InventoryChangeTrigger
@@ -33,13 +33,13 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
             .requires(Items.CHICKEN)
             .unlockedBy(
                 "has_turducken_ingredient", InventoryChangeTrigger.TriggerInstance.hasItems(
-                    ItemPredicate.Builder.item().of(HBItemTags.TURDUCKEN_INGREDIENTS).build()
+                    ItemPredicate.Builder.item().of(HSItemTags.TURDUCKEN_INGREDIENTS).build()
                 )
             )
             .save(exporter)
 
         // cooking recipes
-        offerEggCookingRecipes(exporter, HBItemTags.EGGS, HSItems.COOKED_EGG.get(), 0.15f)
+        offerEggCookingRecipes(exporter, HSItemTags.EGGS, HSItems.COOKED_EGG.get(), 0.15f)
 
         offerCookingRecipes(exporter, HSItems.PUFFIN.get(), HSItems.COOKED_PUFFIN.get(), 0.15f)
         offerCookingRecipes(exporter, HSItems.DUCK.get(), HSItems.COOKED_DUCK.get(), 0.15f)

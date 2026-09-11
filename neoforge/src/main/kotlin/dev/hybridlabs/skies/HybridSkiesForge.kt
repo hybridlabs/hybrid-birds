@@ -1,14 +1,14 @@
-package dev.hybridlabs.birds
+package dev.hybridlabs.skies
 
 import dev.hybridlabs.skies.block.HSBlocks
 import dev.hybridlabs.skies.effect.HSMobEffects
 import dev.hybridlabs.skies.entity.HSEntityTypes
-import dev.hybridlabs.skies.forge.HybridBirdsModBusEvents
+import dev.hybridlabs.skies.forge.HybridSkiesModBusEvents
 import dev.hybridlabs.skies.item.HSItemGroups
 import dev.hybridlabs.skies.item.HSItems
 import dev.hybridlabs.skies.sound.HSSoundEvents
-import dev.hybridlabs.skies.tag.HBBiomeTags
-import dev.hybridlabs.skies.tag.HBItemTags
+import dev.hybridlabs.skies.tag.HSBiomeTags
+import dev.hybridlabs.skies.tag.HSItemTags
 import net.neoforged.fml.common.Mod
 
 /**
@@ -32,11 +32,11 @@ object HybridSkiesForge {
         HSItems
         HSItemGroups
 
-        HBBiomeTags
-        HBItemTags
+        HSBiomeTags
+        HSItemTags
 
         HSMobEffects
 
-        HybridBirdsModBusEvents
+        HybridSkiesModBusEvents
     }
 }

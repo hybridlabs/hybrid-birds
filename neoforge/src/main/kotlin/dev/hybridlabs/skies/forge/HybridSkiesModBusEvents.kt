@@ -1,7 +1,7 @@
 package dev.hybridlabs.skies.forge
 
 import dev.hybridlabs.skies.Constants
-import dev.hybridlabs.skies.client.render.entity.HBEntityRenderers
+import dev.hybridlabs.skies.client.render.entity.HSEntityRenderers
 import dev.hybridlabs.skies.entity.SpawnRestrictionRegistry
 import net.neoforged.fml.event.lifecycle.FMLDedicatedServerSetupEvent
 import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent
@@ -14,7 +14,7 @@ object HybridSkiesModBusEvents {
 
         runForDist(
             clientTarget = {
-                HBEntityRenderers
+                HSEntityRenderers
             },
             serverTarget = {
                 MOD_BUS.addListener(::onServerSetup)

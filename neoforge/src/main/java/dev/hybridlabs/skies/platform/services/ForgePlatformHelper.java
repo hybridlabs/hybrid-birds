@@ -26,7 +26,7 @@ public class ForgePlatformHelper implements PlatformHelper {
 
     public static IEventBus getEventBus() {
         final ModContainer cont =
-                ModList.get().getModContainerById(dev.hybridlabs.birds.Constants.MOD_ID).orElseThrow();
+                ModList.get().getModContainerById(dev.hybridlabs.skies.Constants.MOD_ID).orElseThrow();
         return cont.getEventBus();
     }
 

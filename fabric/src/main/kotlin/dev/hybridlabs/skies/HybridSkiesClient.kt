@@ -1,6 +1,6 @@
 package dev.hybridlabs.skies
 
-import dev.hybridlabs.skies.client.render.entity.HBEntityRenderers
+import dev.hybridlabs.skies.client.render.entity.HSEntityRenderers
 import net.fabricmc.api.ClientModInitializer
 
 object HybridSkiesClient : ClientModInitializer {
@@ -9,6 +9,6 @@ object HybridSkiesClient : ClientModInitializer {
 	}
 
 	private fun registerEntityRenderers() {
-        HBEntityRenderers
+        HSEntityRenderers
 	}
 }

@@ -1,6 +1,6 @@
 package dev.hybridlabs.skies.data.server.tag
 
-import dev.hybridlabs.skies.tag.HBBiomeTags
+import dev.hybridlabs.skies.tag.HSBiomeTags
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider
 import net.minecraft.core.HolderLookup

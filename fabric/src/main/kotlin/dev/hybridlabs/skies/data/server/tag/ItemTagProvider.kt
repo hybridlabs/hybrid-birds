@@ -1,7 +1,7 @@
 package dev.hybridlabs.skies.data.server.tag
 
 import dev.hybridlabs.skies.item.HSItems
-import dev.hybridlabs.skies.tag.HBItemTags
+import dev.hybridlabs.skies.tag.HSItemTags
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider
 import net.minecraft.core.HolderLookup
@@ -16,7 +16,7 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
             HSItems.TURKEY.get(),
             Items.CHICKEN,
         ).forEach { item ->
-            getOrCreateTagBuilder(HBItemTags.TURDUCKEN_INGREDIENTS).add(item)
+            getOrCreateTagBuilder(HSItemTags.TURDUCKEN_INGREDIENTS).add(item)
         }
 
         setOf(
@@ -27,7 +27,7 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
             HSItems.PEACOCK_EGG.get(),
             HSItems.GUINEA_FOWL_EGG.get(),
         ).forEach { item ->
-            getOrCreateTagBuilder(HBItemTags.EGGS).add(item)
+            getOrCreateTagBuilder(HSItemTags.EGGS).add(item)
         }
     }
 }

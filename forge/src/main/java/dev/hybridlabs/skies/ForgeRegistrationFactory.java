@@ -1,4 +1,4 @@
-package dev.hybridlabs.birds;
+package dev.hybridlabs.skies;
 
 import dev.hybridlabs.skies.platform.ForgePlatformHelper;
 import dev.hybridlabs.skies.platform.registration.RegistrationProvider;

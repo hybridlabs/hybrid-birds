@@ -8,8 +8,8 @@ import dev.hybridlabs.skies.entity.SpawnRestrictionRegistry
 import dev.hybridlabs.skies.item.HSItemGroups
 import dev.hybridlabs.skies.item.HSItems
 import dev.hybridlabs.skies.sound.HSSoundEvents
-import dev.hybridlabs.skies.tag.HBBiomeTags
-import dev.hybridlabs.skies.tag.HBItemTags
+import dev.hybridlabs.skies.tag.HSBiomeTags
+import dev.hybridlabs.skies.tag.HSItemTags
 import net.fabricmc.api.ModInitializer
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors
@@ -32,8 +32,8 @@ object HybridSkies : ModInitializer {
         HSItems
         HSItemGroups
 
-        HBBiomeTags
-        HBItemTags
+        HSBiomeTags
+        HSItemTags
 
         HSMobEffects
 
