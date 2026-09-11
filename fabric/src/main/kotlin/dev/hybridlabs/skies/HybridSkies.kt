@@ -1,6 +1,5 @@
 package dev.hybridlabs.skies
 
-import dev.hybridlabs.birds.Constants
 import dev.hybridlabs.skies.Constants.MOD_NAME
 import dev.hybridlabs.skies.block.HSBlocks
 import dev.hybridlabs.skies.config.HSConfig
