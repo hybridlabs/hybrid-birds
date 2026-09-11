@@ -1,9 +1,9 @@
 package datagen
 
-import dev.hybridlabs.birds.Constants
-import dev.hybridlabs.birds.CommonClass
-import dev.hybridlabs.birds.config.HBConfigHandler
-import dev.hybridlabs.birds.initializeConfig
+import dev.hybridlabs.skies.Constants
+import dev.hybridlabs.skies.CommonClass
+import dev.hybridlabs.skies.config.HBConfigHandler
+import dev.hybridlabs.skies.initializeConfig
 import net.minecraft.core.RegistrySetBuilder
 import net.minecraft.core.registries.Registries
 import net.minecraft.resources.ResourceKey

@@ -69,8 +69,6 @@ dependencies {
     commonJavaOut files("src/main/java/")
 }
 
-
-
 configurations {
     commonJava {
         canBeResolved = false
