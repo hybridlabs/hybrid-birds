@@ -78,8 +78,6 @@ class RoosterEntity(entityType: EntityType<out RoosterEntity>, world: Level) :
         if (!player.abilities.instabuild) {
             stack.shrink(1)
         }
-
-        this.angerTicks = 200
     }
 
     override fun tick() {
