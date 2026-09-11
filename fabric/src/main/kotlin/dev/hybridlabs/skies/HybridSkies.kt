@@ -1,7 +1,7 @@
 package dev.hybridlabs.skies
 
 import dev.hybridlabs.skies.block.HSBlocks
-import dev.hybridlabs.skies.config.HBConfig
+import dev.hybridlabs.skies.config.HSConfig
 import dev.hybridlabs.skies.effect.HSMobEffects
 import dev.hybridlabs.skies.entity.HSEntityTypes
 import dev.hybridlabs.skies.entity.SpawnRestrictionRegistry
@@ -42,7 +42,7 @@ object HybridSkies : ModInitializer {
         registerBiomeModifications(configHandler.config)
 	}
 
-    private fun registerBiomeModifications(config: HBConfig) {
+    private fun registerBiomeModifications(config: HSConfig) {
         config.entitySpawnConfig.forEach { config ->
             BiomeModifications.addSpawn(
                 BiomeSelectors.tag(config.biomes),
