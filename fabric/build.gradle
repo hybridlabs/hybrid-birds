@@ -1,20 +1,16 @@
 plugins {
     id 'multiloader-loader'
     id 'fabric-loom'
-    id "me.modmuss50.mod-publish-plugin" version "0.8.4"
-    id "org.jetbrains.kotlin.jvm"
+    id 'me.modmuss50.mod-publish-plugin'
+    id 'org.jetbrains.kotlin.jvm'
 }
 
 repositories {
     maven { url "https://maven.terraformersmc.com/releases/" }
+
     maven {
         name = "Geckolib"
         url  = "https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/"
-    }
-
-    maven {
-        name = "Modrinth"
-        url  = "https://api.modrinth.com/maven/"
     }
 
     maven {
@@ -63,7 +59,6 @@ fabricApi {
         datagenOutput files(runDatagen)
     }
 }
-
 
 loom {
     var accessWidenerFile = file("src/main/resources/${mod_id}.accesswidener")
