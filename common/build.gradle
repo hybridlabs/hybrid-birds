@@ -20,7 +20,10 @@ repositories {
         url  = "https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/"
     }
     mavenCentral()
-    mavenLocal()
+    maven {
+        name = "Hybrid Labs"
+        url = "https://maven.dvitski.cc/releases"
+    }
 }
 
 configurations{
