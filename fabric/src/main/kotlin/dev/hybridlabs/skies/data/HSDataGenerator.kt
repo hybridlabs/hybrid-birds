@@ -13,7 +13,7 @@ import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator
 import net.minecraft.core.Registry
 
-object HBDataGenerator : DataGeneratorEntrypoint {
+object HSDataGenerator : DataGeneratorEntrypoint {
 	override fun onInitializeDataGenerator(generator: FabricDataGenerator) {
 		val pack = generator.createPack()
 		pack.addProvider(::LanguageProvider)

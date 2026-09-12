@@ -1,7 +1,7 @@
 package dev.hybridlabs.skies.data.client
 
 import dev.hybridlabs.skies.block.HSBlocks
-import dev.hybridlabs.skies.data.HBDataGenerator.filterHybridBirds
+import dev.hybridlabs.skies.data.HSDataGenerator.filterHybridBirds
 import dev.hybridlabs.skies.effect.HSMobEffects
 import dev.hybridlabs.skies.entity.HSEntityTypes
 import dev.hybridlabs.skies.item.HSItemGroups
