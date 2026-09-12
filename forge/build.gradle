@@ -10,13 +10,8 @@ dependencies {
     fabricDatagen project(path: ':fabric', configuration: 'datagenOutput')
 }
 
-
-
 legacyForge {
-    apply plugin: 'org.jetbrains.kotlin.jvm'
-    apply plugin: 'kotlin'
     version = "${minecraft_version}-${forge_version}"
-
 
     // AT validation is broken on Forge 1.20.1
     validateAccessTransformers = false
@@ -69,15 +64,10 @@ repositories {
         name = 'Kotlin for Forge'
         url = 'https://thedarkcolour.github.io/KotlinForForge/'
     }
+
     maven {
         name = "Geckolib"
         url  = "https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/"
-    }
-
-    mavenCentral()
-    maven {
-        name = "Hybrid Labs"
-        url = "https://maven.dvitski.cc/releases"
     }
 }
 
