@@ -25,19 +25,19 @@
     "entrypoints": {
         "main": [
             {
-                "value": "HybridSkies",
+                "value": "dev.hybridlabs.skies.HybridSkies",
                 "adapter": "kotlin"
             }
         ],
         "client": [
             {
-                "value": "HybridSkiesClient",
+                "value": "dev.hybridlabs.skies.HybridSkiesClient",
                 "adapter": "kotlin"
             }
         ],
         "fabric-datagen": [
             {
-                "value": "dev.hybridlabs.skies.data.HBDataGenerator",
+                "value": "dev.hybridlabs.skies.data.HSDataGenerator",
                 "adapter": "kotlin"
             }
         ],
