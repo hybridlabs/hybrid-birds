@@ -8,9 +8,9 @@
     "Hybrid Labs"
   ],
   "contact": {
-    "homepage": "https://github.com/hybridlabs/hybrid_birds",
-    "sources": "https://github.com/hybridlabs/hybrid_birds",
-    "issues": "https://github.com/hybridlabs/hybrid_birds/issues"
+    "homepage": "https://hybridlabs.net/",
+    "sources": "https://github.com/hybridlabs/hybrid-birds",
+    "issues": "https://github.com/hybridlabs/hybrid-birds/issues"
   },
   "license": "ARR",
   "icon": "assets/hybrid_birds/icon.png",
