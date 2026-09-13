@@ -47,6 +47,7 @@
     "java": ">=21",
     "fabric-language-kotlin": "*",
     "fabric-api": ">=0.116",
-    "geckolib": ">=4.8"
+    "geckolib": ">=4.8",
+    "hapi": ">=1.0.0"
   }
 }
