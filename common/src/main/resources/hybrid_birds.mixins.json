@@ -3,10 +3,10 @@
     "package": "dev.hybridlabs.skies.mixin",
     "compatibilityLevel": "JAVA_17",
     "mixins": [
-      "dev.hybridlabs.skies.mixin.ChickenEntityMixin",
-      "dev.hybridlabs.skies.mixin.OcelotEntityMixin",
-      "dev.hybridlabs.skies.mixin.EggEntityMixin",
-      "dev.hybridlabs.skies.mixin.SpawnGroupMixin"
+      "ChickenEntityMixin",
+      "OcelotEntityMixin",
+      "EggEntityMixin",
+      "SpawnGroupMixin"
     ],
     "injectors": {
         "defaultRequire": 1
