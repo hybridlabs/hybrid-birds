@@ -35,3 +35,10 @@ modId = "hapi"
 mandatory = true
 versionRange = "[1.0.0,)"
 side = "BOTH"
+
+[[dependencies.${mod_id}]]
+modId = "geckolib"
+mandatory = true
+versionRange = "[4.7.4,)"
+ordering = "NONE"
+side = "BOTH"
