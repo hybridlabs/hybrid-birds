@@ -1,7 +1,6 @@
 package dev.hybridlabs.skies.config
 
 import dev.hybridlabs.skies.entity.HSEntityTypes
-import dev.hybridlabs.skies.platform.Services
 import dev.hybridlabs.skies.tag.HSBiomeTags
 import net.minecraft.tags.BiomeTags
 import net.minecraft.tags.TagKey
@@ -43,7 +42,7 @@ class EntitySpawnConfigGenerator {
         maxGroup: Int
     ) {
         add(entityType, spawnTags,
-            Services.PLATFORM.getHybridMobCategoryByName("terrestrial_bird"),
+            MobCategory.CREATURE,
             weight, minGroup, maxGroup)
     }
 
@@ -55,7 +54,7 @@ class EntitySpawnConfigGenerator {
         maxGroup: Int
     ) {
         add(entityType, spawnTags,
-            Services.PLATFORM.getHybridMobCategoryByName("aquatic_bird"),
+            MobCategory.CREATURE,
             weight, minGroup, maxGroup)
     }
 
