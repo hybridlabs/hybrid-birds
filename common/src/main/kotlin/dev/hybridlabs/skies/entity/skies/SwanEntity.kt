@@ -1,7 +1,7 @@
 package dev.hybridlabs.skies.entity.skies
 
 import dev.hybridlabs.skies.entity.HSEntityTypes
-import dev.hybridlabs.skies.entity.ai.goal.FlyingAnimalBreedGoal
+import dev.hybridlabs.hapi.entity.ai.goal.flying.FlyingAnimalBreedGoal
 import dev.hybridlabs.skies.item.HSItems
 import dev.hybridlabs.skies.sound.HSSoundEvents
 import dev.hybridlabs.hapi.entity.base.flying.BaseAquaticBirdEntity

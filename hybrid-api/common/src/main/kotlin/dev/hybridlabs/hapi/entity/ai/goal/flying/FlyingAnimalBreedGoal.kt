@@ -1,4 +1,4 @@
-package dev.hybridlabs.birds.entity.ai.goal
+package dev.hybridlabs.hapi.entity.ai.goal.flying
 
 import dev.hybridlabs.hapi.entity.base.flying.BaseFlyingAnimal
 import net.minecraft.server.level.ServerLevel

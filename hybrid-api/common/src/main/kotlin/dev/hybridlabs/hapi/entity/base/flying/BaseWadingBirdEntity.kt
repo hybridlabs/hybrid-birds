@@ -1,7 +1,7 @@
 package dev.hybridlabs.hapi.entity.base.flying
 
 import dev.hybridlabs.hapi.entity.ai.control.flying.BirdFloatControl
-import dev.hybridlabs.skies.entity.ai.goal.FlyingAnimalFollowParentGoal
+import dev.hybridlabs.hapi.entity.ai.goal.flying.FlyingAnimalFollowParentGoal
 import net.minecraft.tags.FluidTags
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.goal.*
