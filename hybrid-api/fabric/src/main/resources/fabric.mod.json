@@ -1,0 +1,58 @@
+{
+    "schemaVersion": 1,
+    "id": "${mod_id}",
+    "version": "${version}",
+
+    "name": "${mod_name}",
+    "description": "${description}",
+
+    "authors": [
+        "Hybrid Labs"
+    ],
+
+    "contact": {
+        "homepage": "https://hybridlabs.net/",
+        "sources": "https://github.com/hybridlabs/hybrid-api",
+        "issues": "https://github.com/hybridlabs/hybrid-api/issues"
+    },
+
+    "license": "ARR",
+    "icon": "assets/hapi/icon.png",
+
+    "environment": "*",
+    "entrypoints": {
+        "main": [
+            {
+                "value": "dev.hybridlabs.hapi.HybridAPI",
+                "adapter": "kotlin"
+            }
+        ],
+        "client": [
+            {
+                "value": "dev.hybridlabs.hapi.HAPIClient",
+                "adapter": "kotlin"
+            }
+        ],
+        "fabric-datagen": [
+            {
+                "value": "dev.hybridlabs.hapi.data.HAPIDataGenerator",
+                "adapter": "kotlin"
+            }
+        ],
+        "preLaunch": [
+            "com.llamalad7.mixinextras.MixinExtrasBootstrap::init"
+        ]
+    },
+
+  "mixins": [
+    "hapi.fabric.mixins.json"
+  ],
+
+    "depends": {
+        "minecraft": "~1.21.1",
+        "java": ">=21",
+        "fabric-language-kotlin": "*",
+        "fabric-api": ">=0.116",
+        "geckolib": ">=4.8.3"
+    }
+}

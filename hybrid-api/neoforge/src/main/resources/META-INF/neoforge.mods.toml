@@ -1,0 +1,38 @@
+modLoader = "kotlinforforge"
+
+loaderVersion = "[4,)"
+license = "${license}"
+issueTrackerURL="https://github.com/hybridlabs/hybrid-api/issues"
+
+[[mods]]
+modId = "${mod_id}"
+version = "${version}"
+displayName = "${mod_name}"
+displayURL="https://hybridlabs.net/"
+logoFile = "${mod_id}.png"
+credits = '''${credits}'''
+authors = "${mod_author}"
+description = '''${description}'''
+
+[[mixins]]
+config = "hapi.forge.mixins.json"
+
+[[dependencies.${mod_id}]]
+modId = "neoforge"
+type = "required"
+versionRange = "[${neoforge_version},)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.${mod_id}]]
+modId = "minecraft"
+type = "required"
+versionRange = "${minecraft_version_range}"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.${mod_id}]]
+modId = "geckolib"
+type = "required"
+versionRange = "[4.7.4,)"
+side = "BOTH"

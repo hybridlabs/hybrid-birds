@@ -1,0 +1,16 @@
+{
+  "values": [
+    {
+      "id": "hybrid_aquatic:exotic_river",
+      "required": false
+    },
+    {
+      "id": "hybrid_aquatic:exotic_desert_river",
+      "required": false
+    },
+    {
+      "id": "hybrid_aquatic:exotic_badlands_river",
+      "required": false
+    }
+  ]
+}

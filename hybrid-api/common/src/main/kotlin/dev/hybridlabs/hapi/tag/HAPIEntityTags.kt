@@ -1,0 +1,83 @@
+package dev.hybridlabs.hapi.tag
+
+import net.minecraft.core.registries.Registries
+import net.minecraft.tags.TagKey
+import net.minecraft.world.entity.EntityType
+import dev.hybridlabs.hapi.CommonClass
+
+object HAPIEntityTags {
+
+    //#region Aquatic Tags
+    // Food Chain tags
+    val BAIT_FISH = create("bait_fish")
+    val SMALL_CREATURES = create("small_creatures")
+    val MEDIUM_CREATURES = create("medium_creatures")
+    val LARGE_CREATURES = create("large_creatures")
+    val PLAYERS = create("players")
+    val TOXIC_ANIMALS = create("toxic_animals")
+    val OTTER_PREY = create("otter_prey")
+
+    // Crustacean Tags
+    val ALL_CRUSTACEANS = create("all_crustaceans")
+    val CRAB = create("crab")
+    val LOBSTER = create("lobster")
+    val SHRIMP = create("shrimp")
+    val KRILL = create("krill")
+
+    // Cephalopod Tags
+    val ALL_CEPHALOPODS = create("all_cephalopods")
+    val OCTOPUS = create("octopus")
+    val SQUID = create("squid")
+
+    // Fish Tags
+    val ALL_FISH = create("all_fish")
+    val RAY = create("ray")
+    val REEF_FISH = create("reef_fish")
+    val OPEN_OCEAN_FISH = create("open_ocean_fish")
+    val DEEP_FISH = create("deep_fish")
+    val RIVER_FISH = create("river_fish")
+    val TROPICAL_RIVER_FISH = create("tropical_river_fish")
+    val SWAMP_FISH = create("swamp_fish")
+    val MANGROVE_FISH = create("mangrove_fish")
+
+    // Shark Tags
+    val ALL_SHARKS = create("all_sharks")
+    val SMALL_SHARK = create("small_shark")
+    val MEDIUM_SHARK = create("medium_shark")
+    val LARGE_SHARK = create("large_shark")
+
+    // Mammal Tags
+    val ALL_MAMMALS = create("all_mammals")
+    val SIRENIAN = create("sirenian")
+    val SEAL = create("seal")
+    val DOLPHIN = create("dolphin")
+    val WHALE = create("whale")
+
+    // Misc Creature Tags
+    val TURTLE = create("turtle")
+    val ALL_AMPHIBIANS = create("all_amphibians")
+    val ALL_CRITTERS = create("all_critters")
+    val ALL_JELLYFISH = create("all_jellyfish")
+
+    //#endregion
+
+    //#region Bird Tags
+    val LANDFOWL = create("landfowl")
+    val WATERFOWL = create("waterfowl")
+    val SONGBIRD = create("songbird")
+    val RATITE = create("ratite")
+
+    val NET_CATCHABLE = create("net_catchable")
+
+    //#region Vehicle Tags
+    /**
+     * Entities that should behave like a boat for the purposes of world interaction, most notably
+     * breaking lily pads. Modded boats that do not extend vanilla's Boat belong here.
+     */
+    val BOATS = create("boats")
+    //#endregion
+
+    private fun create(id: String): TagKey<EntityType<*>> {
+        return TagKey.create(Registries.ENTITY_TYPE, CommonClass.locate(id))
+    }
+}

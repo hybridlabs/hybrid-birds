@@ -1,6 +1,6 @@
 package dev.hybridlabs.skies.entity.skies
 
-import dev.hybridlabs.birds.entity.ai.goal.FlyingAnimalBreedGoal
+import dev.hybridlabs.skies.entity.ai.goal.FlyingAnimalBreedGoal
 import dev.hybridlabs.skies.entity.HSEntityTypes
 import dev.hybridlabs.skies.item.HSItems
 import dev.hybridlabs.skies.loot.HSLootTables
