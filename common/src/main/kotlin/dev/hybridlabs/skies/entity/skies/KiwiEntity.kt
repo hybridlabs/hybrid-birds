@@ -1,6 +1,6 @@
 package dev.hybridlabs.skies.entity.skies
 
-import dev.hybridlabs.hapi.entity.base.flying.BaseRatiteEntity
+import dev.hybridlabs.hapi.entity.base.skies.BaseRatiteEntity
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.world.damagesource.DamageSource

@@ -1,9 +1,9 @@
 package dev.hybridlabs.skies.entity.skies
 
-import dev.hybridlabs.skies.entity.HSEntityTypes
 import dev.hybridlabs.hapi.entity.ai.control.flying.FlyingAnimalFlyFloatControl
+import dev.hybridlabs.hapi.entity.base.skies.BaseAquaticBirdEntity
+import dev.hybridlabs.skies.entity.HSEntityTypes
 import dev.hybridlabs.skies.sound.HSSoundEvents
-import dev.hybridlabs.hapi.entity.base.flying.BaseAquaticBirdEntity
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.tags.ItemTags
@@ -13,7 +13,11 @@ import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.entity.ai.control.LookControl
-import net.minecraft.world.entity.ai.goal.*
+import net.minecraft.world.entity.ai.goal.FloatGoal
+import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal
+import net.minecraft.world.entity.ai.goal.PanicGoal
+import net.minecraft.world.entity.ai.goal.TemptGoal
+import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomFlyingGoal
 import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation
 import net.minecraft.world.entity.ai.navigation.PathNavigation
 import net.minecraft.world.entity.player.Player

@@ -1,10 +1,10 @@
 package dev.hybridlabs.skies.entity
 
-import dev.hybridlabs.hapi.entity.base.flying.BaseAquaticBirdEntity
-import dev.hybridlabs.hapi.entity.base.flying.BaseFlyingAnimal
-import dev.hybridlabs.hapi.entity.base.flying.BaseParrotEntity
-import dev.hybridlabs.hapi.entity.base.flying.BaseRatiteEntity
-import dev.hybridlabs.hapi.entity.base.flying.BaseWadingBirdEntity
+import dev.hybridlabs.hapi.entity.base.skies.BaseAquaticBirdEntity
+import dev.hybridlabs.hapi.entity.base.skies.BaseFlyingAnimal
+import dev.hybridlabs.hapi.entity.base.skies.BaseParrotEntity
+import dev.hybridlabs.hapi.entity.base.skies.BaseRatiteEntity
+import dev.hybridlabs.hapi.entity.base.skies.BaseWadingBirdEntity
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.Mob
 import net.minecraft.world.entity.SpawnPlacementType

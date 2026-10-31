@@ -1,9 +1,9 @@
 package dev.hybridlabs.skies.entity.skies
 
-import dev.hybridlabs.skies.entity.HSEntityTypes
 import dev.hybridlabs.hapi.entity.ai.control.flying.FlyingAnimalFlyFloatControl
+import dev.hybridlabs.hapi.entity.base.skies.BaseAquaticBirdEntity
+import dev.hybridlabs.skies.entity.HSEntityTypes
 import dev.hybridlabs.skies.sound.HSSoundEvents
-import dev.hybridlabs.hapi.entity.base.flying.BaseAquaticBirdEntity
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.tags.ItemTags

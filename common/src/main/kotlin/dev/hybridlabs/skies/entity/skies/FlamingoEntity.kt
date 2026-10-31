@@ -1,7 +1,7 @@
 package dev.hybridlabs.skies.entity.skies
 
+import dev.hybridlabs.hapi.entity.base.skies.BaseWadingBirdEntity
 import dev.hybridlabs.skies.sound.HSSoundEvents
-import dev.hybridlabs.hapi.entity.base.flying.BaseWadingBirdEntity
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.entity.EntityType

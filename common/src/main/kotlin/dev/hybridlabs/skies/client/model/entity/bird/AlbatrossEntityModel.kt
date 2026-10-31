@@ -1,8 +1,8 @@
 package dev.hybridlabs.skies.client.model.entity.bird
 
+import dev.hybridlabs.hapi.client.model.entity.skies.BaseFlyingAnimalEntityModel
 import dev.hybridlabs.skies.Constants
 import dev.hybridlabs.skies.entity.skies.AlbatrossEntity
-import dev.hybridlabs.hapi.client.model.entity.flying.BaseFlyingAnimalEntityModel
 import net.minecraft.resources.ResourceLocation
 
 class AlbatrossEntityModel : BaseFlyingAnimalEntityModel<AlbatrossEntity>("hybrid_birds", "albatross") {

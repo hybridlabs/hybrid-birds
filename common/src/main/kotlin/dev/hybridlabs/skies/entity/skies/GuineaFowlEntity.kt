@@ -1,9 +1,9 @@
 package dev.hybridlabs.skies.entity.skies
 
+import dev.hybridlabs.hapi.entity.ai.goal.skies.FlyingAnimalBreedGoal
+import dev.hybridlabs.hapi.entity.base.skies.BaseFlyingAnimal
 import dev.hybridlabs.skies.entity.HSEntityTypes
-import dev.hybridlabs.hapi.entity.ai.goal.flying.FlyingAnimalBreedGoal
 import dev.hybridlabs.skies.item.HSItems
-import dev.hybridlabs.hapi.entity.base.flying.BaseFlyingAnimal
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.sounds.SoundEvents

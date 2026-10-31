@@ -1,8 +1,8 @@
 package dev.hybridlabs.skies.client.render.entity
 
+import dev.hybridlabs.hapi.client.render.entity.skies.BaseBirdEntityRenderer
 import dev.hybridlabs.skies.client.model.entity.bird.PeacockEntityModel
 import dev.hybridlabs.skies.entity.skies.PeacockEntity
-import dev.hybridlabs.hapi.client.render.entity.flying.BaseBirdEntityRenderer
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class PeacockEntityRenderer(context: Context) :

@@ -1,7 +1,7 @@
 package dev.hybridlabs.skies.entity.skies
 
+import dev.hybridlabs.hapi.entity.base.skies.BaseParrotEntity
 import dev.hybridlabs.skies.entity.skies.GuineaFowlEntity.Companion.BREEDING_INGREDIENT
-import dev.hybridlabs.hapi.entity.base.flying.BaseParrotEntity
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes

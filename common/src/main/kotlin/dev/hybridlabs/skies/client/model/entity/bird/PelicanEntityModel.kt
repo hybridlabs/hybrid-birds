@@ -1,6 +1,6 @@
 package dev.hybridlabs.skies.client.model.entity.bird
 
-import dev.hybridlabs.hapi.client.model.entity.flying.BaseFlyingAnimalEntityModel
+import dev.hybridlabs.hapi.client.model.entity.skies.BaseFlyingAnimalEntityModel
 import dev.hybridlabs.skies.Constants
 import dev.hybridlabs.skies.entity.skies.PelicanEntity
 import net.minecraft.resources.ResourceLocation
