@@ -1,9 +1,0 @@
-{
-  "values": [
-    "minecraft:parrot",
-    {
-      "id": "hybrid_birds:jay",
-      "required": false
-    }
-  ]
-}

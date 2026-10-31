@@ -1,8 +1,0 @@
-plugins {
-    id 'dev.hybridlabs.common'
-    id 'org.jetbrains.kotlin.jvm'
-}
-
-dependencies {
-    implementation "software.bernie.geckolib:geckolib-neoforge-$geckolib_version"
-}
