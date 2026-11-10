@@ -138,7 +138,7 @@ object HSEntityTypes {
             entityFactory,
             dimensions,
             attributeContainer,
-            Services.PLATFORM.getHybridMobCategoryByName("terrestrial_bird"),
+            MobCategory.CREATURE,
             trackingRange,
             canSpawnFarFromPlayer = true
         )
@@ -156,7 +156,7 @@ object HSEntityTypes {
             entityFactory,
             dimensions,
             attributeContainer,
-            Services.PLATFORM.getHybridMobCategoryByName("aquatic_bird"),
+            MobCategory.CREATURE,
             trackingRange,
             canSpawnFarFromPlayer = true
         )
