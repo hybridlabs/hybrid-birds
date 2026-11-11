@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 - Birds spawn during world generation like vanilla animals and then stay there
-- Birds tied to fences with leads, tamed birds (jay), bred and creature-net birds no longer despawn when their chunks reload
+- Birds tied to fences with leads, tamed birds, bred and creature-net birds no longer despawn when their chunks reload
 
 ## [1.3.3] 2026-09-16
 
