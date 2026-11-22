@@ -5,7 +5,6 @@ import dev.hybridlabs.skies.platform.registration.RegistryObject;
 
 import dev.hybridlabs.skies.platform.services.PlatformHelper;
 import dev.hybridlabs.skies.utils.HBSpawnGroup;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.world.entity.*;
@@ -51,10 +50,9 @@ public class FabricPlatformHelper implements PlatformHelper {
                 name,
                 () ->
                         new SpawnEggItem(
-                                entityType.get(),
-                                backgroundColor,
-                                highlightColor,
-                                new Item.Properties()));
+                                new Item.Properties()
+                                .setId(net.minecraft.resources.ResourceKey.create(net.minecraft.core.registries.Registries.ITEM, CommonClass.locate(name)))
+                                .spawnEgg(entityType.get())));
     }
 
     @Override
@@ -89,7 +87,4 @@ public class FabricPlatformHelper implements PlatformHelper {
         return HBSpawnGroup.byName(name);
     }
 
-    public BlockBehaviour.Properties getBlockSettings() {
-        return FabricBlockSettings.create();
-    }
 }

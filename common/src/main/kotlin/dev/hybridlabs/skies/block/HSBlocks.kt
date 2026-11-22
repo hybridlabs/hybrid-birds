@@ -17,7 +17,7 @@ object HSBlocks {
         "turducken"
     ) {
         TurduckenBlock(
-            BlockBehaviour.Properties.of()
+            HSBlockProperties.of()
                 .strength(0.5f)
                 .forceSolidOn()
                 .pushReaction(PushReaction.DESTROY)
@@ -26,6 +26,6 @@ object HSBlocks {
     }
 
     private fun register(id: String, block: Supplier<Block>): RegistryObject<Block> {
-        return CommonClass.BLOCKS.register(id, block)
+        return CommonClass.BLOCKS.register(id) { HSBlockProperties.withId(id) { block.get() } }
     }
 }

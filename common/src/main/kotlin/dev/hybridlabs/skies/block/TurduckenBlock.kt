@@ -1,6 +1,8 @@
 package dev.hybridlabs.skies.block
 
 import net.minecraft.core.BlockPos
+import net.minecraft.util.RandomSource
+import net.minecraft.world.level.ScheduledTickAccess
 import net.minecraft.core.Direction
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.sounds.SoundSource
@@ -57,24 +59,19 @@ class TurduckenBlock(settings: Properties?) : Block(settings!!) {
 
     override fun updateShape(
         state: BlockState,
-        direction: Direction,
-        neighborState: BlockState,
-        world: LevelAccessor,
+        level: LevelReader,
+        ticks: ScheduledTickAccess,
         pos: BlockPos,
+        direction: Direction,
         neighborPos: BlockPos,
+        neighborState: BlockState,
+        random: RandomSource,
     ): BlockState {
-        return if (direction == Direction.DOWN && !state.canSurvive(
-                world,
-                pos
-            )
-        ) Blocks.AIR.defaultBlockState() else super.updateShape(
-            state,
-            direction,
-            neighborState,
-            world,
-            pos,
-            neighborPos
-        )
+        return if (direction == Direction.DOWN && !state.canSurvive(level, pos)) {
+            Blocks.AIR.defaultBlockState()
+        } else {
+            super.updateShape(state, level, ticks, pos, direction, neighborPos, neighborState, random)
+        }
     }
 
     override fun canSurvive(state: BlockState, levelReader: LevelReader, pos: BlockPos): Boolean {
@@ -85,7 +82,7 @@ class TurduckenBlock(settings: Properties?) : Block(settings!!) {
         builder.add(*arrayOf<Property<*>>(BITES))
     }
 
-    override fun getAnalogOutputSignal(state: BlockState, world: Level, pos: BlockPos): Int {
+    override fun getAnalogOutputSignal(state: BlockState, world: Level, pos: BlockPos, direction: Direction): Int {
         return getComparatorOutput(state.getValue(BITES) as Int)
     }
 

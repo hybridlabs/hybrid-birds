@@ -4,8 +4,6 @@ import dev.hybridlabs.skies.entity.HSEntityTypes
 import dev.hybridlabs.skies.item.HSItems
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.SimpleFabricLootTableProvider
-import net.minecraft.advancements.critereon.EntityFlagsPredicate
-import net.minecraft.advancements.critereon.EntityPredicate
 import net.minecraft.core.HolderLookup
 import net.minecraft.resources.ResourceKey
 import net.minecraft.world.item.Items
@@ -23,7 +21,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
     override fun generate(exporter: BiConsumer<ResourceKey<LootTable>, LootTable.Builder>) {
         val lookup = lookupProvider.join()
 
-        export(exporter, HSEntityTypes.PUFFIN.get().defaultLootTable) {
+        export(exporter, HSEntityTypes.PUFFIN.get().defaultLootTable.orElseThrow()) {
             pool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(HSItems.PUFFIN.get()))
@@ -37,7 +35,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HSEntityTypes.SEAGULL.get().defaultLootTable) {
+        export(exporter, HSEntityTypes.SEAGULL.get().defaultLootTable.orElseThrow()) {
             pool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(Items.COD)
@@ -52,7 +50,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HSEntityTypes.ALBATROSS.get().defaultLootTable) {
+        export(exporter, HSEntityTypes.ALBATROSS.get().defaultLootTable.orElseThrow()) {
             pool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(Items.COD)
@@ -67,7 +65,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HSEntityTypes.PELICAN.get().defaultLootTable) {
+        export(exporter, HSEntityTypes.PELICAN.get().defaultLootTable.orElseThrow()) {
             pool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(Items.COD)
@@ -82,7 +80,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HSEntityTypes.ROOSTER.get().defaultLootTable) {
+        export(exporter, HSEntityTypes.ROOSTER.get().defaultLootTable.orElseThrow()) {
             pool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(Items.CHICKEN))
@@ -96,7 +94,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HSEntityTypes.GUINEA_FOWL.get().defaultLootTable) {
+        export(exporter, HSEntityTypes.GUINEA_FOWL.get().defaultLootTable.orElseThrow()) {
             pool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(Items.CHICKEN))
@@ -110,7 +108,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HSEntityTypes.DUCK.get().defaultLootTable) {
+        export(exporter, HSEntityTypes.DUCK.get().defaultLootTable.orElseThrow()) {
             pool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(HSItems.DUCK.get()))
@@ -124,7 +122,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HSEntityTypes.GOOSE.get().defaultLootTable) {
+        export(exporter, HSEntityTypes.GOOSE.get().defaultLootTable.orElseThrow()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -139,7 +137,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HSEntityTypes.TURKEY.get().defaultLootTable) {
+        export(exporter, HSEntityTypes.TURKEY.get().defaultLootTable.orElseThrow()) {
             pool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(HSItems.TURKEY.get()))
@@ -153,7 +151,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HSEntityTypes.SWAN.get().defaultLootTable) {
+        export(exporter, HSEntityTypes.SWAN.get().defaultLootTable.orElseThrow()) {
             pool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(Items.FEATHER)
@@ -162,7 +160,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HSEntityTypes.PEACOCK.get().defaultLootTable) {
+        export(exporter, HSEntityTypes.PEACOCK.get().defaultLootTable.orElseThrow()) {
             pool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(Items.FEATHER)
@@ -183,8 +181,4 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
         exporter.accept(entityTable, LootTable.lootTable().apply(builder))
     }
 
-    companion object {
-        private val NEEDS_ENTITY_ON_FIRE: EntityPredicate.Builder =
-            EntityPredicate.Builder.entity().flags(EntityFlagsPredicate.Builder.flags().setOnFire(true))
-    }
 }

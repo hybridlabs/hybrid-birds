@@ -3,6 +3,7 @@ package dev.hybridlabs.skies.entity.skies
 import dev.hybridlabs.hapi.entity.ai.goal.skies.FlyingAnimalBreedGoal
 import dev.hybridlabs.hapi.entity.base.skies.BaseFlyingAnimal
 import dev.hybridlabs.skies.entity.HSEntityTypes
+import dev.hybridlabs.skies.util.ingredientOf
 import dev.hybridlabs.skies.item.HSItems
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvent
@@ -10,7 +11,9 @@ import net.minecraft.sounds.SoundEvents
 import net.minecraft.tags.ItemTags
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.entity.AgeableMob
+import net.minecraft.world.entity.EntitySpawnReason
 import net.minecraft.world.entity.EntityType
+import net.minecraft.world.entity.animal.Animal
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.entity.ai.goal.TemptGoal
@@ -41,7 +44,7 @@ class GuineaFowlEntity(entityType: EntityType<out GuineaFowlEntity>, world: Leve
                 1.0f,
                 (random.nextFloat() - random.nextFloat()) * 0.2f + 1.0f
             )
-            this.spawnAtLocation(HSItems.GUINEA_FOWL_EGG.get())
+            this.spawnAtLocation(level() as ServerLevel, HSItems.GUINEA_FOWL_EGG.get())
             this.gameEvent(GameEvent.ENTITY_PLACE)
             this.eggLayTime = random.nextInt(6000) + 6000
         }
@@ -60,18 +63,18 @@ class GuineaFowlEntity(entityType: EntityType<out GuineaFowlEntity>, world: Leve
     }
 
     override fun getBreedOffspring(serverLevel: ServerLevel, ageableMob: AgeableMob): AgeableMob? {
-        return HSEntityTypes.GUINEA_FOWL.get().create(serverLevel)
+        return HSEntityTypes.GUINEA_FOWL.get().create(serverLevel, EntitySpawnReason.BREEDING)
     }
 
-    override fun spawnChildFromBreeding(level: ServerLevel, mate: BaseFlyingAnimal) {
+    override fun spawnChildFromBreeding(level: ServerLevel, mate: Animal) {
         val babyCount = 1 + random.nextInt(4)
 
         repeat(babyCount) {
             val passiveEntity = this.getBreedOffspring(level, mate)
             if (passiveEntity != null) {
                 passiveEntity.isBaby = true
-                passiveEntity.moveTo(this.x, this.y, this.z, 0.0f, 0.0f)
-                this.finalizeSpawnChildFromBreeding(level, mate)
+                passiveEntity.snapTo(this.x, this.y, this.z, 0.0f, 0.0f)
+                this.finalizeSpawnChildFromBreeding(level, mate, passiveEntity)
                 level.addFreshEntityWithPassengers(passiveEntity)
             }
         }
@@ -92,6 +95,6 @@ class GuineaFowlEntity(entityType: EntityType<out GuineaFowlEntity>, world: Leve
                 .add(Attributes.FOLLOW_RANGE, 12.0)
         }
 
-        val BREEDING_INGREDIENT: Ingredient = Ingredient.of(ItemTags.VILLAGER_PLANTABLE_SEEDS)
+        val BREEDING_INGREDIENT: Ingredient get() = ingredientOf(ItemTags.VILLAGER_PLANTABLE_SEEDS)
     }
 }

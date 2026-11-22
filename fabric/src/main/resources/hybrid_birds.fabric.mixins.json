@@ -6,7 +6,7 @@
       "ChickenEntityMixin",
       "OcelotEntityMixin",
       "EggEntityMixin",
-      "ResourceLocationMixin",
+      "IdentifierMixin",
       "SpawnGroupMixin"
     ],
     "injectors": {

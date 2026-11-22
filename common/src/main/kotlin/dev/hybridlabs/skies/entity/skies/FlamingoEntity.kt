@@ -4,6 +4,7 @@ import dev.hybridlabs.hapi.entity.base.skies.BaseWadingBirdEntity
 import dev.hybridlabs.skies.sound.HSSoundEvents
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.world.damagesource.DamageSource
+import net.minecraft.world.entity.EntitySpawnReason
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
@@ -13,7 +14,7 @@ class FlamingoEntity(type: EntityType<out FlamingoEntity>, world: Level) :
     BaseWadingBirdEntity(type, world) {
 
     //override fun getBreedOffspring(serverLevel: ServerLevel, ageableMob: AgeableMob): FlamingoEntity? {
-    //    return HSEntityTypes.FLAMINGO.get().create(serverLevel)
+    //    return HSEntityTypes.FLAMINGO.get().create(serverLevel, EntitySpawnReason.BREEDING)
     //}
 
     override fun getAmbientSound(): SoundEvent {

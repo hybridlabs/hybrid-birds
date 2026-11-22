@@ -6,6 +6,8 @@ import net.minecraft.core.HolderSet
 import net.minecraft.core.registries.Registries
 import net.minecraft.data.worldgen.BootstrapContext
 import net.minecraft.resources.ResourceKey
+import net.minecraft.util.random.Weighted
+import net.minecraft.util.random.WeightedList
 import net.minecraft.world.level.biome.MobSpawnSettings
 import net.neoforged.neoforge.common.world.BiomeModifier
 import net.neoforged.neoforge.common.world.BiomeModifiers
@@ -34,12 +36,14 @@ class BiomeModifierProvider(context: BootstrapContext<BiomeModifier>) {
             context.register(
                 key, BiomeModifiers.AddSpawnsBiomeModifier(
                     biomeRegistry.get(spawnConfig.biomes).get(),
-                    listOf(
-                        MobSpawnSettings.SpawnerData(
-                            spawnConfig.type,
-                            spawnConfig.weight,
-                            spawnConfig.minGroupSize,
-                            spawnConfig.maxGroupSize
+                    WeightedList.of(
+                        Weighted(
+                            MobSpawnSettings.SpawnerData(
+                                spawnConfig.type,
+                                spawnConfig.minGroupSize,
+                                spawnConfig.maxGroupSize
+                            ),
+                            spawnConfig.weight
                         )
                     )
                 )

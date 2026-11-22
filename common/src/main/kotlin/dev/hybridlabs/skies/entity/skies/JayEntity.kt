@@ -4,6 +4,7 @@ import dev.hybridlabs.hapi.entity.base.skies.BaseParrotEntity
 import dev.hybridlabs.skies.sound.HSSoundEvents
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.world.damagesource.DamageSource
+import net.minecraft.world.entity.EntitySpawnReason
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
@@ -23,7 +24,7 @@ class JayEntity(type: EntityType<out JayEntity>, world: Level) :
     }
 
     //override fun getBreedOffspring(serverLevel: ServerLevel, ageableMob: AgeableMob): JayEntity? {
-    //    return HSEntityTypes.JAY.get().create(serverLevel)
+    //    return HSEntityTypes.JAY.get().create(serverLevel, EntitySpawnReason.BREEDING)
     //}
 
     override fun getAmbientSound(): SoundEvent {

@@ -4,6 +4,7 @@ import dev.hybridlabs.hapi.entity.base.skies.BaseRatiteEntity
 import dev.hybridlabs.skies.sound.HSSoundEvents
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.world.damagesource.DamageSource
+import net.minecraft.world.entity.EntitySpawnReason
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
@@ -13,7 +14,7 @@ class OstrichEntity(entityType: EntityType<out OstrichEntity>, world: Level) :
     BaseRatiteEntity(entityType, world, true) {
 
     //override fun getBreedOffspring(serverLevel: ServerLevel, ageableMob: AgeableMob): AgeableMob? {
-    //    return HSEntityTypes.OSTRICH.get().create(serverLevel)
+    //    return HSEntityTypes.OSTRICH.get().create(serverLevel, EntitySpawnReason.BREEDING)
     //}
 
     override fun getAmbientSound(): SoundEvent {

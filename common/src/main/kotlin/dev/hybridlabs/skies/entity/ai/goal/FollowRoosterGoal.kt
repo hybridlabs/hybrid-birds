@@ -1,9 +1,10 @@
 package dev.hybridlabs.skies.entity.ai.goal
 
 import dev.hybridlabs.skies.entity.skies.RoosterEntity
+import net.minecraft.server.level.ServerLevel
 import net.minecraft.world.entity.ai.goal.Goal
 import net.minecraft.world.entity.ai.targeting.TargetingConditions
-import net.minecraft.world.entity.animal.Chicken
+import net.minecraft.world.entity.animal.chicken.Chicken
 import java.util.EnumSet
 
 class FollowRoosterGoal(
@@ -21,16 +22,12 @@ class FollowRoosterGoal(
     }
 
     override fun canUse(): Boolean {
-        val world = chicken.level()
-        val nearestRooster: RoosterEntity? = world.getNearestEntity(
+        val world = chicken.level() as ServerLevel
+        val nearestRooster = world.getEntitiesOfClass(
             RoosterEntity::class.java,
-            targetPredicate,
-            chicken,
-            chicken.x,
-            chicken.y,
-            chicken.z,
             chicken.boundingBox.inflate(maxDistance.toDouble())
-        )
+        ) { candidate -> targetPredicate.test(world, chicken, candidate) }
+            .minByOrNull { candidate -> candidate.distanceToSqr(chicken) }
 
         if (nearestRooster == null || nearestRooster.distanceToSqr(chicken) < minDistance * minDistance) {
             return false

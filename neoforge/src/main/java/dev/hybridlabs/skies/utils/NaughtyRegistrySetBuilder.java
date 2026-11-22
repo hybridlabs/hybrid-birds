@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /** This subclasses RegistrySetBuilder and disables validating missing holders. Naughty! */
+@SuppressWarnings({"rawtypes", "unchecked"})
 public class NaughtyRegistrySetBuilder extends RegistrySetBuilder {
 
     @Override
@@ -21,12 +22,12 @@ public class NaughtyRegistrySetBuilder extends RegistrySetBuilder {
                 .stream()
                 .map(registryStub -> registryStub.collectRegisteredValues(registrysetbuilder$buildstate))
                 .forEach(registryContents -> map.put(registryContents.key(), registryContents));
-        Set<ResourceKey<? extends Registry<?>>> set = registryAccess.listRegistries().collect(Collectors.toUnmodifiableSet());
-        lookupProvider.listRegistries()
+        Set<ResourceKey<? extends Registry<?>>> set = registryAccess.listRegistryKeys().collect(Collectors.toUnmodifiableSet());
+        lookupProvider.listRegistryKeys()
                 .filter(resourceKey -> !set.contains(resourceKey))
                 .forEach(
                         resourceKey -> map.putIfAbsent(resourceKey,
-                                new RegistrySetBuilder.RegistryContents<>(resourceKey, Lifecycle.stable(), Map.of())
+                                new RegistrySetBuilder.RegistryContents(resourceKey, Lifecycle.stable(), Map.of())
                         )
                 );
         Stream<HolderLookup.RegistryLookup<?>> stream =

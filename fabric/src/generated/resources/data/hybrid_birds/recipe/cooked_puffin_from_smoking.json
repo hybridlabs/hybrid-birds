@@ -3,9 +3,7 @@
   "category": "food",
   "cookingtime": 100,
   "experience": 0.15,
-  "ingredient": {
-    "item": "hybrid_birds:puffin"
-  },
+  "ingredient": "hybrid_birds:puffin",
   "result": {
     "id": "hybrid_birds:cooked_puffin"
   }

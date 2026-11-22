@@ -3,9 +3,7 @@
   "category": "food",
   "cookingtime": 600,
   "experience": 0.15,
-  "ingredient": {
-    "tag": "hybrid_birds:eggs"
-  },
+  "ingredient": "#hybrid_birds:eggs",
   "result": {
     "id": "hybrid_birds:cooked_egg"
   }

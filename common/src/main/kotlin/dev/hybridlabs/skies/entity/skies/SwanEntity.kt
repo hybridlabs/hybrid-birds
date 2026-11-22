@@ -11,6 +11,7 @@ import net.minecraft.sounds.SoundEvent
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.entity.AgeableMob
+import net.minecraft.world.entity.EntitySpawnReason
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
@@ -72,7 +73,7 @@ class SwanEntity(entityType: EntityType<out SwanEntity>, world: Level) :
                 1.0f,
                 (random.nextFloat() - random.nextFloat()) * 0.2f + 1.0f
             )
-            this.spawnAtLocation(HSItems.SWAN_EGG.get())
+            this.spawnAtLocation(level() as ServerLevel, HSItems.SWAN_EGG.get())
             this.gameEvent(GameEvent.ENTITY_PLACE)
             this.eggLayTime = random.nextInt(6000) + 6000
         }
@@ -95,7 +96,7 @@ class SwanEntity(entityType: EntityType<out SwanEntity>, world: Level) :
     }
 
     override fun getBreedOffspring(serverLevel: ServerLevel, ageableMob: AgeableMob): AgeableMob? {
-        return HSEntityTypes.SWAN.get().create(serverLevel)
+        return HSEntityTypes.SWAN.get().create(serverLevel, EntitySpawnReason.BREEDING)
     }
 
     companion object {

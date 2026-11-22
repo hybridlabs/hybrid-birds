@@ -8,7 +8,7 @@ import dev.hybridlabs.skies.sound.HSSoundEvents
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.minecraft.core.Holder
 import net.minecraft.core.HolderLookup
-import net.minecraft.resources.ResourceLocation
+import net.minecraft.resources.Identifier
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.sounds.SoundEvents
 import java.util.concurrent.CompletableFuture
@@ -72,14 +72,7 @@ class SoundProvider(
             ).forEach { (soundEvent, soundPath) ->
             exporter.add(soundEvent.get(), SoundTypeBuilder.of(soundEvent.get())
                 .subtitle("subtitles.${soundEvent.get().location.namespace}.${soundEvent.get().location.path}")
-                .sound(when (soundPath) {
-                    is SoundEvent -> SoundTypeBuilder.RegistrationBuilder.ofEvent(soundPath)
-                    is ResourceLocation -> SoundTypeBuilder.RegistrationBuilder.ofFile(soundPath)
-                    is Holder<*> -> SoundTypeBuilder.RegistrationBuilder.ofEvent(soundPath.value() as SoundEvent)
-                    is RegistryObject<*> -> SoundTypeBuilder.RegistrationBuilder.ofEvent(soundPath.get() as SoundEvent)
-                    else -> SoundTypeBuilder.RegistrationBuilder.ofEvent(SoundEvents.EMPTY)
-                }
-                )
+                .sound(SoundTypeBuilder.RegistrationBuilder.ofFile(soundPath))
             )
         }
     }

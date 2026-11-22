@@ -3,6 +3,7 @@ package dev.hybridlabs.skies.entity.skies
 import dev.hybridlabs.hapi.entity.ai.goal.skies.FlyingAnimalBreedGoal
 import dev.hybridlabs.hapi.entity.base.skies.BaseFlyingAnimal
 import dev.hybridlabs.skies.entity.HSEntityTypes
+import dev.hybridlabs.skies.util.ingredientOf
 import dev.hybridlabs.skies.item.HSItems
 import dev.hybridlabs.skies.sound.HSSoundEvents
 import net.minecraft.core.particles.ParticleTypes
@@ -12,6 +13,7 @@ import net.minecraft.sounds.SoundEvents
 import net.minecraft.tags.ItemTags
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.entity.AgeableMob
+import net.minecraft.world.entity.EntitySpawnReason
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
@@ -20,9 +22,9 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.crafting.Ingredient
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.gameevent.GameEvent
-import software.bernie.geckolib.animation.AnimatableManager
+import software.bernie.geckolib.animatable.manager.AnimatableManager
 import software.bernie.geckolib.animation.AnimationController
-import software.bernie.geckolib.animation.AnimationState
+import software.bernie.geckolib.animation.state.AnimationTest
 import software.bernie.geckolib.animation.RawAnimation
 import software.bernie.geckolib.constant.DefaultAnimations
 
@@ -76,7 +78,7 @@ class PeacockEntity(entityType: EntityType<out PeacockEntity>, world: Level) :
                 1.0f,
                 (random.nextFloat() - random.nextFloat()) * 0.2f + 1.0f
             )
-            this.spawnAtLocation(HSItems.PEACOCK_EGG.get())
+            this.spawnAtLocation(level() as ServerLevel, HSItems.PEACOCK_EGG.get())
             this.gameEvent(GameEvent.ENTITY_PLACE)
             this.eggLayTime = random.nextInt(6000) + 6000
         }
@@ -99,8 +101,8 @@ class PeacockEntity(entityType: EntityType<out PeacockEntity>, world: Level) :
     override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
         controllerRegistrar.add(
             AnimationController(
-                this, "Walk/Fly/Idle", 4
-            ) { state: AnimationState<BaseFlyingAnimal> ->
+                "Walk/Fly/Idle", 4
+            ) { state: AnimationTest<BaseFlyingAnimal> ->
                 when {
                     state.isMoving && onGround() -> state.setAndContinue(DefaultAnimations.WALK)
                     !this.onGround() && !isInWater -> state.setAndContinue(DefaultAnimations.FLY)
@@ -108,7 +110,7 @@ class PeacockEntity(entityType: EntityType<out PeacockEntity>, world: Level) :
                 }
             }
         )
-        controllerRegistrar.add(AnimationController(this, "Tail", 20) { state ->
+        controllerRegistrar.add(AnimationController("Tail", 20) { state: AnimationTest<BaseFlyingAnimal> ->
             val animation = when {
                 tailUp -> TAIL_UP
                 else -> TAIL_DOWN
@@ -118,7 +120,7 @@ class PeacockEntity(entityType: EntityType<out PeacockEntity>, world: Level) :
     }
 
     override fun getBreedOffspring(serverLevel: ServerLevel, ageableMob: AgeableMob): AgeableMob? {
-        return HSEntityTypes.PEACOCK.get().create(serverLevel)
+        return HSEntityTypes.PEACOCK.get().create(serverLevel, EntitySpawnReason.BREEDING)
     }
 
     override fun getAmbientSound(): SoundEvent {
@@ -151,6 +153,6 @@ class PeacockEntity(entityType: EntityType<out PeacockEntity>, world: Level) :
         val TAIL_DOWN: RawAnimation = RawAnimation.begin().thenPlay("misc.tail_down")
         val TAIL_UP: RawAnimation = RawAnimation.begin().thenPlay("misc.tail_up")
 
-        val BREEDING_INGREDIENT: Ingredient = Ingredient.of(ItemTags.VILLAGER_PLANTABLE_SEEDS)
+        val BREEDING_INGREDIENT: Ingredient get() = ingredientOf(ItemTags.VILLAGER_PLANTABLE_SEEDS)
     }
 }

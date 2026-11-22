@@ -3,12 +3,14 @@ package dev.hybridlabs.skies.entity.skies
 import dev.hybridlabs.hapi.entity.ai.control.flying.FlyingAnimalFlyFloatControl
 import dev.hybridlabs.hapi.entity.base.skies.BaseAquaticBirdEntity
 import dev.hybridlabs.skies.entity.HSEntityTypes
+import dev.hybridlabs.skies.util.ingredientOf
 import dev.hybridlabs.skies.sound.HSSoundEvents
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.tags.ItemTags
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.entity.AgeableMob
+import net.minecraft.world.entity.EntitySpawnReason
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
@@ -22,7 +24,7 @@ import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomFlyingGoal
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal
 import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation
 import net.minecraft.world.entity.ai.navigation.PathNavigation
-import net.minecraft.world.entity.animal.Turtle
+import net.minecraft.world.entity.animal.turtle.Turtle
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.crafting.Ingredient
 import net.minecraft.world.level.Level
@@ -66,7 +68,7 @@ class AlbatrossEntity(type: EntityType<out AlbatrossEntity>, world: Level) :
     }
 
     override fun getBreedOffspring(serverLevel: ServerLevel, ageableMob: AgeableMob): AlbatrossEntity? {
-        return HSEntityTypes.ALBATROSS.get().create(serverLevel)
+        return HSEntityTypes.ALBATROSS.get().create(serverLevel, EntitySpawnReason.BREEDING)
     }
 
     override fun getAmbientSound(): SoundEvent {
@@ -92,8 +94,6 @@ class AlbatrossEntity(type: EntityType<out AlbatrossEntity>, world: Level) :
                 .add(Attributes.FOLLOW_RANGE, 12.0)
         }
 
-        val BREEDING_INGREDIENT: Ingredient = Ingredient.of(
-            ItemTags.FISHES
-        )
+        val BREEDING_INGREDIENT: Ingredient get() = ingredientOf(ItemTags.FISHES)
     }
 }

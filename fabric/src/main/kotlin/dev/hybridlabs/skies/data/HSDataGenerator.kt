@@ -26,7 +26,7 @@ object HSDataGenerator : DataGeneratorEntrypoint {
 		pack.addProvider(::RecipeProvider)
 	}
 
-	fun <T> filterHybridBirds(registry: Registry<T>): (T) -> Boolean {
+	fun <T : Any> filterHybridBirds(registry: Registry<T>): (T) -> Boolean {
 		return { o ->
 			val id = registry.getKey(o)
 			id?.namespace == Constants.MOD_ID

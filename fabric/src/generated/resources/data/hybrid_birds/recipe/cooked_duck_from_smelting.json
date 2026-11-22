@@ -3,9 +3,7 @@
   "category": "food",
   "cookingtime": 200,
   "experience": 0.15,
-  "ingredient": {
-    "item": "hybrid_birds:duck"
-  },
+  "ingredient": "hybrid_birds:duck",
   "result": {
     "id": "hybrid_birds:cooked_duck"
   }

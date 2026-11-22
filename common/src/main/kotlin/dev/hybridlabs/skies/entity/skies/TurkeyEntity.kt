@@ -3,12 +3,14 @@ package dev.hybridlabs.skies.entity.skies
 import dev.hybridlabs.hapi.entity.ai.goal.skies.FlyingAnimalBreedGoal
 import dev.hybridlabs.hapi.entity.base.skies.BaseFlyingAnimal
 import dev.hybridlabs.skies.entity.HSEntityTypes
+import dev.hybridlabs.skies.util.ingredientOf
 import dev.hybridlabs.skies.item.HSItems
 import dev.hybridlabs.skies.loot.HSLootTables
 import dev.hybridlabs.skies.sound.HSSoundEvents
 import net.minecraft.core.particles.ParticleTypes
 import net.minecraft.core.registries.Registries
-import net.minecraft.nbt.CompoundTag
+import net.minecraft.world.level.storage.ValueInput
+import net.minecraft.world.level.storage.ValueOutput
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
@@ -21,6 +23,7 @@ import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.entity.AgeableMob
+import net.minecraft.world.entity.EntitySpawnReason
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
@@ -41,14 +44,17 @@ class TurkeyEntity(entityType: EntityType<out TurkeyEntity>, world: Level) :
         this.eggLayTime = random.nextInt(6000) + 6000
     }
 
-    override fun getDefaultLootTable(): ResourceKey<LootTable?> {
-        return when (getStuffingLevel()) {
-            1 -> ResourceKey.create(
-                Registries.LOOT_TABLE, HSLootTables.TURKEY_FAT)
-            2 -> ResourceKey.create(
-                Registries.LOOT_TABLE, HSLootTables.TURKEY_STUFFED)
-            else ->
-                return super.defaultLootTable
+    override fun dropFromLootTable(level: ServerLevel, source: DamageSource, hitByPlayer: Boolean) {
+        val table = when (getStuffingLevel()) {
+            1 -> HSLootTables.TURKEY_FAT
+            2 -> HSLootTables.TURKEY_STUFFED
+            else -> null
+        }
+
+        if (table == null) {
+            super.dropFromLootTable(level, source, hitByPlayer)
+        } else {
+            dropFromLootTable(level, source, hitByPlayer, ResourceKey.create(Registries.LOOT_TABLE, table))
         }
     }
 
@@ -88,7 +94,7 @@ class TurkeyEntity(entityType: EntityType<out TurkeyEntity>, world: Level) :
                 1.0f,
                 (random.nextFloat() - random.nextFloat()) * 0.2f + 1.0f
             )
-            this.spawnAtLocation(HSItems.TURKEY_EGG.get())
+            this.spawnAtLocation(level() as ServerLevel, HSItems.TURKEY_EGG.get())
             this.gameEvent(GameEvent.ENTITY_PLACE)
             this.eggLayTime = random.nextInt(6000) + 6000
         }
@@ -140,14 +146,14 @@ class TurkeyEntity(entityType: EntityType<out TurkeyEntity>, world: Level) :
         builder.define(STUFFING_LEVEL, 0)
     }
 
-    override fun addAdditionalSaveData(compound: CompoundTag) {
-        super.addAdditionalSaveData(compound)
-        compound.putInt("StuffingLevel", getStuffingLevel())
+    override fun addAdditionalSaveData(output: ValueOutput) {
+        super.addAdditionalSaveData(output)
+        output.putInt("StuffingLevel", getStuffingLevel())
     }
 
-    override fun readAdditionalSaveData(compound: CompoundTag) {
-        super.readAdditionalSaveData(compound)
-        setStuffingLevel(compound.getInt("FatnessLevel"))
+    override fun readAdditionalSaveData(input: ValueInput) {
+        super.readAdditionalSaveData(input)
+        setStuffingLevel(input.getIntOr("FatnessLevel", 0))
     }
 
     // region SFX
@@ -171,7 +177,7 @@ class TurkeyEntity(entityType: EntityType<out TurkeyEntity>, world: Level) :
     }
 
     override fun getBreedOffspring(serverLevel: ServerLevel, ageableMob: AgeableMob): AgeableMob? {
-        return HSEntityTypes.TURKEY.get().create(serverLevel)
+        return HSEntityTypes.TURKEY.get().create(serverLevel, EntitySpawnReason.BREEDING)
     }
 
     companion object {
@@ -188,6 +194,6 @@ class TurkeyEntity(entityType: EntityType<out TurkeyEntity>, world: Level) :
         private val STUFFING_LEVEL: EntityDataAccessor<Int> =
             SynchedEntityData.defineId(TurkeyEntity::class.java, EntityDataSerializers.INT)
 
-        val BREEDING_INGREDIENT: Ingredient = Ingredient.of(ItemTags.VILLAGER_PLANTABLE_SEEDS)
+        val BREEDING_INGREDIENT: Ingredient get() = ingredientOf(ItemTags.VILLAGER_PLANTABLE_SEEDS)
     }
 }

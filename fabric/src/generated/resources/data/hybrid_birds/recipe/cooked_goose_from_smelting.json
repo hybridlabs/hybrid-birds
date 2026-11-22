@@ -3,9 +3,7 @@
   "category": "food",
   "cookingtime": 200,
   "experience": 0.15,
-  "ingredient": {
-    "item": "hybrid_birds:goose"
-  },
+  "ingredient": "hybrid_birds:goose",
   "result": {
     "id": "hybrid_birds:cooked_goose"
   }

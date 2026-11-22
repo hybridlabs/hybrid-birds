@@ -13,6 +13,9 @@ import net.minecraft.world.food.FoodProperties
 import net.minecraft.world.item.BlockItem
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.SpawnEggItem
+import net.minecraft.world.item.ItemUseAnimation
+import net.minecraft.world.item.component.Consumable
+import net.minecraft.sounds.SoundEvents
 import java.util.function.Supplier
 
 object HSItems {
@@ -50,7 +53,11 @@ object HSItems {
                 FoodProperties.Builder()
                     .nutrition(4)
                     .saturationModifier(0.4F)
-                    .fast()
+                    .build(),
+                Consumable.builder()
+                    .consumeSeconds(0.8f)
+                    .animation(ItemUseAnimation.EAT)
+                    .sound(SoundEvents.GENERIC_EAT)
                     .build()
             )
         )
@@ -181,7 +188,7 @@ object HSItems {
     }
 
     private fun <T : Item> register(id: String, item: Supplier<T>): RegistryObject<T> {
-        return CommonClass.ITEMS.register(id, item)
+        return CommonClass.ITEMS.register(id) { HSItemProperties.withId(id) { item.get() } }
     }
 
     private fun <T : Mob> registerSpawnEgg(
@@ -194,11 +201,11 @@ object HSItems {
     }
 
     private fun <T : Mob> registerEgg(id: String, type: RegistryObject<EntityType<T>>?): RegistryObject<Item> {
-        return CommonClass.ITEMS.register(id){CustomEggItem(itemSettings().stacksTo(16), type)}
+        return CommonClass.ITEMS.register(id) { HSItemProperties.withId(id) { CustomEggItem(itemSettings().stacksTo(16), type) } }
 
     }
 
     private fun itemSettings(): Item.Properties {
-        return Item.Properties()
+        return HSItemProperties.props()
     }
 }

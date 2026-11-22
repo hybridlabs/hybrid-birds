@@ -1,21 +1,6 @@
 package dev.hybridlabs.skies.client.model.entity.bird
 
 import dev.hybridlabs.hapi.client.model.entity.skies.BaseFlyingAnimalEntityModel
-import dev.hybridlabs.skies.Constants
 import dev.hybridlabs.skies.entity.skies.AlbatrossEntity
-import net.minecraft.resources.ResourceLocation
 
-class AlbatrossEntityModel : BaseFlyingAnimalEntityModel<AlbatrossEntity>("hybrid_birds", "albatross") {
-
-    override fun getModelResource(animatable: AlbatrossEntity): ResourceLocation {
-        return ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "geo/entity/albatross/albatross.geo.json")
-    }
-
-    override fun getTextureResource(animatable: AlbatrossEntity): ResourceLocation {
-        return ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "textures/entity/albatross/albatross.png")
-    }
-
-    override fun getAnimationResource(animatable: AlbatrossEntity): ResourceLocation {
-        return ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "animations/entity/albatross/albatross.animation.json")
-    }
-}
+class AlbatrossEntityModel : BaseFlyingAnimalEntityModel<AlbatrossEntity>("hybrid_birds", "albatross")

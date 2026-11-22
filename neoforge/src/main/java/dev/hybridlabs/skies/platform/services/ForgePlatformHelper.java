@@ -11,9 +11,8 @@ import net.minecraft.world.level.levelgen.Heightmap;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.ModList;
-import net.neoforged.fml.loading.FMLLoader;
+import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.fml.loading.FMLPaths;
-import net.neoforged.neoforge.common.DeferredSpawnEggItem;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
 import org.jetbrains.annotations.NotNull;
@@ -45,7 +44,7 @@ public class ForgePlatformHelper implements PlatformHelper {
     @Override
     public boolean isDevelopmentEnvironment() {
 
-        return !FMLLoader.isProduction();
+        return !FMLEnvironment.isProduction();
     }
 
     @Override
@@ -57,11 +56,10 @@ public class ForgePlatformHelper implements PlatformHelper {
         return CommonClass.ITEMS.register(
                 name,
                 () ->
-                        new DeferredSpawnEggItem(
-                                entityType,
-                                backgroundColor,
-                                highlightColor,
-                                new Item.Properties()));
+                        new SpawnEggItem(
+                                new Item.Properties()
+                                .setId(net.minecraft.resources.ResourceKey.create(net.minecraft.core.registries.Registries.ITEM, CommonClass.locate(name)))
+                                .spawnEgg(entityType.get())));
     }
 
     @Override

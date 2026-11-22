@@ -16,7 +16,7 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
             HSItems.TURKEY.get(),
             Items.CHICKEN,
         ).forEach { item ->
-            getOrCreateTagBuilder(HSItemTags.TURDUCKEN_INGREDIENTS).add(item)
+            builder(HSItemTags.TURDUCKEN_INGREDIENTS).add(item.builtInRegistryHolder().key())
         }
 
         setOf(
@@ -27,7 +27,7 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
             HSItems.PEACOCK_EGG.get(),
             HSItems.GUINEA_FOWL_EGG.get(),
         ).forEach { item ->
-            getOrCreateTagBuilder(HSItemTags.EGGS).add(item)
+            builder(HSItemTags.EGGS).add(item.builtInRegistryHolder().key())
         }
     }
 }

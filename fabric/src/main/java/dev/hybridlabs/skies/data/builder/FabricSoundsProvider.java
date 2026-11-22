@@ -10,7 +10,7 @@ import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.RegistryOps;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 import org.jetbrains.annotations.ApiStatus;
 
@@ -54,14 +54,14 @@ public abstract class FabricSoundsProvider implements DataProvider {
     public interface SoundExporter {
 
         default void add(SoundEvent event, SoundTypeBuilder builder) {
-            add(event.getLocation(), builder);
+            add(event.location(), builder);
         }
 
         default void add(Holder<SoundEvent> event, SoundTypeBuilder builder) {
-            add(event.unwrapKey().orElseThrow(() -> new IllegalArgumentException("Direct (non-registered) sound event cannot be added")).location(), builder);
+            add(event.unwrapKey().orElseThrow(() -> new IllegalArgumentException("Direct (non-registered) sound event cannot be added")).identifier(), builder);
         }
 
-        void add(ResourceLocation id, SoundTypeBuilder builder);
+        void add(Identifier id, SoundTypeBuilder builder);
     }
 
     static <T> CompletableFuture<?> saveStable(

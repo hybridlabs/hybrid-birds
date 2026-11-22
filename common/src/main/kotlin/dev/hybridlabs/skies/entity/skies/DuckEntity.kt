@@ -12,6 +12,7 @@ import net.minecraft.sounds.SoundEvent
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.entity.AgeableMob
+import net.minecraft.world.entity.EntitySpawnReason
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
@@ -78,7 +79,7 @@ class DuckEntity(entityType: EntityType<out DuckEntity>, world: Level) :
                 1.0f,
                 (random.nextFloat() - random.nextFloat()) * 0.2f + 1.0f
             )
-            this.spawnAtLocation(HSItems.DUCK_EGG.get())
+            this.spawnAtLocation(level() as ServerLevel, HSItems.DUCK_EGG.get())
             this.gameEvent(GameEvent.ENTITY_PLACE)
             this.eggLayTime = random.nextInt(6000) + 6000
         }
@@ -101,7 +102,7 @@ class DuckEntity(entityType: EntityType<out DuckEntity>, world: Level) :
     }
 
     override fun getBreedOffspring(serverLevel: ServerLevel, ageableMob: AgeableMob): AgeableMob? {
-        return HSEntityTypes.DUCK.get().create(serverLevel)
+        return HSEntityTypes.DUCK.get().create(serverLevel, EntitySpawnReason.BREEDING)
     }
 
     companion object {

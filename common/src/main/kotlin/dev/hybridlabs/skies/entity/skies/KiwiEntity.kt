@@ -4,6 +4,7 @@ import dev.hybridlabs.hapi.entity.base.skies.BaseRatiteEntity
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.world.damagesource.DamageSource
+import net.minecraft.world.entity.EntitySpawnReason
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
@@ -17,7 +18,7 @@ class KiwiEntity(entityType: EntityType<out KiwiEntity>, world: Level) :
     }
 
     //override fun getBreedOffspring(serverLevel: ServerLevel, ageableMob: AgeableMob): AgeableMob? {
-    //    return HSEntityTypes.KIWI.get().create(serverLevel)
+    //    return HSEntityTypes.KIWI.get().create(serverLevel, EntitySpawnReason.BREEDING)
     //}
 
     override fun getAmbientSound(): SoundEvent {

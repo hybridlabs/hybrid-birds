@@ -12,6 +12,7 @@ import net.minecraft.sounds.SoundEvent
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.entity.AgeableMob
+import net.minecraft.world.entity.EntitySpawnReason
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
@@ -77,7 +78,7 @@ class GooseEntity(entityType: EntityType<out GooseEntity>, world: Level) :
                 1.0f,
                 (random.nextFloat() - random.nextFloat()) * 0.2f + 1.0f
             )
-            this.spawnAtLocation(HSItems.GOOSE_EGG.get())
+            this.spawnAtLocation(level() as ServerLevel, HSItems.GOOSE_EGG.get())
             this.gameEvent(GameEvent.ENTITY_PLACE)
             this.eggLayTime = random.nextInt(6000) + 6000
         }
@@ -100,7 +101,7 @@ class GooseEntity(entityType: EntityType<out GooseEntity>, world: Level) :
     }
 
     override fun getBreedOffspring(serverLevel: ServerLevel, ageableMob: AgeableMob): AgeableMob? {
-        return HSEntityTypes.GOOSE.get().create(serverLevel)
+        return HSEntityTypes.GOOSE.get().create(serverLevel, EntitySpawnReason.BREEDING)
     }
 
     companion object {

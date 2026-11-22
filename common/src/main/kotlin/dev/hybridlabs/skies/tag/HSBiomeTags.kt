@@ -2,7 +2,7 @@ package dev.hybridlabs.skies.tag
 
 import dev.hybridlabs.skies.Constants
 import net.minecraft.core.registries.Registries
-import net.minecraft.resources.ResourceLocation
+import net.minecraft.resources.Identifier
 import net.minecraft.tags.TagKey
 import net.minecraft.world.level.biome.Biome
 
@@ -22,6 +22,6 @@ object HSBiomeTags {
     val HUMMINGBIRD_SPAWN_BIOMES = create("hummingbird_spawn_biomes")
 
     private fun create(id: String): TagKey<Biome> {
-        return TagKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, id))
+        return TagKey.create(Registries.BIOME, Identifier.fromNamespaceAndPath(Constants.MOD_ID, id))
     }
 }

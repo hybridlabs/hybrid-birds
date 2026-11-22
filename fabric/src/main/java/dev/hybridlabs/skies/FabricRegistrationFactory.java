@@ -8,7 +8,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -40,10 +40,10 @@ public class FabricRegistrationFactory implements RegistrationProvider.Factory {
         private Provider(String modId, ResourceKey<? extends Registry<T>> key) {
             this.modId = modId;
 
-            final var reg = BuiltInRegistries.REGISTRY.get(key.location());
+            final var reg = BuiltInRegistries.REGISTRY.get(key.identifier()).map(h -> h.value()).orElse(null);
             if (reg == null) {
                 throw new RuntimeException(
-                        "Registry with name " + key.location() + " was not found!");
+                        "Registry with name " + key.identifier() + " was not found!");
             }
             registry = (Registry<T>) reg;
         }
@@ -67,7 +67,7 @@ public class FabricRegistrationFactory implements RegistrationProvider.Factory {
                 }
 
                 @Override
-                public ResourceLocation getId() {
+                public Identifier getId() {
                     return rl;
                 }
 
@@ -78,7 +78,7 @@ public class FabricRegistrationFactory implements RegistrationProvider.Factory {
 
                 @Override
                 public Holder<I> asHolder() {
-                    return (Holder<I>) registry.getHolder((ResourceKey<T>) this.key).orElseThrow();
+                    return (Holder<I>) registry.get((ResourceKey<T>) this.key).orElseThrow();
                 }
             };
             entries.add((RegistryObject<T>) ro);

@@ -4,7 +4,7 @@ package dev.hybridlabs.skies.tag
 
 import dev.hybridlabs.skies.Constants
 import net.minecraft.core.registries.Registries
-import net.minecraft.resources.ResourceLocation
+import net.minecraft.resources.Identifier
 import net.minecraft.tags.TagKey
 import net.minecraft.world.item.Item
 
@@ -14,6 +14,6 @@ object HSItemTags {
     val EGGS = create("eggs")
 
     private fun create(id: String): TagKey<Item> {
-        return TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, id))
+        return TagKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(Constants.MOD_ID, id))
     }
 }

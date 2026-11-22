@@ -4,13 +4,15 @@ plugins {
 }
 
 dependencies {
-    implementation("dev.hybridlabs.hapi:hapi-common-1.21.1:1.0.0")
-    modImplementation("dev.hybridlabs.hapi:hapi-fabric-1.21.1:1.2.0")
+    implementation("dev.hybridlabs.hapi:hapi-common-${minecraft_version}:${hapi_version}")
+    modImplementation("dev.hybridlabs.hapi:hapi-fabric-${minecraft_version}:${hapi_version}")
 
     modApi "software.bernie.geckolib:geckolib-fabric-$geckolib_version"
+    modLocalRuntime("com.terraformersmc:modmenu:${modmenu_version}")
 
-    modApi("com.terraformersmc:modmenu:${modmenu_version}")
-    modImplementation "maven.modrinth:carpet:$carpet_version"
+    modCompileOnly "maven.modrinth:carpet:$carpet_version"
+    modLocalRuntime "maven.modrinth:carpet:$carpet_version"
+
     modRuntimeOnly "io.github.flemmli97:debugutils:$minecraft_version-$debug_utils_version-fabric"
 }
 
@@ -18,7 +20,15 @@ fabricApi {
     configureDataGeneration {
         setModId("$mod_id")
         outputDirectory = file("src/generated/resources")
+        client = true
     }
+}
+
+// runDatagen writes into src/generated/resources, which is part of the main sourceset.
+// Without this ordering Gradle rejects a combined 'build runDatagen' invocation with an
+// implicit-dependency validation error and datagen never gets a chance to run.
+tasks.withType(Jar).configureEach {
+    if (name == 'sourcesJar') mustRunAfter tasks.named('runDatagen')
 }
 
 publishMods.platforms.configureEach {

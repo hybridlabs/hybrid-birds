@@ -5,9 +5,10 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import dev.hybridlabs.skies.item.CustomEggItem;
 import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
-import net.minecraft.world.entity.projectile.ThrownEgg;
+import net.minecraft.world.entity.projectile.throwableitemprojectile.ThrowableItemProjectile;
+import net.minecraft.world.entity.projectile.throwableitemprojectile.ThrownEgg;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.HitResult;
@@ -25,7 +26,7 @@ public abstract class EggEntityMixin extends ThrowableItemProjectile {
     @WrapMethod(method = "onHit")
     private void onHit(HitResult result, Operation<Void> original) {
         Level world = this.level();
-        if (!world.isClientSide) {
+        if (!world.isClientSide()) {
             if (world.random.nextInt(8) == 0) {
                 int i = 1;
                 if (world.random.nextInt(32) == 0) {
@@ -34,12 +35,12 @@ public abstract class EggEntityMixin extends ThrowableItemProjectile {
 
                 for (int j = 0; j < i; ++j) {
                     EntityType<?> childType = getTypeForChild();
-                    Entity childEntity = childType.create(world);
+                    Entity childEntity = childType.create(world, EntitySpawnReason.TRIGGERED);
                     if (childEntity instanceof AgeableMob passiveChildEntity) {
                         passiveChildEntity.setAge(-24000);
                     }
                     if (childEntity != null) {
-                        childEntity.moveTo(this.getX(), this.getY(), this.getZ(), this.getYRot(), 0.0F);
+                        childEntity.snapTo(this.getX(), this.getY(), this.getZ(), this.getYRot(), 0.0F);
                         world.addFreshEntity(childEntity);
                     }
                 }

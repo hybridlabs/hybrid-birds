@@ -5,4 +5,4 @@ import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.item.EggItem
 
-class CustomEggItem<T : Entity?>(settings: Properties, val type: RegistryObject<EntityType<T>>?) : EggItem(settings)
+class CustomEggItem<T : Entity>(settings: Properties, val type: RegistryObject<EntityType<T>>?) : EggItem(settings)

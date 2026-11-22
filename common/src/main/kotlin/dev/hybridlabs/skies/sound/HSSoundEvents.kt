@@ -3,7 +3,7 @@ package dev.hybridlabs.skies.sound
 import dev.hybridlabs.skies.CommonClass
 import dev.hybridlabs.skies.Constants
 import dev.hybridlabs.skies.platform.registration.RegistryObject
-import net.minecraft.resources.ResourceLocation
+import net.minecraft.resources.Identifier
 import net.minecraft.sounds.SoundEvent
 
 object HSSoundEvents {
@@ -57,7 +57,7 @@ object HSSoundEvents {
     val OSTRICH_HURT = register("entity.ostrich.hurt")
 
     private fun register(id: String, range: Float = -1.0f): RegistryObject<SoundEvent> {
-        val identifier = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, id)
+        val identifier = Identifier.fromNamespaceAndPath(Constants.MOD_ID, id)
         return if (range < 0)
             CommonClass.SOUND_EVENTS.register(id) { SoundEvent.createVariableRangeEvent(identifier) }
         else

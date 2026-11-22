@@ -1,9 +1,12 @@
 package dev.hybridlabs.skies.entity.skies
 
+import dev.hybridlabs.skies.util.ingredientOf
+
 import dev.hybridlabs.hapi.entity.base.skies.BaseFlyingAnimal
 import dev.hybridlabs.skies.effect.HSMobEffects
 import dev.hybridlabs.skies.sound.HSSoundEvents
-import net.minecraft.nbt.CompoundTag
+import net.minecraft.world.level.storage.ValueInput
+import net.minecraft.world.level.storage.ValueOutput
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.sounds.SoundEvents
@@ -13,6 +16,7 @@ import net.minecraft.world.InteractionResult
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.effect.MobEffectInstance
 import net.minecraft.world.entity.AgeableMob
+import net.minecraft.world.entity.EntitySpawnReason
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
@@ -21,7 +25,7 @@ import net.minecraft.world.entity.ai.goal.MeleeAttackGoal
 import net.minecraft.world.entity.ai.goal.TemptGoal
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal
-import net.minecraft.world.entity.animal.Chicken
+import net.minecraft.world.entity.animal.chicken.Chicken
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
@@ -43,13 +47,13 @@ class RoosterEntity(entityType: EntityType<out RoosterEntity>, world: Level) :
 
     override fun registerGoals() {
         super.registerGoals()
-        goalSelector.addGoal(3, TemptGoal(this, 1.0,Ingredient.of(ItemTags.VILLAGER_PLANTABLE_SEEDS), false))
+        goalSelector.addGoal(3, TemptGoal(this, 1.0,ingredientOf(ItemTags.VILLAGER_PLANTABLE_SEEDS), false))
         goalSelector.addGoal(6, LookAtPlayerGoal(this, RoosterEntity::class.java, 8.0f))
         goalSelector.addGoal(6, LookAtPlayerGoal(this, Chicken::class.java, 8.0f))
         goalSelector.addGoal(1, MeleeAttackGoal(this, 1.0, false))
         targetSelector.addGoal(1, HurtByTargetGoal(this))
-        targetSelector.addGoal(2, NearestAttackableTargetGoal(this, RoosterEntity::class.java, true) { other ->
-            other is RoosterEntity && this.isAngry() && other.isAngry()
+        targetSelector.addGoal(2, NearestAttackableTargetGoal(this, RoosterEntity::class.java, 10, true, false) { other, _ ->
+            this.isAngry() && other is RoosterEntity && other.isAngry()
         })
     }
 
@@ -58,7 +62,7 @@ class RoosterEntity(entityType: EntityType<out RoosterEntity>, world: Level) :
     }
 
     override fun getBreedOffspring(serverLevel: ServerLevel, ageableMob: AgeableMob): AgeableMob? {
-        return EntityType.CHICKEN.create(serverLevel)
+        return EntityType.CHICKEN.create(serverLevel, EntitySpawnReason.BREEDING)
     }
 
     override fun mobInteract(player: Player, hand: InteractionHand): InteractionResult {
@@ -78,7 +82,7 @@ class RoosterEntity(entityType: EntityType<out RoosterEntity>, world: Level) :
         return super.mobInteract(player, hand)
     }
 
-    override fun usePlayerItem(player: Player, hand: InteractionHand?, stack: ItemStack) {
+    override fun usePlayerItem(player: Player, hand: InteractionHand, stack: ItemStack) {
         if (!player.abilities.instabuild) {
             stack.shrink(1)
         }
@@ -93,7 +97,7 @@ class RoosterEntity(entityType: EntityType<out RoosterEntity>, world: Level) :
     }
 
     private fun morningCall() {
-        val timeOfDay = level().dayTime() % 24000L
+        val timeOfDay = level().dayTime % 24000L
         if (timeOfDay in 0..5 && !hasCalled) {
             this.playSound(HSSoundEvents.ROOSTER_CALL.get(), 1.0F, 1.0F)
             applySpeedEffectToNearbyPlayers()
@@ -117,14 +121,14 @@ class RoosterEntity(entityType: EntityType<out RoosterEntity>, world: Level) :
 
     // region NBT
 
-    override fun addAdditionalSaveData(compound: CompoundTag) {
-        super.addAdditionalSaveData(compound)
-        compound.putInt("IsAngry", this.angerTicks)
+    override fun addAdditionalSaveData(output: ValueOutput) {
+        super.addAdditionalSaveData(output)
+        output.putInt("IsAngry", this.angerTicks)
     }
 
-    override fun readAdditionalSaveData(compound: CompoundTag) {
-        super.readAdditionalSaveData(compound)
-        this.angerTicks = compound.getInt("IsAngry")
+    override fun readAdditionalSaveData(input: ValueInput) {
+        super.readAdditionalSaveData(input)
+        this.angerTicks = input.getIntOr("IsAngry", 0)
     }
 
     // endregion
