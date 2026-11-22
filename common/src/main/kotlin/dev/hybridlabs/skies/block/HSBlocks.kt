@@ -2,6 +2,9 @@ package dev.hybridlabs.skies.block
 
 import dev.hybridlabs.skies.CommonClass
 import dev.hybridlabs.skies.platform.registration.RegistryObject
+import dev.hybridlabs.hapi.block.HAPIBlockProperties
+import net.minecraft.core.registries.Registries
+import net.minecraft.resources.ResourceKey
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.SoundType
 import net.minecraft.world.level.block.state.BlockBehaviour
@@ -17,7 +20,7 @@ object HSBlocks {
         "turducken"
     ) {
         TurduckenBlock(
-            HSBlockProperties.of()
+            HAPIBlockProperties.of()
                 .strength(0.5f)
                 .forceSolidOn()
                 .pushReaction(PushReaction.DESTROY)
@@ -26,6 +29,8 @@ object HSBlocks {
     }
 
     private fun register(id: String, block: Supplier<Block>): RegistryObject<Block> {
-        return CommonClass.BLOCKS.register(id) { HSBlockProperties.withId(id) { block.get() } }
+        return CommonClass.BLOCKS.register(id) {
+            HAPIBlockProperties.withId(ResourceKey.create(Registries.BLOCK, CommonClass.locate(id))) { block.get() }
+        }
     }
 }
