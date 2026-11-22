@@ -3,7 +3,7 @@ package dev.hybridlabs.skies.datagen
 import dev.hybridlabs.skies.CommonClass
 import dev.hybridlabs.skies.ConfigHelper.initializeConfig
 import dev.hybridlabs.skies.Constants
-import dev.hybridlabs.skies.utils.NaughtyRegistrySetBuilder
+import net.minecraft.core.RegistrySetBuilder
 import net.minecraft.core.registries.Registries
 import net.minecraft.data.worldgen.BootstrapContext
 import net.minecraft.resources.ResourceKey
@@ -33,8 +33,8 @@ object DataGenerators {
         val generator = event.generator
         val packOutput = generator.packOutput
 
-        val builder = NaughtyRegistrySetBuilder()
-        val lookupProvider = event.lookupProvider
+        val builder = RegistrySetBuilder()
+        val lookupProvider = event.worldLookupProvider
 
         builder.add(BIOME_MODIFIERS)
         { context ->
@@ -42,8 +42,9 @@ object DataGenerators {
         }
 
         event.addProvider(
-            DatapackBuiltinEntriesProvider(
+            DatapackBuiltinEntriesProvider.forWorldLayer(
                 packOutput,
+                Constants.MOD_ID,
                 lookupProvider,
                 builder,
                 setOf(Constants.MOD_ID)
@@ -73,8 +74,10 @@ object DataGenerators {
                         Weighted(
                             MobSpawnSettings.SpawnerData(
                                 spawnConfig.type,
-                                spawnConfig.minGroupSize,
-                                spawnConfig.maxGroupSize
+                                net.minecraft.util.valueproviders.UniformInt.of(
+                                    spawnConfig.minGroupSize,
+                                    spawnConfig.maxGroupSize
+                                )
                             ),
                             spawnConfig.weight
                         )

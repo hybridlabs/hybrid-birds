@@ -3,8 +3,11 @@
   "biomes": "#hybrid_birds:pelican_spawn_biomes",
   "spawners": {
     "type": "hybrid_birds:pelican",
-    "maxCount": 2,
-    "minCount": 1,
+    "count": {
+      "type": "minecraft:uniform",
+      "max_inclusive": 2,
+      "min_inclusive": 1
+    },
     "weight": 3
   }
 }

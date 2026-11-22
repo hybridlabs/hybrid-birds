@@ -3,8 +3,11 @@
   "biomes": "#hybrid_birds:puffin_spawn_biomes",
   "spawners": {
     "type": "hybrid_birds:puffin",
-    "maxCount": 5,
-    "minCount": 2,
+    "count": {
+      "type": "minecraft:uniform",
+      "max_inclusive": 5,
+      "min_inclusive": 2
+    },
     "weight": 5
   }
 }

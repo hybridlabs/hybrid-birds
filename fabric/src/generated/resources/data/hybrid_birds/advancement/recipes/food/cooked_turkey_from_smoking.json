@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hybrid_birds:cooked_turkey_from_smoking"
+        "recipes": "hybrid_birds:cooked_turkey_from_smoking"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

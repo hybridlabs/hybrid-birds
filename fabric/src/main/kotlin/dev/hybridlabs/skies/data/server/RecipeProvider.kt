@@ -7,9 +7,12 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider
 import net.minecraft.advancements.triggers.InventoryChangeTrigger
 import net.minecraft.advancements.predicates.ItemPredicate
 import net.minecraft.core.HolderLookup
+import net.minecraft.advancements.Advancement
+import net.minecraft.data.worldgen.BootstrapContext
+import net.minecraft.resources.ResourceKey
+import net.minecraft.world.item.crafting.Recipe
 import net.minecraft.core.registries.Registries
 import net.minecraft.data.recipes.RecipeCategory
-import net.minecraft.data.recipes.RecipeOutput
 import net.minecraft.data.recipes.ShapelessRecipeBuilder
 import net.minecraft.data.recipes.SimpleCookingRecipeBuilder
 import net.minecraft.data.recipes.RecipeProvider as VanillaRecipeProvider
@@ -22,16 +25,17 @@ class RecipeProvider(output: FabricPackOutput, lookupProvider: CompletableFuture
     FabricRecipeProvider(output, lookupProvider) {
     override fun createRecipeProvider(
         registries: HolderLookup.Provider,
-        output: RecipeOutput,
-    ): VanillaRecipeProvider = GeneratedRecipes(registries, output)
+        recipes: BootstrapContext<Recipe<*>>,
+        advancements: BootstrapContext<Advancement>,
+    ): VanillaRecipeProvider = GeneratedRecipes(recipes, advancements)
 
     override fun getName(): String = "Recipes"
 
     private class GeneratedRecipes(
-        registries: HolderLookup.Provider,
-        output: RecipeOutput,
-    ) : VanillaRecipeProvider(registries, output) {
-        private val itemLookup = registries.lookupOrThrow(Registries.ITEM)
+        recipes: BootstrapContext<Recipe<*>>,
+        advancements: BootstrapContext<Advancement>,
+    ) : VanillaRecipeProvider(recipes, advancements) {
+        private val itemLookup = recipes.lookup(Registries.ITEM)
 
         override fun buildRecipes() {
             // misc recipes

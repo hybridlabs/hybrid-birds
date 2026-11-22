@@ -20,7 +20,7 @@ object HSBlocks {
             HSBlockProperties.of()
                 .strength(0.5f)
                 .forceSolidOn()
-                .pushReaction(PushReaction.DESTROY)
+                .pushReaction(PushReaction.POPPED)
                 .sound(SoundType.WOOL)
         )
     }

@@ -3,8 +3,11 @@
   "biomes": "#hybrid_birds:turkey_spawn_biomes",
   "spawners": {
     "type": "hybrid_birds:turkey",
-    "maxCount": 3,
-    "minCount": 1,
+    "count": {
+      "type": "minecraft:uniform",
+      "max_inclusive": 3,
+      "min_inclusive": 1
+    },
     "weight": 3
   }
 }

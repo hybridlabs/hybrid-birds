@@ -3,8 +3,11 @@
   "biomes": "#minecraft:is_savanna",
   "spawners": {
     "type": "hybrid_birds:guinea_fowl",
-    "maxCount": 3,
-    "minCount": 1,
+    "count": {
+      "type": "minecraft:uniform",
+      "max_inclusive": 3,
+      "min_inclusive": 1
+    },
     "weight": 3
   }
 }

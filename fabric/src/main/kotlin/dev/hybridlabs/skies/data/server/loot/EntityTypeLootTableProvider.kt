@@ -12,7 +12,7 @@ import net.minecraft.world.level.storage.loot.LootTable
 import net.minecraft.world.level.storage.loot.entries.LootItem
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets
-import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator
+import net.minecraft.world.level.storage.loot.providers.number.ints.ContextIntProviders
 import java.util.concurrent.CompletableFuture
 import java.util.function.BiConsumer
 
@@ -30,7 +30,7 @@ class EntityTypeLootTableProvider(exporter: FabricPackOutput, val lookupProvider
             pool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(Items.FEATHER)
-                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0f, 2.0f))))
+                        .apply(SetItemCountFunction.setCount(ContextIntProviders.between(0, 2))))
                     .build()
             )
         }
@@ -39,13 +39,13 @@ class EntityTypeLootTableProvider(exporter: FabricPackOutput, val lookupProvider
             pool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(Items.COD)
-                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0f, 2.0f))))
+                        .apply(SetItemCountFunction.setCount(ContextIntProviders.between(0, 2))))
                     .build()
             )
             pool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(Items.FEATHER)
-                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0f, 2.0f))))
+                        .apply(SetItemCountFunction.setCount(ContextIntProviders.between(0, 2))))
                     .build()
             )
         }
@@ -54,13 +54,13 @@ class EntityTypeLootTableProvider(exporter: FabricPackOutput, val lookupProvider
             pool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(Items.COD)
-                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0f, 2.0f))))
+                        .apply(SetItemCountFunction.setCount(ContextIntProviders.between(0, 2))))
                     .build()
             )
             pool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(Items.FEATHER)
-                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0f, 2.0f))))
+                        .apply(SetItemCountFunction.setCount(ContextIntProviders.between(0, 2))))
                     .build()
             )
         }
@@ -69,13 +69,13 @@ class EntityTypeLootTableProvider(exporter: FabricPackOutput, val lookupProvider
             pool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(Items.COD)
-                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0f, 2.0f))))
+                        .apply(SetItemCountFunction.setCount(ContextIntProviders.between(0, 2))))
                     .build()
             )
             pool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(Items.FEATHER)
-                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0f, 2.0f))))
+                        .apply(SetItemCountFunction.setCount(ContextIntProviders.between(0, 2))))
                     .build()
             )
         }
@@ -89,7 +89,7 @@ class EntityTypeLootTableProvider(exporter: FabricPackOutput, val lookupProvider
             pool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(Items.FEATHER)
-                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0f, 2.0f))))
+                        .apply(SetItemCountFunction.setCount(ContextIntProviders.between(0, 2))))
                     .build()
             )
         }
@@ -103,7 +103,7 @@ class EntityTypeLootTableProvider(exporter: FabricPackOutput, val lookupProvider
             pool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(Items.FEATHER)
-                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0f, 2.0f))))
+                        .apply(SetItemCountFunction.setCount(ContextIntProviders.between(0, 2))))
                     .build()
             )
         }
@@ -117,7 +117,7 @@ class EntityTypeLootTableProvider(exporter: FabricPackOutput, val lookupProvider
             pool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(Items.FEATHER)
-                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F))))
+                        .apply(SetItemCountFunction.setCount(ContextIntProviders.between(0, 2))))
                     .build()
             )
         }
@@ -132,7 +132,7 @@ class EntityTypeLootTableProvider(exporter: FabricPackOutput, val lookupProvider
             pool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(Items.FEATHER)
-                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F))))
+                        .apply(SetItemCountFunction.setCount(ContextIntProviders.between(0, 2))))
                     .build()
             )
         }
@@ -146,7 +146,7 @@ class EntityTypeLootTableProvider(exporter: FabricPackOutput, val lookupProvider
             pool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(Items.FEATHER)
-                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F))))
+                        .apply(SetItemCountFunction.setCount(ContextIntProviders.between(0, 2))))
                     .build()
             )
         }
@@ -155,7 +155,7 @@ class EntityTypeLootTableProvider(exporter: FabricPackOutput, val lookupProvider
             pool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(Items.FEATHER)
-                            .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F))))
+                            .apply(SetItemCountFunction.setCount(ContextIntProviders.between(0, 2))))
                     .build()
             )
         }
@@ -164,7 +164,7 @@ class EntityTypeLootTableProvider(exporter: FabricPackOutput, val lookupProvider
             pool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(Items.FEATHER)
-                            .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 5.0F))))
+                            .apply(SetItemCountFunction.setCount(ContextIntProviders.between(1, 5))))
                     .build()
             )
         }
