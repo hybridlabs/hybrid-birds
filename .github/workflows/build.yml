@@ -29,7 +29,7 @@ jobs:
         uses: actions/setup-java@v6
         with:
           java-version: |
-            21
+            25
           distribution: temurin
 
       # Validates the wrapper checksum, and caches ~/.gradle plus the Gradle build cache between
@@ -38,7 +38,7 @@ jobs:
         uses: gradle/actions/setup-gradle@v6
 
       - name: build
-        run: ./gradlew build "-Dorg.gradle.java.installations.fromEnv=JAVA_HOME_21_X64"
+        run: ./gradlew build "-Dorg.gradle.java.installations.fromEnv=JAVA_HOME_25_X64"
 
       - name: capture build artifacts
         uses: actions/upload-artifact@v7
