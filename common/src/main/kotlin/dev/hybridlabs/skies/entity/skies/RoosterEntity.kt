@@ -152,6 +152,7 @@ class RoosterEntity(entityType: EntityType<out RoosterEntity>, world: Level) :
     companion object {
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
+                .add(Attributes.TEMPT_RANGE, 10.0)
                 .add(Attributes.MAX_HEALTH, 6.0)
                 .add(Attributes.MOVEMENT_SPEED, 0.25)
                 .add(Attributes.ATTACK_KNOCKBACK, 0.1)
