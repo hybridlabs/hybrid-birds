@@ -6,15 +6,29 @@
             "_name_comment": "The field name of the new entry, must be prefixed with the mod ID",
             "name": "HYBRID_BIRDS_TERRESTRIAL_BIRD",
             "_constructor_comment": "The constructor to be used",
-            "constructor": "(Ljava/lang/String;IZZI)V",
+            "constructor": "(Ljava/lang/String;Ljava/lang/String;IZZI)V",
             "_parameters_comment": "Constant parameters provided directly.",
-            "parameters": [ "hybrid_birds:terrestrial_bird", 6, true, false, 128 ]
+            "parameters": [
+                "hybrid_birds:terrestrial_bird",
+                "hybrid_birds:terrestrial_bird",
+                6,
+                true,
+                false,
+                128
+            ]
         },
         {
             "enum": "net/minecraft/world/entity/MobCategory",
             "name": "HYBRID_BIRDS_AQUATIC_BIRD",
-            "constructor": "(Ljava/lang/String;IZZI)V",
-            "parameters": [ "hybrid_birds:aquatic_bird", 6, true, false, 128]
+            "constructor": "(Ljava/lang/String;Ljava/lang/String;IZZI)V",
+            "parameters": [
+                "hybrid_birds:aquatic_bird",
+                "hybrid_birds:aquatic_bird",
+                6,
+                true,
+                false,
+                128
+            ]
         }
     ]
 }

@@ -35,12 +35,12 @@ side = "BOTH"
 [[dependencies.${mod_id}]]
 modId = "geckolib"
 type = "required"
-versionRange = "[5.5.2,)"
+versionRange = "[5.5.5,)"
 side = "BOTH"
 
 [[dependencies.${mod_id}]]
 modId = "hapi"
 type = "required"
-versionRange = "[1.4.0,)"
+versionRange = "[1.5.0,)"
 ordering = "NONE"
 side = "BOTH"

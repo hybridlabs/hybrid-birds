@@ -4,8 +4,8 @@ import dev.hybridlabs.skies.item.HSItems
 import dev.hybridlabs.skies.tag.HSItemTags
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider
-import net.minecraft.advancements.criterion.InventoryChangeTrigger
-import net.minecraft.advancements.criterion.ItemPredicate
+import net.minecraft.advancements.triggers.InventoryChangeTrigger
+import net.minecraft.advancements.predicates.ItemPredicate
 import net.minecraft.core.HolderLookup
 import net.minecraft.core.registries.Registries
 import net.minecraft.data.recipes.RecipeCategory
@@ -88,7 +88,7 @@ class RecipeProvider(output: FabricPackOutput, lookupProvider: CompletableFuture
             experience: Float,
             cookingTime: Int,
             criterionName: String,
-            criterion: net.minecraft.advancements.Criterion<*>,
+            criterion: net.minecraft.advancements.triggers.Criterion<*>,
         ) {
             val builder = when (cooker) {
                 "smoking" -> SimpleCookingRecipeBuilder.smoking(

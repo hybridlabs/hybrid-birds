@@ -7,6 +7,7 @@ import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.projectile.throwableitemprojectile.ThrowableItemProjectile;
 import net.minecraft.world.entity.projectile.throwableitemprojectile.ThrownEgg;
 import net.minecraft.world.item.ItemStack;
@@ -57,6 +58,6 @@ public abstract class EggEntityMixin extends ThrowableItemProjectile {
         if (stack.getItem() instanceof CustomEggItem eggItem) {
             return (EntityType<?>) Objects.requireNonNull(eggItem.getType()).get();
         }
-        return Objects.requireNonNull(EntityType.CHICKEN);
+        return Objects.requireNonNull(EntityTypes.CHICKEN);
     }
 }

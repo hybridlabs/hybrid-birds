@@ -18,6 +18,7 @@ import net.minecraft.world.effect.MobEffectInstance
 import net.minecraft.world.entity.AgeableMob
 import net.minecraft.world.entity.EntitySpawnReason
 import net.minecraft.world.entity.EntityType
+import net.minecraft.world.entity.EntityTypes
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal
@@ -62,7 +63,7 @@ class RoosterEntity(entityType: EntityType<out RoosterEntity>, world: Level) :
     }
 
     override fun getBreedOffspring(serverLevel: ServerLevel, ageableMob: AgeableMob): AgeableMob? {
-        return EntityType.CHICKEN.create(serverLevel, EntitySpawnReason.BREEDING)
+        return EntityTypes.CHICKEN.create(serverLevel, EntitySpawnReason.BREEDING)
     }
 
     override fun mobInteract(player: Player, hand: InteractionHand): InteractionResult {
