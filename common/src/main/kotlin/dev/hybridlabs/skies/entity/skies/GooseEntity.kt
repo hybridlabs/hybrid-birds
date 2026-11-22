@@ -107,6 +107,7 @@ class GooseEntity(entityType: EntityType<out GooseEntity>, world: Level) :
     companion object {
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
+                .add(Attributes.TEMPT_RANGE, 10.0)
                 .add(Attributes.MAX_HEALTH, 6.0)
                 .add(Attributes.MOVEMENT_SPEED, 0.25)
                 .add(Attributes.FLYING_SPEED, 0.5)
