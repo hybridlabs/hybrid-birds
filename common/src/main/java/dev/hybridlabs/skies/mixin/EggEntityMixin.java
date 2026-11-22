@@ -27,9 +27,9 @@ public abstract class EggEntityMixin extends ThrowableItemProjectile {
     private void onHit(HitResult result, Operation<Void> original) {
         Level world = this.level();
         if (!world.isClientSide()) {
-            if (world.random.nextInt(8) == 0) {
+            if (this.random.nextInt(8) == 0) {
                 int i = 1;
-                if (world.random.nextInt(32) == 0) {
+                if (this.random.nextInt(32) == 0) {
                     i = 4;
                 }
 

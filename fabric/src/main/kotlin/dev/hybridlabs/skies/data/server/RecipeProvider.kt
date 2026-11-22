@@ -2,7 +2,7 @@ package dev.hybridlabs.skies.data.server
 
 import dev.hybridlabs.skies.item.HSItems
 import dev.hybridlabs.skies.tag.HSItemTags
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider
 import net.minecraft.advancements.criterion.InventoryChangeTrigger
 import net.minecraft.advancements.criterion.ItemPredicate
@@ -13,18 +13,12 @@ import net.minecraft.data.recipes.RecipeOutput
 import net.minecraft.data.recipes.ShapelessRecipeBuilder
 import net.minecraft.data.recipes.SimpleCookingRecipeBuilder
 import net.minecraft.data.recipes.RecipeProvider as VanillaRecipeProvider
-import net.minecraft.tags.TagKey
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.Items
-import net.minecraft.world.item.crafting.AbstractCookingRecipe
-import net.minecraft.world.item.crafting.CampfireCookingRecipe
 import net.minecraft.world.item.crafting.Ingredient
-import net.minecraft.world.item.crafting.RecipeSerializer
-import net.minecraft.world.item.crafting.SmeltingRecipe
-import net.minecraft.world.item.crafting.SmokingRecipe
 import java.util.concurrent.CompletableFuture
 
-class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture<HolderLookup.Provider>) :
+class RecipeProvider(output: FabricPackOutput, lookupProvider: CompletableFuture<HolderLookup.Provider>) :
     FabricRecipeProvider(output, lookupProvider) {
     override fun createRecipeProvider(
         registries: HolderLookup.Provider,
@@ -67,104 +61,50 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
             result: Item,
             experience: Float,
         ) {
-            offerCookingRecipe(
-                "smelting",
-                RecipeSerializer.SMELTING_RECIPE,
-                ::SmeltingRecipe,
-                200,
-                Ingredient.of(input),
-                result,
-                experience,
-                getHasName(input),
-                has(input),
-            )
-            offerCookingRecipe(
-                "smoking",
-                RecipeSerializer.SMOKING_RECIPE,
-                ::SmokingRecipe,
-                100,
-                Ingredient.of(input),
-                result,
-                experience,
-                getHasName(input),
-                has(input),
-            )
-            offerCookingRecipe(
-                "campfire_cooking",
-                RecipeSerializer.CAMPFIRE_COOKING_RECIPE,
-                ::CampfireCookingRecipe,
-                600,
-                Ingredient.of(input),
-                result,
-                experience,
-                getHasName(input),
-                has(input),
-            )
+            val ingredient = Ingredient.of(input)
+            val criterionName = getHasName(input)
+            val criterion = has(input)
+            offerCookingRecipe("smelting", ingredient, result, experience, 200, criterionName, criterion)
+            offerCookingRecipe("smoking", ingredient, result, experience, 100, criterionName, criterion)
+            offerCookingRecipe("campfire_cooking", ingredient, result, experience, 600, criterionName, criterion)
         }
 
         private fun offerEggCookingRecipes(
-            inputTag: TagKey<Item>,
+            inputTag: net.minecraft.tags.TagKey<Item>,
             result: Item,
             experience: Float,
         ) {
             val ingredient = Ingredient.of(itemLookup.getOrThrow(inputTag))
-            offerCookingRecipe(
-                "smelting",
-                RecipeSerializer.SMELTING_RECIPE,
-                ::SmeltingRecipe,
-                200,
-                ingredient,
-                result,
-                experience,
-                "has_egg",
-                has(inputTag),
-            )
-            offerCookingRecipe(
-                "smoking",
-                RecipeSerializer.SMOKING_RECIPE,
-                ::SmokingRecipe,
-                100,
-                ingredient,
-                result,
-                experience,
-                "has_egg",
-                has(inputTag),
-            )
-            offerCookingRecipe(
-                "campfire_cooking",
-                RecipeSerializer.CAMPFIRE_COOKING_RECIPE,
-                ::CampfireCookingRecipe,
-                600,
-                ingredient,
-                result,
-                experience,
-                "has_egg",
-                has(inputTag),
-            )
+            val criterion = has(inputTag)
+            offerCookingRecipe("smelting", ingredient, result, experience, 200, "has_egg", criterion)
+            offerCookingRecipe("smoking", ingredient, result, experience, 100, "has_egg", criterion)
+            offerCookingRecipe("campfire_cooking", ingredient, result, experience, 600, "has_egg", criterion)
         }
 
-        private fun <T : AbstractCookingRecipe> offerCookingRecipe(
+        private fun offerCookingRecipe(
             cooker: String,
-            serializer: RecipeSerializer<T>,
-            recipeFactory: AbstractCookingRecipe.Factory<T>,
-            cookingTime: Int,
             input: Ingredient,
             result: Item,
             experience: Float,
+            cookingTime: Int,
             criterionName: String,
             criterion: net.minecraft.advancements.Criterion<*>,
         ) {
-            val builder = SimpleCookingRecipeBuilder.generic(
-                input,
-                RecipeCategory.FOOD,
-                result,
-                experience,
-                cookingTime,
-                serializer,
-                recipeFactory,
-            ).unlockedBy(criterionName, criterion)
+            val builder = when (cooker) {
+                "smoking" -> SimpleCookingRecipeBuilder.smoking(
+                    input, RecipeCategory.FOOD, result, experience, cookingTime
+                )
+                "campfire_cooking" -> SimpleCookingRecipeBuilder.campfireCooking(
+                    input, RecipeCategory.FOOD, result, experience, cookingTime
+                )
+                else -> SimpleCookingRecipeBuilder.smelting(
+                    input, RecipeCategory.FOOD, net.minecraft.world.item.crafting.CookingBookCategory.FOOD,
+                    result, experience, cookingTime
+                )
+            }
 
-            builder.save(output, getItemName(result) + "_from_" + cooker)
+            builder.unlockedBy(criterionName, criterion)
+                .save(output, getItemName(result) + "_from_" + cooker)
         }
     }
 }

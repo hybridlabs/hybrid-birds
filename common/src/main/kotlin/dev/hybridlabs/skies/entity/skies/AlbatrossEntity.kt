@@ -35,8 +35,8 @@ class AlbatrossEntity(type: EntityType<out AlbatrossEntity>, world: Level) :
 
     override fun createNavigation(level: Level): PathNavigation {
         setPathfindingMalus(PathType.WATER, 0.0f)
-        setPathfindingMalus(PathType.DANGER_FIRE, 16.0f)
-        setPathfindingMalus(PathType.DAMAGE_FIRE, -1.0f)
+        setPathfindingMalus(PathType.FIRE_IN_NEIGHBOR, 16.0f)
+        setPathfindingMalus(PathType.FIRE, -1.0f)
 
         moveControl = FlyingAnimalFlyFloatControl(this, 10, false)
         navigation = FlyingPathNavigation(this, level)

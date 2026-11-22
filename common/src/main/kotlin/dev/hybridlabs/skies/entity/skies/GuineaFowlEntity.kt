@@ -8,6 +8,7 @@ import dev.hybridlabs.skies.item.HSItems
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.sounds.SoundEvents
+import net.minecraft.world.entity.animal.chicken.ChickenSoundVariants
 import net.minecraft.tags.ItemTags
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.entity.AgeableMob
@@ -51,15 +52,15 @@ class GuineaFowlEntity(entityType: EntityType<out GuineaFowlEntity>, world: Leve
     }
 
     override fun getHurtSound(source: DamageSource): SoundEvent {
-        return SoundEvents.CHICKEN_HURT
+        return chickenSounds().hurtSound().value()
     }
 
     override fun getDeathSound(): SoundEvent {
-        return SoundEvents.CHICKEN_DEATH
+        return chickenSounds().deathSound().value()
     }
 
     override fun getAmbientSound(): SoundEvent {
-        return SoundEvents.CHICKEN_AMBIENT
+        return chickenSounds().ambientSound().value()
     }
 
     override fun getBreedOffspring(serverLevel: ServerLevel, ageableMob: AgeableMob): AgeableMob? {
@@ -83,6 +84,9 @@ class GuineaFowlEntity(entityType: EntityType<out GuineaFowlEntity>, world: Leve
     override fun isFood(stack: ItemStack): Boolean {
         return BREEDING_INGREDIENT.test(stack)
     }
+
+    private fun chickenSounds() =
+        SoundEvents.CHICKEN_SOUNDS[ChickenSoundVariants.SoundSet.CLASSIC]!!.adultSounds()
 
     companion object {
         fun createMobAttributes(): AttributeSupplier.Builder {

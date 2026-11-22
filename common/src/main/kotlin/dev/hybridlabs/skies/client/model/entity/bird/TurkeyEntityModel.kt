@@ -4,8 +4,8 @@ import dev.hybridlabs.hapi.client.model.entity.skies.BaseFlyingAnimalEntityModel
 import dev.hybridlabs.skies.Constants
 import dev.hybridlabs.skies.entity.skies.TurkeyEntity
 import net.minecraft.resources.Identifier
-import software.bernie.geckolib.constant.dataticket.DataTicket
-import software.bernie.geckolib.renderer.base.GeoRenderState
+import com.geckolib.constant.dataticket.DataTicket
+import com.geckolib.renderer.base.GeoRenderState
 
 class TurkeyEntityModel : BaseFlyingAnimalEntityModel<TurkeyEntity>("hybrid_birds", "turkey") {
 

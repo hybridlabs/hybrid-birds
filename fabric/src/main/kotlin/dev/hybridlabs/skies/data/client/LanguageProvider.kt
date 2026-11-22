@@ -7,7 +7,7 @@ import dev.hybridlabs.skies.entity.HSEntityTypes
 import dev.hybridlabs.skies.item.HSItemGroups
 import dev.hybridlabs.skies.item.HSItems
 import dev.hybridlabs.skies.sound.HSSoundEvents
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider
 import net.minecraft.util.Util
 import net.minecraft.core.HolderLookup
@@ -16,7 +16,7 @@ import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.Mob
 import java.util.concurrent.CompletableFuture
 
-class LanguageProvider( output: FabricDataOutput, lookupProvider: CompletableFuture<HolderLookup.Provider>) : FabricLanguageProvider(output,lookupProvider) {
+class LanguageProvider( output: FabricPackOutput, lookupProvider: CompletableFuture<HolderLookup.Provider>) : FabricLanguageProvider(output,lookupProvider) {
     override fun generateTranslations(lookupProvider: HolderLookup.Provider, builder: TranslationBuilder) {
         builder.add(
             BuiltInRegistries.CREATIVE_MODE_TAB.getResourceKey(HSItemGroups.HYBRID_BIRDS.get())

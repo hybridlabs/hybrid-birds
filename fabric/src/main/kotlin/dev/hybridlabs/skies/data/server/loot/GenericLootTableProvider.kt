@@ -2,8 +2,8 @@ package dev.hybridlabs.skies.data.server.loot
 
 import dev.hybridlabs.skies.item.HSItems
 import dev.hybridlabs.skies.loot.HSLootTables
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
-import net.fabricmc.fabric.api.datagen.v1.provider.SimpleFabricLootTableProvider
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput
+import net.fabricmc.fabric.api.datagen.v1.provider.SimpleFabricLootTableSubProvider
 import net.minecraft.core.HolderLookup
 import net.minecraft.core.registries.Registries
 import net.minecraft.resources.ResourceKey
@@ -18,8 +18,8 @@ import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator
 import java.util.concurrent.CompletableFuture
 import java.util.function.BiConsumer
 
-class GenericLootTableProvider(output: FabricDataOutput,lookupProvider: CompletableFuture<HolderLookup.Provider>) :
-    SimpleFabricLootTableProvider(output, lookupProvider,LootContextParamSets.ALL_PARAMS) {
+class GenericLootTableProvider(output: FabricPackOutput,lookupProvider: CompletableFuture<HolderLookup.Provider>) :
+    SimpleFabricLootTableSubProvider(output, lookupProvider,LootContextParamSets.ALL_PARAMS) {
     override fun generate(exporter: BiConsumer<ResourceKey<LootTable>, LootTable.Builder>) {
 
         exporter.accept(

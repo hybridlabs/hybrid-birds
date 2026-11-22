@@ -22,11 +22,11 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.crafting.Ingredient
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.gameevent.GameEvent
-import software.bernie.geckolib.animatable.manager.AnimatableManager
-import software.bernie.geckolib.animation.AnimationController
-import software.bernie.geckolib.animation.state.AnimationTest
-import software.bernie.geckolib.animation.RawAnimation
-import software.bernie.geckolib.constant.DefaultAnimations
+import com.geckolib.animatable.manager.AnimatableManager
+import com.geckolib.animation.AnimationController
+import com.geckolib.animation.state.AnimationTest
+import com.geckolib.animation.RawAnimation
+import com.geckolib.constant.DefaultAnimations
 
 class PeacockEntity(entityType: EntityType<out PeacockEntity>, world: Level) :
     BaseFlyingAnimal(entityType, world) {

@@ -97,7 +97,7 @@ class RoosterEntity(entityType: EntityType<out RoosterEntity>, world: Level) :
     }
 
     private fun morningCall() {
-        val timeOfDay = level().dayTime % 24000L
+        val timeOfDay = level().overworldClockTime % 24000L
         if (timeOfDay in 0..5 && !hasCalled) {
             this.playSound(HSSoundEvents.ROOSTER_CALL.get(), 1.0F, 1.0F)
             applySpeedEffectToNearbyPlayers()

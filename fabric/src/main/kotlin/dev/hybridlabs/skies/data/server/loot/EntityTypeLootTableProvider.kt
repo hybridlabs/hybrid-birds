@@ -2,8 +2,8 @@ package dev.hybridlabs.skies.data.server.loot
 
 import dev.hybridlabs.skies.entity.HSEntityTypes
 import dev.hybridlabs.skies.item.HSItems
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
-import net.fabricmc.fabric.api.datagen.v1.provider.SimpleFabricLootTableProvider
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput
+import net.fabricmc.fabric.api.datagen.v1.provider.SimpleFabricLootTableSubProvider
 import net.minecraft.core.HolderLookup
 import net.minecraft.resources.ResourceKey
 import net.minecraft.world.item.Items
@@ -16,8 +16,8 @@ import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator
 import java.util.concurrent.CompletableFuture
 import java.util.function.BiConsumer
 
-class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider: CompletableFuture<HolderLookup.Provider>) :
-    SimpleFabricLootTableProvider(exporter, lookupProvider, LootContextParamSets.ENTITY) {
+class EntityTypeLootTableProvider(exporter: FabricPackOutput, val lookupProvider: CompletableFuture<HolderLookup.Provider>) :
+    SimpleFabricLootTableSubProvider(exporter, lookupProvider, LootContextParamSets.ENTITY) {
     override fun generate(exporter: BiConsumer<ResourceKey<LootTable>, LootTable.Builder>) {
         val lookup = lookupProvider.join()
 

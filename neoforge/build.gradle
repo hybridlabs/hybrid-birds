@@ -4,9 +4,8 @@ plugins {
 }
 
 dependencies {
-    implementation "software.bernie.geckolib:geckolib-neoforge-$geckolib_version"
-
     implementation("dev.hybridlabs.hapi:hapi-neoforge-${minecraft_version}:${hapi_version}")
+    implementation "com.geckolib:geckolib-neoforge-${geckolib_version}"
 }
 
 publishMods.platforms.configureEach {
@@ -25,5 +24,16 @@ neoForge {
     // the Fabric project's datagen.
     runs.named('data') {
         serverData()
+    }
+}
+
+// GeckoLib 5.5 moved to the com.geckolib group, which hybrid-gradle's GeckoLib repository
+// filter does not include yet.
+repositories {
+    maven {
+        url = 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
+        content {
+            includeGroup('com.geckolib')
+        }
     }
 }
